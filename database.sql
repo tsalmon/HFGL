@@ -6,7 +6,6 @@ ALTER TABLE `Question` DROP FOREIGN KEY `fk_Question_Questions_1`;
 ALTER TABLE `Responses` DROP FOREIGN KEY `fk_Responses_Question_1`;
 ALTER TABLE `Result` DROP FOREIGN KEY `fk_Result_Questionnaire_1`;
 ALTER TABLE `Points` DROP FOREIGN KEY `fk_Points_Question_1`;
-ALTER TABLE `Person` DROP FOREIGN KEY `fk_Person_Tutor_1`;
 ALTER TABLE `Student` DROP FOREIGN KEY `fk_student_FinalNote_1`;
 ALTER TABLE `Student` DROP FOREIGN KEY `fk_student_Person_1`;
 ALTER TABLE `Person` DROP FOREIGN KEY `fk_Person_Admin_1`;
@@ -22,6 +21,7 @@ ALTER TABLE `FinalNote` DROP FOREIGN KEY `fk_FinalNote_Course_1`;
 ALTER TABLE `FinalNote` DROP FOREIGN KEY `fk_FinalNote_Tutor_1`;
 ALTER TABLE `Tutor` DROP FOREIGN KEY `fk_Tutor_Teaching_1`;
 ALTER TABLE `Teaching` DROP FOREIGN KEY `fk_Teaching_Course_1`;
+ALTER TABLE `Person` DROP FOREIGN KEY `fk_Person_Tutor_1`;
 
 ALTER TABLE `Person`DROP PRIMARY KEY;
 ALTER TABLE `Course`DROP PRIMARY KEY;
@@ -76,7 +76,7 @@ PRIMARY KEY (`courseID`)
 
 CREATE TABLE `Tutor` (
 `tutorID` int NULL AUTO_INCREMENT,
-`coursID` int NULL,
+`personID` int NULL,
 PRIMARY KEY (`tutorID`) 
 );
 
@@ -199,7 +199,6 @@ ALTER TABLE `Question` ADD CONSTRAINT `fk_Question_Questions_1` FOREIGN KEY (`qu
 ALTER TABLE `Responses` ADD CONSTRAINT `fk_Responses_Question_1` FOREIGN KEY (`questionID`) REFERENCES `Question` (`questionID`);
 ALTER TABLE `Result` ADD CONSTRAINT `fk_Result_Questionnaire_1` FOREIGN KEY (`questionnaireID`) REFERENCES `Questionnaire` (`questionnaireID`);
 ALTER TABLE `Points` ADD CONSTRAINT `fk_Points_Question_1` FOREIGN KEY (`questionID`) REFERENCES `Question` (`questionID`);
-ALTER TABLE `Person` ADD CONSTRAINT `fk_Person_Tutor_1` FOREIGN KEY (`personID`) REFERENCES `Tutor` (`tutorID`);
 ALTER TABLE `Student` ADD CONSTRAINT `fk_student_FinalNote_1` FOREIGN KEY (`student_id`) REFERENCES `FinalNote` (`studentID`);
 ALTER TABLE `Student` ADD CONSTRAINT `fk_student_Person_1` FOREIGN KEY (`student_id`) REFERENCES `Person` (`personID`);
 ALTER TABLE `Person` ADD CONSTRAINT `fk_Person_Admin_1` FOREIGN KEY (`personID`) REFERENCES `Admin` (`personID`);
@@ -215,4 +214,5 @@ ALTER TABLE `FinalNote` ADD CONSTRAINT `fk_FinalNote_Course_1` FOREIGN KEY (`cou
 ALTER TABLE `FinalNote` ADD CONSTRAINT `fk_FinalNote_Tutor_1` FOREIGN KEY (`tutorID`) REFERENCES `Tutor` (`tutorID`);
 ALTER TABLE `Tutor` ADD CONSTRAINT `fk_Tutor_Teaching_1` FOREIGN KEY (`tutorID`) REFERENCES `Teaching` (`tutorID`);
 ALTER TABLE `Teaching` ADD CONSTRAINT `fk_Teaching_Course_1` FOREIGN KEY (`courseID`) REFERENCES `Course` (`courseID`);
+ALTER TABLE `Person` ADD CONSTRAINT `fk_Person_Tutor_1` FOREIGN KEY (`personID`) REFERENCES `Tutor` (`personID`);
 
