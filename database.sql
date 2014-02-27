@@ -62,6 +62,7 @@ CREATE TABLE `Person` (
 `name` varchar(255) NOT NULL,
 `surname` varchar(255) NOT NULL,
 `e-mail` varchar(255) NOT NULL,
+`password` varchar(255) NOT NULL,
 PRIMARY KEY (`personID`) 
 );
 
