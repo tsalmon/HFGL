@@ -22,6 +22,8 @@ ALTER TABLE `FinalNote` DROP FOREIGN KEY `fk_FinalNote_Tutor_1`;
 ALTER TABLE `Tutor` DROP FOREIGN KEY `fk_Tutor_Teaching_1`;
 ALTER TABLE `Teaching` DROP FOREIGN KEY `fk_Teaching_Course_1`;
 ALTER TABLE `Person` DROP FOREIGN KEY `fk_Person_Tutor_1`;
+ALTER TABLE `Student` DROP FOREIGN KEY `fk_Student_NotFinishedQuestionnaire_1`;
+ALTER TABLE `NotFinishedQuestionnaire` DROP FOREIGN KEY `fk_NotFinishedQuestionnaire_Questionnaire_1`;
 
 ALTER TABLE `Person`DROP PRIMARY KEY;
 ALTER TABLE `Course`DROP PRIMARY KEY;
@@ -56,6 +58,7 @@ DROP TABLE `Parts`;
 DROP TABLE `QuestionType`;
 DROP TABLE `QuestionnaireType`;
 DROP TABLE `Teaching`;
+DROP TABLE `NotFinishedQuestionnaire`;
 
 CREATE TABLE `Person` (
 `personID` int NOT NULL AUTO_INCREMENT,
@@ -190,6 +193,12 @@ CREATE TABLE `Teaching` (
 `courseID` int NOT NULL
 );
 
+CREATE TABLE `NotFinishedQuestionnaire` (
+`studentID` int NULL,
+`questionnaireID` int NULL,
+`stopDate` date NULL
+);
+
 
 ALTER TABLE `Course` ADD CONSTRAINT `fk_Course_Inscription_1` FOREIGN KEY (`courseID`) REFERENCES `Inscription` (`courseID`);
 ALTER TABLE `Chapters` ADD CONSTRAINT `fk_Chapter_Chapters_1` FOREIGN KEY (`chapterID`) REFERENCES `Chapter` (`chapterID`);
@@ -215,4 +224,6 @@ ALTER TABLE `FinalNote` ADD CONSTRAINT `fk_FinalNote_Tutor_1` FOREIGN KEY (`tuto
 ALTER TABLE `Tutor` ADD CONSTRAINT `fk_Tutor_Teaching_1` FOREIGN KEY (`tutorID`) REFERENCES `Teaching` (`tutorID`);
 ALTER TABLE `Teaching` ADD CONSTRAINT `fk_Teaching_Course_1` FOREIGN KEY (`courseID`) REFERENCES `Course` (`courseID`);
 ALTER TABLE `Person` ADD CONSTRAINT `fk_Person_Tutor_1` FOREIGN KEY (`personID`) REFERENCES `Tutor` (`personID`);
+ALTER TABLE `Student` ADD CONSTRAINT `fk_Student_NotFinishedQuestionnaire_1` FOREIGN KEY (`student_id`) REFERENCES `NotFinishedQuestionnaire` (`studentID`);
+ALTER TABLE `NotFinishedQuestionnaire` ADD CONSTRAINT `fk_NotFinishedQuestionnaire_Questionnaire_1` FOREIGN KEY (`questionnaireID`) REFERENCES `Questionnaire` (`questionnaireID`);
 
