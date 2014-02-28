@@ -1,0 +1,48 @@
+#nav_menu li{
+	display: inline;
+}
+
+body{
+    padding: 0;
+    margin: 0 auto 0;
+    height: 100%;
+}
+
+#p_matieres, #p_view{
+padding: 0;
+float: left;
+height:500px;
+}
+#p_matieres{
+width:30%;
+background: white;
+}
+
+#p_matieres ul{
+	overflow:scroll;
+}
+
+#p_view{
+width:70%;
+    right:0;
+}
+#p_matiere{
+}
+
+#p_view{
+}
+
+#contact{
+}
+
+li{
+    list-style-type: none;
+}
+
+#p_me, h3{
+    background: #6699FF;
+}
+
+#contact li{
+    display: inline;
+}
