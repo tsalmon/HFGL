@@ -23,7 +23,7 @@
 			margin: 0 auto;
 		}
 
-		#liste_matieres, #matiere_selectionner{
+		#liste_matieres{
 			float: left;
 		}
 
@@ -49,10 +49,14 @@
 			height: 650px;
 			/*background: blue;*/
 		}
+
+		div, nav, ul, article{
+			border: 1px black solid;
+		}
 	</style>
 	<script type="text/javascript">
-		function test(){
-			alert("toto");
+		function test(x){
+			alert("toto " + x);
 		}
 	</script>
 </head>
@@ -62,9 +66,9 @@
 	<div id="center">
 		<nav id="liste_matieres">
 			<ul>
-				<li><a class="button" onClick="test();"> Matiere 1</a></li>
-				<li><a class="button" onClick="test();">Matiere 2</a></li>
-				<li><a class="button" onClick="test();">Matiere 3</a></li>
+				<li><a class="button" onClick="test(1);"> Matiere 1</a></li>
+				<li><a class="button" onClick="test(2);">Matiere 2</a></li>
+				<li><a class="button" onClick="test(3);">Matiere 3</a></li>
 			</ul>
 		</nav>
 		<article id="matiere_selectionner">matiere</article>
