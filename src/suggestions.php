@@ -1,47 +1,24 @@
 <html>
 <head>
-	<style type="text/css">
-		body{
-			margin-top: 0px;
-		}
-
-		#wrapper{
-			width: 1100px;
-			height: 700px;
-			margin: 0 auto;
-		}
-
-		#toolbar{
-			height: 50px;			
-			/*background: brown;*/
-		}
-
-		.gauche{
-			float: left;
-		}
-
-		div, nav, ul, article{
-			border: 1px black solid;
-		}
-	</style>
 </head>
 <body>
 <div id="wrapper">
-	<header id="toolbar">bar</header>
+	<?php include("navigation.php");?>
 	<div id="center">
 		<form>champs de recherche<input type="text"/></form>
+		
 		<div class="ligne">
 			<div class="colonne gauche">
 				<div>
-					<span>vignette</span>
-					<span>
-						nom matiere <br>
-						nom de l'enseignent<br>
+					<span class="vignette">vignette</span>
+					<div class="description">
+						<span class="nom_matiere"> Nom Matiere</span>
+						<span class="nom_enseignent">Nom de l'enseignent</span>
 						<div class="description_rapide">
-							toto
+							Description Rapide
 						</div>
-						<a href="#">voir plus</a>
-					</span>
+						<a href="index.php?page=voir_matiere">voir plus</a>
+					</div>
 				</div>
 			</div>
 			<div class="colonne">

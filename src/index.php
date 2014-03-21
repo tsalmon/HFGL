@@ -20,24 +20,28 @@ function deconnexion(){
 <html>
 	<head>
 		<meta charset="utf-8">
-		<link rel="stylesheet" href="css/style.css">
-		<title>Formation Avancée Professionalisante</title>
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<?
+			if(isset($_GET["page"])){
+				echo '<link rel="stylesheet" type="text/css" href="css/'.$_GET["page"].'.css">';
+			} else{
+				echo '<link rel="stylesheet" type="text/css" href="css/connexion.css">';
+			}
+		?>
+		<title>HFGL</title>
 	</head>
 	<body>
 		<?
-			if(!isset($_SESSION["user"]) && $_POST == null){ /* not connected */
-				include("gestion_compte_connexion.html");
-			} else if(array_key_exists("user", $_POST)){  /*try to login...*/
-				if(connexion()){
-					echo "bienvenue";
+			if(isset($_POST["user"]) && isset($_POST["pwd"]) && isset($_POST["connexion"])){
+				if($_POST["user"] == "prof"){
+					include("enseignant.php");
 				} else {
-					print_r($_SESSION);
-					echo "<p>already connected</p>";
+					include("etudiant.php");
 				}
-			} else if(array_key_exists("inscr_name", $_POST)){/* try to sign up ...*/
-				inscription();
-			} else {
-				include("accueil.php");
+			} else if(isset($_GET["page"])){
+				include(($_GET["page"]).".php");
+			} else{
+				include("connexion.html");
 			}
 		?>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
