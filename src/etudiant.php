@@ -1,7 +1,3 @@
-<html>
-<head>
-</head>
-<body>
 <div id="wrapper">
 	<? include("navigation.php"); ?>
 	<div id="center">		
@@ -43,5 +39,3 @@
 		</article>
 	</div>
 </div>
-</body>
-</html>
