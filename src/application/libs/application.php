@@ -2,33 +2,19 @@
 
 class Application
 {
-    /** @var null The controller */
     private $url_controller = null;
-
-    /** @var null The method (of the above controller), often also named "action" */
     private $url_action = null;
-
-    /** @var null Parameter one */
     private $url_parameter_1 = null;
-
-    /** @var null Parameter two */
     private $url_parameter_2 = null;
-
-    /** @var null Parameter three */
     private $url_parameter_3 = null;
 
-    /**
-     * "Start" the application:
-     * Analyze the URL elements and calls the according controller/method or the fallback
-     */
     public function __construct()
     {
         // create array with URL parts in $url
         $this->splitUrl();
 
-        // check for controller: does such a controller exist ?
+        // check for controller: does such a controller exist 
         if (file_exists('./application/controller/' . $this->url_controller . '.php')) {
-
             // if so, then load this file and create this controller
             // example: if controller would be "car", then this line would translate into: $this->car = new car();
             require './application/controller/' . $this->url_controller . '.php';

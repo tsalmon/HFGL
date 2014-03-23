@@ -1,33 +1,19 @@
-/* Demo CSS */
+ol, ul {
+  list-style: none; }
 
-html, body {
-    margin: 0;
-    padding: 0;
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle; 
 }
 
 body {
-    font-size: 15px;
-}
-
-table {
-    font-size: 13px;
-}
-
-.container {
-    border: 3px solid #000;
-    padding: 20px;
-    margin: 10px;
-}
-
-.where-are-we-box {
-    position: relative;
-    left: -20px;
-    top: -20px;
-    background-color: #bbb;
-    padding: 10px 15px;
-    display: inline-block;
-}
-
-.bold {
-    font-weight: bold;
+  width: 1100px;
+  font-size: 16px;
+  font-style: normal;
+  color: #4f4f4f; 
 }
