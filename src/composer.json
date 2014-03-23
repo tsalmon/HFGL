@@ -1,0 +1,47 @@
+{
+    "name": "hfgl",
+    "type": "project",
+    "description": "school project",
+    "keywords": ["learning", "genie_logiciel", "programming"],
+    "homepage": "https://tsalmon.fr/gl",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "SALMON Thomas",
+            "homepage": "http://tsalmon.fr",
+            "role": ["PO", "developper"]
+        },
+        {
+            "name": "HAMDANE Yasmine",
+            "role": "developper"
+        }, 
+        {
+            "name": "GUEMOURI Aiman", 
+            "role": "developper" 
+        },
+        {
+            "name" : "NGUYEN Thi Quynh Nga",
+            "role" : "developper"
+        },
+        {
+            "name" : "CHEVALIER Josian",
+            "role" : "developper" 
+        },
+        {
+            "name": "VLADISLAV Fitc",
+            "role": ["CI", "developper"]
+        }
+    ],
+    "support": [{
+        "issues": "https://github.com/tsalmon/hfgl/issues",
+        "source": "https://github.com/tsalmon/hfgl"
+    },
+    {
+        "issues": "http://moule.informatique.univ-paris-diderot.fr:8080/afk-lol/gl/issues",
+        "source": "http://moule.informatique.univ-paris-diderot.fr:8080/afk-lol/gl"
+    }],
+    "require": {
+        "php": ">=5.3.0",
+        "mysql": ">=6"
+    }
+}

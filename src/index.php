@@ -1,42 +1,24 @@
-﻿<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<link rel="stylesheet" type="text/css" href="css/style.css">
-		<?
-			if(isset($_GET["page"])){
-				if($_GET["page"] == "inscription"){
-					echo '<link rel="stylesheet" type="text/css" href="css/welcome.css">';
-				}
-				echo '<link rel="stylesheet" type="text/css" href="css/'.$_GET["page"].'.css">';
-			} else{
-				echo '<link rel="stylesheet" type="text/css" href="css/welcome.css">
-				<link rel="stylesheet" type="text/css" href="css/connexion.css">';
-			}
-		?>
-		<title>HFGL</title>
-	</head>
-	<body>
-		<?
-			if(isset($_POST["user"]) && isset($_POST["pwd"])){
-				if(isset($_POST["connexion"])){
-					if($_POST["user"] == "prof"){
-						include("enseignant.php");
-					} else {
-						include("etudiant.php");
-					}
-				} else if($_POST["inscription"]){
-					echo "vous venez de vous inscrire";
-				} else{
-					echo "???";
-				}
-			} else if(isset($_GET["page"])){
-				include(($_GET["page"]).".php");
-			} else{
-				include("connexion.html");
-			}
-		?>
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-    <script src="js/mustache.js"></script>
-	</body>
-</html>
+<?php
+
+/**
+ * HFGL application website
+ *
+ * @package hfgl
+ * @author HAMDANE Yasmine, GUEMOURI Aiman, SALMON Thomas, NGUYEN Thi Quynh Nga, CHEVALIER Josian, VLADISLAV Fitc
+ * @link http://moule.informatique.univ-paris-diderot.fr:8080/groups/afk-lol
+ * @link http://tsalmon.fr/gl
+ * @link https://github.com/tsalmon/HFGL
+ * @license http://opensource.org/licenses/MIT MIT License
+ */
+
+
+// load application config (error reporting etc.)
+require 'application/config/config.php';
+
+// load application class
+//require 'application/libs/application.php';
+//require 'application/libs/controller.php';
+
+//$app = new Application();
+?>
+marche?
