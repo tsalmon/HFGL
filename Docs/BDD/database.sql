@@ -1,29 +1,28 @@
-ALTER TABLE `Course` DROP FOREIGN KEY `fk_Course_Inscription_1`;
 ALTER TABLE `Chapters` DROP FOREIGN KEY `fk_Chapter_Chapters_1`;
-ALTER TABLE `Questionnaire` DROP FOREIGN KEY `fk_Questionnaire_Chapter_1`;
 ALTER TABLE `Questions` DROP FOREIGN KEY `fk_Questions_Questionnaire_1`;
-ALTER TABLE `Question` DROP FOREIGN KEY `fk_Question_Questions_1`;
-ALTER TABLE `Responses` DROP FOREIGN KEY `fk_Responses_Question_1`;
-ALTER TABLE `Result` DROP FOREIGN KEY `fk_Result_Questionnaire_1`;
 ALTER TABLE `Points` DROP FOREIGN KEY `fk_Points_Question_1`;
-ALTER TABLE `Student` DROP FOREIGN KEY `fk_student_FinalNote_1`;
-ALTER TABLE `Student` DROP FOREIGN KEY `fk_student_Person_1`;
-ALTER TABLE `Person` DROP FOREIGN KEY `fk_Person_Admin_1`;
 ALTER TABLE `Parts` DROP FOREIGN KEY `fk_Parts_Part_1`;
 ALTER TABLE `Parts` DROP FOREIGN KEY `fk_Parts_Course_1`;
-ALTER TABLE `Part` DROP FOREIGN KEY `fk_Part_Chapters_1`;
-ALTER TABLE `QuestionnaireType` DROP FOREIGN KEY `fk_QuestionnaireType_Questionnaire_1`;
-ALTER TABLE `QuestionType` DROP FOREIGN KEY `fk_QuestionType_Question_1`;
-ALTER TABLE `Student` DROP FOREIGN KEY `fk_Student_Inscription_1`;
 ALTER TABLE `Points` DROP FOREIGN KEY `fk_Points_Student_1`;
-ALTER TABLE `Student` DROP FOREIGN KEY `fk_Student_Result_1`;
 ALTER TABLE `FinalNote` DROP FOREIGN KEY `fk_FinalNote_Course_1`;
 ALTER TABLE `FinalNote` DROP FOREIGN KEY `fk_FinalNote_Tutor_1`;
-ALTER TABLE `Tutor` DROP FOREIGN KEY `fk_Tutor_Teaching_1`;
 ALTER TABLE `Teaching` DROP FOREIGN KEY `fk_Teaching_Course_1`;
-ALTER TABLE `Person` DROP FOREIGN KEY `fk_Person_Tutor_1`;
-ALTER TABLE `Student` DROP FOREIGN KEY `fk_Student_NotFinishedQuestionnaire_1`;
-ALTER TABLE `NotFinishedQuestionnaire` DROP FOREIGN KEY `fk_NotFinishedQuestionnaire_Questionnaire_1`;
+ALTER TABLE `Admin` DROP FOREIGN KEY `fk_Admin_Person_1`;
+ALTER TABLE `Tutor` DROP FOREIGN KEY `fk_Tutor_Person_1`;
+ALTER TABLE `Teaching` DROP FOREIGN KEY `fk_Teaching_Tutor_1`;
+ALTER TABLE `FinalNote` DROP FOREIGN KEY `fk_FinalNote_Student_1`;
+ALTER TABLE `Inscription` DROP FOREIGN KEY `fk_Inscription_Student_1`;
+ALTER TABLE `Inscription` DROP FOREIGN KEY `fk_Inscription_Course_1`;
+ALTER TABLE `Responses` DROP FOREIGN KEY `fk_Responses_Question_1`;
+ALTER TABLE `Questions` DROP FOREIGN KEY `fk_Questions_Question_1`;
+ALTER TABLE `Question` DROP FOREIGN KEY `fk_Question_QuestionType_1`;
+ALTER TABLE `Questionnaire` DROP FOREIGN KEY `fk_Questionnaire_QuestionnaireType_1`;
+ALTER TABLE `Chapter` DROP FOREIGN KEY `fk_Chapter_Questionnaire_1`;
+ALTER TABLE `Result` DROP FOREIGN KEY `fk_Result_Questionnaire_1`;
+ALTER TABLE `Result` DROP FOREIGN KEY `fk_Result_Student_1`;
+ALTER TABLE `Course` DROP FOREIGN KEY `fk_Course_Questionnaire_1`;
+ALTER TABLE `Chapters` DROP FOREIGN KEY `fk_Chapters_Part_1`;
+ALTER TABLE `Student` DROP FOREIGN KEY `fk_Student_Person_1`;
 
 ALTER TABLE `Person`DROP PRIMARY KEY;
 ALTER TABLE `Course`DROP PRIMARY KEY;
@@ -58,7 +57,6 @@ DROP TABLE `Parts`;
 DROP TABLE `QuestionType`;
 DROP TABLE `QuestionnaireType`;
 DROP TABLE `Teaching`;
-DROP TABLE `NotFinishedQuestionnaire`;
 
 CREATE TABLE `Person` (
 `personID` int NOT NULL AUTO_INCREMENT,
@@ -70,7 +68,7 @@ PRIMARY KEY (`personID`)
 );
 
 CREATE TABLE `Course` (
-`courseID` int NOT NULL,
+`courseID` int NOT NULL AUTO_INCREMENT,
 `title` varchar(255) NOT NULL,
 `description` varchar(2000) NULL,
 `questionnaireID` int NULL,
@@ -78,15 +76,15 @@ PRIMARY KEY (`courseID`)
 );
 
 CREATE TABLE `Tutor` (
-`tutorID` int NULL AUTO_INCREMENT,
-`personID` int NULL,
+`tutorID` int NOT NULL AUTO_INCREMENT,
+`personID` int NOT NULL,
 PRIMARY KEY (`tutorID`) 
 );
 
 CREATE TABLE `Inscription` (
-`studentID` decimal(53,30) NOT NULL,
-`courseID` decimal(53,30) NOT NULL,
-`date` date NOT NULL
+`studentID` int(53) NOT NULL,
+`courseID` int(53) NOT NULL,
+`date` timestamp(255) NOT NULL
 );
 
 CREATE TABLE `Chapters` (
@@ -95,7 +93,7 @@ CREATE TABLE `Chapters` (
 );
 
 CREATE TABLE `Chapter` (
-`chapterID` int NOT NULL,
+`chapterID` int NOT NULL AUTO_INCREMENT,
 `chapterNumber` int NOT NULL,
 `title` varchar(255) NULL,
 `URL` varchar(1000) NULL,
@@ -104,7 +102,7 @@ PRIMARY KEY (`chapterID`)
 );
 
 CREATE TABLE `Questionnaire` (
-`questionnaireID` int NOT NULL,
+`questionnaireID` int NOT NULL AUTO_INCREMENT,
 `questionnaireType` int NOT NULL,
 `deadline` date NOT NULL,
 `available` date NOT NULL,
@@ -117,7 +115,7 @@ CREATE TABLE `Questions` (
 );
 
 CREATE TABLE `Question` (
-`questionID` int NOT NULL,
+`questionID` int NOT NULL AUTO_INCREMENT,
 `assignment` varchar(2000) NOT NULL,
 `points` int NOT NULL,
 `typeID` int NOT NULL,
@@ -126,7 +124,8 @@ PRIMARY KEY (`questionID`)
 
 CREATE TABLE `Responses` (
 `questionID` int NOT NULL,
-`content` varchar(2000) NOT NULL
+`content` varchar(2000) NOT NULL,
+`correct` bit(1) NULL
 );
 
 CREATE TABLE `Points` (
@@ -141,8 +140,8 @@ CREATE TABLE `Result` (
 `studentID` int NOT NULL,
 `questionnaireID` int NOT NULL,
 `lastPoints` int NOT NULL,
-`attemptsRemain` int NOT NULL,
-`lastAttemptDate` date NOT NULL
+`attemptsRemain` int NOT NULL DEFAULT 3,
+`lastAttemptDate` timestamp NOT NULL
 );
 
 CREATE TABLE `FinalNote` (
@@ -153,19 +152,20 @@ CREATE TABLE `FinalNote` (
 );
 
 CREATE TABLE `Student` (
-`student_id` int NOT NULL,
+`personID` int NOT NULL,
+`studentID` int NOT NULL AUTO_INCREMENT,
 `NSE` int NOT NULL,
-PRIMARY KEY (`student_id`) 
+PRIMARY KEY (`studentID`) 
 );
 
 CREATE TABLE `Admin` (
-`adminID` int NOT NULL,
+`adminID` int NOT NULL AUTO_INCREMENT,
 `personID` int NOT NULL,
 PRIMARY KEY (`adminID`) 
 );
 
 CREATE TABLE `Part` (
-`partID` int NOT NULL,
+`partID` int NOT NULL AUTO_INCREMENT,
 `title` varchar(255) NOT NULL,
 `questionnaireID` int NULL,
 PRIMARY KEY (`partID`) 
@@ -177,13 +177,13 @@ CREATE TABLE `Parts` (
 );
 
 CREATE TABLE `QuestionType` (
-`typeID` int NOT NULL,
+`typeID` int NOT NULL AUTO_INCREMENT,
 `typeName` varchar(255) NOT NULL,
 PRIMARY KEY (`typeID`) 
 );
 
 CREATE TABLE `QuestionnaireType` (
-`typeID` int NOT NULL,
+`typeID` int NOT NULL AUTO_INCREMENT,
 `typeName` varchar(255) NOT NULL,
 PRIMARY KEY (`typeID`) 
 );
@@ -193,37 +193,30 @@ CREATE TABLE `Teaching` (
 `courseID` int NOT NULL
 );
 
-CREATE TABLE `NotFinishedQuestionnaire` (
-`studentID` int NULL,
-`questionnaireID` int NULL,
-`stopDate` date NULL
-);
 
-
-ALTER TABLE `Course` ADD CONSTRAINT `fk_Course_Inscription_1` FOREIGN KEY (`courseID`) REFERENCES `Inscription` (`courseID`);
 ALTER TABLE `Chapters` ADD CONSTRAINT `fk_Chapter_Chapters_1` FOREIGN KEY (`chapterID`) REFERENCES `Chapter` (`chapterID`);
-ALTER TABLE `Questionnaire` ADD CONSTRAINT `fk_Questionnaire_Chapter_1` FOREIGN KEY (`questionnaireID`) REFERENCES `Chapter` (`questionnaireID`);
 ALTER TABLE `Questions` ADD CONSTRAINT `fk_Questions_Questionnaire_1` FOREIGN KEY (`questionnaireID`) REFERENCES `Questionnaire` (`questionnaireID`);
-ALTER TABLE `Question` ADD CONSTRAINT `fk_Question_Questions_1` FOREIGN KEY (`questionID`) REFERENCES `Questions` (`questionID`);
-ALTER TABLE `Responses` ADD CONSTRAINT `fk_Responses_Question_1` FOREIGN KEY (`questionID`) REFERENCES `Question` (`questionID`);
-ALTER TABLE `Result` ADD CONSTRAINT `fk_Result_Questionnaire_1` FOREIGN KEY (`questionnaireID`) REFERENCES `Questionnaire` (`questionnaireID`);
 ALTER TABLE `Points` ADD CONSTRAINT `fk_Points_Question_1` FOREIGN KEY (`questionID`) REFERENCES `Question` (`questionID`);
-ALTER TABLE `Student` ADD CONSTRAINT `fk_student_FinalNote_1` FOREIGN KEY (`student_id`) REFERENCES `FinalNote` (`studentID`);
-ALTER TABLE `Student` ADD CONSTRAINT `fk_student_Person_1` FOREIGN KEY (`student_id`) REFERENCES `Person` (`personID`);
-ALTER TABLE `Person` ADD CONSTRAINT `fk_Person_Admin_1` FOREIGN KEY (`personID`) REFERENCES `Admin` (`personID`);
 ALTER TABLE `Parts` ADD CONSTRAINT `fk_Parts_Part_1` FOREIGN KEY (`partID`) REFERENCES `Part` (`partID`);
 ALTER TABLE `Parts` ADD CONSTRAINT `fk_Parts_Course_1` FOREIGN KEY (`courseID`) REFERENCES `Course` (`courseID`);
-ALTER TABLE `Part` ADD CONSTRAINT `fk_Part_Chapters_1` FOREIGN KEY (`partID`) REFERENCES `Chapters` (`chapterID`);
-ALTER TABLE `QuestionnaireType` ADD CONSTRAINT `fk_QuestionnaireType_Questionnaire_1` FOREIGN KEY (`typeID`) REFERENCES `Questionnaire` (`questionnaireType`);
-ALTER TABLE `QuestionType` ADD CONSTRAINT `fk_QuestionType_Question_1` FOREIGN KEY (`typeID`) REFERENCES `Question` (`typeID`);
-ALTER TABLE `Student` ADD CONSTRAINT `fk_Student_Inscription_1` FOREIGN KEY (`student_id`) REFERENCES `Inscription` (`studentID`);
-ALTER TABLE `Points` ADD CONSTRAINT `fk_Points_Student_1` FOREIGN KEY (`studentID`) REFERENCES `Student` (`student_id`);
-ALTER TABLE `Student` ADD CONSTRAINT `fk_Student_Result_1` FOREIGN KEY (`student_id`) REFERENCES `Result` (`studentID`);
+ALTER TABLE `Points` ADD CONSTRAINT `fk_Points_Student_1` FOREIGN KEY (`studentID`) REFERENCES `Student` (`studentID`);
 ALTER TABLE `FinalNote` ADD CONSTRAINT `fk_FinalNote_Course_1` FOREIGN KEY (`courseID`) REFERENCES `Course` (`courseID`);
 ALTER TABLE `FinalNote` ADD CONSTRAINT `fk_FinalNote_Tutor_1` FOREIGN KEY (`tutorID`) REFERENCES `Tutor` (`tutorID`);
-ALTER TABLE `Tutor` ADD CONSTRAINT `fk_Tutor_Teaching_1` FOREIGN KEY (`tutorID`) REFERENCES `Teaching` (`tutorID`);
 ALTER TABLE `Teaching` ADD CONSTRAINT `fk_Teaching_Course_1` FOREIGN KEY (`courseID`) REFERENCES `Course` (`courseID`);
-ALTER TABLE `Person` ADD CONSTRAINT `fk_Person_Tutor_1` FOREIGN KEY (`personID`) REFERENCES `Tutor` (`personID`);
-ALTER TABLE `Student` ADD CONSTRAINT `fk_Student_NotFinishedQuestionnaire_1` FOREIGN KEY (`student_id`) REFERENCES `NotFinishedQuestionnaire` (`studentID`);
-ALTER TABLE `NotFinishedQuestionnaire` ADD CONSTRAINT `fk_NotFinishedQuestionnaire_Questionnaire_1` FOREIGN KEY (`questionnaireID`) REFERENCES `Questionnaire` (`questionnaireID`);
+ALTER TABLE `Admin` ADD CONSTRAINT `fk_Admin_Person_1` FOREIGN KEY (`adminID`) REFERENCES `Person` (`personID`);
+ALTER TABLE `Tutor` ADD CONSTRAINT `fk_Tutor_Person_1` FOREIGN KEY (`tutorID`) REFERENCES `Person` (`personID`);
+ALTER TABLE `Teaching` ADD CONSTRAINT `fk_Teaching_Tutor_1` FOREIGN KEY (`tutorID`) REFERENCES `Tutor` (`tutorID`);
+ALTER TABLE `FinalNote` ADD CONSTRAINT `fk_FinalNote_Student_1` FOREIGN KEY (`studentID`) REFERENCES `Student` (`studentID`);
+ALTER TABLE `Inscription` ADD CONSTRAINT `fk_Inscription_Student_1` FOREIGN KEY (`studentID`) REFERENCES `Student` (`studentID`);
+ALTER TABLE `Inscription` ADD CONSTRAINT `fk_Inscription_Course_1` FOREIGN KEY (`courseID`) REFERENCES `Course` (`courseID`);
+ALTER TABLE `Responses` ADD CONSTRAINT `fk_Responses_Question_1` FOREIGN KEY (`questionID`) REFERENCES `Question` (`questionID`);
+ALTER TABLE `Questions` ADD CONSTRAINT `fk_Questions_Question_1` FOREIGN KEY (`questionID`) REFERENCES `Question` (`questionID`);
+ALTER TABLE `Question` ADD CONSTRAINT `fk_Question_QuestionType_1` FOREIGN KEY (`typeID`) REFERENCES `QuestionType` (`typeID`);
+ALTER TABLE `Questionnaire` ADD CONSTRAINT `fk_Questionnaire_QuestionnaireType_1` FOREIGN KEY (`questionnaireType`) REFERENCES `QuestionnaireType` (`typeID`);
+ALTER TABLE `Chapter` ADD CONSTRAINT `fk_Chapter_Questionnaire_1` FOREIGN KEY (`questionnaireID`) REFERENCES `Questionnaire` (`questionnaireID`);
+ALTER TABLE `Result` ADD CONSTRAINT `fk_Result_Questionnaire_1` FOREIGN KEY (`questionnaireID`) REFERENCES `Questionnaire` (`questionnaireID`);
+ALTER TABLE `Result` ADD CONSTRAINT `fk_Result_Student_1` FOREIGN KEY (`studentID`) REFERENCES `Student` (`studentID`);
+ALTER TABLE `Course` ADD CONSTRAINT `fk_Course_Questionnaire_1` FOREIGN KEY (`questionnaireID`) REFERENCES `Questionnaire` (`questionnaireID`);
+ALTER TABLE `Chapters` ADD CONSTRAINT `fk_Chapters_Part_1` FOREIGN KEY (`partID`) REFERENCES `Part` (`partID`);
+ALTER TABLE `Student` ADD CONSTRAINT `fk_Student_Person_1` FOREIGN KEY (`personID`) REFERENCES `Person` (`personID`);
 
