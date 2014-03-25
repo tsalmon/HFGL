@@ -6,6 +6,9 @@
 		</p>
 		<input type="hidden" value="inscription"/>
 		<p>
+			<input type="radiobox" name="teacher_student" id="student"/><label for="élève"><span class="ui"></span>Red</label>
+		</p>
+		<p>
 			<input 	type="text" 
 					placeholder="Entrez votre nom" 
 					name="inscr_surname"
