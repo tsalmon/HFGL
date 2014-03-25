@@ -1,9 +1,68 @@
+ALTER TABLE `Chapters` DROP FOREIGN KEY `fk_Chapter_Chapters_1`;
+ALTER TABLE `Questions` DROP FOREIGN KEY `fk_Questions_Questionnaire_1`;
+ALTER TABLE `Points` DROP FOREIGN KEY `fk_Points_Question_1`;
+ALTER TABLE `Parts` DROP FOREIGN KEY `fk_Parts_Part_1`;
+ALTER TABLE `Parts` DROP FOREIGN KEY `fk_Parts_Course_1`;
+ALTER TABLE `Points` DROP FOREIGN KEY `fk_Points_Student_1`;
+ALTER TABLE `FinalNote` DROP FOREIGN KEY `fk_FinalNote_Course_1`;
+ALTER TABLE `FinalNote` DROP FOREIGN KEY `fk_FinalNote_Tutor_1`;
+ALTER TABLE `Teaching` DROP FOREIGN KEY `fk_Teaching_Course_1`;
+ALTER TABLE `Admin` DROP FOREIGN KEY `fk_Admin_Person_1`;
+ALTER TABLE `Tutor` DROP FOREIGN KEY `fk_Tutor_Person_1`;
+ALTER TABLE `Teaching` DROP FOREIGN KEY `fk_Teaching_Tutor_1`;
+ALTER TABLE `FinalNote` DROP FOREIGN KEY `fk_FinalNote_Student_1`;
+ALTER TABLE `Inscription` DROP FOREIGN KEY `fk_Inscription_Student_1`;
+ALTER TABLE `Inscription` DROP FOREIGN KEY `fk_Inscription_Course_1`;
+ALTER TABLE `Responses` DROP FOREIGN KEY `fk_Responses_Question_1`;
+ALTER TABLE `Questions` DROP FOREIGN KEY `fk_Questions_Question_1`;
+ALTER TABLE `Question` DROP FOREIGN KEY `fk_Question_QuestionType_1`;
+ALTER TABLE `Questionnaire` DROP FOREIGN KEY `fk_Questionnaire_QuestionnaireType_1`;
+ALTER TABLE `Chapter` DROP FOREIGN KEY `fk_Chapter_Questionnaire_1`;
+ALTER TABLE `Result` DROP FOREIGN KEY `fk_Result_Questionnaire_1`;
+ALTER TABLE `Result` DROP FOREIGN KEY `fk_Result_Student_1`;
+ALTER TABLE `Course` DROP FOREIGN KEY `fk_Course_Questionnaire_1`;
+ALTER TABLE `Chapters` DROP FOREIGN KEY `fk_Chapters_Part_1`;
+ALTER TABLE `Student` DROP FOREIGN KEY `fk_Student_Person_1`;
+
+ALTER TABLE `Person`DROP PRIMARY KEY;
+ALTER TABLE `Course`DROP PRIMARY KEY;
+ALTER TABLE `Tutor`DROP PRIMARY KEY;
+ALTER TABLE `Chapter`DROP PRIMARY KEY;
+ALTER TABLE `Questionnaire`DROP PRIMARY KEY;
+ALTER TABLE `Question`DROP PRIMARY KEY;
+ALTER TABLE `Points`DROP PRIMARY KEY;
+ALTER TABLE `Student`DROP PRIMARY KEY;
+ALTER TABLE `Admin`DROP PRIMARY KEY;
+ALTER TABLE `Part`DROP PRIMARY KEY;
+ALTER TABLE `QuestionType`DROP PRIMARY KEY;
+ALTER TABLE `QuestionnaireType`DROP PRIMARY KEY;
+
+DROP TABLE `Person`;
+DROP TABLE `Course`;
+DROP TABLE `Tutor`;
+DROP TABLE `Inscription`;
+DROP TABLE `Chapters`;
+DROP TABLE `Chapter`;
+DROP TABLE `Questionnaire`;
+DROP TABLE `Questions`;
+DROP TABLE `Question`;
+DROP TABLE `Responses`;
+DROP TABLE `Points`;
+DROP TABLE `Result`;
+DROP TABLE `FinalNote`;
+DROP TABLE `Student`;
+DROP TABLE `Admin`;
+DROP TABLE `Part`;
+DROP TABLE `Parts`;
+DROP TABLE `QuestionType`;
+DROP TABLE `QuestionnaireType`;
+DROP TABLE `Teaching`;
 
 CREATE TABLE `Person` (
 `personID` int NOT NULL AUTO_INCREMENT,
 `name` varchar(255) NOT NULL,
 `surname` varchar(255) NOT NULL,
-`e-mail` varchar(255) NOT NULL,
+`email` varchar(255) NOT NULL,
 `password` varchar(255) NOT NULL,
 PRIMARY KEY (`personID`) 
 );

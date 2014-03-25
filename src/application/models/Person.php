@@ -2,5 +2,5 @@
 class Person{
 	private $name;
 	private $email;
-	private $password
+	private $password;
 }
