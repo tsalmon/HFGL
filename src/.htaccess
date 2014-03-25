@@ -4,7 +4,7 @@ RewriteEngine On
 
 Options -Indexes
 
-RewriteBase /hfgl/
+RewriteBase /GL/src/
 
 # General rewrite rules
 RewriteCond %{REQUEST_FILENAME} !-d

@@ -1,12 +1,20 @@
 <article id="middle">
-	<form action="index.php" method="POST" id="middleform">
-		<h1 id="hfgl">Bienvenue sur HFGL</h1>
-		<p id="quote">Have Fun, Good Learning</p>
+	<form action="<?php echo URL; ?>Welcome/Inscription_result" method="POST" id="middleform">
+		<p>
+			<h1 id="hfgl">Bienvenue sur HFGL</h1>
+			 <span id="quote"> Have Fun, Good Learning</span>
+		</p>
 		<input type="hidden" value="inscription"/>
 		<p>
 			<input 	type="text" 
-					placeholder="Entrez un pseudo" 
-					name="inscr_name"
+					placeholder="Entrez votre nom" 
+					name="inscr_surname"
+					required/>
+		</p>
+		<p>
+			<input 	type="text" 
+					placeholder="Entrez votre prénom" 
+					name="inscr_firstname"
 					required/>
 		</p>
 		<p>
