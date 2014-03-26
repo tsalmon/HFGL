@@ -2,7 +2,7 @@ CREATE TABLE `Person` (
 `personID` int NOT NULL AUTO_INCREMENT,
 `name` varchar(255) NOT NULL,
 `surname` varchar(255) NOT NULL,
-`e-mail` varchar(255) NOT NULL,
+`email` varchar(255) NOT NULL,
 `password` varchar(255) NOT NULL,
 PRIMARY KEY (`personID`) 
 );
