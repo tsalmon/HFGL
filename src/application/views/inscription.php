@@ -4,10 +4,10 @@
 			<h1 id="hfgl">Bienvenue sur HFGL</h1>
 			 <span id="quote"> Have Fun, Good Learning</span>
 		</p>
-		<input type="hidden" value="inscription"/>
-		<p>
-			<input type="radiobox" name="teacher_student" id="student"/><label for="élève"><span class="ui"></span>Red</label>
-		</p>
+		<input type="radio" id="radio1" name="radios" value="all" checked>
+		<label for="radio1">Etudient</label>
+		<input type="radio" id="radio2" name="radios" value="false">
+		<label for="radio2">Enseignent</label>
 		<p>
 			<input 	type="text" 
 					placeholder="Entrez votre nom" 
@@ -16,7 +16,7 @@
 		</p>
 		<p>
 			<input 	type="text" 
-					placeholder="Entrez votre prénom" 
+					placeholder="En	trez votre prénom" 
 					name="inscr_firstname"
 					required/>
 		</p>
