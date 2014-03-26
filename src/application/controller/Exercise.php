@@ -27,8 +27,13 @@ class Exercise extends Controller{
                 echo '<br/>';
             }
             echo '<br/><br/>';
-            $this->mysqli->query("INSERT INTO `Question`(`assignment`, `points`, `typeID`) (".$question->text.",2,1)");
-            $qid = $this->mysqli->query("SELECT questionID FROM Question where assignment=".$question->text.")");
+            //$this->mysqli->query("INSERT INTO `Question`(`assignment`, `points`, `typeID`) (".$question->text.",2,1)");
+            echo "ololo".$question->text;
+            echo '<br/>';
+            $questionIDS = $this->mysqli->query("SELECT questionID FROM Question WHERE assignment='".$question->text."'");
+            $qid = $qids->fetch_array()[0];
+            echo $qid['questionID'];
+
         }
     }
 

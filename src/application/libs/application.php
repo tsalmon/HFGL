@@ -65,6 +65,7 @@ class Application
             $ex = new Exercise();
             $ex->connectdDB();
             $ex->showExercise();
+            $ex->parseXML();
         }
     }
 
