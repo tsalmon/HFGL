@@ -84,7 +84,7 @@ PRIMARY KEY (`tutorID`)
 CREATE TABLE `Inscription` (
 `studentID` int(53) NOT NULL,
 `courseID` int(53) NOT NULL,
-`date` timestamp(255) NOT NULL
+`date` timestamp(6) NOT NULL
 );
 
 CREATE TABLE `Chapters` (
