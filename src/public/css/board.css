@@ -1,0 +1,5 @@
+/*management of css when we have been connected to the website*/
+
+#toolbar li{
+	float: left;
+}
