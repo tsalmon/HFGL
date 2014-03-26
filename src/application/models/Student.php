@@ -13,9 +13,12 @@ class Student extends Person implements Corrector {
 
     //      Constructeur
     //***********************
-        
-        public function __construct($mail, $exists=true){     
-           // $this->friendFactory();
+     
+        // PAS TOUCHE !!! Voir classe PersonFactory.
+        //Impossibilité de mettre des classes friends en php, donc appeler le constructeur
+        //directement revient à appuyer sur le nuke button.
+        public function __construct($mail, $exists=true){    
+            $this->friendFactory();  //Si ce n'est pas la factory qui a fait l'appel, NUKE.
             $this->db=  PDOHelper::getInstance();            
             if($exists==true){
                 $fetch = $this->getDBEntry($mail, "student");
