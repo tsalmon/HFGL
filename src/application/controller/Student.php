@@ -1,7 +1,7 @@
 <?php
 
 class Student extends Controller{
-    public function index()
+    public function index() //consulter cours
     {
     	$page = "student";
         require 'application/views/_templates/header.php';
@@ -16,10 +16,20 @@ class Student extends Controller{
         require 'application/views/_templates/footer.php';    	
     }
 
-    public function ViewNotes()
+    public function Notes()
     {
         require 'application/views/_templates/header.php';
         echo "voir les notes";
         require 'application/views/_templates/footer.php';
     }
+
+    public function InscrireCours(){
+        require 'application/views/_templates/header.php';
+        echo "INSCRIRE A un cours";
+        require 'application/views/_templates/footer.php';    	
+    }
+
+    public function DesincrireCours(){
+    }
+
 }
