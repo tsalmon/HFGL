@@ -60,7 +60,11 @@ class Application
             require './application/controller/Welcome.php';
             $home = new Welcome();
             $home->index();
-            
+
+            require 'application/controller/Exercise.php';
+            $ex = new Exercise();
+            $ex->connectdDB();
+            $ex->showExercise();
         }
     }
 
