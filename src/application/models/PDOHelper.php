@@ -1,7 +1,7 @@
 <?php
-
+    
+    require_once("/../config/config.php");
     // MODIFIER LES ATTRIBUTS PARAM LORS D'UN REDEPLOIEMENT.
-
 
  class PDOHelper {
     
@@ -26,7 +26,7 @@
     
     public static function getInstance(){
         if(PDOHelper::$pdo==null){
-            PDOHelper::$pdo=new PDO('mysql:host='.PDOHelper::$PARAM_host.';dbname='.PDOHelper::$PARAM_dbname, PDOHelper::$PARAM_user, PDOHelper::$PARAM_pwd);
+            PDOHelper::$pdo=new PDO(DB_TYPE.':host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASS);
         }
         return PDOHelper::$pdo;
     }

@@ -19,12 +19,17 @@ class Student extends Person implements Corrector {
             if($exists==true){
                 $res = $this->db->query("SELECT * FROM (person JOIN student ON person.personID = student.personID) WHERE `email`='".$mail."';");
                 $fetch = $res->fetch(PDO::FETCH_ASSOC);
-                $this->surname=$fetch['surname'];
-                $this->email=$fetch['email'];
-                $this->password=$fetch['password'];
-                $this->personID=$fetch['personID'];
-                $this->studentID=$fetch['studentID'];
-                $this->nse=$fetch['NSE'];
+                if($fetch==null){
+                    throw new UnexpectedValueException("Utilisateur non existant");
+                }
+                else{
+                    $this->surname=$fetch['surname'];
+                    $this->email=$fetch['email'];
+                    $this->password=$fetch['password'];
+                    $this->personID=$fetch['personID'];
+                    $this->studentID=$fetch['studentID'];
+                    $this->nse=$fetch['NSE'];
+                }
             }
             else {
                 $this->db->exec("INSERT INTO person ( `email`) VALUES ('".$mail."');");            
