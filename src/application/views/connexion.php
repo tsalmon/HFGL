@@ -4,8 +4,8 @@
 		<h1 id="hfgl">Bienvenue sur HFGL</h1>
 		<p id="quote">Have Fun, Good Learning</p>
 		<a id="inscription" href="<?php echo URL; ?>Welcome/inscription">s'inscrire</a>
-		<input type="mail" name="user" id="username" placeholder="Entrez votre adresse email" required>
-        <input type="password" name="pwd" id="pwd" placeholder="Mot de passe" required>
+		<input type="mail" name="user" id="username" placeholder="Entrez votre adresse email" >
+        <input type="password" name="pwd" id="pwd" placeholder="Mot de passe" >
         <input type="submit" value="Connexion">
 	</form>
 </div>
