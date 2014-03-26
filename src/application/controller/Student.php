@@ -11,10 +11,15 @@ class Student extends Controller{
 
     public function Parameters()
     {
-    	
+        require 'application/views/_templates/header.php';
+        echo "voir les parametres";
+        require 'application/views/_templates/footer.php';    	
     }
+
     public function ViewNotes()
     {
-    	
+        require 'application/views/_templates/header.php';
+        echo "voir les notes";
+        require 'application/views/_templates/footer.php';
     }
 }
