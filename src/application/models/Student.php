@@ -50,3 +50,5 @@ class Student extends Person implements Corrector {
         }
                     
 }
+
+?>
