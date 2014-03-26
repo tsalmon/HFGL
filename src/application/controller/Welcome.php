@@ -84,7 +84,7 @@ class Welcome extends Controller
     public function Connexion()
     {
         $page = "inscription";
-        
+        print_r($_POST);
         //header('location: ' . URL . 'Student');
     }
 
