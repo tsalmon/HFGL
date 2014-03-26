@@ -11,6 +11,8 @@
     <?php
         if($page == "connexion" || $page == "inscription"){ // if Welcome mode add him css  
             ?><link href="<?php echo URL; ?>public/css/welcome.css" rel="stylesheet"><?php
+        } else {
+            ?><link href="<?php echo URL; ?>public/css/board.css" rel="stylesheet"><?php
         }
     ?>
     <link href="<?php echo URL; ?>public/css/<?php echo $page ?>.css" rel="stylesheet">

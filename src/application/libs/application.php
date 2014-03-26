@@ -25,10 +25,9 @@ class Application
     {
         // create array with URL parts in $url
         $this->splitUrl();
-
         // check for controller: does such a controller exist ?
         if (file_exists('./application/controller/' . $this->url_controller . '.php')) {
-            // if so, then load this file and create this controller
+           // if so, then load this file and create this controller
             // example: if controller would be "car", then this line would translate into: $this->car = new car();
             require './application/controller/' . $this->url_controller . '.php';
             $this->url_controller = new $this->url_controller();
@@ -60,15 +59,8 @@ class Application
             require './application/controller/Welcome.php';
             $home = new Welcome();
             $home->index();
-
-            require 'application/controller/Exercise.php';
-            $ex = new Exercise();
-            $ex->connectdDB();
-            $ex->showExercise();
-            $ex->parseXML();
-        }
     }
-
+}
     /**
      * Get and split the URL
      */
