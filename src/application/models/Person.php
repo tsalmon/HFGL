@@ -99,6 +99,7 @@ abstract class Person{
         //destructor
         
         public function __destruct() {
+            PersonFactory::onDestruct($this->personID);
         }
         
 }
