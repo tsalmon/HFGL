@@ -13,26 +13,20 @@ class Professor extends Person implements Corrector{
     //      Constructeur
     //***********************
         
-        public function __construct($mail, $exists=true){
+        public function __construct($mail, $exists=true){    
             $this->db=  PDOHelper::getInstance();
             if($exists==true){
-                $res = $this->db->query("SELECT * FROM (person JOIN tutor ON person.personID = tutor.personID) WHERE `email`='".$mail."';");
-                $fetch = $res->fetch(PDO::FETCH_ASSOC);
+                $fetch = $this->getDBEntry($mail, "tutor");
                 if($fetch==null){
                     throw new UnexpectedValueException("Utilisateur non existant");
                 }
-                else {
-                    $this->name=$fetch['name'];
-                    $this->surname=$fetch['surname'];
-                    $this->email=$fetch['email'];
-                    $this->password=$fetch['password'];
-                    $this->personID=$fetch['personID'];
+                else{
+                    $this->initiateMembers($fetch);
                     $this->tutorID=$fetch['tutorID'];
                 }
             }
             else {
-                $this->db->exec("INSERT INTO person ( `email`) VALUES ('".$mail."');");            
-                $lastid=intval($this->db->lastInsertId());
+                $lastid=$this->createEntry($mail);
                 $this->db->exec("INSERT INTO tutor (personID) VALUES (".$lastid.");");        
             }
         }
@@ -46,4 +40,10 @@ class Professor extends Person implements Corrector{
         }
         
 	
+        //Suppression de l'etudiant en BDD - Detruit la classe
+        
+        public function delete(){
+            $this->db->exec("DELETE FROM tutor WHERE tutorID ='".$this->tutorID."'");   
+            parent::delete();            
+        }
 }

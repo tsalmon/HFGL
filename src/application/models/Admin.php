@@ -12,26 +12,20 @@ class Admin extends Person{
     //      Constructeur
     //***********************
         
-        public function __construct($mail, $exists=true){
+        public function __construct($mail, $exists=true){  
             $this->db=  PDOHelper::getInstance();
             if($exists==true){
-                $res = $this->db->query("SELECT * FROM (person JOIN admin ON person.personID = admin.personID) WHERE `email`='".$mail."';");
-                $fetch = $res->fetch(PDO::FETCH_ASSOC);
+                $fetch = $this->getDBEntry($mail, "admin");
                 if($fetch==null){
                     throw new UnexpectedValueException("Utilisateur non existant");
                 }
-                else {
-                    $this->name=$fetch['name'];
-                    $this->surname=$fetch['surname'];
-                    $this->email=$fetch['email'];
-                    $this->password=$fetch['password'];
-                    $this->personID=$fetch['personID'];
+                else{
+                    $this->initiateMembers($fetch);
                     $this->adminID=$fetch['adminID'];
                 }
             }
             else {
-                $this->db->exec("INSERT INTO person ( `email`) VALUES ('".$mail."');");            
-                $lastid=intval($this->db->lastInsertId());
+                $lastid=$this->createEntry($mail);
                 $this->db->exec("INSERT INTO admin (personID) VALUES (".$lastid.");");        
             }
         }
@@ -42,6 +36,14 @@ class Admin extends Person{
         
         public function adminID(){  
             return $this->adminID;          
+        }
+        
+        
+        //Suppression de l'etudiant en BDD - Detruit la classe
+        
+        public function delete(){
+            $this->db->exec("DELETE FROM admin WHERE adminID ='".$this->adminID."'");   
+            parent::delete();            
         }
         
 	
