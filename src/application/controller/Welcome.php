@@ -84,9 +84,8 @@ class Welcome extends Controller
     public function Connexion()
     {
         $page = "inscription";
-        require 'application/views/_templates/header.php';
-        require 'application/views/inscription.php';
-        require 'application/views/_templates/footer.php';
+        
+        //header('location: ' . URL . 'Student');
     }
 
 }
