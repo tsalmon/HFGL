@@ -9,3 +9,47 @@ input{
 input[type=submit]{
 	width: 130px;
 }
+
+input[type=radio] {
+    display:none; 
+    margin:10px;
+}
+
+
+input[type=radio][id=radio2] + label{
+  border-top-right-radius:8px; 
+  -moz-border-radius-topright:8px;
+  -webkit-border-top-right-radius: 8px;
+  border-bottom-right-radius:8px;  
+  -moz-border-radius-bottomright:8px;  
+  -webkit-border-bottom-right-radius:8px;
+}
+
+input[type=radio][id=radio1] + label{
+  border-top-left-radius:8px; 
+  -moz-border-radius-topleft:8px;
+  -webkit-border-top-left-radius: 8px;
+  border-bottom-left-radius:8px;  
+  -moz-border-radius-bottomleft:8px;  
+  -webkit-border-bottom-left-radius:8px;
+}
+
+
+input[type=radio] + label {
+	width : 100px;
+    display:inline-block;
+    margin:-2px;
+    padding: 4px 12px;
+	background-color: rgba(0, 0, 0, 0.4);
+    border-color: #ddd;
+}
+
+
+input[type=radio]:checked + label { 
+	background: #2E5481;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+	-webkit-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0	.6);
+	-moz-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+	box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+	color: #FFF;
+}

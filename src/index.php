@@ -22,9 +22,6 @@ require 'application/config/config.php';
 // load application class
 require 'application/libs/application.php';
 require 'application/libs/controller.php';
-require 'application/models/Question.php';
-require 'application/models/QCMAnswer.php';
 
 $app = new Application();
-
 ?>
