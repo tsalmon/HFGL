@@ -15,12 +15,13 @@ class Admin extends Person{
         public function __construct($mail, $exists=true){
             $this->db=  PDOHelper::getInstance();
             if($exists==true){
+                $res = $this->db->query("SELECT * FROM (person JOIN admin ON person.personID = admin.personID) WHERE `email`='".$mail."';");
+                $fetch = $res->fetch(PDO::FETCH_ASSOC);
                 if($fetch==null){
                     throw new UnexpectedValueException("Utilisateur non existant");
                 }
                 else {
-                    $res = $this->db->query("SELECT * FROM (person JOIN admin ON person.personID = admin.personID) WHERE `email`='".$mail."';");
-                    $fetch = $res->fetch(PDO::FETCH_ASSOC);
+                    $this->name=$fetch['name'];
                     $this->surname=$fetch['surname'];
                     $this->email=$fetch['email'];
                     $this->password=$fetch['password'];

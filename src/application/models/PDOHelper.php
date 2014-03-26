@@ -8,12 +8,7 @@
     //    attributs et infos pour PDO
     //************************************
         
-    
-    private static $PARAM_host='localhost'; // le chemin vers le serveur
-    private static $PARAM_dbname='glhf'; //base de donnée
-    private static $PARAM_user='root'; //nom utilisateur
-    private static $PARAM_pwd=''; //mot de passe //mot de passe
-    private static $pdo=null;
+        private static $pdo=null;
     
     //      Constructeur private : singleton
     //*********************************************

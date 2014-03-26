@@ -23,6 +23,7 @@ class Student extends Person implements Corrector {
                     throw new UnexpectedValueException("Utilisateur non existant");
                 }
                 else{
+                    $this->name=$fetch['name'];
                     $this->surname=$fetch['surname'];
                     $this->email=$fetch['email'];
                     $this->password=$fetch['password'];
