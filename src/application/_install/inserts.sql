@@ -72,7 +72,7 @@ INSERT INTO `Course`(`title`, `description`, `questionnaireID`) VALUES
 ('Object Oriented Programming','Intermediate programming in a high-level language and introduction to computer science. Topics include program structure and organization, object-oriented programming (classes, objects, types, sub-typing), graphical user interfaces, algorithm analysis (asymptotic complexity, big “O” notation), recursion, data structures (lists, trees, stacks, queues, heaps, search trees, hash tables, graphs), simple graph algorithms. C++ is the principal programming language.',1);
 
 
-INSERT INTO `Person`(`name`, `surname`, `e-mail`, `password`) VALUES 
+INSERT INTO `Person`(`name`, `surname`, `email`, `password`) VALUES 
 ('Olivier','Alphand','Olivier.Alphand@afk.com','lemotdepasse1'),
 ('Karine','Altisen','Karine.Altisen@afk.com','lemotdepasse2'),
 ('Andrzej','Duda','Andrzej.Duda@afk.com','lemotdepasse3'),
