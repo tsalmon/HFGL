@@ -17,12 +17,12 @@ abstract class Person{
     //****************************
         
         protected function friendFactory(){
-        $trace = debug_backtrace();
-        if ($trace[2]['class'] != 'PersonFactory') {
-            die("<h1>Non ! On utilise la PersonFactory si on veut une personne !!!</h1>
-                <p>On remplace le système de class friends comme on peux ... Le constructeur de cette classe doit être considéré comme protected</p>
-                <p>Demande a Josian si tu as  un probleme pour utiliser la classe Person</p>");
-        } 
+            $trace = debug_backtrace();
+            if ($trace[2]['class'] != 'PersonFactory') {
+                die("<h1>Non ! On utilise la PersonFactory si on veut une personne !!!</h1>
+                    <p>On remplace le système de class friends comme on peux ... Le constructeur de cette classe doit être considéré comme protected</p>
+                    <p>Demande a Josian si tu as  un probleme pour utiliser la classe Person</p>");
+            } 
         }
         
         //$table est le nom de la table associée à la classe fille
@@ -75,18 +75,22 @@ abstract class Person{
          
         public function setName($n){
             $this->db->exec("UPDATE person SET name = '".$n."' WHERE personID ='".$this->personID."'");
+            $this->name=$n;
         }
         
         public function setEmail($m){     
             $this->db->exec("UPDATE person SET `email` = '".$m."' WHERE personID ='".$this->personID."'");
+            $this->email=$m;
         }
         
         public function setPassword($p){   
             $this->db->exec("UPDATE person SET password = '".$p."' WHERE personID ='".$this->personID."'");
+            $this->password=$p;
         }
         
         public function setSurname($s){  
             $this->db->exec("UPDATE person SET surname = '".$s."' WHERE personID ='".$this->personID."'");    
+            $this->surname=$s;
         }
         
         

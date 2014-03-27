@@ -82,9 +82,11 @@ PRIMARY KEY (`tutorID`)
 );
 
 CREATE TABLE `Inscription` (
+`inscriptionID` int NOT NULL AUTO_INCREMENT,
 `studentID` int(53) NOT NULL,
 `courseID` int(53) NOT NULL,
-`date` timestamp NOT NULL
+`date` timestamp NOT NULL,
+PRIMARY KEY (`inscriptionID`) 
 );
 
 CREATE TABLE `Chapters` (
@@ -189,8 +191,10 @@ PRIMARY KEY (`typeID`)
 );
 
 CREATE TABLE `Teaching` (
+`teachingID` int NOT NULL AUTO_INCREMENT,
 `tutorID` int NOT NULL,
-`courseID` int NOT NULL
+`courseID` int NOT NULL,
+PRIMARY KEY (`teachingID`) 
 );
 
 
