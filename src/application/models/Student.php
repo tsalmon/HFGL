@@ -57,7 +57,8 @@ class Student extends Person implements Corrector {
         //Suppression de l'etudiant en BDD - Detruit la classe
         
         public function delete(){
-            $this->db->exec("DELETE FROM student WHERE studentID ='".$this->studentID."'");   
+            $this->db->exec("DELETE FROM inscription WHERE studentID ='".$this->studentID."'");  
+            $this->db->exec("DELETE FROM student WHERE studentID ='".$this->studentID."'"); 
             parent::delete();            
         }
         

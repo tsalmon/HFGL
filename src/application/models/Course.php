@@ -1,5 +1,7 @@
 <?php
 
+require_once 'Part.php';
+
 class Course {
 
     //      Attributs
@@ -8,7 +10,7 @@ class Course {
         protected $courseID;
         protected $title;
         protected $description;
-        protected $finalExamID;
+        protected $finalExam;
         protected $parts;
         protected $db;
         
@@ -21,24 +23,26 @@ class Course {
         // PAS TOUCHE !!! Voir classe PersonFactory.
         //Impossibilité de mettre des classes friends en php, donc appeler le constructeur
         //directement revient à appuyer sur le nuke button.
-        private function __construct($id, $exists=true){    
+        private function __construct($title, $exists=true){    
             $this->friendFactory();  //Si ce n'est pas la factory qui a fait l'appel, NUKE.
             $this->db=PDOHelper::getInstance();            
             if($exists==true){
-                $res = $this->db->query("SELECT * FROM Course WHERE `courseID`='".$id."';");
+                $res = $this->db->query("SELECT * FROM Course WHERE `title`=".$title.";");
                 $fetch = $res->fetch(PDO::FETCH_ASSOC);     
                 if($fetch==null){
                     throw new UnexpectedValueException("Cours non existant");
                 }
                 else{     
-                    $this->title=$fetch['name'];
-                    $this->finalExamID=$fetch['surname'];
-                    $this->description=$fetch['email'];                    
+                    $this->title=$title;
+                    $this->courseID=$fetch['courseID'];
+                    if(isset($fetch['questionnaireID'])){
+                        $this->finalExam=new ExerciseSheet($fetch['questionnaireID']);}
+                    $this->description=$fetch['description'];                    
                     $this->parts=$this->getDBParts();
                 }
             }
             else {
-                $this->db->exec("INSERT INTO Course (courseID) VALUES (".$id.");");        
+                $this->db->exec("INSERT INTO Course (title) VALUES ('.$title.');");        
             }
         }
         
@@ -57,14 +61,14 @@ class Course {
         }
         
         protected function getDBParts(){
-            $parts=[];
-            $result = $this->db->query("SELECT partID FROM parts WHERE `courseID`='".$this->courseID."';");
+            $p=[];
+            $result = $this->db->query("SELECT partID FROM parts WHERE `courseID`=".$this->courseID.";");
             $fetch = $result->fetchAll(PDO::FETCH_ASSOC);
             foreach($fetch as $entry){
                 $partid=$entry["partID"];
-                $parts[]=new Part($partid);
+                $p[]=new Part($partid);
             }
-            return $parts;
+            return $p;
             
         }
         
@@ -98,33 +102,56 @@ class Course {
             return false;        
         }
         
-        public function finalExamID(){   
-            return $this->finalExamID;         
+        public function finalExam(){   
+            return $this->finalExam;         
         }
          
-        public function setFinalExamID($fe){
-            $this->db->exec("UPDATE course SET questionnaireID: = '".$fe."' WHERE courseID ='".$this->courseID."'");
-            $this->finalExamID=$fe;
+        public function setFinalExam($fe){
+            $this->db->exec("UPDATE course SET questionnaireID = '".$fe->getId()."' WHERE courseID =".$this->courseID);
+            $this->finalExam=$fe;
         }
         
         public function setTitle($t){     
-            $this->db->exec("UPDATE course SET title: = '".$t."' WHERE courseID ='".$this->courseID."'");
+            $this->db->exec("UPDATE course SET title = '".$t."' WHERE courseID =".$this->courseID);
             $this->title=$t;
         }
         
         public function setDescription($d){   
-            $this->db->exec("UPDATE course SET description: = '".$d."' WHERE courseID ='".$this->courseID."'");
+            $this->db->exec("UPDATE course SET description = '".$d."' WHERE courseID =".$this->courseID);
             $this->description=$d;
         }
         
         public function addPart($part){  
-            $this->db->exec("INSERT INTO parts VALUES (".$part->partID.", ".$this->courseID.");");
+            $this->db->exec("INSERT INTO parts VALUES (".$part->partID().", ".$this->courseID.");");
             $this->parts[]=$part;
         }
+        
+        public function &createNewPart($title){  
+            $part=new Part($title,false);
+            $this->addPart($part);
+            return $part;
+        }
+        
         public function removePart($part){  
-            $this->db->exec("DELETE FROM parts WHERE partID=".$part->partID."'");
+            $this->db->exec("DELETE FROM parts WHERE partID=".$part->partID());
             $key=  array_search($this->parts, $part);           
             array_splice($this->parts, $key, 1);
+        }
+        
+        
+        
+        //Suppression du cours en BDD
+        
+        public function delete(){
+            $this->db->exec("DELETE FROM teaching WHERE courseID ='".$this->courseID."'");
+            $this->db->exec("DELETE FROM inscription WHERE courseID ='".$this->courseID."'");
+            $this->db->exec("DELETE FROM course WHERE courseID ='".$this->courseID."'");   
+        }
+        
+        //destructor
+        
+        public function __destruct() {
+            CourseFactory::onDestruct($this->courseID);
         }
 
 }
