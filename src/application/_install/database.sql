@@ -1,63 +1,3 @@
-ALTER TABLE `Chapters` DROP FOREIGN KEY `fk_Chapter_Chapters_1`;
-ALTER TABLE `Questions` DROP FOREIGN KEY `fk_Questions_Questionnaire_1`;
-ALTER TABLE `Points` DROP FOREIGN KEY `fk_Points_Question_1`;
-ALTER TABLE `Parts` DROP FOREIGN KEY `fk_Parts_Part_1`;
-ALTER TABLE `Parts` DROP FOREIGN KEY `fk_Parts_Course_1`;
-ALTER TABLE `Points` DROP FOREIGN KEY `fk_Points_Student_1`;
-ALTER TABLE `FinalNote` DROP FOREIGN KEY `fk_FinalNote_Course_1`;
-ALTER TABLE `FinalNote` DROP FOREIGN KEY `fk_FinalNote_Tutor_1`;
-ALTER TABLE `Teaching` DROP FOREIGN KEY `fk_Teaching_Course_1`;
-ALTER TABLE `Admin` DROP FOREIGN KEY `fk_Admin_Person_1`;
-ALTER TABLE `Tutor` DROP FOREIGN KEY `fk_Tutor_Person_1`;
-ALTER TABLE `Teaching` DROP FOREIGN KEY `fk_Teaching_Tutor_1`;
-ALTER TABLE `FinalNote` DROP FOREIGN KEY `fk_FinalNote_Student_1`;
-ALTER TABLE `Inscription` DROP FOREIGN KEY `fk_Inscription_Student_1`;
-ALTER TABLE `Inscription` DROP FOREIGN KEY `fk_Inscription_Course_1`;
-ALTER TABLE `Responses` DROP FOREIGN KEY `fk_Responses_Question_1`;
-ALTER TABLE `Questions` DROP FOREIGN KEY `fk_Questions_Question_1`;
-ALTER TABLE `Question` DROP FOREIGN KEY `fk_Question_QuestionType_1`;
-ALTER TABLE `Questionnaire` DROP FOREIGN KEY `fk_Questionnaire_QuestionnaireType_1`;
-ALTER TABLE `Chapter` DROP FOREIGN KEY `fk_Chapter_Questionnaire_1`;
-ALTER TABLE `Result` DROP FOREIGN KEY `fk_Result_Questionnaire_1`;
-ALTER TABLE `Result` DROP FOREIGN KEY `fk_Result_Student_1`;
-ALTER TABLE `Course` DROP FOREIGN KEY `fk_Course_Questionnaire_1`;
-ALTER TABLE `Chapters` DROP FOREIGN KEY `fk_Chapters_Part_1`;
-ALTER TABLE `Student` DROP FOREIGN KEY `fk_Student_Person_1`;
-
-ALTER TABLE `Person`DROP PRIMARY KEY;
-ALTER TABLE `Course`DROP PRIMARY KEY;
-ALTER TABLE `Tutor`DROP PRIMARY KEY;
-ALTER TABLE `Chapter`DROP PRIMARY KEY;
-ALTER TABLE `Questionnaire`DROP PRIMARY KEY;
-ALTER TABLE `Question`DROP PRIMARY KEY;
-ALTER TABLE `Points`DROP PRIMARY KEY;
-ALTER TABLE `Student`DROP PRIMARY KEY;
-ALTER TABLE `Admin`DROP PRIMARY KEY;
-ALTER TABLE `Part`DROP PRIMARY KEY;
-ALTER TABLE `QuestionType`DROP PRIMARY KEY;
-ALTER TABLE `QuestionnaireType`DROP PRIMARY KEY;
-
-DROP TABLE `Person`;
-DROP TABLE `Course`;
-DROP TABLE `Tutor`;
-DROP TABLE `Inscription`;
-DROP TABLE `Chapters`;
-DROP TABLE `Chapter`;
-DROP TABLE `Questionnaire`;
-DROP TABLE `Questions`;
-DROP TABLE `Question`;
-DROP TABLE `Responses`;
-DROP TABLE `Points`;
-DROP TABLE `Result`;
-DROP TABLE `FinalNote`;
-DROP TABLE `Student`;
-DROP TABLE `Admin`;
-DROP TABLE `Part`;
-DROP TABLE `Parts`;
-DROP TABLE `QuestionType`;
-DROP TABLE `QuestionnaireType`;
-DROP TABLE `Teaching`;
-
 CREATE TABLE `Person` (
 `personID` int NOT NULL AUTO_INCREMENT,
 `name` varchar(255) NOT NULL,
@@ -82,11 +22,9 @@ PRIMARY KEY (`tutorID`)
 );
 
 CREATE TABLE `Inscription` (
-`inscriptionID` int NOT NULL AUTO_INCREMENT,
 `studentID` int(53) NOT NULL,
 `courseID` int(53) NOT NULL,
-`date` timestamp NOT NULL,
-PRIMARY KEY (`inscriptionID`) 
+`date` timestamp NOT NULL
 );
 
 CREATE TABLE `Chapters` (
@@ -118,13 +56,14 @@ CREATE TABLE `Questions` (
 
 CREATE TABLE `Question` (
 `questionID` int NOT NULL AUTO_INCREMENT,
-`assignment` varchar(2000) NOT NULL,
-`points` int NOT NULL,
 `typeID` int NOT NULL,
+`assignment` varchar(2000) NOT NULL,
+`tip` varchar(2000) NULL,
+`points` int NOT NULL,
 PRIMARY KEY (`questionID`) 
 );
 
-CREATE TABLE `Responses` (
+CREATE TABLE `Response` (
 `questionID` int NOT NULL,
 `content` varchar(2000) NOT NULL,
 `correct` bit(1) NULL
@@ -191,10 +130,20 @@ PRIMARY KEY (`typeID`)
 );
 
 CREATE TABLE `Teaching` (
-`teachingID` int NOT NULL AUTO_INCREMENT,
 `tutorID` int NOT NULL,
-`courseID` int NOT NULL,
-PRIMARY KEY (`teachingID`) 
+`courseID` int NOT NULL
+);
+
+CREATE TABLE `Test` (
+`questionID` int NOT NULL,
+`input` varchar(2000) NOT NULL,
+`output` varchar(2000) NOT NULL
+);
+
+CREATE TABLE `Resource` (
+`questionID` int NOT NULL,
+`type` varchar(100) NOT NULL,
+`content` varchar(2000) NOT NULL
 );
 
 
@@ -213,7 +162,7 @@ ALTER TABLE `Teaching` ADD CONSTRAINT `fk_Teaching_Tutor_1` FOREIGN KEY (`tutorI
 ALTER TABLE `FinalNote` ADD CONSTRAINT `fk_FinalNote_Student_1` FOREIGN KEY (`studentID`) REFERENCES `Student` (`studentID`);
 ALTER TABLE `Inscription` ADD CONSTRAINT `fk_Inscription_Student_1` FOREIGN KEY (`studentID`) REFERENCES `Student` (`studentID`);
 ALTER TABLE `Inscription` ADD CONSTRAINT `fk_Inscription_Course_1` FOREIGN KEY (`courseID`) REFERENCES `Course` (`courseID`);
-ALTER TABLE `Responses` ADD CONSTRAINT `fk_Responses_Question_1` FOREIGN KEY (`questionID`) REFERENCES `Question` (`questionID`);
+ALTER TABLE `Response` ADD CONSTRAINT `fk_Responses_Question_1` FOREIGN KEY (`questionID`) REFERENCES `Question` (`questionID`);
 ALTER TABLE `Questions` ADD CONSTRAINT `fk_Questions_Question_1` FOREIGN KEY (`questionID`) REFERENCES `Question` (`questionID`);
 ALTER TABLE `Question` ADD CONSTRAINT `fk_Question_QuestionType_1` FOREIGN KEY (`typeID`) REFERENCES `QuestionType` (`typeID`);
 ALTER TABLE `Questionnaire` ADD CONSTRAINT `fk_Questionnaire_QuestionnaireType_1` FOREIGN KEY (`questionnaireType`) REFERENCES `QuestionnaireType` (`typeID`);
@@ -223,4 +172,6 @@ ALTER TABLE `Result` ADD CONSTRAINT `fk_Result_Student_1` FOREIGN KEY (`studentI
 ALTER TABLE `Course` ADD CONSTRAINT `fk_Course_Questionnaire_1` FOREIGN KEY (`questionnaireID`) REFERENCES `Questionnaire` (`questionnaireID`);
 ALTER TABLE `Chapters` ADD CONSTRAINT `fk_Chapters_Part_1` FOREIGN KEY (`partID`) REFERENCES `Part` (`partID`);
 ALTER TABLE `Student` ADD CONSTRAINT `fk_Student_Person_1` FOREIGN KEY (`personID`) REFERENCES `Person` (`personID`);
+ALTER TABLE `Test` ADD CONSTRAINT `fk_Test_Question_1` FOREIGN KEY (`questionID`) REFERENCES `Question` (`questionID`);
+ALTER TABLE `Resource` ADD CONSTRAINT `fk_Resource_Question_1` FOREIGN KEY (`questionID`) REFERENCES `Question` (`questionID`);
 
