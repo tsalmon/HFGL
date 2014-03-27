@@ -10,6 +10,7 @@ class Course {
         protected $description;
         protected $finalExamID;
         protected $parts;
+        protected $db;
         
         
     //      Constructeur
@@ -32,8 +33,8 @@ class Course {
                 else{     
                     $this->title=$fetch['name'];
                     $this->finalExamID=$fetch['surname'];
-                    $this->description=$fetch['email'];
-                    $this->parts=$this->getParts;
+                    $this->description=$fetch['email'];                    
+                    $this->parts=$this->getDBParts();
                 }
             }
             else {
@@ -45,7 +46,7 @@ class Course {
         
     //       Classes privées
     //****************************
-        //S'assure que c'est bian la factory qui affectué l'appel (sur le constructeur)
+        //S'assure que c'est bien la factory qui a affectué l'appel (sur le constructeur)
         protected function friendFactory(){
             $trace = debug_backtrace();
             if ($trace[1]['class'] != 'CourseFactory') {
@@ -55,7 +56,17 @@ class Course {
             } 
         }
         
-        
+        protected function getDBParts(){
+            $parts=[];
+            $result = $this->db->query("SELECT partID FROM parts WHERE `courseID`='".$this->courseID."';");
+            $fetch = $result->fetchAll(PDO::FETCH_ASSOC);
+            foreach($fetch as $entry){
+                $partid=$entry["partID"];
+                $parts[]=new Part($partid);
+            }
+            return $parts;
+            
+        }
         
     //      Accesseurs
     //***********************
@@ -76,7 +87,7 @@ class Course {
             return $this->parts;          
         }
         
-        public function part($id){    
+        public function &part($id){    
             if(isset($this->parts)){
                 foreach ($this->parts as $part){
                     if($part->partID()==$id){
