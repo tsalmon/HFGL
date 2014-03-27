@@ -14,6 +14,19 @@ class WelcomeModel
         }
     }
 
+
+    /**
+    * @param email (string)
+    * @param pwd (string)
+    */
+    public function connect($email, $pwd){
+        $sql = "SELECT * FROM Person WHERE Person.email = '". $email."'";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        $result = $query->fetch();
+        return $result->password == $pwd;
+    }
+
     /**
     * @param user_email: the mail give by user
     */

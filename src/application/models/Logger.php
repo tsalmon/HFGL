@@ -4,13 +4,15 @@ require_once("Person.php");
 class Logger{
 	private $currentUser;
 
-	/**
-	* @param email (string)
-	* @param pwd (string)
-	*/
-	public function connect($email, $pwd){
-		return false;
-	}
+    function __construct($db) {
+        try {
+            $this->db = $db;
+        } catch (PDOException $e) {
+            exit('Database connection could not be established.');
+        }
+    }
+
+
 
 }
 
