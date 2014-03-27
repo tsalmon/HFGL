@@ -1,5 +1,5 @@
 <?php
-class Welcome extends Controller
+class Welcomecontroller extends Controller
 {
     public function index()
     {
@@ -81,14 +81,16 @@ class Welcome extends Controller
 
     public function Connexion()
     {
-        $page = "inscription";
         $log = $this->loadModel('WelcomeModel');
         $co = $log->connect($_POST["user"], $_POST["pwd"]);
-        if($co == true){
-            header('location: ' . URL . 'Student');
+        if($co == null){
+            $page = "connexion";
+            $incorrect = 1;
+            require 'application/views/_templates/header.php';
+            require 'application/views/connexion.php';
+            require 'application/views/_templates/footer.php';       
         } else {
-            echo " Soit le mot de passe incorrect, soit vous n'êtes pas enregistré avec cette adresse";
+            header('location: ' . URL . 'Student');
         }
     }
-
 }

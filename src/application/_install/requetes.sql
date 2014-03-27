@@ -37,13 +37,13 @@ where Course.title = 'Object Oriented Programming'
 
 
 --Montrer les reponses pour la question avec ID=1
-select content from Responses 
-join Question on Question.questionID = Responses.questionID
+select content from Response
+join Question on Question.questionID = Response.questionID
 where Question.questionID=2
 
 --Montrer la bonne reponse pour la question avec ID=2
-select content from Responses 
-join Question on Question.questionID = Responses.questionID
+select content from Response
+join Question on Question.questionID = Response.questionID
 where Question.questionID=2 and correct=1
 
 --Montrer les parties de LOA

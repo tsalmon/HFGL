@@ -23,7 +23,7 @@ INSERT INTO `Question`(`assignment`, `points`, `typeID`) VALUES
 ('In C/CPP Programming binary operator needs _______ operand.',2,1),
 ('A function which invokes itself repeatedly until some condition is satisfied is called ___________',2,1);
 
-INSERT INTO `Responses`(`questionID`, `content`,`correct`) VALUES 
+INSERT INTO `Response`(`questionID`, `content`,`correct`) VALUES 
 (1,'here()',0),
 (1,'main()',1),
 (1,'start()',0),

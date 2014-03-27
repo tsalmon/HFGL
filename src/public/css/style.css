@@ -12,7 +12,6 @@ caption, th, td {
 }
 
 body {
-  margin: 0;
   padding: 0;
   line-height: 1.7em;
   font-family: Verdana, Geneva, sans-serif;
@@ -20,15 +19,17 @@ body {
   color: #707b84;
   background: #3e464d;
 }
-    
-a:link, a:visited { color: #0066CC; text-decoration: none; font-weight: normal; } 
-a:active, a:hover { color: #008400; text-decoration: underline; }
+
 
 p { margin: 0px; padding: 0px; }
 
 img { margin: 0px; padding: 0px; border: none; }
 
+a:link, a:visited { color: #0066CC; text-decoration: none; font-weight: normal; } 
+
 /* header */
+/*
+
 
 #header_wrapper {
   width: 100%;
@@ -90,5 +91,5 @@ img { margin: 0px; padding: 0px; border: none; }
   font-weight: normal;
   letter-spacing: 2px;
 }
-
+*/
 /* end of header */

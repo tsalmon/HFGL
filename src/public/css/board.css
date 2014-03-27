@@ -1,5 +1,21 @@
 /*management of css when we have been connected to the website*/
 
-#toolbar li{
+nav[id=liste_matiere], article[id=matiere_selectionner]{
 	float: left;
+	border: 1px solid black;
+}
+
+body{
+	margin: auto;
+	width: 1000px;
+}
+
+#liste_matiere{
+	width: 200px;
+	margin: 15px;
+}
+
+#matiere_selectionner{
+	width: 700px;
+	margin: 15px;
 }
