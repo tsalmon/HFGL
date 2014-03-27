@@ -104,7 +104,7 @@ INSERT INTO `Admin`(`personID`) VALUES
 (19);
 
 INSERT INTO `Teaching`(`tutorID`, `courseID`) VALUES 
-(1,1),(2,2),(3,3),(4,4),(5,5),(6,6),(7,7),(8,8);
+(1,1),(2,2),(3,3),(4,4),(5,5),(6,6),(7,7);
 
 INSERT INTO `Inscription`(`studentID`, `courseID`) VALUES 
 (1,1),(1,4),(1,5),
