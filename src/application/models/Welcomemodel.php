@@ -23,9 +23,9 @@ class WelcomeModel
     */
     public function connect($email, $pwd){
         try{
-            $person=&PersonFactory::getPerson($mail);
+            $person=&PersonFactory::getPerson($email);
         }catch(UnexpectedValueException $e){
-            //RETOUR AVEC ERREUR : PEROSNNE NON EXISTANTE
+            //RETOUR AVEC ERREUR : PERSONNE NON EXISTANTE
         }
         
         if($person->password()=$pwd){
