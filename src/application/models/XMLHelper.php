@@ -7,10 +7,11 @@ require_once("application/models/PDOHelper.php");
 
 
 class XMLHelper {
+
+    //Parses XML file. Returns ExerciseSheet.
     public static function parseXML(){
         $questions = simplexml_load_file("application/models/exo.xml");
         $type = $questions->attributes()['type'];
-        $typeNumber = 0;
         if($type == "qcm"){
             $typeNumber = QCM;
         } else
@@ -25,23 +26,40 @@ class XMLHelper {
                     } else {
                         throw new Exception('Unknown questionnaire type.');
                     }
+        $oquestions = array();
 
         echo "Exercise type:".$type."(".$typeNumber.")<br>";
         foreach ($questions->question as $question) {
-            echo "INSERT INTO `Question`(`assignment`, `points`, `typeID`) VALUES ('".$question->text."',2,".$typeNumber.")<br>";
-            PDOHelper::getInstance()->exec("INSERT INTO `Question`(`assignment`, `points`, `typeID`) VALUES ('".$question->text."',2,".$typeNumber.")");
-            $questionID = PDOHelper::getInstance()->lastInsertID();
-            echo "QuestionID:".$questionID."<br>";
-
-            if($typeNumber == L)
-                return;
+            $oanswers = array();
 
             foreach ($question->answers->answer as $ans){
-                $correct = $ans['good']=="true"?1:0;
-                echo "INSERT INTO `Responses`(`questionID`, `content`, `correct`) (".$questionID.",".$ans->text.",".$correct.")<br>";
-                PDOHelper::getInstance()->exec("INSERT INTO `Responses`(`questionID`, `content`, `correct`) VALUES (".$questionID.",'".$ans->text."',".$correct.")");
-            }
-            return;
+                $correct = $ans['good']=="true"?true:false;
+                switch($typeNumber){
+                    case QCM:
+                    {
+                        $answer = new QCMAnswer($correct, $ans->text);
+                    }
+                    break;
+
+                    case QRF:
+                    {
+                        $answer = new QRFAnswer($correct, $ans->text);
+                    }
+                    break;
+                }
+                $oanswers[] = $answer;
+              }
+
+            $oq = new Question($typeNumber, $question->text, $oanswers, 2);
+            $oquestions[] = $oq;
         }
+
+        $nExercise = new ExerciseSheet();
+        $nExercise->setQuestions($oquestions);
+        $nExercise->setAvailableDate(time());
+        $nExercise->setDeadline(time());
+        $nExercise->setQuestionnaireType(Examen);
+
+        return $nExercise;
     }
 } 

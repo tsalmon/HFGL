@@ -1,5 +1,5 @@
 <?php
-require_once("/application/models/Document.php");
+require_once("application/models/Document.php");
 
 class CourseNote extends Document{
     private $URL;

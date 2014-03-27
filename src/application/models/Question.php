@@ -5,9 +5,11 @@ class Question {
     private $assignment;
     private $answers;
     private $points;
+    private $type;
 
-    public function __construct($assignment, $answers, $points)
+    public function __construct($type, $assignment, $answers, $points)
     {
+        $this->type = $type;
         $this->assignment = $assignment;
         $this->answers = $answers;
         $this->points = $points;
@@ -28,5 +30,9 @@ class Question {
 
     public function getAnswers(){
         return $this->answers;
+    }
+
+    public function getType(){
+        return $this->type;
     }
 }

@@ -5,22 +5,29 @@ require_once("application/models/QCMAnswer.php");
 require_once("application/models/QRFAnswer.php");
 require_once("application/models/LAnswer.php");
 require_once("application/models/PDOHelper.php");
+require_once("application/models/Document.php");
+
 
 define('QCM',1);
 define('QRF',2);
 define('P',3);
 define('L',4);
 
-class ExerciseSheet{
+define('Examen', 1);
+define('TP', 4);
 
-    private $mysqli;
+class ExerciseSheet extends Document{
+
+    private $deadline;
+    private $available;
+    private $questionnaireID;
+    private $questionnaireType;
     private $questions;
     private $db;
 
-    public function __construct($questionnaireID)
+    public function __construct()
     {
         $this->db = PDOHelper::getInstance();
-        $this->fetchQuestionsForQuestionnaireID($questionnaireID);
     }
 
     public function show(){
@@ -43,13 +50,85 @@ class ExerciseSheet{
         }
     }
 
+    public function getID()
+    {
+        return $this->questionnaireID;
+    }
+
     public function getQuestions()
     {
         return $this->questions;
     }
 
-    private function fetchQuestionsForQuestionnaireID($questionnaireID){
+    public function addQuestion($question)
+    {
+        $this->questions[] = $question;
+    }
+
+    public function setDeadline($deadline)
+    {
+        $this->deadline = $deadline;
+    }
+
+    public function setAvailableDate($available)
+    {
+        $this->available = $available;
+    }
+
+    public function setQuestions($questions)
+    {
+        $this->questions = $questions;
+    }
+
+    public function setQuestionnaireType($type)
+    {
+        $this->questionnaireType = $type;
+    }
+
+    //Add current questionnaire to database. Returns questionnaireID.
+    public function writeToDatabase()
+    {
+        PDOHelper::getInstance()->exec("INSERT INTO `Questionnaire`(`questionnaireType`, `deadline`, `available`) VALUES(".Examen.",".$this->deadline.",".$this->available.")");;
+        echo "INSERT INTO `Questionnaire`(`questionnaireType`, `deadline`, `available`) VALUES(".Examen.",".$this->deadline.",".$this->available.")";
+        $questionnaireID = PDOHelper::getInstance()->lastInsertID();
+
+        foreach ($this->questions as $question) {
+           echo "INSERT INTO `Question`(`assignment`, `points`, `typeID`) VALUES ('".$question->getAssignment()."',2,".$this->questionnaireType.")<br>";
+           PDOHelper::getInstance()->exec("INSERT INTO `Question`(`assignment`, `points`, `typeID`) VALUES ('".$question->getAssignment()."',2,".$this->questionnaireType.")");
+           $questionID = PDOHelper::getInstance()->lastInsertID();
+           echo "QuestionID:".$questionID."<br>";
+           echo "INSERT INTO `Questions`(`questionnaireID`, `questionID`) VALUES (".$questionnaireID.",".$questionID.")";
+           PDOHelper::getInstance()->exec("INSERT INTO `Questions`(`questionnaireID`, `questionID`) VALUES (".$questionnaireID.",".$questionID.")");
+
+           if($this->questionnaireType == L)
+               return $questionnaireID;
+
+           foreach ($question->getAnswers() as $answer)
+           {
+                $correct = $answer->isCorrect()?1:0;
+                echo "INSERT INTO `Responses`(`questionID`, `content`, `correct`) (".$questionID.",".$answer->content.",".$correct.")<br>";
+                PDOHelper::getInstance()->exec("INSERT INTO `Responses`(`questionID`, `content`, `correct`) VALUES (".$questionID.",'".$answer->content."',".$correct.")");
+           }
+
+           return $questionnaireID;
+        }
+    }
+
+    //Initializes current questionnaire with data from database using questionnaireID
+    public function loadByID($questionnaireID){
         $questions = array();
+        if($questionnaireRequestResult = $this->db->query("SELECT deadline, available FROM Questionnaire WHERE questionnaireID=".$questionnaireID.""))
+        {
+            $questionnaireRow = $questionnaireRequestResult->fetch(PDF::FETCH_ASSOC);
+            $this->questionnaireID = $questionnaireRow['questionnaireID'];
+            $this->available = $questionnaireRow['available'];
+            $this->deadline = $questionnaireRow['deadline'];
+        }
+        else
+        {
+            throw new Exception('Questionnaire wasnt found.');
+        }
+
         //getting questionnaire object from DB
         if ($questionsRequestResult = $this->db->query("SELECT questionID FROM Questions WHERE questionnaireID=".$questionnaireID))
         {
@@ -102,7 +181,7 @@ class ExerciseSheet{
         }
         else
         {
-            throw new Exception('Questionnaire wasnt found.');
+            throw new Exception('Questions for current questionnaire werent found.');
         }
         return $questions;
     }
