@@ -1,5 +1,5 @@
 --tout le monde
-select name, surname, `e-mail` from Person
+select name, surname, `email` from Person
 
 --tous les cours
 select title, description from Course

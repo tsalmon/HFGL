@@ -16,7 +16,7 @@
 		</p>
 		<p>
 			<input 	type="text" 
-					placeholder="En	trez votre prénom" 
+					placeholder="Entrez votre prénom" 
 					name="inscr_firstname"
 					required/>
 		</p>
