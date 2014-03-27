@@ -56,8 +56,8 @@ class Application
         } else {
             
             // invalid URL, so simply show home/index
-            require './application/controller/Welcome.php';
-            $home = new Welcome();
+            require './application/controller/Welcomecontroller.php';
+            $home = new Welcomecontroller();
             $home->index();
             require './application/models/ExerciseSheet.php';
             require './application/models/XMLHelper.php';
@@ -82,7 +82,7 @@ class Application
             // Put URL parts into according properties
             // By the way, the syntax here is just a short form of if/else, called "Ternary Operators"
             // @see http://davidwalsh.name/php-shorthand-if-else-ternary-operators
-            $this->url_controller = (isset($url[0]) ? $url[0] : null);
+            $this->url_controller = (isset($url[0]) ? $url[0]."controller" : null);
             $this->url_action = (isset($url[1]) ? $url[1] : null);
             $this->url_parameter_1 = (isset($url[2]) ? $url[2] : null);
             $this->url_parameter_2 = (isset($url[3]) ? $url[3] : null);
