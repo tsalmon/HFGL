@@ -48,7 +48,7 @@ class PersonFactory {
                         $res=new Admin($m);
                        }
                     catch(UnexpectedValueException $e){
-                        return false;}                
+                        throw new UnexpectedValueException("Utilisateur non existant");}                
                  }
              }
             $key=$res->personID();
