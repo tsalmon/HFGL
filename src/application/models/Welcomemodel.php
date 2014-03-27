@@ -25,16 +25,16 @@ class WelcomeModel
         try{
             $person=&PersonFactory::getPerson($email);
         }catch(UnexpectedValueException $e){
-            //RETOUR AVEC ERREUR : PERSONNE NON EXISTANTE
+            return null;
         }
         
         if($person->password()=$pwd){
-            // RETOUR AVEC ERREUR : MAUVAIS PWD
+            return null;
         }
         else {
            $_SESSION['current']=$person;
         }
-        
+        return $person;        
 //        $sql = "SELECT * FROM Person WHERE Person.email = '". $email."'";
 //        $query = $this->db->prepare($sql);
 //        $query->execute();
