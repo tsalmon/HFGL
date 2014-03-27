@@ -1,9 +1,9 @@
 <?php
 require_once("application/libs/controller.php");
-require_once("application/models/Question.php");
-require_once("application/models/QCMAnswer.php");
-require_once("application/models/QRFAnswer.php");
-require_once("application/models/LAnswer.php");
+require_once("application/models/QCMQuestion.php");
+require_once("application/models/QRFQuestion.php");
+require_once("application/models/LQuestion.php");
+require_once("application/models/PQuestion.php");
 require_once("application/models/PDOHelper.php");
 require_once("application/models/Document.php");
 
@@ -36,14 +36,18 @@ class ExerciseSheet extends Document{
             echo '<form action="">';
             $curanswers = $question->getAnswers();
             foreach($curanswers as $answer) {
-                if($answer instanceof QCMAnswer)
+                if($question instanceof QCMQuestion)
                 {
                     echo '<input type="checkbox" name="checkboxanswer" value="val">'.$answer->getContent().'<br>';
-                } else
-                    if($answer instanceof QCMAnswer || $answer instanceof QRFAnswer)
-                    {
-                        echo '<input type="text" name="textanswer" placeholder="Your answer...">';
-                    }
+                }
+                else if($question instanceof QRFQuestion || $question instanceof LQuestion)
+                {
+                    echo '<input type="text" name="textanswer" placeholder="Your answer...">';
+                }
+                else
+                {
+                    throw new Exception("Undefined question type");
+                }
             }
             echo '</form>';
             echo '<br/>';
@@ -88,38 +92,23 @@ class ExerciseSheet extends Document{
     //Add current questionnaire to database. Returns questionnaireID.
     public function writeToDatabase()
     {
+        echo "INSERT INTO `Questionnaire`(`questionnaireType`, `deadline`, `available`) VALUES(".Examen.",".$this->deadline.",".$this->available.")<br>";
         PDOHelper::getInstance()->exec("INSERT INTO `Questionnaire`(`questionnaireType`, `deadline`, `available`) VALUES(".Examen.",".$this->deadline.",".$this->available.")");;
-        echo "INSERT INTO `Questionnaire`(`questionnaireType`, `deadline`, `available`) VALUES(".Examen.",".$this->deadline.",".$this->available.")";
         $questionnaireID = PDOHelper::getInstance()->lastInsertID();
+        echo "Inserted questionnaireID:".$questionnaireID."<br>";
 
         foreach ($this->questions as $question) {
-           echo "INSERT INTO `Question`(`assignment`, `points`, `typeID`) VALUES ('".$question->getAssignment()."',2,".$this->questionnaireType.")<br>";
-           PDOHelper::getInstance()->exec("INSERT INTO `Question`(`assignment`, `points`, `typeID`) VALUES ('".$question->getAssignment()."',2,".$this->questionnaireType.")");
-           $questionID = PDOHelper::getInstance()->lastInsertID();
-           echo "QuestionID:".$questionID."<br>";
-           echo "INSERT INTO `Questions`(`questionnaireID`, `questionID`) VALUES (".$questionnaireID.",".$questionID.")";
-           PDOHelper::getInstance()->exec("INSERT INTO `Questions`(`questionnaireID`, `questionID`) VALUES (".$questionnaireID.",".$questionID.")");
-
-           if($this->questionnaireType == L)
-               return $questionnaireID;
-
-           foreach ($question->getAnswers() as $answer)
-           {
-                $correct = $answer->isCorrect()?1:0;
-                echo "INSERT INTO `Responses`(`questionID`, `content`, `correct`) (".$questionID.",".$answer->content.",".$correct.")<br>";
-                PDOHelper::getInstance()->exec("INSERT INTO `Responses`(`questionID`, `content`, `correct`) VALUES (".$questionID.",'".$answer->content."',".$correct.")");
-           }
-
-           return $questionnaireID;
+           $question->writeToDBForQuestionnaireID($questionnaireID);
         }
+        return $questionnaireID;
     }
 
     //Initializes current questionnaire with data from database using questionnaireID
     public function loadByID($questionnaireID){
         $questions = array();
-        if($questionnaireRequestResult = $this->db->query("SELECT deadline, available FROM Questionnaire WHERE questionnaireID=".$questionnaireID.""))
+        if($questionnaireRequestResult = $this->db->query("SELECT * FROM Questionnaire WHERE questionnaireID=".$questionnaireID.""))
         {
-            $questionnaireRow = $questionnaireRequestResult->fetch(PDF::FETCH_ASSOC);
+            $questionnaireRow = $questionnaireRequestResult->fetch(PDO::FETCH_ASSOC);
             $this->questionnaireID = $questionnaireRow['questionnaireID'];
             $this->available = $questionnaireRow['available'];
             $this->deadline = $questionnaireRow['deadline'];
@@ -129,54 +118,13 @@ class ExerciseSheet extends Document{
             throw new Exception('Questionnaire wasnt found.');
         }
 
-        //getting questionnaire object from DB
         if ($questionsRequestResult = $this->db->query("SELECT questionID FROM Questions WHERE questionnaireID=".$questionnaireID))
         {
             //enumertaion of questions of current questionnaire
             while($currentQuestionsRow = $questionsRequestResult->fetch(PDO::FETCH_ASSOC))
             {
-                $currentQuestionID = $currentQuestionsRow['questionID'];
-                //getting question objects from DB
-                if($questionRequestResult = $this->db->query("SELECT * FROM Question WHERE questionID=".$currentQuestionID))
-                {
-                    //question processing
-                    while($currentQuestionRow = $questionRequestResult->fetch(PDO::FETCH_ASSOC))
-                    {
-                        $currentQuestionAssignment = $currentQuestionRow['assignment'];
-                        $currentQuestionTypeID = $currentQuestionRow['typeID'];
-                        $currentQuestionPoints = $currentQuestionRow['points'];
-
-                        //Getting answers for current question
-                        $answerObjects = array();
-                        if($answersRequestResult = $this->db->query("SELECT * FROM Responses WHERE questionID=".$currentQuestionID))
-                        {
-                            //enumeration of answers
-                            while($currentAnswerRow = $answersRequestResult->fetch(PDO::FETCH_ASSOC))
-                            {
-                                switch($currentQuestionTypeID)
-                                {
-                                    case QCM:
-                                    {
-                                        $answerObjects[] = new QCMAnswer((bool)$currentAnswerRow['correct'], $currentAnswerRow['content']);
-                                    }
-                                        break;
-
-                                    case QRF:
-                                    {
-                                        $answerObjects[] = new QRFAnswer((bool)$currentAnswerRow['correct'], $currentAnswerRow['content']);
-                                    }
-                                        break;
-                                }
-                            }
-                        }
-
-                        $this->questions[] = new Question($currentQuestionAssignment, $answerObjects, $currentQuestionPoints);
-                    }
-                }
-                else
-                {
-                    throw new Exception('Questions for current questionnaire werent found.');
-                }
+                $questionID = $currentQuestionsRow['questionID'];
+                $this->questions[] = Question::getQuestionByID($questionID);
             }
         }
         else
