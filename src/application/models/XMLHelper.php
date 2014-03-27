@@ -1,8 +1,9 @@
 <?php
-require_once("application/models/Question.php");
-require_once("application/models/QCMAnswer.php");
-require_once("application/models/QRFAnswer.php");
-require_once("application/models/LAnswer.php");
+require_once("application/models/QCMQuestion.php");
+require_once("application/models/QRFQuestion.php");
+require_once("application/models/LQuestion.php");
+require_once("application/models/PQuestion.php");
+
 require_once("application/models/PDOHelper.php");
 
 
@@ -12,45 +13,41 @@ class XMLHelper {
     public static function parseXML(){
         $questions = simplexml_load_file("application/models/exo.xml");
         $type = $questions->attributes()['type'];
-        if($type == "qcm"){
-            $typeNumber = QCM;
-        } else
-            if($type == "qrf"){
-                $typeNumber = QRF;
-            } else
-                if($type == "p"){
-                    $typeNumber = P;
-                }else
-                    if($type == "l"){
-                        $typeNumber = L;
-                    } else {
-                        throw new Exception('Unknown questionnaire type.');
-                    }
+
         $oquestions = array();
 
-        echo "Exercise type:".$type."(".$typeNumber.")<br>";
+        echo "Exercise type:".$type."<br>";
         foreach ($questions->question as $question) {
             $oanswers = array();
 
-            foreach ($question->answers->answer as $ans){
+            foreach ($question->answers->answer as $ans)
+            {
                 $correct = $ans['good']=="true"?true:false;
-                switch($typeNumber){
-                    case QCM:
-                    {
-                        $answer = new QCMAnswer($correct, $ans->text);
-                    }
-                    break;
-
-                    case QRF:
-                    {
-                        $answer = new QRFAnswer($correct, $ans->text);
-                    }
-                    break;
-                }
+                $answer = new Answer($ans->text, $correct);
                 $oanswers[] = $answer;
-              }
+            }
 
-            $oq = new Question($typeNumber, $question->text, $oanswers, 2);
+            if($type == "qcm"){
+                $oq = new QCMQuestion($question->text, $question->tip, 2);
+                $oq->setAnswers($oanswers);
+            }
+            else if($type == "qrf")
+            {
+                $oq = new QRFQuestion($question->text, $question->tip, 2);
+                $oq->setAnswers($oanswers);
+            }
+            else if($type == "p"){
+
+            }
+            else if($type == "l")
+            {
+                $oq = new LQuestion($question->text, $question->tip, 2);
+            }
+            else
+            {
+                throw new Exception('Unknown questionnaire type.');
+            }
+
             $oquestions[] = $oq;
         }
 
