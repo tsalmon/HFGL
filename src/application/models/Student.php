@@ -4,7 +4,7 @@ require_once("Corrector.php");
 
 class Student extends Person implements Corrector {
 	
-    //      Attribut
+    //      Attributs
     //**********************
     
         protected $studentID;
@@ -51,6 +51,7 @@ class Student extends Person implements Corrector {
          
         public function setNse($n){     
             $this->db->exec("UPDATE student SET nse = '".$n."' WHERE studentID ='".$this->studentID."'");
+            $this->nse=$n;
         }
         
         //Suppression de l'etudiant en BDD - Detruit la classe
