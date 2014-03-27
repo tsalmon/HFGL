@@ -28,12 +28,11 @@ class WelcomeModel
             return null;
         }
         
-        if($person->password()==$pwd){
+        if($person->password()!=$pwd){
             return null;
         }
-        else {
-           $_SESSION['current']=$person;
-        }
+        
+        $_SESSION['current']=$person;
 
         return $person;
         
