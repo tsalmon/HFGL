@@ -81,13 +81,16 @@ class Welcome extends Controller
 
     public function Connexion()
     {
-        $page = "inscription";
         $log = $this->loadModel('WelcomeModel');
         $co = $log->connect($_POST["user"], $_POST["pwd"]);
-        if($co == true){
+        if($co > 1){
             header('location: ' . URL . 'Student');
         } else {
-            echo " Soit le mot de passe incorrect, soit vous n'êtes pas enregistré avec cette adresse";
+            $page = "connexion";
+            $incorrect = 1;
+            require 'application/views/_templates/header.php';
+            require 'application/views/connexion.php';
+            require 'application/views/_templates/footer.php';       
         }
     }
 

@@ -24,7 +24,23 @@ class WelcomeModel
         $query = $this->db->prepare($sql);
         $query->execute();
         $result = $query->fetch();
-        return $result->password == $pwd;
+        if($result == null){
+            return 0;
+        } elseif ($result->password != $pwd) {
+            return 1;
+        }   
+        $sql = "SELECT * FROM Student WHERE Student.PersonID = '". $result->personID."'";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        $result2 = $query->fetch();
+        if($result2 == null){ // not a student
+            $sql = "SELECT * FROM Tutor WHERE Tutor.PersonID = '". $result->personID."'";
+            $query = $this->db->prepare($sql);
+            $query->execute();
+            $result = $query->fetch();
+            return $result;
+        }
+        return $result2;
     }
 
     /**
