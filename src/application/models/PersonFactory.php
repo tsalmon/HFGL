@@ -25,8 +25,8 @@ class PersonFactory {
     
     protected static function initiateArrays(){
         if(!isset(PersonFactory::$mails)){
-            PersonFactory::$persons=[];
-            PersonFactory::$mails=[];            
+            PersonFactory::$persons=array();
+            PersonFactory::$mails=array();            
         }
     }
 
