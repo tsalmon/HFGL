@@ -82,6 +82,7 @@ class Welcomecontroller extends Controller
     public function Connexion()
     {
         $log = $this->loadModel('WelcomeModel');
+        
         $co = $log->connect($_POST["user"], $_POST["pwd"]);
         if($co == null){
             $page = "connexion";
@@ -90,8 +91,10 @@ class Welcomecontroller extends Controller
             require 'application/views/connexion.php';
             require 'application/views/_templates/footer.php';       
         } else {
+            header('location: ' . URL . 'Student');
             $_SESSION["role"] = "student";
             $_SESSION["email"] = $_POST["user"];
+            echo "toto";
         }
     }
 }
