@@ -27,6 +27,8 @@
     <script src="<?php echo URL; ?>public/js/application.js"></script>
 </head>
 <body>
+<?php
+/*
     <div id="header_wrapper">
         <div id="header">
             <div id="site_title">
@@ -38,3 +40,5 @@
             <p>Slogan ;;;;;;;;</p>
         </div> 
     </div> <!-- end of header -->
+    */
+    ?>

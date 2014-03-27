@@ -1,7 +1,7 @@
 <article id="middle">
 	<form action="<?php echo URL; ?>Welcome/Inscription_result" method="POST" id="middleform">
 		<p>
-			<h1 id="hfgl">Bienvenue sur HFGL</h1>
+			<a href="<?php echo URL; ?>Welcome/"><h1 id="hfgl">Bienvenue sur HFGL</h1></a>
 			 <span id="quote"> Have Fun, Good Learning</span>
 		</p>
 		<input type="radio" id="radio1" name="radios" value="all" checked>
@@ -16,7 +16,7 @@
 		</p>
 		<p>
 			<input 	type="text" 
-					placeholder="En	trez votre prénom" 
+					placeholder="Entrez votre prénom" 
 					name="inscr_firstname"
 					required/>
 		</p>

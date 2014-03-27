@@ -19,9 +19,7 @@ class Welcome extends Controller
 
     public function Inscription_result()
     {
-        $page = "inscription";
-        //require 'application/views/_templates/header.php';
-    
+        $page = "inscription";    
         $inscription_error = array();
         $inscription_model = $this->loadModel('WelcomeModel');
 
@@ -83,8 +81,17 @@ class Welcome extends Controller
 
     public function Connexion()
     {
-        $page = "inscription";
-        header('location: ' . URL . 'Student');
+        $log = $this->loadModel('WelcomeModel');
+        $co = $log->connect($_POST["user"], $_POST["pwd"]);
+        if($co > 1){
+            header('location: ' . URL . 'Student');
+        } else {
+            $page = "connexion";
+            $incorrect = 1;
+            require 'application/views/_templates/header.php';
+            require 'application/views/connexion.php';
+            require 'application/views/_templates/footer.php';       
+        }
     }
 
 }
