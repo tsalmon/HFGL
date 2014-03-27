@@ -28,13 +28,15 @@ class WelcomeModel
             return null;
         }
         
-        if($person->password()=$pwd){
+        if($person->password()==$pwd){
             return null;
         }
         else {
            $_SESSION['current']=$person;
         }
-        return $person;        
+
+        return $person;
+        
 //        $sql = "SELECT * FROM Person WHERE Person.email = '". $email."'";
 //        $query = $this->db->prepare($sql);
 //        $query->execute();
