@@ -1,6 +1,6 @@
 <?php
     
-    require_once("/../config/config.php");
+    require_once("application/config/config.php");
     // MODIFIER LES ATTRIBUTS PARAM LORS D'UN REDEPLOIEMENT.
 
  class PDOHelper {
