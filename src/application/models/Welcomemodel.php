@@ -22,7 +22,7 @@ class WelcomeModel
     * @param pwd (string)
     */
     public function connect($email, $pwd){
-        $sql = "SELECT * FROM Person WHERE Person.email = '". $email."'";
+        /*$sql = "SELECT * FROM Person WHERE Person.email = '". $email."'";
         $query = $this->db->prepare($sql);
         $query->execute();
         $result = $query->fetch();
@@ -42,9 +42,9 @@ class WelcomeModel
             $result = $query->fetch();
             return $result;
         }
-        return $result2;
+        return $result2;*/
 
-        /*try{
+        try{
             $person=&PersonFactory::getPerson($email);
         }catch(UnexpectedValueException $e){
             return null;
@@ -55,7 +55,7 @@ class WelcomeModel
         }
         
         $_SESSION['current']=$person;
-        */
+        
         return $person;
     }
         
