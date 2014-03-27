@@ -19,9 +19,7 @@ class Welcome extends Controller
 
     public function Inscription_result()
     {
-        $page = "inscription";
-        //require 'application/views/_templates/header.php';
-    
+        $page = "inscription";    
         $inscription_error = array();
         $inscription_model = $this->loadModel('WelcomeModel');
 
@@ -84,7 +82,13 @@ class Welcome extends Controller
     public function Connexion()
     {
         $page = "inscription";
-        header('location: ' . URL . 'Student');
+        $log = $this->loadModel('WelcomeModel');
+        $co = $log->connect($_POST["user"], $_POST["pwd"]);
+        if($co == true){
+            header('location: ' . URL . 'Student');
+        } else {
+            echo " Soit le mot de passe incorrect, soit vous n'êtes pas enregistré avec cette adresse";
+        }
     }
 
 }
