@@ -23,7 +23,9 @@ class Application
      */
     public function __construct()
     {
-        // create array with URL parts in $url
+        session_start();
+
+// create array with URL parts in $url
         $this->splitUrl();
         // check for controller: does such a controller exist ?
         if (file_exists('./application/controller/' . $this->url_controller . '.php')) {
@@ -59,7 +61,7 @@ class Application
             require './application/controller/Welcomecontroller.php';
             $home = new Welcomecontroller();
             $home->index();
-        }
+        }    
     }
 
     /**
@@ -90,5 +92,18 @@ class Application
             // echo 'Parameter 2: ' . $this->url_parameter_2 . '<br />';
             // echo 'Parameter 3: ' . $this->url_parameter_3 . '<br />';
         }
+    }
+
+    public function doLogout(){
+        $_SESSION = array();
+        session_destroy();
+        //$this->messages[] = "Vous avez été déconnecté";
+    }
+
+    /**
+     * @return boolean user's login status, connected (true) or not (false)
+     */
+    public function isUserLoggedIn(){
+        return (isset($_SESSION['role']) AND $_SESSION['role'] == 1);
     }
 }

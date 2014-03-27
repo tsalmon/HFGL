@@ -33,7 +33,6 @@ class WelcomeModel
         }
         
         $_SESSION['current']=$person;
-
         return $person;
         
 //        $sql = "SELECT * FROM Person WHERE Person.email = '". $email."'";
