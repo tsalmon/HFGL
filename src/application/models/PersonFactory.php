@@ -33,18 +33,13 @@ class PersonFactory {
 
     //Récupérer un objet correspondant à une personne dans la base de donnée
     public static function &getPerson($m){  
-        echo "test 1";
         PersonFactory::initiateArrays();
-        echo "test 2";
         $key=array_search($m,PersonFactory::$mails);
         if ($key==FALSE){      
-        echo "test 3";
             try{
                 $res=new Student($m);
-        echo "test fin";
                }
             catch(UnexpectedValueException $e){
-           echo "test fail";
                 try{
                     $res=new Professor($m);
                    }
@@ -53,7 +48,7 @@ class PersonFactory {
                         $res=new Admin($m);
                        }
                     catch(UnexpectedValueException $e){
-                        throw new UnexpectedValueException("Utilisateur non existant");}                
+                        return false;}                
                  }
              }
             $key=$res->personID();
