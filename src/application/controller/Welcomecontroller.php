@@ -1,5 +1,5 @@
 <?php
-class Welcome extends Controller
+class Welcomecontroller extends Controller
 {
     public function index()
     {
@@ -83,15 +83,14 @@ class Welcome extends Controller
     {
         $log = $this->loadModel('WelcomeModel');
         $co = $log->connect($_POST["user"], $_POST["pwd"]);
-        if($co > 1){
-            header('location: ' . URL . 'Student');
-        } else {
+        if($co == null){
             $page = "connexion";
             $incorrect = 1;
             require 'application/views/_templates/header.php';
             require 'application/views/connexion.php';
             require 'application/views/_templates/footer.php';       
+        } else {
+            header('location: ' . URL . 'Student');
         }
     }
-
 }

@@ -24,11 +24,11 @@ class WelcomeModel
         $query = $this->db->prepare($sql);
         $query->execute();
         $result = $query->fetch();
-        if($result == null){
-            return 0;
-        } elseif ($result->password != $pwd) {
-            return 1;
-        }   
+        
+        if(($result == null) || ($result->password != $pwd)){ //incorrect password, or unregisted user
+            return null;
+        } 
+
         $sql = "SELECT * FROM Student WHERE Student.PersonID = '". $result->personID."'";
         $query = $this->db->prepare($sql);
         $query->execute();

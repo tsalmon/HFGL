@@ -1,6 +1,6 @@
 <?php
 
-class Teacher extends Controller
+class Teachercontroller extends Controller
 {
     public function index()
     {

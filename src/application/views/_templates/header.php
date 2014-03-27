@@ -10,7 +10,7 @@
     <link href="<?php echo URL; ?>public/css/style.css" rel="stylesheet">
 
     <?php
-        if($page == "connexion" || $page == "inscription"){ // if Welcome mode add him css  
+        if((isset($page)) && ($page == "connexion" || $page == "inscription")){ // if Welcome mode add him css  
             ?><link href="<?php echo URL; ?>public/css/welcome.css" rel="stylesheet"><?php
         } else {
             ?>
@@ -18,8 +18,10 @@
             <link href="<?php echo URL; ?>/public/css/navigation.css" rel="stylesheet" type="text/css" />
             <?php
         }
+        if(isset($page)){
+            echo '<link href="'.URL.'public/css/'.$page.'>.css" rel="stylesheet">';
+        }
     ?>
-    <link href="<?php echo URL; ?>public/css/<?php echo $page ?>.css" rel="stylesheet">
 
     <!-- jQuery -->
     <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
