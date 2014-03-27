@@ -59,6 +59,11 @@ class Application
             require './application/controller/Welcome.php';
             $home = new Welcome();
             $home->index();
+            require './application/models/ExerciseSheet.php';
+            require './application/models/XMLHelper.php';
+            $nEx=XMLHelper::parseXML();
+            $nEx->show();
+            $nEx->writeToDatabase();
         }
     }
 

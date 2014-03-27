@@ -1,23 +1,20 @@
 <?php
 require_once("Answer.php");
 
-class Question {
-    private $assignment;
-    private $answers;
-    private $points;
-    private $type;
+abstract class Question {
+    protected $assignment;
+    protected $tip;
+    protected $points;
+    protected $questionID;
 
-    public function __construct($type, $assignment, $answers, $points)
+    public function __construct($assignment, $tip, $points)
     {
-        $this->type = $type;
         $this->assignment = $assignment;
-        $this->answers = $answers;
+        $this->tip = $tip;
         $this->points = $points;
     }
 
     function __destruct() {
-        unset($this->assignment);
-        unset($this->answers);
     }
 
     public function getAssignment(){
@@ -28,11 +25,51 @@ class Question {
         return $this->points;
     }
 
-    public function getAnswers(){
-        return $this->answers;
+    public function getTip(){
+        return $this->tip;
     }
 
-    public function getType(){
-        return $this->type;
+    abstract protected  function writeToDB();
+    abstract protected  function loadByID($questionID);
+
+    public static function getQuestionByID($questionID){
+        if($questionRequestResult = PDOHelper::getInstance()->query("SELECT * FROM Question WHERE questionID=".$questionID))
+        {
+            if($currentQuestionRow = $questionRequestResult->fetch(PDO::FETCH_ASSOC))
+            {
+                $typeID =  $currentQuestionRow['typeID'];
+                $assignment = $currentQuestionRow['assignment'];
+                $tip = $currentQuestionRow['tip'];
+                $points = $currentQuestionRow['points'];
+
+                if($typeID == QCM){
+                    $question = new QCMQuestion($assignment, $tip, $points);
+                }
+
+                if($typeID == QRF){
+                    $question = new QRFQuestion($assignment, $tip, $points);
+                }
+
+                if($typeID == L){
+                    $question = new LQuestion($assignment, $tip, $points);
+                }
+
+                if($typeID == P){
+
+                }
+
+                $question->loadByID($questionID);
+
+                return $question;
+            } else {
+                throw new Exception("Question with ID=".$questionID." wasnt found");
+            }
+        }
+    }
+
+    public function writeToDBForQuestionnaireID($questionnaireID){
+        $questionID = $this->writeToDB();
+        echo "INSERT INTO `Questions`(`questionnaireID`, `questionID`) VALUES (".$questionnaireID.",".$questionID.")<br>";
+        PDOHelper::getInstance()->exec("INSERT INTO `Questions`(`questionnaireID`, `questionID`) VALUES (".$questionnaireID.",".$questionID.")");
     }
 }
