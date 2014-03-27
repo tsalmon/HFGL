@@ -1,5 +1,7 @@
 <?php
 
+require_once 'PersonFactory.php';
+
 class WelcomeModel
 {
     /**
@@ -20,27 +22,40 @@ class WelcomeModel
     * @param pwd (string)
     */
     public function connect($email, $pwd){
-        $sql = "SELECT * FROM Person WHERE Person.email = '". $email."'";
-        $query = $this->db->prepare($sql);
-        $query->execute();
-        $result = $query->fetch();
-        
-        if(($result == null) || ($result->password != $pwd)){ //incorrect password, or unregisted user
-            return null;
-        } 
-
-        $sql = "SELECT * FROM Student WHERE Student.PersonID = '". $result->personID."'";
-        $query = $this->db->prepare($sql);
-        $query->execute();
-        $result2 = $query->fetch();
-        if($result2 == null){ // not a student
-            $sql = "SELECT * FROM Tutor WHERE Tutor.PersonID = '". $result->personID."'";
-            $query = $this->db->prepare($sql);
-            $query->execute();
-            $result = $query->fetch();
-            return $result;
+        try{
+            $person=&PersonFactory::getPerson($mail);
+        }catch(UnexpectedValueException $e){
+            //RETOUR AVEC ERREUR : PEROSNNE NON EXISTANTE
         }
-        return $result2;
+        
+        if($person->password()=$pwd){
+            // RETOUR AVEC ERREUR : MAUVAIS PWD
+        }
+        else {
+           $_SESSION['current']=$person;
+        }
+        
+//        $sql = "SELECT * FROM Person WHERE Person.email = '". $email."'";
+//        $query = $this->db->prepare($sql);
+//        $query->execute();
+//        $result = $query->fetch();
+//        
+//        if(($result == null) || ($result->password != $pwd)){ //incorrect password, or unregisted user
+//            return null;
+//        } 
+//
+//        $sql = "SELECT * FROM Student WHERE Student.PersonID = '". $result->personID."'";
+//        $query = $this->db->prepare($sql);
+//        $query->execute();
+//        $result2 = $query->fetch();
+//        if($result2 == null){ // not a student
+//            $sql = "SELECT * FROM Tutor WHERE Tutor.PersonID = '". $result->personID."'";
+//            $query = $this->db->prepare($sql);
+//            $query->execute();
+//            $result = $query->fetch();
+//            return $result;
+//        }
+//        return $result2;
     }
 
     /**
