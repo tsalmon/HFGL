@@ -94,7 +94,7 @@ class Welcomecontroller extends Controller
             header('location: ' . URL . 'Student');
             $_SESSION["role"] = "student";
             $_SESSION["email"] = $_POST["user"];
-            echo "toto";
+            $_SESSION["id"] = $co->personID();
         }
     }
 }
