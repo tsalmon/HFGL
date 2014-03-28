@@ -1,6 +1,6 @@
 <?php
 
-require_once 'ExerciceSheet.php';
+require_once 'ExerciseSheet.php';
 require_once 'CourseNote.php';
 require_once 'Part.php';
 class Chapter {
@@ -19,7 +19,7 @@ class Chapter {
     //      Constructeur
     //**************************
         
-        private function __construct($id, $exists=true){  
+        public function __construct($id, $exists=true){  
             $this->db=PDOHelper::getInstance();            
             if($exists==true){
                 $res = $this->db->query("SELECT * FROM chapter WHERE `chapterID`=".$id.";");
@@ -94,12 +94,12 @@ class Chapter {
             $res=$this->db->query("SELECT partID FROM chapters WHERE chapterID ='".$this->chapterID."'");  
             $fetch=$res->fetchAll(PDO::FETCH_ASSOC);
             foreach($fetch as $line){
-                $id=$fetch["partID"];
-                $res2=$this->db->query("SELECT courseID FROM parts WHERE partID ='".$id."'");  
+                $id=$line["partID"];
+                $res2=$this->db->query("SELECT title FROM course JOIN (SELECT courseID FROM parts WHERE partID ='".$id."') AS thispart ON course.courseID=thispart.courseID");  
                 $fetch2=$res2->fetchAll(PDO::FETCH_ASSOC);
                 foreach($fetch2 as $line2){
-                    $course=&CourseFactory::getCourse($line["courseID"]);
-                    $course->part()->removeChapter($this);
+                    $course=&CourseFactory::getCourse($line2["title"]);
+                    $course->part($id)->removeChapter($this);
                 }
             }
             $this->db->exec("DELETE FROM chapter WHERE chapterID ='".$this->chapterID."'"); 

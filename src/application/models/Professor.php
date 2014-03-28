@@ -26,8 +26,12 @@ class Professor extends Person implements Corrector{
                 }
             }
             else {
+                if($this->mailExists($mail)){
+                    throw new UnexpectedValueException("Utilisateur existant");
+                }
                 $lastid=$this->createEntry($mail);
-                $this->db->exec("INSERT INTO tutor (personID) VALUES (".$lastid.");");        
+                $this->db->exec("INSERT INTO tutor (personID) VALUES (".$lastid.");");   
+                $this->tutorID=$this->db->lastInsertId();              
             }
         }
         
@@ -39,11 +43,15 @@ class Professor extends Person implements Corrector{
             return $this->tutorID;          
         }
         
+        public function getCourses(){
+            return CourseTeaching::getCourses($this);
+        }
+        
 	
         //Suppression de l'etudiant en BDD - Detruit la classe
         
         public function delete(){
-            $this->db->exec("DELETE FROM teaching WHERE tutorID ='".$this->tutorID."'"); 
+            CourseTeaching::deleteTutor($this);
             $this->db->exec("DELETE FROM tutor WHERE tutorID ='".$this->tutorID."'");    
             parent::delete();            
         }
