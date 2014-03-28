@@ -28,8 +28,16 @@
           <tr><td>Projet</td> <td><a href="#">Sujet de projet</a></td></tr>
           <tr><td>Examen</td> <td><a href="#">Feuille d'examen</a></td></tr>
         </table>
-          <p style="padding-top: 15px; display: inline"><span>&nbsp;</span><input class="bouton" type="submit" name="name" value="Se désinscrit ce cours" /></p>
-          <p style="padding-top: 15px; display: inline"><span>&nbsp;</span><input class="bouton" type="submit" name="name" value="Note de cours" /></p>
+
+        <p style="padding-top: 15px; display: inline"><span>&nbsp;</span>
+        	<input class="bouton" type="submit" name="name" value="Se désinscrit ce cours" />
+        </p>
+
+        <a href="#Etudiant_Notesdecours.html">
+           <p style="padding-top: 15px; display: inline"><span>&nbsp;</span>
+           	<input class="bouton" type="submit" name="name" value="Notes de cours" />
+           </p>
+        </a>
       </div>
     </div>
     <div id="scroll">
