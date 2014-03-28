@@ -91,19 +91,11 @@ class Welcomecontroller extends Controller
             require 'application/views/connexion.php';
             require 'application/views/_templates/footer.php';       
         } else {
-<<<<<<< HEAD
             $_SESSION["role"] = "student";
             $_SESSION["email"] = $_POST["user"];
             $_SESSION["id"] = strval($co->personID());
             header('location: ' . URL . 'Student');
             echo $_SESSION["id"];
-=======
-            header('location: ' . URL . 'Student');
-            $_SESSION["role"] = "student";
-            $_SESSION["email"] = $_POST["user"];
-            $_SESSION["id"] = $co->personID();
-            echo $_SESSION["id"]; 
->>>>>>> 4ef4ba31438c5e60ee335967b396aa17d3f44221
         }
     }
 }
