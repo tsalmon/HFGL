@@ -95,6 +95,7 @@ class Welcomecontroller extends Controller
             $_SESSION["role"] = "student";
             $_SESSION["email"] = $_POST["user"];
             $_SESSION["id"] = $co->personID();
+            echo $_SESSION["id"];
         }
     }
 }

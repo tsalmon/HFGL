@@ -17,7 +17,7 @@ class Part {
     //      Constructeur
     //**************************
         
-        private function __construct($id, $exists=true){  
+        public function __construct($id, $exists=true){  
             $this->db=PDOHelper::getInstance();            
             if($exists==true){
                 $res = $this->db->query("SELECT * FROM part WHERE `partID`=".$id.";");
@@ -34,7 +34,9 @@ class Part {
                 }
             }
             else {
-                $this->db->exec("INSERT INTO part ('title') VALUES ('".$id."');");        
+                $this->db->exec("INSERT INTO part (title) VALUES ('".$id."');");     
+                $this->title=$id;
+                $this->partID=$this->db->lastInsertId();   
             }
         }  
         
@@ -107,17 +109,17 @@ class Part {
         
         public function removeChapter($chapter){  
             $this->db->exec("DELETE FROM chapters WHERE chapterID=".$chapter->chapterID());
-            $key= array_search($this->chapters, $chapter);           
-            array_splice($this->chapter, $key, 1);
+            $key= array_search($chapter, $this->chapters);           
+            array_splice($this->chapters, $key, 1);
         }
 
         //Suppression de la part en BDD
         
         public function delete(){
-            $res=$this->db->query("SELECT courseID FROM parts WHERE partID ='".$this->partID."'");  
+            $res=$this->db->query("SELECT title FROM course JOIN (SELECT courseID FROM parts WHERE partID ='".$this->partID."') AS thispart ON course.courseID=thispart.courseID");  
             $fetch=$res->fetchAll(PDO::FETCH_ASSOC);
             foreach($fetch as $line){
-                $course=&CourseFactory::getCourse($line["courseID"]);
+                $course=&CourseFactory::getCourse($line["title"]);
                 $course->removePart($this);
             }
             $this->db->exec("DELETE FROM part WHERE partID ='".$this->partID."'"); 

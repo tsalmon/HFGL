@@ -16,6 +16,12 @@ abstract class Person{
     //       Classes privées
     //****************************
         
+        protected function mailExists($m){
+            $res=$this->db->query("Select * from person WHERE email='".$m."';");
+            $fetch=$res->fetch(PDO::FETCH_ASSOC);
+            return isset($fetch["email"]);
+        }
+        
         protected function friendFactory(){
             $trace = debug_backtrace();
             if ($trace[2]['class'] != 'PersonFactory') {
@@ -46,8 +52,9 @@ abstract class Person{
         //Créé une nouvelle personne en BDD à partir de son mail
         
         protected function createEntry($mail){     
-                $this->db->exec("INSERT INTO person ( `email`) VALUES ('".$mail."');");            
-                return intval($this->db->lastInsertId());
+                $this->db->exec("INSERT INTO person ( `email`) VALUES ('".$mail."');");
+                $this->personID=$this->db->lastInsertId();
+                return intval($this->personID);
         }
         
     //      Accesseurs

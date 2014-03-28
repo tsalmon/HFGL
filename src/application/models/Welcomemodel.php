@@ -64,6 +64,15 @@ class WelcomeModel
     * @param user_email: the mail give by user
     */
     public function user_exist($user_email){
+        /* A METTRE EN PLACE QUAND LA BDD AURA ETE OPTIMISEE
+         try {
+            $person=&PersonFactory::getPerson($user_email);
+            unset($person);
+            return true;
+        }catch(Exception $e){
+            return false;
+        }*/
+        
         $sql = "SELECT email FROM Person WHERE Person.email = '".$user_email."'";
         $query = $this->db->prepare($sql);
         $query->execute();

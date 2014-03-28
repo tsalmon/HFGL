@@ -40,19 +40,18 @@ class CourseFactory {
              }
             $key=$res->courseID();
             CourseFactory::$courses[$key]=&$res;
-            CourseFactory::$titles[$key]=$m;
+            CourseFactory::$titles[$key]=$t;
         }
         return CourseFactory::$courses[$key];
     }
     
-    public static function &createCourse($title,$description,$finalExam){
+    public static function &createCourse($title,$description){
         CourseFactory::initiateArrays();
         $course=new Course($title, false);
         $course->setDescription($description);
-        $course->setFinalExam($finalExam);
         $key=$course->courseID();
         CourseFactory::$courses[$key]=&$course;
-        CourseFactory::$titles[$key]=$m;
+        CourseFactory::$titles[$key]=$title;
         return $course;
         
     }
