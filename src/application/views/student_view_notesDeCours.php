@@ -1,15 +1,15 @@
 <div id="main">
 
-    <?php include("nav_etudiant.php"); ?>
+    <?php include("_templates/nav_etudiant.php"); ?>
 
     <div id="site_content">
       
-      <?php include("student_sidebar_left.php"); ?>
+      <?php include("_templates/student_sidebar_left.php"); ?>
 
       <div class="content">
         
         <h1>Notes de Cours 1</h1>
-        
+        <h5>Enseignant: echo nom d'enseignant</h5>
         <div id="div_scroll">
             <p>
               echo Les Notes de cours 
