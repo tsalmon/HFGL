@@ -1,20 +1,11 @@
 <div id="main">
-    <?php include("nav_etudiant.php"); ?>
+
+    <?php include("_templates/nav_etudiant.php"); ?>
+
     <div id="site_content">
-      <div id="welcome"><h3>Bienvenue echo nom d'étudiant</h3></div>
-      <div id="sidebar_container">
-        <div class="sidebar">
-          <h3>Liste de cours</h3>
-          <ul>
-			<?php
-			foreach ($liste_matiere as $key => $value) {
-				echo "<li> <a href='#''>".$value."</a></li>";
-			}
-			?>
-		</ul>
-          </ul>
-        </div>
-      </div>
+
+      <?php include("_templates/student_sidebar_left.php"); ?>
+      
       <div class="content">
         <h1>Cours 1</h1>
         <h2>Déscriptions</h2>
@@ -40,18 +31,7 @@
         </a>
       </div>
     </div>
-    <div id="scroll">
-      <a title="Scroll to the top" class="top" href="#"><img src="images/top.png" alt="top" /></a>
-    </div>
-    <footer>
-      <p>
-        <a href="Student">Mes cours</a> | 
-        <a href="Student/Notes">Mes notes</a> |
-        <a href="index.php?page=suggestions">S'incrire à un cours</a> | 
-        <a href="Student/Parametres">Parametrès du compte</a>| <a href="#">Déconnexion</a>
-      </p>
-      <p>Copyright &copy; HFGL| <a href="#">design from M1 Info Paris 7</a></p>
-    </footer>
+    <?php include("_templates/nav_footer_etudiant.php"); ?>
 </div>
 
 

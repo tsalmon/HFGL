@@ -1,5 +1,7 @@
 <?php
 require_once("application/models/Question.php");
+require_once("application/models/QuestionTypeManager.php");
+
 
 class QCMQuestion extends Question{
     private $answers;
@@ -12,6 +14,8 @@ class QCMQuestion extends Question{
     function __destruct() {
         unset($this->answers);
     }
+
+    /* Getters & Setters */
 
     public function getAnswers()
     {
@@ -43,9 +47,11 @@ class QCMQuestion extends Question{
         }
     }
 
+    /* Store question in DB. Returns questionID. */
+
     public function writeToDB(){
         echo "INSERT INTO `Question`(`assignment`, `points`, `typeID`) VALUES ('".$this->assignment."',".$this->points.",".QCM.")<br>";
-        PDOHelper::getInstance()->exec("INSERT INTO `Question`(`assignment`, `points`, `typeID`) VALUES ('".$this->assignment."',".$this->points.",".QCM.")");
+        PDOHelper::getInstance()->exec("INSERT INTO `Question`(`assignment`, `points`, `typeID`) VALUES ('".$this->assignment."',".$this->points.",".QuestionTypeManager::getInstance()->getQcmID().")");
         $this->questionID = PDOHelper::getInstance()->lastInsertID();
         echo "Inserted questionID:".$this->questionID."<br>";
 

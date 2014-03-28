@@ -1,5 +1,6 @@
 <?php
 require_once("application/models/Question.php");
+require_once("application/models/QuestionTypeManager.php");
 
 class QRFQuestion extends Question
 {
@@ -13,6 +14,8 @@ class QRFQuestion extends Question
     function __destruct() {
         unset($this->answers);
     }
+
+    /* Getters & Setters */
 
     public function getAnswers()
     {
@@ -42,9 +45,11 @@ class QRFQuestion extends Question
         }
     }
 
+    /* Store question in DB. Returns questionID. */
+
     public function writeToDB(){
         echo "INSERT INTO `Question`(`assignment`, `points`, `typeID`) VALUES ('".$this->assignment."',".$this->points.",".QRF.")<br>";
-        PDOHelper::getInstance()->exec("INSERT INTO `Question`(`assignment`, `points`, `typeID`) VALUES ('".$this->assignment."',".$this->points.",".QRF.")");
+        PDOHelper::getInstance()->exec("INSERT INTO `Question`(`assignment`, `points`, `typeID`) VALUES ('".$this->assignment."',".$this->points.",".QuestionTypeManager::getInstance()->getQrfID().")");
         $this->questionID = PDOHelper::getInstance()->lastInsertID();
         echo "Inserted questionID:".$this->questionID."<br>";
 

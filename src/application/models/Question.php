@@ -17,6 +17,8 @@ abstract class Question {
     function __destruct() {
     }
 
+    /* Getters & Setters */
+
     public function getAssignment(){
         return $this->assignment;
     }
@@ -29,9 +31,11 @@ abstract class Question {
         return $this->tip;
     }
 
+    /* Abstract methods */
     abstract protected  function writeToDB();
     abstract protected  function loadByID($questionID);
 
+    /* Initialize question by ID. Returns object of one of derived classes. The choice of class depends on question's typeID. */
     public static function getQuestionByID($questionID){
         if($questionRequestResult = PDOHelper::getInstance()->query("SELECT * FROM Question WHERE questionID=".$questionID))
         {
@@ -67,6 +71,7 @@ abstract class Question {
         }
     }
 
+    /* Store question in DB as a question of questionnaire with $questionnaireID. */
     public function writeToDBForQuestionnaireID($questionnaireID){
         $questionID = $this->writeToDB();
         echo "INSERT INTO `Questions`(`questionnaireID`, `questionID`) VALUES (".$questionnaireID.",".$questionID.")<br>";

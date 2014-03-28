@@ -62,7 +62,7 @@ class Application
             require './application/controller/Welcomecontroller.php';
             $home = new Welcomecontroller();
             $home->index();
-        }    
+        }
     }
 
     /**
