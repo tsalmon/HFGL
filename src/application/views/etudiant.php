@@ -1,14 +1,6 @@
-<!-- toolbar -->
-<?php include("navigation.php"); ?>
-<div id="center">		
-	<nav id="liste_matiere">
-		<ul>
-			<?php
-			foreach ($liste_matiere as $key => $value) {
-				echo "<li>".$value."</li>";
-			}
-			?>
-		</ul>
+<div id="main">
+    <?php include("nav_etudiant.php"); ?>
+	</ul>
 	</nav>
 	<article id="matiere_selectionner">
 		<h2><?php echo ($liste_matiere[0]); ?></h2>

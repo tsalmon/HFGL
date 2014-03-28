@@ -31,8 +31,7 @@ class Studentcontroller extends Controller{
         }
         //pour la plus premiere matiere de la liste, get id
         $list_part = $this->CoursParts($liste_inscription[0]->courseID, $student_model);
-        print_r($list_part);
-
+        
         require 'application/views/_templates/header.php';
         require 'application/views/etudiant.php';
         require 'application/views/_templates/footer.php';

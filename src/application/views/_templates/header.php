@@ -16,8 +16,10 @@
             ?>
             <link href="<?php echo URL; ?>public/css/board.css" rel="stylesheet">
             <link href="<?php echo URL; ?>/public/css/navigation.css" rel="stylesheet" type="text/css" />
+            <link href="<?php echo URL; ?>/public/css/etudiant.css" rel="stylesheet">
             <?php
         }
+        
         if(isset($page)){
             echo '<link href="'.URL.'public/css/'.$page.'.css" rel="stylesheet">';
         }
