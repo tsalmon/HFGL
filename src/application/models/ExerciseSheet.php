@@ -40,7 +40,7 @@ class ExerciseSheet extends Document{
                 {
                     echo '<input type="checkbox" name="checkboxanswer" value="val">'.$answer->getContent().'<br>';
                 }
-                else if($question instanceof QRFQuestion || $question instanceof LQuestion)
+                else if($question instanceof QRFQuestion || $question instanceof LQuestion || $question instanceof PQuestion)
                 {
                     echo '<input type="text" name="textanswer" placeholder="Your answer...">';
                 }
