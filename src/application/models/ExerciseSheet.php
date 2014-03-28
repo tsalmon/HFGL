@@ -30,30 +30,7 @@ class ExerciseSheet extends Document{
         $this->db = PDOHelper::getInstance();
     }
 
-    public function show(){
-        foreach($this->questions as $question) {
-            echo $question->getAssignment().'<br/>';
-            echo '<form action="">';
-            $curanswers = $question->getAnswers();
-            foreach($curanswers as $answer) {
-                if($question instanceof QCMQuestion)
-                {
-                    echo '<input type="checkbox" name="checkboxanswer" value="val">'.$answer->getContent().'<br>';
-                }
-                else if($question instanceof QRFQuestion || $question instanceof LQuestion)
-                {
-                    echo '<input type="text" name="textanswer" placeholder="Your answer...">';
-                }
-                else
-                {
-                    throw new Exception("Undefined question type");
-                }
-            }
-            echo '</form>';
-            echo '<br/>';
-        }
-    }
-
+    /* Getters & Setters */
     public function getID()
     {
         return $this->questionnaireID;
