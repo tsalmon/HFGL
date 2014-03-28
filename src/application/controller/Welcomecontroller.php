@@ -81,7 +81,7 @@ class Welcomecontroller extends Controller
 
     public function Connexion()
     {
-        $log = $this->loadModel('WelcomeModel');
+         $log = $this->loadModel('WelcomeModel');
         
         $co = $log->connect($_POST["user"], $_POST["pwd"]);
         if($co == null){
@@ -91,16 +91,11 @@ class Welcomecontroller extends Controller
             require 'application/views/connexion.php';
             require 'application/views/_templates/footer.php';       
         } else {
-<<<<<<< HEAD
-            $_POST["a"] = "b";
-            header('location: ' . URL . 'Student'.SID);
-=======
-            header('location: ' . URL . 'Student');
             $_SESSION["role"] = "student";
             $_SESSION["email"] = $_POST["user"];
-            $_SESSION["id"] = $co->personID();
+            $_SESSION["id"] = strval($co->personID());
+            header('location: ' . URL . 'Student');
             echo $_SESSION["id"];
->>>>>>> fc2bdf71108fadc98a2ab0d4699149c2a2077939
         }
     }
 }

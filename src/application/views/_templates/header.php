@@ -19,7 +19,7 @@
             <?php
         }
         if(isset($page)){
-            echo '<link href="'.URL.'public/css/'.$page.'>.css" rel="stylesheet">';
+            echo '<link href="'.URL.'public/css/'.$page.'.css" rel="stylesheet">';
         }
     ?>
 
