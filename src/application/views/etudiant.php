@@ -8,7 +8,7 @@
           <ul>
 			<?php
 			foreach ($liste_matiere as $key => $value) {
-				echo "<li> <a href='#''>".$key."</a></li>";
+				echo "<li> <a href='#''>".$value."</a></li>";
 			}
 			?>
 		</ul>
@@ -47,9 +47,11 @@
       <p>
         <a href="Student">Mes cours</a> | 
         <a href="Student/Notes">Mes notes</a> |
-        <a href="index.php?page=suggestions">S'incriire à un cours</a> | 
+        <a href="index.php?page=suggestions">S'incrire à un cours</a> | 
         <a href="Student/Parametres">Parametrès du compte</a>| <a href="#">Déconnexion</a>
       </p>
       <p>Copyright &copy; HFGL| <a href="#">design from M1 Info Paris 7</a></p>
     </footer>
 </div>
+
+
