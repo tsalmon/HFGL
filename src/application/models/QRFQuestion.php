@@ -1,5 +1,6 @@
 <?php
 require_once("application/models/Question.php");
+require_once("application/models/QuestionTypeManager.php");
 
 class QRFQuestion extends Question
 {
@@ -48,7 +49,7 @@ class QRFQuestion extends Question
 
     public function writeToDB(){
         echo "INSERT INTO `Question`(`assignment`, `points`, `typeID`) VALUES ('".$this->assignment."',".$this->points.",".QRF.")<br>";
-        PDOHelper::getInstance()->exec("INSERT INTO `Question`(`assignment`, `points`, `typeID`) VALUES ('".$this->assignment."',".$this->points.",".QRF.")");
+        PDOHelper::getInstance()->exec("INSERT INTO `Question`(`assignment`, `points`, `typeID`) VALUES ('".$this->assignment."',".$this->points.",".QuestionTypeManager::getInstance()->getQrfID().")");
         $this->questionID = PDOHelper::getInstance()->lastInsertID();
         echo "Inserted questionID:".$this->questionID."<br>";
 
