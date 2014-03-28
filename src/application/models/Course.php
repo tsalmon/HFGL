@@ -160,7 +160,7 @@ class Course {
         //Suppression du cours en BDD
         
         public function delete(){
-            $this->db->exec("DELETE FROM teaching WHERE courseID ='".$this->courseID."'");
+            CourseSubstcription::deleteCourse($this);
             $this->db->exec("DELETE FROM course WHERE courseID ='".$this->courseID."'");   
         }
         

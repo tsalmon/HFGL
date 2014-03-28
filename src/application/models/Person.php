@@ -53,6 +53,7 @@ abstract class Person{
         
         protected function createEntry($mail){     
                 $this->db->exec("INSERT INTO person ( `email`) VALUES ('".$mail."');");
+                $this->email=$mail;
                 $this->personID=$this->db->lastInsertId();
                 return intval($this->personID);
         }

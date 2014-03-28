@@ -37,7 +37,8 @@ class Student extends Person implements Corrector {
                     throw new UnexpectedValueException("Utilisateur existant");
                 }
                 $lastid=$this->createEntry($mail);
-                $this->db->exec("INSERT INTO student (personID) VALUES (".$lastid.");");        
+                $this->db->exec("INSERT INTO student (personID) VALUES (".$lastid.");");   
+                $this->studentID=$this->db->lastInsertId();       
             }
         }
         
