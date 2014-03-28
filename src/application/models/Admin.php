@@ -29,7 +29,8 @@ class Admin extends Person{
                     throw new UnexpectedValueException("Utilisateur existant");
                 }
                 $lastid=$this->createEntry($mail);
-                $this->db->exec("INSERT INTO admin (personID) VALUES (".$lastid.");");        
+                $this->db->exec("INSERT INTO admin (personID) VALUES (".$lastid.");");     
+                $this->adminID=$this->db->lastInsertId();            
             }
         }
         

@@ -16,46 +16,64 @@ class CourseTeaching {
     //**********************
     
     private function construct(){
-        CourseSubstcription::$db=PDOHelper::getInstance();
-        CourseSubstcription::$courses=array();
-        CourseSubstcription::$persons=array();   
-        
-        $res=CourseSubstcription::$db->query("SELECT tutorID, `email` FROM tutor JOIN person on person.personID=tutor.personID");
-        $fetch = $res->fetchAll(PDO::FETCH_ASSOC);
-        foreach($fetch as $entry){
-            CourseSubstcription::$persons[$entry['tutorID']]=array($entry['email']);
-        }
-        
-        $res=CourseSubstcription::$db->query("SELECT courseID, `title` FROM course");
-        $fetch = $res->fetchAll(PDO::FETCH_ASSOC);
-        foreach($fetch as $entry){
-            CourseSubstcription::$courses[$entry['courseID']]=array($entry['title']);
-        }
     }
 
+    public static function initiate(){
+        CourseTeaching::$db=PDOHelper::getInstance();
+        CourseTeaching::$courses=array();
+        CourseTeaching::$persons=array();   
+        
+        $res=CourseTeaching::$db->query("SELECT tutorID, `email` FROM tutor JOIN person on person.personID=tutor.personID");
+        $fetch = $res->fetchAll(PDO::FETCH_ASSOC);
+        foreach($fetch as $entry){
+            CourseTeaching::$persons[$entry['tutorID']]=array($entry['email']);
+        }
+        
+        $res=CourseTeaching::$db->query("SELECT courseID, `title` FROM course");
+        $fetch = $res->fetchAll(PDO::FETCH_ASSOC);
+        foreach($fetch as $entry){
+            CourseTeaching::$courses[$entry['courseID']]=array($entry['title']);
+        }
+    }
+    
+    protected static function createEntryProfessor($tutor){        
+        if(!isset(CourseTeaching::$persons[$tutor->tutorID()])){            
+            CourseTeaching::$persons[$student->tutorID()]=array($tutor->email());
+        }
+    }
+    
+    protected static function createEntryCourse($course){
+        if(!isset(CourseTeaching::$courses[$course->courseID()])){            
+            CourseTeaching::$courses[$course->courseID()]=array($course->title());
+        }
+        
+    }
 
     //      Fonctions
     //**********************
     
     
-    
     public static function getCourses($tutor){
+        CourseTeaching::createEntryProfessor($tutor);
         $resultat=array();
         $idtutor=$tutor->tutorID();
-        if(!isset(CourseSubstcription::$persons[$idtutor][0])){
+        if(!isset(CourseTeaching::$persons[$idtutor][1])){
             $res=array();
-            $req = $this->db->query("SELECT courseID FROM teaching where tutorID=".$idtutor);
+            $req = CourseTeaching::$db->query("SELECT courseID FROM teaching where tutorID=".$idtutor);
+            if($req===false){
+                return array();
+            }
             $fetch = $req->fetchAll(PDO::FETCH_ASSOC);
             foreach($fetch as $entry){
                 $id=$entry['courseID'];
-                CourseSubstcription::$persons[$idtutor][]=$id;
-                $resultat[]=CourseFactory::getCourse(CourseSubstcription::$courses[$id][0]);
+                CourseTeaching::$persons[$idtutor][]=$id;
+                $resultat[]=CourseFactory::getCourse(CourseTeaching::$courses[$id][0]);
             }
         }
         else{
-            foreach(CourseSubstcription::$persons[$idtutor] as $id){
-                if(is_int($id)){
-                  $resultat[]=CourseFactory::getCourse(CourseSubstcription::$courses[$id][0]);
+            foreach(CourseTeaching::$persons[$idtutor] as $id){
+                if(ctype_digit($id)){
+                  $resultat[]=CourseFactory::getCourse(CourseTeaching::$courses[$id][0]);
                 }
             }
         }
@@ -63,22 +81,26 @@ class CourseTeaching {
     }   
     
     public static function getProfessors($course){
+         CourseTeaching::createEntryCourse($course);
         $resultat=array();
         $idcourse=$course->courseID();
-        if(!isset(CourseSubstcription::$course[$idcourse][0])){
+        if(!isset(CourseTeaching::$courses[$idcourse][1])){
             $res=array();
-            $req = $this->db->query("SELECT tutorID FROM teaching where courseID=".$idcourse);
+            $req = CourseTeaching::$db->query("SELECT tutorID FROM teaching where courseID=".$idcourse);
+            if($req===false){
+                return array();
+            }
             $fetch = $req->fetchAll(PDO::FETCH_ASSOC);
             foreach($fetch as $entry){
                 $id=$entry['tutorID'];
-                CourseSubstcription::$courses[$idcourse][]=$id;
-                $resultat[]=CourseFactory::getPerson(CourseSubstcription::$persons[$id][0]);
+                CourseTeaching::$courses[$idcourse][]=$id;
+                $resultat[]=PersonFactory::getPerson(CourseTeaching::$persons[$id][0]);
             }
         }
         else{
-            foreach(CourseSubstcription::$courses[$idcourse] as $id){
-                if(is_int($id)){
-                  $resultat[]=CourseFactory::getPerson(CourseSubstcription::$persons[$id][0]);
+            foreach(CourseTeaching::$courses[$idcourse] as $id){
+                if(ctype_digit($id)){
+                  $resultat[]=PersonFactory::getPerson(CourseTeaching::$persons[$id][0]);
                 }
             }
         }
@@ -86,39 +108,46 @@ class CourseTeaching {
         
     }
     
-    public static function add($tutor,$course){        
-        CourseSubstcription::$courses[$course->courseID()][]=$tutor->tutorID();
-        CourseSubstcription::$persons[$tutor->tutorID()][]=$course->courseID();
-        CourseSubstcription::$db->exec('INSERT INTO teaching (tutorID,courseID,date) VALUES ('.$tutor->tutorID().','.$course->courseID().','.CURRENT_TIMESTAMP.');');
+    public static function add($tutor,$course){
+        CourseTeaching::createEntryProfessor($tutor);
+        CourseTeaching::createEntryCourse($course);
+        $test=array_search($course, $tutor->getCourses());
+        if($test===false){
+            CourseTeaching::$courses[$course->courseID()][]=$tutor->tutorID();
+            CourseTeaching::$persons[$tutor->tutorID()][]=$course->courseID();
+            CourseTeaching::$db->exec('INSERT INTO teaching (tutorID,courseID) VALUES ('.$tutor->tutorID().','.$course->courseID().');');            
+        }
     }
     
     public static function remove($tutor,$course){
-        array_splice(CourseSubstcription::$courses[$course->courseID()],$tutor->tutorID());
-        array_splice(CourseSubstcription::$persons[$tutor->tutorID()],$course->courseID());
-        CourseSubstcription::$db->exec('DELETE FROM teaching WHERE courseID='.$course->courseID().' AND tutorID='.$tutor->tutorID().');');
+        $indice=array_search($tutor->tutorID(), CourseTeaching::$courses[$course->courseID()]);
+        array_splice(CourseTeaching::$courses[$course->courseID()],$indice);
+        $indice=array_search($course->courseID(), CourseTeaching::$persons[$tutor->tutorID()]);
+        array_splice(CourseTeaching::$persons[$tutor->tutorID()],$indice);
+        CourseTeaching::$db->exec('DELETE FROM teaching WHERE courseID="'.$course->courseID().'" AND tutorID="'.$tutor->tutorID().'";');
     }
     
     public static function deleteTutor($tutor){
-        $entry=CourseSubstcription::$persons[$tutor->tutorID()];
+        $entry=CourseTeaching::$persons[$tutor->tutorID()];
         foreach($entry as $course){
-            if(is_int($id)){
-                array_splice(CourseSubstcription::$courses[$course],$tutor->tutorID());
+            if(ctype_digit($id)){
+                array_splice(CourseTeaching::$courses[$course],$tutor->tutorID());
             }
         }        
-        unset(CourseSubstcription::$persons[$tutor->tutorID()]);
-        CourseSubstcription::$db->exec("DELETE FROM teaching WHERE tutorID ='".$tutor->tutorID()."'");  
+        unset(CourseTeaching::$persons[$tutor->tutorID()]);
+        CourseTeaching::$db->exec("DELETE FROM teaching WHERE tutorID ='".$tutor->tutorID()."'");  
         
     }
     
     public static function deleteCourse($course){
-        $entry=CourseSubstcription::$courses[$course->courseID()];
+        $entry=CourseTeaching::$courses[$course->courseID()];
         foreach($entry as $tutor){
-            if(is_int($id)){
-                array_splice(CourseSubstcription::$persons[$tutor],$course->courseID());
+            if(ctype_digit($id)){
+                array_splice(CourseTeaching::$persons[$tutor],$course->courseID());
             }
         }        
-        unset(CourseSubstcription::$courses[$courses->courseID()]);
-        CourseSubstcription::$db->exec("DELETE FROM teaching WHERE courseID ='".$course->courseID()."'");      
+        unset(CourseTeaching::$courses[$courses->courseID()]);
+        CourseTeaching::$db->exec("DELETE FROM teaching WHERE courseID ='".$course->courseID()."'");      
         
     }
     
@@ -126,5 +155,5 @@ class CourseTeaching {
     
     
 }
-
+CourseTeaching::initiate();
 ?>
