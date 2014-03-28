@@ -1,7 +1,21 @@
-<ul id="toolbar">
-	<li><h3><a href="Teacher">Mes cours</a></h3></li>
-	<li><h3><a href="#">Créer un cours</a></h3></li>
-	<li><h3><a href="Teacher/Parametres">Parametrès du compte</a></h3></li>
-	<li><h3><a href="#">Déconnexion</a></h3></li>
-</ul>
-<?php
+<header>
+      <div id="logo">
+        <div id="logo_text">
+          <!-- class="logo_colour", allows you to change the colour of the text -->
+          <h1>
+            <a href="index.html">Have fun&nbsp;<span class="logo_colour">- Good learning</span></a>
+          </h1>
+        </div>
+      </div>
+
+      <nav>
+        <div id="menu_container">
+          <ul class="sf-menu" id="toolbar">
+              <li><a href="Student">Mes cours</a></li>
+              <li><a href="Student/Notes">Créer un cours<</a></li>
+              <li><a href="Student/Parametres">Parametrès du compte</a></li>
+              <li><a href="#">Déconnexion</a></li>
+          </ul>
+        </div>
+      </nav>
+</header>
