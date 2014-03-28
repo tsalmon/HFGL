@@ -146,7 +146,6 @@ class Course {
         }
         
         public function removePart($part){  
-            echo "DELETE FROM parts WHERE partID=".$part->partID();
             $this->db->exec("DELETE FROM parts WHERE partID=".$part->partID());
             $key=  array_search($part,$this->parts);           
             array_splice($this->parts, $key, 1);
