@@ -56,42 +56,54 @@ class PersonFactory {
             PersonFactory::$mails[$key]=$m;
         }
         return PersonFactory::$persons[$key];
-    }
+    }     
     
     public static function &createStudent($mail,$name,$surname,$password,$nse){
         PersonFactory::initiateArrays();
-        $student=new Student($mail, false);
+        try{
+            $student=new Student($mail, false);
+        }catch(UnexpectedValueException $e){
+            throw new UnexpectedValueException("Utilisateur déjà existant");                
+         }
         $student->setName($name);
         $student->setSurname($surname);
         $student->setPassword($password);
         $student->setNse($nse);
         $key=$student->personID();
         PersonFactory::$persons[$key]=&$student;
-        PersonFactory::$mails[$key]=$m;
+        PersonFactory::$mails[$key]=$mail;
         return $student;
         
     }
     public static function &createProfessor($mail,$name,$surname,$password){
         PersonFactory::initiateArrays();
-        $professor=new Professor($mail, false);
+        try{
+          $professor=new Professor($mail, false);
+        }catch(UnexpectedValueException $e){
+            throw new UnexpectedValueException("Utilisateur déjà existant");                
+         }
         $professor->setName($name);
         $professor->setSurname($surname);
         $professor->setPassword($password);
         $key=$professor->personID();
         PersonFactory::$persons[$key]=&$professor;
-        PersonFactory::$mails[$key]=$m;
+        PersonFactory::$mails[$key]=$mail;
         return $professor;
         
     }
     public static function &createAdmin($mail,$name,$surname,$password){
         PersonFactory::initiateArrays();
-        $admin=new Admin($mail, false);
+        try{
+            $admin=new Admin($mail, false);
+        }catch(UnexpectedValueException $e){
+            throw new UnexpectedValueException("Utilisateur déjà existant");                
+         }
         $admin->setName($name);
         $admin->setSurname($surname);
         $admin->setPassword($password);
         $key=$admin->personID();
         PersonFactory::$persons[$key]=&$admin;
-        PersonFactory::$mails[$key]=$m;
+        PersonFactory::$mails[$key]=$mail;
         return $admin;
         
     }

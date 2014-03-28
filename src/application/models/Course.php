@@ -23,11 +23,11 @@ class Course {
         // PAS TOUCHE !!! Voir classe PersonFactory.
         //Impossibilité de mettre des classes friends en php, donc appeler le constructeur
         //directement revient à appuyer sur le nuke button.
-        private function __construct($title, $exists=true){    
+        public function __construct($title, $exists=true){    
             $this->friendFactory();  //Si ce n'est pas la factory qui a fait l'appel, NUKE.
             $this->db=PDOHelper::getInstance();            
             if($exists==true){
-                $res = $this->db->query("SELECT * FROM Course WHERE `title`=".$title.";");
+                $res = $this->db->query("SELECT * FROM Course WHERE `title`='".$title."';");
                 $fetch = $res->fetch(PDO::FETCH_ASSOC);     
                 if($fetch==null){
                     throw new UnexpectedValueException("Cours non existant");
@@ -42,7 +42,12 @@ class Course {
                 }
             }
             else {
-                $this->db->exec("INSERT INTO Course (title) VALUES ('.$title.');");        
+                if($this->titleExists($title)){
+                    throw new UnexpectedValueException("Cours déjà existant");
+                }
+                $this->db->exec("INSERT INTO Course (title) VALUES ('".$title."');"); 
+                $this->title=$title;
+                $this->courseID=$this->db->lastInsertId();
             }
         }
         
@@ -50,10 +55,18 @@ class Course {
         
     //       Classes privées
     //****************************
+        
+        protected function titleExists($t){
+            $res=$this->db->query("Select * from course WHERE title='".$t."';");
+            $fetch=$res->fetch(PDO::FETCH_ASSOC);
+            return isset($fetch["title"]);
+        }
+                
+        
         //S'assure que c'est bien la factory qui a affectué l'appel (sur le constructeur)
         protected function friendFactory(){
             $trace = debug_backtrace();
-            if ($trace[1]['class'] != 'CourseFactory') {
+            if ($trace[2]['class'] != 'CourseFactory') {
                 die("<h1>Non ! On utilise la CourseFactory si on veut un cours !!!</h1>
                     <p>On remplace le système de class friends comme on peux ... Le constructeur de cette classe doit être considéré comme protected</p>
                     <p>Demande a Josian si tu as  un probleme pour utiliser la classe Course</p>");
@@ -122,7 +135,7 @@ class Course {
         }
         
         public function addPart($part){  
-            $this->db->exec("INSERT INTO parts VALUES (".$part->partID().", ".$this->courseID.");");
+            $this->db->exec("INSERT INTO parts (partID, courseID) VALUES (".$part->partID().", ".$this->courseID.");");
             $this->parts[]=$part;
         }
         
@@ -134,8 +147,12 @@ class Course {
         
         public function removePart($part){  
             $this->db->exec("DELETE FROM parts WHERE partID=".$part->partID());
-            $key=  array_search($this->parts, $part);           
+            $key=  array_search($part,$this->parts);           
             array_splice($this->parts, $key, 1);
+        }
+        
+        public function getStudents(){
+            return CourseSubstcription::getStudents($this);
         }
         
         
@@ -144,7 +161,6 @@ class Course {
         
         public function delete(){
             $this->db->exec("DELETE FROM teaching WHERE courseID ='".$this->courseID."'");
-            $this->db->exec("DELETE FROM inscription WHERE courseID ='".$this->courseID."'");
             $this->db->exec("DELETE FROM course WHERE courseID ='".$this->courseID."'");   
         }
         

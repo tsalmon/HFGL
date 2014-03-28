@@ -1,6 +1,7 @@
 <?php
 require_once("Person.php");
 require_once("Corrector.php");
+require_once("CourseSubstcription.php");
 
 class Student extends Person implements Corrector {
 	
@@ -32,6 +33,9 @@ class Student extends Person implements Corrector {
                 }
             }
             else {
+                if($this->mailExists($mail)){
+                    throw new UnexpectedValueException("Utilisateur existant");
+                }
                 $lastid=$this->createEntry($mail);
                 $this->db->exec("INSERT INTO student (personID) VALUES (".$lastid.");");        
             }
@@ -54,10 +58,14 @@ class Student extends Person implements Corrector {
             $this->nse=$n;
         }
         
+        public function getCourses(){
+            return CourseSubstcription::getCourses($this);
+        }
+        
         //Suppression de l'etudiant en BDD - Detruit la classe
         
-        public function delete(){
-            $this->db->exec("DELETE FROM inscription WHERE studentID ='".$this->studentID."'");  
+        public function delete(){  
+            CourseSubstcription::deleteStudent($this);
             $this->db->exec("DELETE FROM student WHERE studentID ='".$this->studentID."'"); 
             parent::delete();            
         }
