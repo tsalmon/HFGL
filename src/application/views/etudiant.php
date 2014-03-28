@@ -4,10 +4,9 @@
 	<nav id="liste_matiere">
 		<ul>
 			<?php
-				echo '<li><div><h3>Matiere 1</h3><span>avancement</span></div></li>';
-				echo '<li><div><h3>Matiere 1</h3><span>avancement</span></div></li>';
-				echo '<li><div><h3>Matiere 1</h3><span>avancement</span></div></li>';
-				echo '<li><div><h3>Matiere 1</h3><span>avancement</span></div></li>';
+			foreach ($liste_matiere as $key => $value) {
+				echo "<li>".$key."</li>";
+			}
 			?>
 		</ul>
 	</nav>
