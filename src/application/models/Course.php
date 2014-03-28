@@ -151,13 +151,16 @@ class Course {
             array_splice($this->parts, $key, 1);
         }
         
+        public function getStudents(){
+            return CourseSubstcription::getStudents($this);
+        }
+        
         
         
         //Suppression du cours en BDD
         
         public function delete(){
             $this->db->exec("DELETE FROM teaching WHERE courseID ='".$this->courseID."'");
-            $this->db->exec("DELETE FROM inscription WHERE courseID ='".$this->courseID."'");
             $this->db->exec("DELETE FROM course WHERE courseID ='".$this->courseID."'");   
         }
         
