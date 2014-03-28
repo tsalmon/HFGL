@@ -13,6 +13,8 @@ class QCMQuestion extends Question{
         unset($this->answers);
     }
 
+    /* Getters & Setters */
+
     public function getAnswers()
     {
         return $this->answers;
@@ -42,6 +44,8 @@ class QCMQuestion extends Question{
             }
         }
     }
+
+    /* Store question in DB. Returns questionID. */
 
     public function writeToDB(){
         echo "INSERT INTO `Question`(`assignment`, `points`, `typeID`) VALUES ('".$this->assignment."',".$this->points.",".QCM.")<br>";

@@ -12,6 +12,8 @@ class LQuestion extends Question{
         $this->questionID = $questionID;
     }
 
+    /* Store question in DB. Returns questionID. */
+
     public function writeToDB(){
         echo "INSERT INTO `Question`(`assignment`, `points`, `typeID`) VALUES ('".$this->assignment."',".$this->points.",".L.")<br>";
         PDOHelper::getInstance()->exec("INSERT INTO `Question`(`assignment`, `points`, `typeID`) VALUES ('".$this->assignment."',".$this->points.",".L.")");
