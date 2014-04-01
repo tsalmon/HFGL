@@ -7,13 +7,13 @@ require_once("application/models/PQuestion.php");
 require_once("application/models/PDOHelper.php");
 require_once("application/models/Document.php");
 
-
+/*
 define('QCM',1);
 define('QRF',2);
 define('P',3);
 define('L',4);
-
-define('Examen', 1);
+*/
+define('Examen', 1);    
 define('TP', 4);
 
 class ExerciseSheet extends Document{
