@@ -149,11 +149,7 @@ class CourseTeaching {
         unset(CourseTeaching::$courses[$courses->courseID()]);
         CourseTeaching::$db->exec("DELETE FROM teaching WHERE courseID ='".$course->courseID()."'");      
         
-    }
-    
-    
-    
-    
+    }   
 }
 CourseTeaching::initiate();
 ?>
