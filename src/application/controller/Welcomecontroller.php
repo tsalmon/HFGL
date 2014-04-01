@@ -81,7 +81,7 @@ class Welcomecontroller extends Controller
 
     public function Connexion()
     {
-         $log = $this->loadModel('WelcomeModel');
+        $log = $this->loadModel('WelcomeModel');
         
         $co = $log->connect($_POST["user"], $_POST["pwd"]);
         if($co == null){
