@@ -59,9 +59,9 @@ class Studentcontroller extends Controller{
             print_r($part);
             echo "</p><br>";
             */
-            $list_part[$liste->partID] = $titre_part->title;
+            $this->list_part[$liste->partID] = $titre_part->title;
         }
-        return $list_part;
+        return $this->list_part;
     }
 
     public function Parametres()
