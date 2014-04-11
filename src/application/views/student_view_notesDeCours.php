@@ -1,3 +1,5 @@
+<!-- pour consulter les memoires ou les notes d'un cours -->
+
 <div id="main">
 
     <?php include("_templates/nav_etudiant.php"); ?>
@@ -9,10 +11,10 @@
       <div class="content">
         
         <h1>Notes de Cours 1</h1>
-        <h5>Enseignant: echo nom d'enseignant</h5>
+        <h5>Enseignant: </h5>
         <div id="div_scroll">
             <p>
-              echo Les Notes de cours 
+              <!-- echo Les Notes ou les memoire de cours-->
             </p>
         </div>
 

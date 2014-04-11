@@ -1,3 +1,5 @@
+// index fichier d'etudiant
+
 <div id="main">
 
     <?php include("_templates/nav_etudiant.php"); ?>
@@ -24,9 +26,9 @@
         	<input class="bouton" type="submit" name="name" value="Se désinscrit ce cours" />
         </p>
 
-        <a href="#Etudiant_Notesdecours.html">
+        <a href="Student/NotesDeCours">
            <p style="padding-top: 15px; display: inline"><span>&nbsp;</span>
-           	<input class="bouton" type="submit" name="name" value="Notes de cours" />
+           	<input class="bouton" type="submit" name="name" value="Notes de cours" onclick="NotesDeCours"/>
            </p>
         </a>
       </div>

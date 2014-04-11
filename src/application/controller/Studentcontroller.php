@@ -90,4 +90,13 @@ class Studentcontroller extends Controller{
     public function DesincrireCours(){
     }
 
+    public function NotesDeCours()
+    {
+        $page = "student";
+        require 'application/views/_templates/header.php';
+        require 'application/views/student_view_notesDeCours.php';
+        require 'application/views/_templates/footer.php';
+        echo "NotesDeCours";
+    }
+
 }
