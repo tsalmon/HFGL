@@ -68,7 +68,7 @@ class Studentcontroller extends Controller{
     {
     	$page = "student";
         require 'application/views/_templates/header.php';
-        echo "voir les parametres";
+        require 'application/views/student_parametres.php';
         require 'application/views/_templates/footer.php';    	
     }
 
@@ -96,7 +96,6 @@ class Studentcontroller extends Controller{
         require 'application/views/_templates/header.php';
         require 'application/views/student_view_notesDeCours.php';
         require 'application/views/_templates/footer.php';
-        echo "NotesDeCours";
     }
 
 }

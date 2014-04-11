@@ -18,7 +18,7 @@
             </p>
         </div>
 
-        <a href="Student">
+        <a href="#Student/index">
           <p style="padding-top: 15px; display: inline">
             <span>&nbsp;</span>
             <input class="bouton"  name="name" value="Traveaux de cours" />

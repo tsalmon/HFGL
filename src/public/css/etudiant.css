@@ -305,16 +305,17 @@ footer a:hover {
 }
 
 .form_settings { 
-  margin: 15px 0 0 0;
+  margin: 15px 0 15px 0;
 }
 
 .form_settings p { 
-  padding: 0 0 4px 0;
+  padding-bottom: 15px;
+
 }
 
 .form_settings span { 
   float: left; 
-  width: 200px; 
+  width: 250px; 
   text-align: left;
 }
   
@@ -329,11 +330,11 @@ footer a:hover {
   -moz-border-radius: 7px 7px 7px 7px;
   -webkit-border: 7px 7px 7px 7px;  
 }
-  
+
 .bouton { 
   font: 100% 'Droid Sans', arial; 
   border: 0; 
-  margin: 0 0 0 40px; 
+  margin: 0 200px 0 0; 
   padding: 10px;
   cursor: pointer; 
   background: #1A1225; 
