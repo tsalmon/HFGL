@@ -6,7 +6,7 @@
 
     <div id="site_content">
 
-      <?php include("student_sidebar_left.php"); ?>
+      <?php include("_templates/student_sidebar_left.php"); ?>
       
       <div class="content">
         <h1>Cours 1</h1>
@@ -28,7 +28,7 @@
 
         <a href="Student/NotesDeCours">
            <p style="padding-top: 15px; display: inline"><span>&nbsp;</span>
-           	<input class="bouton" type="submit" name="name" value="Notes de cours" onclick="NotesDeCours"/>
+           	<input class="bouton" type="submit" name="name" value="Notes de cours"/>
            </p>
         </a>
       </div>

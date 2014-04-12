@@ -83,7 +83,7 @@ class Studentcontroller extends Controller{
     public function InscrireCours(){
     	$page = "student";
         require 'application/views/_templates/header.php';
-        echo "INSCRIRE A un cours";
+        require 'application/views/student_inscrireCours.php';
         require 'application/views/_templates/footer.php';    	
     }
 

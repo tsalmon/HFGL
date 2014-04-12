@@ -5,9 +5,13 @@
     <?php include("_templates/nav_etudiant.php"); ?>
 
     <div id="site_content">
+
       <div id="welcome"><h3>Bienvenue</h3></div>
+
       <div class="content">
+
         <h1>Paramètre du compte</h1>
+
         <form action="#" method="post">
           <div class="form_settings">
             <p><span>Nom</span><input type="text" name="name" value="" /></p>
@@ -17,6 +21,7 @@
         </form>
 
         <h3>Modifier le mot de passe</h3>
+        
         <form action="#" method="post">
           <div class="form_settings">
 
