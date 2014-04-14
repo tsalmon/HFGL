@@ -23,17 +23,17 @@ class CourseSubstcription {
         CourseSubstcription::$courses=array();
         CourseSubstcription::$persons=array();   
         
-        $res=CourseSubstcription::$db->query("SELECT studentID, `email` FROM student JOIN person on person.personID=student.personID");
+        $res=CourseSubstcription::$db->query("SELECT studentID, `email` FROM Student JOIN Person on Person.personID=Student.personID");
         $fetch = $res->fetchAll(PDO::FETCH_ASSOC);
         foreach($fetch as $entry){
             CourseSubstcription::$persons[$entry['studentID']]=array($entry['email']);
         }
         
-        $res=CourseSubstcription::$db->query("SELECT courseID, `title` FROM course");
+        $res=CourseSubstcription::$db->query("SELECT courseID, `title` FROM Course");
         $fetch = $res->fetchAll(PDO::FETCH_ASSOC);
         foreach($fetch as $entry){
             CourseSubstcription::$courses[$entry['courseID']]=array($entry['title']);
-        }            
+        } 
     }
 
     //      Fonctions

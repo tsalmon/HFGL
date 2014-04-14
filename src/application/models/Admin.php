@@ -15,7 +15,7 @@ class Admin extends Person{
         public function __construct($mail, $exists=true){  
             $this->db=  PDOHelper::getInstance();
             if($exists==true){
-                $fetch = $this->getDBEntry($mail, "admin");
+                $fetch = $this->getDBEntry($mail, "Admin");
                 if($fetch==null){
                     throw new UnexpectedValueException("Utilisateur non existant");
                 }
@@ -29,7 +29,7 @@ class Admin extends Person{
                     throw new UnexpectedValueException("Utilisateur existant");
                 }
                 $lastid=$this->createEntry($mail);
-                $this->db->exec("INSERT INTO admin (personID) VALUES (".$lastid.");");     
+                $this->db->exec("INSERT INTO Admin (personID) VALUES (".$lastid.");");     
                 $this->adminID=$this->db->lastInsertId();            
             }
         }
@@ -46,7 +46,7 @@ class Admin extends Person{
         //Suppression de l'etudiant en BDD - Detruit la classe
         
         public function delete(){
-            $this->db->exec("DELETE FROM admin WHERE adminID ='".$this->adminID."'");   
+            $this->db->exec("DELETE FROM Admin WHERE adminID ='".$this->adminID."'");   
             parent::delete();            
         }
         

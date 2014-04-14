@@ -20,7 +20,7 @@ class Part {
         public function __construct($id, $exists=true){  
             $this->db=PDOHelper::getInstance();            
             if($exists==true){
-                $res = $this->db->query("SELECT * FROM part WHERE `partID`=".$id.";");
+                $res = $this->db->query("SELECT * FROM Part WHERE `partID`=".$id.";");
                 $fetch = $res->fetch(PDO::FETCH_ASSOC);     
                 if($fetch==null){
                     throw new UnexpectedValueException("Partie non existante");
@@ -34,7 +34,7 @@ class Part {
                 }
             }
             else {
-                $this->db->exec("INSERT INTO part (title) VALUES ('".$id."');");     
+                $this->db->exec("INSERT INTO Part (title) VALUES ('".$id."');");     
                 $this->title=$id;
                 $this->partID=$this->db->lastInsertId();   
             }
@@ -45,7 +45,7 @@ class Part {
         
         protected function getDBChapters(){
             $chap=[];
-            $result = $this->db->query("SELECT chapterID FROM chapters WHERE `partID`=".$this->partID.";");
+            $result = $this->db->query("SELECT chapterID FROM Chapters WHERE `partID`=".$this->partID.";");
             $fetch = $result->fetchAll(PDO::FETCH_ASSOC);
             foreach($fetch as $entry){
                 $chapid=$entry["chapterID"];
@@ -87,17 +87,17 @@ class Part {
         
          
         public function setExam($e){
-            $this->db->exec("UPDATE part SET questionnaireID = '".$e->getId()."' WHERE partID =".$this->partID);
+            $this->db->exec("UPDATE Part SET questionnaireID = '".$e->getId()."' WHERE partID =".$this->partID);
             $this->exam=$e;
         }
         
         public function setTitle($t){     
-            $this->db->exec("UPDATE part SET title = '".$t."' WHERE partID =".$this->partID);
+            $this->db->exec("UPDATE Part SET title = '".$t."' WHERE partID =".$this->partID);
             $this->title=$t;
         }
         
         public function addChapter($chapter){  
-            $this->db->exec("INSERT INTO chapters VALUES (".$chapter->chapterID().", ".$this->partID.");");
+            $this->db->exec("INSERT INTO Chapters VALUES (".$chapter->chapterID().", ".$this->partID.");");
             $this->chapters[]=$chapter;
         }
         
@@ -108,7 +108,7 @@ class Part {
         }
         
         public function removeChapter($chapter){  
-            $this->db->exec("DELETE FROM chapters WHERE chapterID=".$chapter->chapterID());
+            $this->db->exec("DELETE FROM Chapters WHERE chapterID=".$chapter->chapterID());
             $key= array_search($chapter, $this->chapters);           
             array_splice($this->chapters, $key, 1);
         }
@@ -116,13 +116,13 @@ class Part {
         //Suppression de la part en BDD
         
         public function delete(){
-            $res=$this->db->query("SELECT title FROM course JOIN (SELECT courseID FROM parts WHERE partID ='".$this->partID."') AS thispart ON course.courseID=thispart.courseID");  
+            $res=$this->db->query("SELECT title FROM Course JOIN (SELECT courseID FROM Parts WHERE partID ='".$this->partID."') AS thispart ON Course.courseID=thispart.courseID");  
             $fetch=$res->fetchAll(PDO::FETCH_ASSOC);
             foreach($fetch as $line){
                 $course=&CourseFactory::getCourse($line["title"]);
                 $course->removePart($this);
             }
-            $this->db->exec("DELETE FROM part WHERE partID ='".$this->partID."'"); 
+            $this->db->exec("DELETE FROM Part WHERE partID ='".$this->partID."'"); 
         }
         
 }

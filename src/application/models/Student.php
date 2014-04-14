@@ -22,7 +22,7 @@ class Student extends Person implements Corrector {
             $this->friendFactory();  //Si ce n'est pas la factory qui a fait l'appel, NUKE.
             $this->db=  PDOHelper::getInstance();   
             if($exists==true){
-                $fetch = $this->getDBEntry($mail, "student"); 
+                $fetch = $this->getDBEntry($mail, "Student"); 
                 if($fetch==null){
                     throw new UnexpectedValueException("Utilisateur non existant");
                 }
@@ -37,7 +37,7 @@ class Student extends Person implements Corrector {
                     throw new UnexpectedValueException("Utilisateur existant");
                 }
                 $lastid=$this->createEntry($mail);
-                $this->db->exec("INSERT INTO student (personID) VALUES (".$lastid.");");   
+                $this->db->exec("INSERT INTO Student (personID) VALUES (".$lastid.");");   
                 $this->studentID=$this->db->lastInsertId();       
             }
         }
@@ -55,7 +55,7 @@ class Student extends Person implements Corrector {
         }
          
         public function setNse($n){     
-            $this->db->exec("UPDATE student SET nse = '".$n."' WHERE studentID ='".$this->studentID."'");
+            $this->db->exec("UPDATE Student SET nse = '".$n."' WHERE studentID ='".$this->studentID."'");
             $this->nse=$n;
         }
         
@@ -67,7 +67,7 @@ class Student extends Person implements Corrector {
         
         public function delete(){  
             CourseSubstcription::deleteStudent($this);
-            $this->db->exec("DELETE FROM student WHERE studentID ='".$this->studentID."'"); 
+            $this->db->exec("DELETE FROM Student WHERE studentID ='".$this->studentID."'"); 
             parent::delete();            
         }
         

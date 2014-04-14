@@ -17,7 +17,7 @@ abstract class Person{
     //****************************
         
         protected function mailExists($m){
-            $res=$this->db->query("Select * from person WHERE email='".$m."';");
+            $res=$this->db->query("Select * FROM Person WHERE email='".$m."';");
             $fetch=$res->fetch(PDO::FETCH_ASSOC);
             return isset($fetch["email"]);
         }
@@ -33,7 +33,7 @@ abstract class Person{
         
         //$table est le nom de la table associée à la classe fille
         protected function getDBEntry($mail,$table){    
-            $res = $this->db->query("SELECT * FROM (person JOIN ".$table." ON person.personID = ".$table.".personID) WHERE `email`='".$mail."';");
+            $res = $this->db->query("SELECT * FROM (Person JOIN ".$table." ON Person.personID = ".$table.".personID) WHERE `email`='".$mail."';");
             $fetch = $res->fetch(PDO::FETCH_ASSOC);            
             return $fetch;
         }
@@ -52,7 +52,7 @@ abstract class Person{
         //Créé une nouvelle personne en BDD à partir de son mail
         
         protected function createEntry($mail){     
-                $this->db->exec("INSERT INTO person ( `email`) VALUES ('".$mail."');");
+                $this->db->exec("INSERT INTO Person ( `email`) VALUES ('".$mail."');");
                 $this->email=$mail;
                 $this->personID=$this->db->lastInsertId();
                 return intval($this->personID);
@@ -82,22 +82,22 @@ abstract class Person{
         }
          
         public function setName($n){
-            $this->db->exec("UPDATE person SET name = '".$n."' WHERE personID ='".$this->personID."'");
+            $this->db->exec("UPDATE Person SET name = '".$n."' WHERE personID ='".$this->personID."'");
             $this->name=$n;
         }
         
         public function setEmail($m){     
-            $this->db->exec("UPDATE person SET `email` = '".$m."' WHERE personID ='".$this->personID."'");
+            $this->db->exec("UPDATE Person SET `email` = '".$m."' WHERE personID ='".$this->personID."'");
             $this->email=$m;
         }
         
         public function setPassword($p){   
-            $this->db->exec("UPDATE person SET password = '".$p."' WHERE personID ='".$this->personID."'");
+            $this->db->exec("UPDATE Person SET password = '".$p."' WHERE personID ='".$this->personID."'");
             $this->password=$p;
         }
         
         public function setSurname($s){  
-            $this->db->exec("UPDATE person SET surname = '".$s."' WHERE personID ='".$this->personID."'");    
+            $this->db->exec("UPDATE Person SET surname = '".$s."' WHERE personID ='".$this->personID."'");    
             $this->surname=$s;
         }
         
@@ -105,7 +105,7 @@ abstract class Person{
         //Suppression de la personne en BDD - Detruit la classe
         
         public function delete(){
-            $this->db->exec("DELETE FROM person WHERE personID ='".$this->personID."'");   
+            $this->db->exec("DELETE FROM Person WHERE personID ='".$this->personID."'");   
         }
         
         //destructor

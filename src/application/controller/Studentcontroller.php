@@ -11,7 +11,7 @@ class Studentcontroller extends Controller{
         $list_partID = array();
         $list_coursID = array();
         $liste_matiere = array();
-        $student_model = $this->loadModel('WelcomeModel');
+        $student_model = $this->loadModel('Welcomemodel');
 
         // on recupere les id des cours de l'utilisateur
         $sql = "SELECT courseID FROM Inscription WHERE Inscription.studentID = ".$_SESSION["id"]."";

@@ -21,7 +21,7 @@ class Welcomecontroller extends Controller
     {
         $page = "inscription";    
         $inscription_error = array();
-        $inscription_model = $this->loadModel('WelcomeModel');
+        $inscription_model = $this->loadModel('Welcomemodel');
 
         //user errors
         if($inscription_model->user_exist($_POST["inscr_mail"])){ // user already exist (we check if the email address is already saved in the database)
@@ -81,7 +81,7 @@ class Welcomecontroller extends Controller
 
     public function Connexion()
     {
-        $log = $this->loadModel('WelcomeModel');
+        $log = $this->loadModel('Welcomemodel');
         
         $co = $log->connect($_POST["user"], $_POST["pwd"]);
         if($co == null){

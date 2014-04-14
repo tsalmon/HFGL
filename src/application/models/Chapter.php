@@ -38,7 +38,7 @@ class Chapter {
                 }
             }
             else {
-                $this->db->exec("INSERT INTO chapter ('title') VALUES ('".$id."');");        
+                $this->db->exec("INSERT INTO Chapter ('title') VALUES ('".$id."');");        
             }
         }  
         
@@ -69,40 +69,40 @@ class Chapter {
         
          
         public function setChapterNumber($num){
-            $this->db->exec("UPDATE chapter SET chapterNumber = ".$num." WHERE chapterID =".$this->chapterID);
+            $this->db->exec("UPDATE Chapter SET chapterNumber = ".$num." WHERE chapterID =".$this->chapterID);
             $this->chapterNumber=$num;
         }
         
         public function setExercices($e){
-            $this->db->exec("UPDATE chapter SET questionnaireID = '".$e->getId()."' WHERE chapterID =".$this->chapterID);
+            $this->db->exec("UPDATE Chapter SET questionnaireID = '".$e->getId()."' WHERE chapterID =".$this->chapterID);
             $this->exercices=$e;
         }
         
         public function setTitle($t){     
-            $this->db->exec("UPDATE chapter SET title = '".$t."' WHERE chapterID =".$this->chapterID);
+            $this->db->exec("UPDATE Chapter SET title = '".$t."' WHERE chapterID =".$this->chapterID);
             $this->title=$t;
         }
         
         public function setCourseNotes($n){
-            $this->db->exec("UPDATE chapter SET URL = '".$n->getId()."' WHERE chapterID =".$this->chapterID);
+            $this->db->exec("UPDATE Chapter SET URL = '".$n->getId()."' WHERE chapterID =".$this->chapterID);
             $this->courseNotes=$n;
         }
 
         //Suppression de la part en BDD
         
         public function delete(){
-            $res=$this->db->query("SELECT partID FROM chapters WHERE chapterID ='".$this->chapterID."'");  
+            $res=$this->db->query("SELECT partID FROM Chapters WHERE chapterID ='".$this->chapterID."'");  
             $fetch=$res->fetchAll(PDO::FETCH_ASSOC);
             foreach($fetch as $line){
                 $id=$line["partID"];
-                $res2=$this->db->query("SELECT title FROM course JOIN (SELECT courseID FROM parts WHERE partID ='".$id."') AS thispart ON course.courseID=thispart.courseID");  
+                $res2=$this->db->query("SELECT title FROM Course JOIN (SELECT courseID FROM Parts WHERE partID ='".$id."') AS thispart ON Course.courseID=thispart.courseID");  
                 $fetch2=$res2->fetchAll(PDO::FETCH_ASSOC);
                 foreach($fetch2 as $line2){
                     $course=&CourseFactory::getCourse($line2["title"]);
                     $course->part($id)->removeChapter($this);
                 }
             }
-            $this->db->exec("DELETE FROM chapter WHERE chapterID ='".$this->chapterID."'"); 
+            $this->db->exec("DELETE FROM Chapter WHERE chapterID ='".$this->chapterID."'"); 
         }
         
         
