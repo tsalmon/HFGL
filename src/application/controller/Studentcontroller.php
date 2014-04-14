@@ -59,16 +59,16 @@ class Studentcontroller extends Controller{
             print_r($part);
             echo "</p><br>";
             */
-            $list_part[$liste->partID] = $titre_part->title;
+            $this->list_part[$liste->partID] = $titre_part->title;
         }
-        return $list_part;
+        return $this->list_part;
     }
 
     public function Parametres()
     {
     	$page = "student";
         require 'application/views/_templates/header.php';
-        echo "voir les parametres";
+        require 'application/views/student_parametres.php';
         require 'application/views/_templates/footer.php';    	
     }
 
@@ -83,11 +83,19 @@ class Studentcontroller extends Controller{
     public function InscrireCours(){
     	$page = "student";
         require 'application/views/_templates/header.php';
-        echo "INSCRIRE A un cours";
+        require 'application/views/student_inscrireCours.php';
         require 'application/views/_templates/footer.php';    	
     }
 
     public function DesincrireCours(){
+    }
+
+    public function NotesDeCours()
+    {
+        $page = "student";
+        require 'application/views/_templates/header.php';
+        require 'application/views/student_view_notesDeCours.php';
+        require 'application/views/_templates/footer.php';
     }
 
 }

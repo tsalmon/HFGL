@@ -5,6 +5,7 @@ RewriteEngine On
 Options -Indexes
 
 RewriteBase /GL/src/
+#RewriteBase /gl/src/
 
 # General rewrite rules
 RewriteCond %{REQUEST_FILENAME} !-d

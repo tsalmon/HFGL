@@ -1,5 +1,5 @@
 <div id="main">
-    <?php include("nav_etudiant.php"); ?>
+    <?php include("_templates/nav_enseignant.php"); ?>
     <div id="site_content">
       <div id="welcome"><h3>Bienvenue echo nom d'enseignant</h3></div>
       <div id="sidebar_container">
@@ -32,16 +32,6 @@
           <p style="padding-top: 15px; display: inline"><span>&nbsp;</span><input class="bouton" type="submit" name="name" value="Note de cours" /></p>
       </div>
     </div>
-    <div id="scroll">
-      <a title="Scroll to the top" class="top" href="#"><img src="images/top.png" alt="top" /></a>
-    </div>
-    <footer>
-      <p>
-        <a href="teacher">Mes cours</a> | 
-        <a href="teacher/Notes">Les Soumissions</a> |
-        <a href="index.php?page=suggestions">DONNER UNE NOTE</a> | 
-        <a href="teacher/Parametres">Parametrès du compte</a>| <a href="#">Déconnexion</a>
-      </p>
-      <p>Copyright &copy; HFGL| <a href="#">design from M1 Info Paris 7</a></p>
-    </footer>
+
+    <?php include("_templates/nav_footer_enseignant.php"); ?>
 </div>

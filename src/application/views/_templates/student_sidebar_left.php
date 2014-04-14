@@ -1,4 +1,4 @@
-<div id="welcome"><h3>Bienvenue echo nom d'étudiant</h3></div>
+<div id="welcome"><h3>Bienvenue</h3></div>
 <div id="sidebar_container">
   <div class="sidebar">
       <h3>Liste de cours</h3>

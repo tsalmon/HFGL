@@ -11,10 +11,10 @@
       <nav>
         <div id="menu_container">
           <ul class="sf-menu" id="toolbar">
-              <li><a href="Student">Mes cours</a></li>
-              <li><a href="Student/Notes">Mes notes</a></li>
-              <li><a href="index.php?page=suggestions">S'incrire à un cours</a></li>
-              <li><a href="Student/Parametres">Parametrès du compte</a></li>
+              <li><a href="Student">Mes cours </a></li>
+              <li><a href="Student/Notes">Mes notes </a></li>
+              <li><a href="Student/InscrireCours">S'incrire à un cours </a></li>
+              <li><a href="Student/Parametres">Parametrès du compte   </a></li>
               <li><a href="#">Déconnexion</a></li>
           </ul>
         </div>
