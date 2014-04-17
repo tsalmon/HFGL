@@ -38,7 +38,7 @@ class CourseTeaching {
     
     protected static function createEntryProfessor($tutor){        
         if(!isset(CourseTeaching::$persons[$tutor->tutorID()])){            
-            CourseTeaching::$persons[$student->tutorID()]=array($tutor->email());
+            CourseTeaching::$persons[$tutor->tutorID()]=array($tutor->email());
         }
     }
     
