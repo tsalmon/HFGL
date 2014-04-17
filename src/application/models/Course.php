@@ -57,7 +57,7 @@ class Course {
     //****************************
         
         protected function titleExists($t){
-            $res=$this->db->query("Select * from course WHERE title='".$t."';");
+            $res=$this->db->query("Select * from Course WHERE title='".$t."';");
             $fetch=$res->fetch(PDO::FETCH_ASSOC);
             return isset($fetch["title"]);
         }
@@ -75,7 +75,7 @@ class Course {
         
         protected function getDBParts(){
             $p=[];
-            $result = $this->db->query("SELECT partID FROM parts WHERE `courseID`=".$this->courseID.";");
+            $result = $this->db->query("SELECT partID FROM Parts WHERE `courseID`=".$this->courseID.";");
             $fetch = $result->fetchAll(PDO::FETCH_ASSOC);
             foreach($fetch as $entry){
                 $partid=$entry["partID"];
@@ -120,22 +120,22 @@ class Course {
         }
          
         public function setFinalExam($fe){
-            $this->db->exec("UPDATE course SET questionnaireID = '".$fe->getId()."' WHERE courseID =".$this->courseID);
+            $this->db->exec("UPDATE Course SET questionnaireID = '".$fe->getId()."' WHERE courseID =".$this->courseID);
             $this->finalExam=$fe;
         }
         
         public function setTitle($t){     
-            $this->db->exec("UPDATE course SET title = '".$t."' WHERE courseID =".$this->courseID);
+            $this->db->exec("UPDATE Course SET title = '".$t."' WHERE courseID =".$this->courseID);
             $this->title=$t;
         }
         
         public function setDescription($d){   
-            $this->db->exec("UPDATE course SET description = '".$d."' WHERE courseID =".$this->courseID);
+            $this->db->exec("UPDATE Course SET description = '".$d."' WHERE courseID =".$this->courseID);
             $this->description=$d;
         }
         
         public function addPart($part){  
-            $this->db->exec("INSERT INTO parts (partID, courseID) VALUES (".$part->partID().", ".$this->courseID.");");
+            $this->db->exec("INSERT INTO Parts (partID, courseID) VALUES (".$part->partID().", ".$this->courseID.");");
             $this->parts[]=$part;
         }
         
@@ -146,7 +146,7 @@ class Course {
         }
         
         public function removePart($part){  
-            $this->db->exec("DELETE FROM parts WHERE partID=".$part->partID());
+            $this->db->exec("DELETE FROM Parts WHERE partID=".$part->partID());
             $key=  array_search($part,$this->parts);           
             array_splice($this->parts, $key, 1);
         }
@@ -161,7 +161,7 @@ class Course {
         
         public function delete(){
             CourseSubstcription::deleteCourse($this);
-            $this->db->exec("DELETE FROM course WHERE courseID ='".$this->courseID."'");   
+            $this->db->exec("DELETE FROM Course WHERE courseID ='".$this->courseID."'");   
         }
         
         //destructor

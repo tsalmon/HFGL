@@ -3,7 +3,7 @@
 </head>
 <body>
 <div id="wrapper">
-	<?php include("navigation.php") ?>
+	<?php include("_templates/nav_etudiant.php") ?>
 	<div id="center">
 		<article id="description">
 			<h1>Nom du projet</h1>

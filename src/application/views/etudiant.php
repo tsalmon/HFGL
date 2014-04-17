@@ -1,3 +1,5 @@
+// index fichier d'etudiant
+
 <div id="main">
 
     <?php include("_templates/nav_etudiant.php"); ?>
@@ -9,8 +11,8 @@
       <div class="content">
         <h1>Cours 1</h1>
         <h2>Déscriptions</h2>
-        <h5>Enseignant: echo nom d'enseignant</h5>
-        <h5>echo le déscription de cours</h5>
+        <h5>Enseignant: </h5>
+        <h5></h5>
         <h2>Les travaux</h2>
         <table style="width:100%; border-spacing:0;">
           <tr><th>Matière</th> <th>Documents</th></tr>
@@ -24,9 +26,9 @@
         	<input class="bouton" type="submit" name="name" value="Se désinscrit ce cours" />
         </p>
 
-        <a href="#Etudiant_Notesdecours.html">
+        <a href="Student/NotesDeCours">
            <p style="padding-top: 15px; display: inline"><span>&nbsp;</span>
-           	<input class="bouton" type="submit" name="name" value="Notes de cours" />
+           	<input class="bouton" type="submit" name="name" value="Notes de cours"/>
            </p>
         </a>
       </div>

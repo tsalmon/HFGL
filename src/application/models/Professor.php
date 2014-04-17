@@ -16,7 +16,7 @@ class Professor extends Person implements Corrector{
         public function __construct($mail, $exists=true){    
             $this->db=  PDOHelper::getInstance();
             if($exists==true){
-                $fetch = $this->getDBEntry($mail, "tutor");
+                $fetch = $this->getDBEntry($mail, "Tutor");
                 if($fetch==null){
                     throw new UnexpectedValueException("Utilisateur non existant");
                 }
@@ -30,7 +30,7 @@ class Professor extends Person implements Corrector{
                     throw new UnexpectedValueException("Utilisateur existant");
                 }
                 $lastid=$this->createEntry($mail);
-                $this->db->exec("INSERT INTO tutor (personID) VALUES (".$lastid.");");   
+                $this->db->exec("INSERT INTO Tutor (personID) VALUES (".$lastid.");");   
                 $this->tutorID=$this->db->lastInsertId();              
             }
         }
@@ -52,7 +52,7 @@ class Professor extends Person implements Corrector{
         
         public function delete(){
             CourseTeaching::deleteTutor($this);
-            $this->db->exec("DELETE FROM tutor WHERE tutorID ='".$this->tutorID."'");    
+            $this->db->exec("DELETE FROM Tutor WHERE tutorID ='".$this->tutorID."'");    
             parent::delete();            
         }
 }
