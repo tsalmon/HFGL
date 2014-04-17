@@ -24,8 +24,6 @@ class Application
     public function __construct()
     {
         session_start();
-        $_SESSION["id"] = 1;
-        $_SESSION["mail"] = "th_s@hotmail.fr";
 // create array with URL parts in $url
         $this->splitUrl();
         // check for controller: does such a controller exist ?
