@@ -8,9 +8,6 @@ define('P', "p");
 
 
 class QuestionTypeManager extends TypeManager{
-    private $typeTable = "QuestionType";
-    private $idField = "typeID";
-    private $nameField = "typeName";
 
     private $qrf;
     private $qcm;
@@ -21,6 +18,9 @@ class QuestionTypeManager extends TypeManager{
     //*********************************************
 
     private function __construct(){
+        $this->typeTable = "QuestionType";
+        $this->idField = "typeID";
+        $this->nameField = "typeName";
         $this->refresh();
     }
 
@@ -39,18 +39,6 @@ class QuestionTypeManager extends TypeManager{
         $this->l = $this->getIdForTypeName(L);
         $this->p = $this->getIdForTypeName(P);
 
-    }
-
-    protected  function getIdForTypeName($typeName){
-        if($typeRequestResult = PDOHelper::getInstance()->query("SELECT ".$this->idField." FROM ".$this->typeTable." WHERE ".$this->nameField."=".$typeName.")"))
-        {
-            $currentTypeRow = $typeRequestResult->fetch(PDO::FETCH_ASSOC);
-            return $currentTypeRow['typeID'];
-        }
-        else
-        {
-            throw new Exception("No ".$typeName." ID in the table".$this->typeTable."");
-        }
     }
 
     public function getQrfID()

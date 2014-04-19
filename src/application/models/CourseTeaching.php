@@ -23,7 +23,7 @@ class CourseTeaching {
         CourseTeaching::$courses=array();
         CourseTeaching::$persons=array();   
         
-        $res=CourseTeaching::$db->query("SELECT tutorID, `email` FROM tutor JOIN person on person.personID=tutor.personID");
+        $res=CourseTeaching::$db->query("SELECT tutorID, `email` FROM Tutor JOIN person on person.personID=tutor.personID");
         $fetch = $res->fetchAll(PDO::FETCH_ASSOC);
         foreach($fetch as $entry){
             CourseTeaching::$persons[$entry['tutorID']]=array($entry['email']);
@@ -38,7 +38,7 @@ class CourseTeaching {
     
     protected static function createEntryProfessor($tutor){        
         if(!isset(CourseTeaching::$persons[$tutor->tutorID()])){            
-            CourseTeaching::$persons[$student->tutorID()]=array($tutor->email());
+            CourseTeaching::$persons[$tutor->tutorID()]=array($tutor->email());
         }
     }
     
@@ -59,7 +59,7 @@ class CourseTeaching {
         $idtutor=$tutor->tutorID();
         if(!isset(CourseTeaching::$persons[$idtutor][1])){
             $res=array();
-            $req = CourseTeaching::$db->query("SELECT courseID FROM teaching where tutorID=".$idtutor);
+            $req = CourseTeaching::$db->query("SELECT courseID FROM Teaching where tutorID=".$idtutor);
             if($req===false){
                 return array();
             }
@@ -86,7 +86,7 @@ class CourseTeaching {
         $idcourse=$course->courseID();
         if(!isset(CourseTeaching::$courses[$idcourse][1])){
             $res=array();
-            $req = CourseTeaching::$db->query("SELECT tutorID FROM teaching where courseID=".$idcourse);
+            $req = CourseTeaching::$db->query("SELECT tutorID FROM Teaching where courseID=".$idcourse);
             if($req===false){
                 return array();
             }
@@ -115,7 +115,7 @@ class CourseTeaching {
         if($test===false){
             CourseTeaching::$courses[$course->courseID()][]=$tutor->tutorID();
             CourseTeaching::$persons[$tutor->tutorID()][]=$course->courseID();
-            CourseTeaching::$db->exec('INSERT INTO teaching (tutorID,courseID) VALUES ('.$tutor->tutorID().','.$course->courseID().');');            
+            CourseTeaching::$db->exec('INSERT INTO Teaching (tutorID,courseID) VALUES ('.$tutor->tutorID().','.$course->courseID().');');            
         }
     }
     
@@ -124,7 +124,7 @@ class CourseTeaching {
         array_splice(CourseTeaching::$courses[$course->courseID()],$indice);
         $indice=array_search($course->courseID(), CourseTeaching::$persons[$tutor->tutorID()]);
         array_splice(CourseTeaching::$persons[$tutor->tutorID()],$indice);
-        CourseTeaching::$db->exec('DELETE FROM teaching WHERE courseID="'.$course->courseID().'" AND tutorID="'.$tutor->tutorID().'";');
+        CourseTeaching::$db->exec('DELETE FROM Teaching WHERE courseID="'.$course->courseID().'" AND tutorID="'.$tutor->tutorID().'";');
     }
     
     public static function deleteTutor($tutor){
@@ -135,7 +135,7 @@ class CourseTeaching {
             }
         }        
         unset(CourseTeaching::$persons[$tutor->tutorID()]);
-        CourseTeaching::$db->exec("DELETE FROM teaching WHERE tutorID ='".$tutor->tutorID()."'");  
+        CourseTeaching::$db->exec("DELETE FROM Teaching WHERE tutorID ='".$tutor->tutorID()."'");  
         
     }
     
@@ -147,7 +147,7 @@ class CourseTeaching {
             }
         }        
         unset(CourseTeaching::$courses[$courses->courseID()]);
-        CourseTeaching::$db->exec("DELETE FROM teaching WHERE courseID ='".$course->courseID()."'");      
+        CourseTeaching::$db->exec("DELETE FROM Teaching WHERE courseID ='".$course->courseID()."'");      
         
     }   
 }

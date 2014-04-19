@@ -4,8 +4,8 @@
       <h3>Liste de cours</h3>
       <ul>
       		<?php
-      			foreach ($liste_matiere as $key => $value) {
-      				echo "<li> <a href='#''>".$value."</a></li>";
+            foreach($liste_cours as $cours){
+              echo "<li>" . ($cours->title()) . "</p>";
       			}
       		?>
 		  </ul>
