@@ -62,7 +62,9 @@
 					</span>
 				</div>
 			</div>
-		</div><div class="ligne">
+</div>
+
+<div class="ligne">
 			<div class="colonne gauche">
 				<div>
 					<span>vignette</span>
