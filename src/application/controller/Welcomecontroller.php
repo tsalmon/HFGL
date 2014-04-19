@@ -28,7 +28,7 @@ class Welcomecontroller extends Controller
             $inscription_error["usr"] = true;  
         }
         if(!preg_match('/^[A-Z][a-z]+$/', $_POST["inscr_firstname"])){ //math usr firstname invalid
-            $inscription_error["usr_fn_regex"] = true;            
+            $inscription_error["usr_fn_regex"] = true;              
         }
         if(!preg_match('/^[A-Z][a-z]+$/', $_POST["inscr_surname"])){ //math usr surname invalid
             $inscription_error["usr_sn_regex"] = true;            
@@ -42,7 +42,7 @@ class Welcomecontroller extends Controller
             $inscription_error["pwd_size"] = true;
         }
         if(!ctype_alnum($_POST["inscr_pwd"])){ // pwd isn't alphanum
-            $inscription_error["pwd_regex"] = true;            
+            $inscription_error["pwd_regex"] = true;
         }
 
         //email error
@@ -50,41 +50,48 @@ class Welcomecontroller extends Controller
         if($_POST["inscr_mail"] !=  $_POST["inscr_mail_confirm"]){
             $inscription_error["mail"] = true;
         }
+        
         //mathc not a email valid
-        $reg = '/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/';
-        if(!preg_match($reg, $_POST["inscr_mail"])){ 
-            $inscription_error["mail_regex"] = true;            
+        if(!filter_var($_POST["inscr_mail"], FILTER_VALIDATE_EMAIL)) {
+             $inscription_error["mail_regex"] = true;
         }
+        
+        //$reg = '/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/';
+        //if(!preg_match($reg, $_POST["inscr_mail"])){ 
+        //    $inscription_error["mail_regex"] = true;            
+        //}
 
         // if there is any errors in the formular
         if(count($inscription_error) > 0){
-            header('location: ' . URL . 'Welcome/Inscription_failed');
+            foreach ($inscription_error as $key => $value) {
+                $_POST[$key] = $value;
+            }
+            $page = "inscription_failed";
+            require 'application/views/_templates/header.php';
+            require 'application/views/Inscription.php';       
+            require 'application/views/_templates/footer.php';        
         } else {
             $inscription_model->addPerson($_POST["inscr_firstname"],$_POST["inscr_surname"], $_POST["inscr_pwd"], $_POST["inscr_mail"]);
+            header('location: ' . URL . 'Welcome/Inscription_ok');
         }
         //require 'application/views/_templates/footer.php';
     }
 
     public function Inscription_ok(){
-        $page = "inscription";
+        $page = "inscription_ok";
         require 'application/views/_templates/header.php';
-        echo "<p>Inscription réussie</p>";
+        require 'application/views/connexion.php';
         require 'application/views/_templates/footer.php';
     }   
-
-    public function Inscription_failed(){
-        $page = "inscription";
-        require 'application/views/_templates/header.php';
-        echo "<p>Echec de l'inscription</p>";
-        require 'application/views/_templates/footer.php';       
-    }
 
     public function Connexion()
     {
         $log = $this->loadModel('Welcomemodel');
         
+        
         $co = $log->connect($_POST["user"], $_POST["pwd"]);
-        if($co == null){
+        
+        if($co == null){ // error
             $page = "connexion";
             $incorrect = 1;
             require 'application/views/_templates/header.php';
@@ -94,8 +101,8 @@ class Welcomecontroller extends Controller
             $_SESSION["role"] = "student";
             $_SESSION["email"] = $_POST["user"];
             $_SESSION["id"] = strval($co->personID());
-            header('location: ' . URL . 'Student');
-            echo $_SESSION["id"];
+            header('location: '.URL.'Student');
         }
+        
     }
 }
