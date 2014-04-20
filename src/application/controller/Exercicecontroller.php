@@ -6,9 +6,8 @@ class Exercicecontroller extends Controller{
     {
         $this->exerciseSheetModel = $this->loadModel('ExerciseSheet');
         $this->exerciseSheetModel->loadByID(1);
-        //echo $this->exerciseSheetModel->getQuestions()[0]->getAssignment();
+        $questions = $this->exerciseSheetModel->getQuestions();
         require 'application/views/_templates/header.php';
-        $this->showExerciseSheet();
         require 'application/views/exercise.php';
         require 'application/views/_templates/footer.php';
     }
@@ -27,7 +26,7 @@ class Exercicecontroller extends Controller{
         require 'application/views/_templates/footer.php';
 	}
 
-
+    /* demenagé à view exercice.php
     public function showExerciseSheet(){
         foreach($this->exerciseSheetModel->getQuestions() as $question) {
             echo $question->getAssignment().'<br/>';
@@ -51,7 +50,5 @@ class Exercicecontroller extends Controller{
             echo '</form>';
             echo '<br/>';
         }
-    }
-
-
+    }*/
 }
