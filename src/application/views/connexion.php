@@ -11,8 +11,10 @@
         	if(isset($incorrect)){
         		echo "<p>Soit le mot de passe incorrect, soit vous n'êtes pas enregistré avec cette adresse<p>";
         	} else if(isset($page) && $page  == "inscription_ok"){
-        		echo "<p>Vous êtes désormais inscrit</p>";
-        	}
+        		echo "<p>Vous êtes désormais inscrit.</p>";
+        	} else if(isset($page) && $page == "deconnexion"){
+                        echo "<p>Vous êtes maintenant déconnecté.</p>";
+                }
         ?>
 	</form>
 </div>
