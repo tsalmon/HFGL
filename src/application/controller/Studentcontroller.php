@@ -9,11 +9,12 @@ class Studentcontroller extends Controller{
     public function index() //consulter cours
     { 
         $MODELcours = $this->loadModel('CourseSubstcription');
-        $liste_cours = $MODELcours->getCourses(PersonFactory::getPerson($_SESSION["email"]));    
+        $liste_cours = $MODELcours->getCourses(PersonFactory::getPerson($_SESSION["email"]));
+        
         require 'application/views/_templates/header.php';
         require 'application/views/etudiant.php';
         require 'application/views/_templates/footer.php';
-
+        
     }
 
     //get id and title of all part for one cours
@@ -76,5 +77,11 @@ class Studentcontroller extends Controller{
         require 'application/views/student_view_notesDeCours.php';
         require 'application/views/_templates/footer.php';
     }
-
+    public function Deconnexion(){
+        if(session_destroy()){
+            header('location: '.URL.'Welcome');
+        } else {
+            header('location: '.URL.'Student');
+        }
+    }
 }

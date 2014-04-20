@@ -18,8 +18,6 @@
               echo '<h2>'.$part->title().'</h2>';
               echo '<h3><a href="">Examen</a></h3>';
               
-              //print_r($part->chapters());
-              
               echo '
               <h2>Chapitres</h2>
               <table style="width:100%; border-spacing:0;">
