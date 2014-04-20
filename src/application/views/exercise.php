@@ -1,7 +1,3 @@
-<?php
-    echo 'Hello world!';
-
-?>
 <div id="main">
 
     <?php include("_templates/nav_etudiant.php"); ?>
@@ -16,7 +12,7 @@
         <div id="div_scroll">
         	<h1>Notes de Cours 1</h1>
             <p>
-              echo Les Notes de cours 
+              echo Les Notes de cours!!!
             </p>
         </div>
 

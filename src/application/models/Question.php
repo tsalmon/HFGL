@@ -42,23 +42,31 @@ abstract class Question {
             if($currentQuestionRow = $questionRequestResult->fetch(PDO::FETCH_ASSOC))
             {
                 $typeID =  $currentQuestionRow['typeID'];
+                //echo $typeID;
                 $assignment = $currentQuestionRow['assignment'];
+                //echo $assignment;
                 $tip = $currentQuestionRow['tip'];
+                //echo $tip;
                 $points = $currentQuestionRow['points'];
+                //echo $points;
+                //echo "QCM:".QuestionTypeManager::getInstance()->getQcmID();
+                //echo "QRF:".QuestionTypeManager::getInstance()->getQrfID();
+                //echo "P:".QuestionTypeManager::getInstance()->getPID();
+                //echo "L:".QuestionTypeManager::getInstance()->getLID();
 
-                if($typeID == QCM){
+                if($typeID == QuestionTypeManager::getInstance()->getQcmID()){
                     $question = new QCMQuestion($assignment, $tip, $points);
                 }
 
-                if($typeID == QRF){
+                if($typeID == QuestionTypeManager::getInstance()->getQrfID()){
                     $question = new QRFQuestion($assignment, $tip, $points);
                 }
 
-                if($typeID == L){
+                if($typeID == QuestionTypeManager::getInstance()->getLID()){
                     $question = new LQuestion($assignment, $tip, $points);
                 }
 
-                if($typeID == P){
+                if($typeID == QuestionTypeManager::getInstance()->getPID()){
 
                 }
 

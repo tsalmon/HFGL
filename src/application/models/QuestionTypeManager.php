@@ -1,10 +1,10 @@
 <?php
 require_once "application/models/TypeManager.php";
 
-define('QRF', "qrf");
-define('QCM', "qcm");
-define('L', "l");
-define('P', "p");
+define('QRF', "QRF");
+define('QCM', "QCM");
+define('L', "L");
+define('P', "P");
 
 
 class QuestionTypeManager extends TypeManager{

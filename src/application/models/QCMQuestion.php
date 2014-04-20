@@ -37,7 +37,7 @@ class QCMQuestion extends Question{
         $this->questionID = $questionID;
 
         //Getting answers for current question
-        if($answersRequestResult = PDOHelper::getInstance()->query("SELECT * FROM Responses WHERE questionID=".$questionID))
+        if($answersRequestResult = PDOHelper::getInstance()->query("SELECT * FROM Response WHERE questionID=".$questionID))
         {
             //enumeration of answers
             while($currentAnswerRow = $answersRequestResult->fetch(PDO::FETCH_ASSOC))

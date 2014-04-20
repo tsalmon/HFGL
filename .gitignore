@@ -2,5 +2,6 @@
 *~
 *#
 config.php
-!.htaccess
-!.gitignore
+src/.htaccess
+.htaccess
+src/application/config/config.php

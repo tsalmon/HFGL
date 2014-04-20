@@ -4,9 +4,12 @@ class Exercicecontroller extends Controller{
 
     public function index()
     {
-        $exerciseSheetModel = $this->loadModel('ExerciseSheet');
+        $this->exerciseSheetModel = $this->loadModel('ExerciseSheet');
+        $this->exerciseSheetModel->loadByID(1);
+        //echo $this->exerciseSheetModel->getQuestions()[0]->getAssignment();
         require 'application/views/_templates/header.php';
         $this->showExerciseSheet();
+        require 'application/views/exercise.php';
         require 'application/views/_templates/footer.php';
     }
 
@@ -26,10 +29,11 @@ class Exercicecontroller extends Controller{
 
 
     public function showExerciseSheet(){
-        foreach($this->exerciseSheetModel->questions as $question) {
+        foreach($this->exerciseSheetModel->getQuestions() as $question) {
             echo $question->getAssignment().'<br/>';
-            echo '<form action="">';
+            //secho $question->getAnswers();
             $curanswers = $question->getAnswers();
+            echo '<form action="">';
             foreach($curanswers as $answer) {
                 if($question instanceof QCMQuestion)
                 {
