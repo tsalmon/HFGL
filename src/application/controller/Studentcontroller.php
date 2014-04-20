@@ -9,45 +9,10 @@ class Studentcontroller extends Controller{
     public function index() //consulter cours
     { 
         $MODELcours = $this->loadModel('CourseSubstcription');
-        $liste_cours = $MODELcours->getCourses(PersonFactory::getPerson($_SESSION["email"]));
-        foreach($liste_cours as $cours){
-            echo "<p>";
-            print_r($cours);
-            echo "</p>";
-        }
-        //$liste_cours = new CourseFactory($_SESSION["emain"]);
-
-        /*
-        $list_partID = array();
-        $list_coursID = array();
-        $liste_matiere = array();
-        $student_model = $this->loadModel('Welcomemodel');
-        
-        // on recupere les id des cours de l'utilisateur
-        $sql = "SELECT courseID FROM Inscription WHERE Inscription.studentID = ".$_SESSION["id"]."";
-        $query = $student_model->db->prepare($sql);
-        $query->execute();
-        $liste_inscription = $query->fetchAll();
-        
-        //pour chaque id de cours suivis, recuperer le nom, description
-        foreach ($liste_inscription as &$liste) {
-            $sql = "SELECT title, description  FROM Course WHERE Course.courseID = ".($liste->courseID)."";
-            $query = $student_model->db->prepare($sql);
-            $query->execute();
-            $result = $query->fetch();
-            
-            array_push($liste_matiere, $result->title);
-            
-        }
-        //pour la plus premiere matiere de la liste, get id
-        $list_part = $this->CoursParts($liste_inscription[0]->courseID, $student_model);
-        */
-        
-        /*
+        $liste_cours = $MODELcours->getCourses(PersonFactory::getPerson($_SESSION["email"]));    
         require 'application/views/_templates/header.php';
         require 'application/views/etudiant.php';
         require 'application/views/_templates/footer.php';
-        */
 
     }
 
