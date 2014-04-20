@@ -1,3 +1,7 @@
+<<<<<<< HEAD:src/application/views/exercise.php
+=======
+// feuille d'exercise -- finish
+>>>>>>> 1a9cbf622212cfe9bfe262dae962babfc1f43a9c:src/application/views/student_exercise.php
 <div id="main">
 
     <?php include("_templates/nav_etudiant.php"); ?>
@@ -8,10 +12,13 @@
 
       <div class="content">
         
-        <h5>Enseignant: echo nom d'enseignant</h5>
+        <h5>Enseignant: </h5>
         <div id="div_scroll">
-        	<h1>Notes de Cours 1</h1>
+        	<h1>Feuille d'exercise</h1>
+          <h4>Date limite: </h4>
+
             <p>
+<<<<<<< HEAD:src/application/views/exercise.php
               echo Les Notes de cours
             </p>
             <hr>
@@ -41,6 +48,9 @@
                     echo '<input id="inscription" type="submit"/>';
                 echo '<br/>';
                 ?>
+=======
+              //consulter les exercises de chaptrire
+>>>>>>> 1a9cbf622212cfe9bfe262dae962babfc1f43a9c:src/application/views/student_exercise.php
             </p>
         </div>
 
@@ -54,6 +64,11 @@
         <p style="padding-top: 15px; display: inline">
           <span>&nbsp;</span>
           <input class="bouton" type="submit" name="name" value="Enregistrer" />
+        </p>
+
+        <p style="padding-top: 15px; display: inline">
+          <span>&nbsp;</span>
+          <input class="bouton" type="submit" name="name" value="Soumettre" />
         </p>
           
       </div>
