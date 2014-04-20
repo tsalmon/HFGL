@@ -66,6 +66,14 @@ CREATE TABLE `Person` (
 PRIMARY KEY (`personID`) 
 );
 
+CREATE TABLE IF NOT EXISTS `Student` (
+  `personID` int(11) NOT NULL,
+  `studentID` int(11) NOT NULL AUTO_INCREMENT,
+  `NSE` int(11) NOT NULL,
+  PRIMARY KEY (`studentID`),
+  KEY `fk_Student_Person_1` (`personID`)
+);
+
 CREATE TABLE `Course` (
 `courseID` int NOT NULL AUTO_INCREMENT,
 `title` varchar(255) NOT NULL,
