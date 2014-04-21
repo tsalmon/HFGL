@@ -25,7 +25,7 @@
               <tr><th>Matière</th> <th>Documents</th></tr>';
 
               foreach($part->chapters() as $chapter){
-                echo '<tr><td>nom chapitre</td><td>???</td></tr>';
+                echo '<tr><td>'.$chapter->title().'</td><td><p>'.print_r($chapter).'</p></td></tr>';
               }
               echo '
               </table>
