@@ -60,6 +60,17 @@ INSERT INTO `Response`(`questionID`, `content`,`correct`) VALUES
 INSERT INTO `Questions`(`questionnaireID`, `questionID`) VALUES
 (1,1),(1,2),(1,3),(1,4),(1,5),(1,6),(1,7),(1,8);
 
+
+INSERT INTO `Course`(`title`, `description`) VALUES
+('Algortihms','In this course you will learn several fundamental principles of algorithm design: divide-and-conquer methods, graph algorithms, practical data structures (heaps, hash tables, search trees), randomized algorithms, and more.'),
+('Functional Programming','The purpose of this course is to introduce the theory and practice of functional programming (FP). The characteristic feature of FP is the emphasis on computation as evaluation. The traditional distinction between program and data characteristic of imperative programming (IP) is replaced by an emphasis on classifying expressions by types that specify their applicative behavior.'),
+('Logic Programming','In addition to a short introduction to the programming language Prolog, the lecture deals with the foundations of logic programming, with programming techniques in these languages, with the implementation of logic programming languages, and with their application in several areas.'),
+('Philosophy','This course will introduce you to some of the most important areas of research in contemporary philosophy. Each week a different philosopher will talk you through some of the most important questions and issues in their area of expertise.'),
+('Circuits and Electronics','The course introduces the fundamentals of the lumped circuit abstraction. Topics covered include: resistive elements and networks; independent and dependent sources; switches and MOS transistors; digital abstraction; amplifiers; energy storage elements; dynamics of first- and second-order networks; design in the time and frequency domains; and analog and digital circuits and applications.'),
+('Computer graphics','Computer graphics course offers an introduction to computer graphics hardware, algorithms, and software. Topics include: line generators, affine transformations, line and polygon clipping, splines, interactive techniques, perspective projection, solid modeling, hidden surface algorithms, lighting models, shading, and animation. Substantial programming experience is required. This course is worth 6 Engineering Design Points.');
+INSERT INTO `Course`(`title`, `description`, `questionnaireID`) VALUES
+('Object Oriented Programming','Intermediate programming in a high-level language and introduction to computer science. Topics include program structure and organization, object-oriented programming (classes, objects, types, sub-typing), graphical user interfaces, algorithm analysis (asymptotic complexity, big “O” notation), recursion, data structures (lists, trees, stacks, queues, heaps, search trees, hash tables, graphs), simple graph algorithms. C++ is the principal programming language.',1);
+
 INSERT INTO `Part` (`title`,`questionnaireID`) VALUES
 ('Introduction', 1), ('Main part', 1), ('Advanced chapters', 1);
 
@@ -77,17 +88,6 @@ INSERT INTO `Chapters` (`chapterID`, `partID`) VALUES
 (2,2),
 (3,2),
 (4,2);
-
-
-INSERT INTO `Course`(`title`, `description`) VALUES
-('Algortihms','In this course you will learn several fundamental principles of algorithm design: divide-and-conquer methods, graph algorithms, practical data structures (heaps, hash tables, search trees), randomized algorithms, and more.'),
-('Functional Programming','The purpose of this course is to introduce the theory and practice of functional programming (FP). The characteristic feature of FP is the emphasis on computation as evaluation. The traditional distinction between program and data characteristic of imperative programming (IP) is replaced by an emphasis on classifying expressions by types that specify their applicative behavior.'),
-('Logic Programming','In addition to a short introduction to the programming language Prolog, the lecture deals with the foundations of logic programming, with programming techniques in these languages, with the implementation of logic programming languages, and with their application in several areas.'),
-('Philosophy','This course will introduce you to some of the most important areas of research in contemporary philosophy. Each week a different philosopher will talk you through some of the most important questions and issues in their area of expertise.'),
-('Circuits and Electronics','The course introduces the fundamentals of the lumped circuit abstraction. Topics covered include: resistive elements and networks; independent and dependent sources; switches and MOS transistors; digital abstraction; amplifiers; energy storage elements; dynamics of first- and second-order networks; design in the time and frequency domains; and analog and digital circuits and applications.'),
-('Computer graphics','Computer graphics course offers an introduction to computer graphics hardware, algorithms, and software. Topics include: line generators, affine transformations, line and polygon clipping, splines, interactive techniques, perspective projection, solid modeling, hidden surface algorithms, lighting models, shading, and animation. Substantial programming experience is required. This course is worth 6 Engineering Design Points.');
-INSERT INTO `Course`(`title`, `description`, `questionnaireID`) VALUES
-('Object Oriented Programming','Intermediate programming in a high-level language and introduction to computer science. Topics include program structure and organization, object-oriented programming (classes, objects, types, sub-typing), graphical user interfaces, algorithm analysis (asymptotic complexity, big “O” notation), recursion, data structures (lists, trees, stacks, queues, heaps, search trees, hash tables, graphs), simple graph algorithms. C++ is the principal programming language.',1);
 
 INSERT INTO `Role` (`name`) VALUES
 ('admin'),('tutor'),('student');
@@ -109,6 +109,7 @@ INSERT INTO `Student` (`personID`, `studentID`, `NSE`) VALUES
 (17, 9, 0),
 (18, 10, 0),
 (20, 11, 0);
+
 INSERT INTO `Teaching`(`tutorID`, `courseID`) VALUES
 (2,1),(2,2),(2,3),(2,4),(2,5),(2,6),(2,7);
 
