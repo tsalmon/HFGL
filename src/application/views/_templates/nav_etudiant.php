@@ -15,7 +15,7 @@
               <li><a href="Student/Notes">Mes notes </a></li>
               <li><a href="Student/InscrireCours">S'incrire à un cours </a></li>
               <li><a href="Student/Parametres">Parametrès du compte   </a></li>
-              <li><a href="#">Déconnexion</a></li>
+              <li><a href="<?php echo URL; ?>Student/Deconnexion">Déconnexion</a></li>
           </ul>
         </div>
       </nav>

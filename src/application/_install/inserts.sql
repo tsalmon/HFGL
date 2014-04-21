@@ -97,6 +97,18 @@ INSERT INTO `Person`(`name`, `surname`, `email`, `password`, `roleID`) VALUES
 ('Karine','Altisen','Karine.Altisen@afk.com','lemotdepasse2', 2),
 ('Andrzej','Duda','Andrzej.Duda@afk.com','lemotdepasse3', 3);
 
+INSERT INTO `Student` (`personID`, `studentID`, `NSE`) VALUES
+(9, 1, 0),
+(10, 2, 0),
+(11, 3, 0),
+(12, 4, 0),
+(13, 5, 0),
+(14, 6, 0),
+(15, 7, 0),
+(16, 8, 0),
+(17, 9, 0),
+(18, 10, 0),
+(20, 11, 0);
 INSERT INTO `Teaching`(`tutorID`, `courseID`) VALUES
 (2,1),(2,2),(2,3),(2,4),(2,5),(2,6),(2,7);
 
