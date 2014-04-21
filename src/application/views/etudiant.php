@@ -15,20 +15,30 @@
             echo "<p><h1>". $cours->title(). "</h1>";
             echo "<p>". $cours->description() ."</p>";
             echo "<h5>TODO: Enseignant: </h5>";
-            foreach ($cours->parts() as $part) {
-              echo '<h2>'.$part->title().'</h2>';
-              echo '<h3><a href="">Examen</a></h3>';
-              
-              echo '
-              <h2>Chapitres</h2>
-              <table style="width:100%; border-spacing:0;">
-              <tr><th>Matière</th> <th>Documents</th></tr>';
+            echo "
+              <h2>Les travaux</h2>
+              <table style='width:100%; border-spacing:0;''>
+                <tr><th>Matière</th> <th>Documents</th></tr>
+            ";
+                foreach ($cours->parts() as $part) {
+                  echo '
+                <tr>
+                  <td>'.$part->title().'</td>'
+                  foreach($part->chapters() as $chapter){
+                  echo ' 
+                  <td>
+                      <a href="#">'.$chapter->title().'</a>
+                  </td>';
+                  }
 
-              foreach($part->chapters() as $chapter){
-                echo '<tr><td>'.$chapter->title().'</td><td><p>'.print_r($chapter).'</p></td></tr>';
-              }
               echo '
+                </tr>
+                <tr><td>Projet</td> <td><a href="projet_memoire.html">Sujet de projet</a></td></tr>
+                <tr><td>Examen</td> <td><a href="#">Feuille d examen</a></td></tr>
               </table>
+              ';
+             
+              echo '
               <p style="padding-top: 15px; display: inline"><span>&nbsp;</span>
               <input class="bouton" type="submit" name="name" value="Se desinscrire ce cours" />
               </p>
