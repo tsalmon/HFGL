@@ -10,7 +10,8 @@
       
       <div class="content">
       <?php
-        foreach($liste_cours as $cours){
+          foreach($liste_cours as $cours){
+
             echo "<p><h1>". $cours->title(). "</h1>";
             echo "<p>". $cours->description() ."</p>";
             echo "<h5>TODO: Enseignant: </h5>";

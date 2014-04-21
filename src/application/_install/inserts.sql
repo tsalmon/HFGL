@@ -71,53 +71,35 @@ INSERT INTO `Course`(`title`, `description`) VALUES
 INSERT INTO `Course`(`title`, `description`, `questionnaireID`) VALUES
 ('Object Oriented Programming','Intermediate programming in a high-level language and introduction to computer science. Topics include program structure and organization, object-oriented programming (classes, objects, types, sub-typing), graphical user interfaces, algorithm analysis (asymptotic complexity, big “O” notation), recursion, data structures (lists, trees, stacks, queues, heaps, search trees, hash tables, graphs), simple graph algorithms. C++ is the principal programming language.',1);
 
+INSERT INTO `Part` (`title`,`questionnaireID`) VALUES
+('Introduction', 1), ('Main part', 1), ('Advanced chapters', 1);
+
+INSERT INTO `Parts` (`partID`, `courseID`) VALUES
+(1, 1),(2,1),(3,1);
+
+INSERT INTO `Chapter` (`chapterNumber`, `title`, `URL`, `questionnaireID`) VALUES
+(1, 'Introduction to C++', 'http:://www.google.com', 1),
+(2, 'Classes', 'http:://www.google.com', 1),
+(3, 'Templates', 'http:://www.google.com', 1),
+(4, 'Shared pointers', 'http:://www.google.com', 1);
+
+INSERT INTO `Chapters` (`chapterID`, `partID`) VALUES
+(1,1),
+(2,2),
+(3,2),
+(4,2);
+
 INSERT INTO `Role` (`name`) VALUES
 ('admin'),('tutor'),('student');
 
 INSERT INTO `Person`(`name`, `surname`, `email`, `password`, `roleID`) VALUES
-('Olivier','Alphand','Olivier.Alphand@afk.com','lemotdepasse1', 2),
+('Olivier','Alphand','Olivier.Alphand@afk.com','lemotdepasse1', 1),
 ('Karine','Altisen','Karine.Altisen@afk.com','lemotdepasse2', 2),
-('Andrzej','Duda','Andrzej.Duda@afk.com','lemotdepasse3', 2),
-('Pierre','Etore','Pierre.Etore@afk.com','lemotdepasse4', 2),
-('Nils','Gesbert','Nils.Gesbert@afk.com','lemotdepasse5', 2),
-('Joseph','Staline','Joseph.Staline@kgb.ussr','lemotdepasse6', 2),
-('Guillaume','James','Guillaume.James@afk.com','lemotdepasse7', 2),
-('Xavier','Nicollin','Xavier.Nicollin@afk.com','lemotdepasse8', 2),
-('Guan','Yang','Guan.Yang@afk.com','lemotdepasse9', 3),
-('Emil','Siriwardane','Emil.Siriwardane@afk.com','lemotdepasse10', 3),
-('James','Albertus','James.Albertus@afk.com','lemotdepasse11', 3),
-('Matteo','Crosignani','Matteo.Crosignani@afk.com','lemotdepasse12', 3),
-('Mohsan','Bilal','Mohsan.Bilal@afk.com','lemotdepasse13', 3),
-('Suzanne','Chang','Suzanne.Chang@afk.com','lemotdepasse14', 3),
-('Markus','Sihvonen','Markus.Sihvonen@afk.com','lemotdepasse15', 3),
-('Katherine','Waldock','Katherine.Waldock@afk.com','lemotdepasse16', 3),
-('Vadim','Elenev','Vadim.Elenev@afk.com','lemotdepasse17', 3),
-('Adriana','Alfaro','Adriana.Alfaro@afk.com','lemotdepasse18', 3),
-('Admin', "", "Admin@afk.com", 'lemotdepasse', 1);
+('Andrzej','Duda','Andrzej.Duda@afk.com','lemotdepasse3', 3);
 
-INSERT INTO `Student` (`personID`, `studentID`, `NSE`) VALUES
-(9, 1, 0),
-(10, 2, 0),
-(11, 3, 0),
-(12, 4, 0),
-(13, 5, 0),
-(14, 6, 0),
-(15, 7, 0),
-(16, 8, 0),
-(17, 9, 0),
-(18, 10, 0),
-(20, 11, 0);
+
 INSERT INTO `Teaching`(`tutorID`, `courseID`) VALUES
-(1,1),(2,2),(3,3),(4,4),(5,5),(6,6),(7,7);
+(2,1),(2,2),(2,3),(2,4),(2,5),(2,6),(2,7);
 
 INSERT INTO `Inscription`(`studentID`, `courseID`) VALUES
-(9,1),(9,4),(9,5),
-(10,2),(10,1),(10,5),
-(11,5),(11,7),(11,1),
-(12,4),(12,1),(12,2),
-(13,5),(13,2),(13,1),
-(14,7),(14,1),(14,2),
-(15,1),(15,2),(15,3),
-(16,7),(16,5),(16,4),
-(17,4),(17,2),(17,1),
-(18,5),(18,6),(18,7);
+(3,1),(3,2),(3,3),(3,4),(3,5),(3,6),(3,7);
