@@ -55,8 +55,6 @@ class WelcomeModel
             return null;
         }
         
-        $_SESSION['current']=$person;
-        
         return $person;
     }
         
