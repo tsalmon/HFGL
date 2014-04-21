@@ -23,14 +23,16 @@
                 foreach ($cours->parts() as $part) {
                   echo '
                 <tr>
-                  <td>'.$part->title().'</td>'
+                  <td>'.$part->title().'</td>
+                  <td>';
                   foreach($part->chapters() as $chapter){
                   echo ' 
-                  <td>
+                  
                       <a href="#">'.$chapter->title().'</a>
-                  </td>';
+                  ';
                   }
-
+                  echo '</td>';
+                }
               echo '
                 </tr>
                 <tr><td>Projet</td> <td><a href="projet_memoire.html">Sujet de projet</a></td></tr>
