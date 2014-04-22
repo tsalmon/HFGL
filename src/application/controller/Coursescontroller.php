@@ -8,7 +8,7 @@ class Coursescontroller extends Controller{
 
 		//print_r($_GET);
 		require 'application/views/_templates/header.php';
-        require 'application/views/student_view_notesDeCours.php';
+        require 'application/views/student_exercice.php';
         require 'application/views/_templates/footer.php';
 	}
 
