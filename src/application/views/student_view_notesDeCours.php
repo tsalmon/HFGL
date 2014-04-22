@@ -18,7 +18,7 @@
             </p>
         </div>
 
-        <a href="#Student/index">
+        <a href="<?php echo URL; ?>Student/">
           <p style="padding-top: 15px; display: inline">
             <span>&nbsp;</span>
             <input class="bouton"  name="name" value="Traveaux de cours" />
