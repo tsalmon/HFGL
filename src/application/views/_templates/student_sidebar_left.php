@@ -5,7 +5,7 @@
       <ul>
       		<?php
             foreach($liste_cours as $cours){
-              echo "<li>" . ($cours->title()) . "</p>";
+              echo '<li><a href="#' . ($cours->title()) . '">'.($cours->title()).'</a></p>';
       			}
       		?>
 		  </ul>

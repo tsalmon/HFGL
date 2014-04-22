@@ -21,7 +21,7 @@
       <?php
           foreach($liste_cours as $cours){
 
-            echo "<p><h1>". $cours->title(). "</h1>";
+            echo '<p><h1 id="'.$cours->title().'">'. $cours->title() .'</h1>';
             echo "<p>". $cours->description() ."</p>";
             echo "<h5>TODO: Enseignant: </h5>";
             echo "
