@@ -4,8 +4,6 @@
 
     <div id="site_content">
       
-      <?php include("_templates/student_sidebar_left.php"); ?>
-
       <div class="content">
         
         <h2>Les notes de tous les cours suivis</h2>
