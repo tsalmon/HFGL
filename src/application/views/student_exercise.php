@@ -15,6 +15,7 @@
             <h1>L'exercice de cours 1</h1>
             <p>
                <?php
+               echo 'les questions de chapitre'
                 //     foreach($questions as $question){
                 //         echo $question->getAssignment().'<br/>';
                 //         $answers = $question->getAnswers();
