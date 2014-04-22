@@ -11,10 +11,10 @@
       <nav>
         <div id="menu_container">
           <ul class="sf-menu" id="toolbar">
-              <li><a href="Student">Mes cours </a></li>
-              <li><a href="Student/Notes">Mes notes </a></li>
-              <li><a href="Student/InscrireCours">S'incrire à un cours </a></li>
-              <li><a href="Student/Parametres">Parametrès du compte   </a></li>
+              <li><a href="<?php echo URL; ?>Student/">Mes cours </a></li>
+              <li><a href="<?php echo URL; ?>Student/Notes">Mes notes </a></li>
+              <li><a href="<?php echo URL; ?>Student/InscrireCours">S'incrire à un cours </a></li>
+              <li><a href="<?php echo URL; ?>Student/Parametres">Parametrès du compte   </a></li>
               <li><a href="<?php echo URL; ?>Student/Deconnexion">Déconnexion</a></li>
           </ul>
         </div>

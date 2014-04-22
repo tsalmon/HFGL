@@ -35,9 +35,7 @@
                   <td>'.$part->title().'</td>
                   <td>';
                   foreach($part->chapters() as $chapter){
-                  echo '                   
-                      <a target="blank" href="'.URL.'Courses/?cours='.strval($cours->courseID()).'&part='.strval($part->partID()).'&chp='.strval($chapter->chapterID()).'">'.$chapter->title().'</a>
-                  ';
+                    echo '<a target="blank" href="'.URL.'Courses/?cours='.strval($cours->courseID()).'&part='.strval($part->partID()).'&chp='.strval($chapter->chapterID()).'">'.$chapter->title().'</a>';
                   }
                  
                   echo '</td>';
@@ -53,10 +51,10 @@
               </p>
 
               <p style="padding-top: 15px; display: inline"><span>&nbsp;</span>
-              <input class="bouton" type="submit" name="name" value="Notes de cours"/>
-              </p>              
+              </p>
               </p>'; 
-            }            
+            /*<input class="bouton" type="submit" name="name" value="Notes de cours"/>*/
+            }
       ?>
       </div>
     </div>
