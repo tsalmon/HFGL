@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Dim 20 Avril 2014 à 19:20
+-- Généré le: Mar 22 Avril 2014 à 10:37
 -- Version du serveur: 5.5.33
 -- Version de PHP: 5.5.3
 
@@ -28,7 +28,17 @@ CREATE TABLE `Chapter` (
   `questionnaireID` int(11) DEFAULT NULL,
   PRIMARY KEY (`chapterID`),
   KEY `fk_Chapter_Questionnaire_1` (`questionnaireID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Contenu de la table `Chapter`
+--
+
+INSERT INTO `Chapter` (`chapterID`, `chapterNumber`, `title`, `URL`, `questionnaireID`) VALUES
+(1, 1, 'Introduction to C++', 'http:://www.google.com', 1),
+(2, 2, 'Classes', 'http:://www.google.com', 1),
+(3, 3, 'Templates', 'http:://www.google.com', 1),
+(4, 4, 'Shared pointers', 'http:://www.google.com', 1);
 
 -- --------------------------------------------------------
 
@@ -42,6 +52,16 @@ CREATE TABLE `Chapters` (
   KEY `fk_Chapter_Chapters_1` (`chapterID`),
   KEY `fk_Chapters_Part_1` (`partID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `Chapters`
+--
+
+INSERT INTO `Chapters` (`chapterID`, `partID`) VALUES
+(1, 1),
+(2, 2),
+(3, 2),
+(4, 2);
 
 -- --------------------------------------------------------
 
@@ -105,36 +125,13 @@ CREATE TABLE `Inscription` (
 --
 
 INSERT INTO `Inscription` (`studentID`, `courseID`, `date`) VALUES
-(9, 1, '2014-04-20 14:24:57'),
-(9, 4, '2014-04-20 14:24:57'),
-(9, 5, '2014-04-20 14:24:57'),
-(10, 2, '2014-04-20 14:24:57'),
-(10, 1, '2014-04-20 14:24:57'),
-(10, 5, '2014-04-20 14:24:57'),
-(11, 5, '2014-04-20 14:24:57'),
-(11, 7, '2014-04-20 14:24:57'),
-(11, 1, '2014-04-20 14:24:57'),
-(12, 4, '2014-04-20 14:24:57'),
-(12, 1, '2014-04-20 14:24:57'),
-(12, 2, '2014-04-20 14:24:57'),
-(13, 5, '2014-04-20 14:24:57'),
-(13, 2, '2014-04-20 14:24:57'),
-(13, 1, '2014-04-20 14:24:57'),
-(14, 7, '2014-04-20 14:24:57'),
-(14, 1, '2014-04-20 14:24:57'),
-(14, 2, '2014-04-20 14:24:57'),
-(15, 1, '2014-04-20 14:24:57'),
-(15, 2, '2014-04-20 14:24:57'),
-(15, 3, '2014-04-20 14:24:57'),
-(16, 7, '2014-04-20 14:24:57'),
-(16, 5, '2014-04-20 14:24:57'),
-(16, 4, '2014-04-20 14:24:57'),
-(17, 4, '2014-04-20 14:24:57'),
-(17, 2, '2014-04-20 14:24:57'),
-(17, 1, '2014-04-20 14:24:57'),
-(18, 5, '2014-04-20 14:24:57'),
-(18, 6, '2014-04-20 14:24:57'),
-(18, 7, '2014-04-20 14:24:57');
+(3, 1, '2014-04-21 21:14:08'),
+(3, 2, '2014-04-21 21:14:08'),
+(3, 3, '2014-04-21 21:14:08'),
+(3, 4, '2014-04-21 21:14:08'),
+(3, 5, '2014-04-21 21:14:08'),
+(3, 6, '2014-04-21 21:14:08'),
+(3, 7, '2014-04-21 21:14:08');
 
 -- --------------------------------------------------------
 
@@ -148,7 +145,16 @@ CREATE TABLE `Part` (
   `questionnaireID` int(11) DEFAULT NULL,
   PRIMARY KEY (`partID`),
   KEY `fk_Part_Questionnaire_1` (`questionnaireID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Contenu de la table `Part`
+--
+
+INSERT INTO `Part` (`partID`, `title`, `questionnaireID`) VALUES
+(1, 'Introduction', 1),
+(2, 'Main part', 1),
+(3, 'Advanced chapters', 1);
 
 -- --------------------------------------------------------
 
@@ -162,6 +168,15 @@ CREATE TABLE `Parts` (
   KEY `fk_Parts_Part_1` (`partID`),
   KEY `fk_Parts_Course_1` (`courseID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `Parts`
+--
+
+INSERT INTO `Parts` (`partID`, `courseID`) VALUES
+(1, 1),
+(2, 1),
+(3, 1);
 
 -- --------------------------------------------------------
 
@@ -178,32 +193,16 @@ CREATE TABLE `Person` (
   `password` varchar(255) NOT NULL,
   PRIMARY KEY (`personID`),
   KEY `fk_Person_Role_1` (`roleID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Contenu de la table `Person`
 --
 
 INSERT INTO `Person` (`personID`, `roleID`, `name`, `surname`, `email`, `password`) VALUES
-(1, 2, 'thomas', 'salmon', 'thtttt', 'toto'),
+(1, 1, 'Olivier', 'Alphand', 'Olivier.Alphand@afk.com', 'lemotdepasse1'),
 (2, 2, 'Karine', 'Altisen', 'Karine.Altisen@afk.com', 'lemotdepasse2'),
-(3, 2, 'Andrzej', 'Duda', 'Andrzej.Duda@afk.com', 'lemotdepasse3'),
-(4, 2, 'Pierre', 'Etore', 'Pierre.Etore@afk.com', 'lemotdepasse4'),
-(5, 2, 'Nils', 'Gesbert', 'Nils.Gesbert@afk.com', 'lemotdepasse5'),
-(6, 2, 'Joseph', 'Staline', 'Joseph.Staline@kgb.ussr', 'lemotdepasse6'),
-(7, 2, 'Guillaume', 'James', 'Guillaume.James@afk.com', 'lemotdepasse7'),
-(8, 2, 'Xavier', 'Nicollin', 'Xavier.Nicollin@afk.com', 'lemotdepasse8'),
-(9, 1, 'thomas', 'salmon', 'th_s@hotmail.fr', 'toto'),
-(10, 3, 'Emil', 'Siriwardane', 'Emil.Siriwardane@afk.com', 'lemotdepasse10'),
-(11, 3, 'James', 'Albertus', 'James.Albertus@afk.com', 'lemotdepasse11'),
-(12, 3, 'Matteo', 'Crosignani', 'Matteo.Crosignani@afk.com', 'lemotdepasse12'),
-(13, 3, 'Mohsan', 'Bilal', 'Mohsan.Bilal@afk.com', 'lemotdepasse13'),
-(14, 3, 'Suzanne', 'Chang', 'Suzanne.Chang@afk.com', 'lemotdepasse14'),
-(15, 3, 'Markus', 'Sihvonen', 'Markus.Sihvonen@afk.com', 'lemotdepasse15'),
-(16, 3, 'Katherine', 'Waldock', 'Katherine.Waldock@afk.com', 'lemotdepasse16'),
-(17, 3, 'Vadim', 'Elenev', 'Vadim.Elenev@afk.com', 'lemotdepasse17'),
-(18, 3, 'Adriana', 'Alfaro', 'Adriana.Alfaro@afk.com', 'lemotdepasse18'),
-(19, 1, 'Admin', '', 'Admin@afk.com', 'lemotdepasse');
+(3, 3, 'Andrzej', 'Duda', 'Andrzej.Duda@afk.com', 'lemotdepasse3');
 
 -- --------------------------------------------------------
 
@@ -270,7 +269,7 @@ CREATE TABLE `Questionnaire` (
 --
 
 INSERT INTO `Questionnaire` (`questionnaireID`, `questionnaireType`, `deadline`, `available`) VALUES
-(1, 1, '2015-01-01', '2014-04-20');
+(1, 1, '2015-01-01', '2014-04-21');
 
 -- --------------------------------------------------------
 
@@ -464,15 +463,15 @@ CREATE TABLE `Student` (
 
 INSERT INTO `Student` (`personID`, `studentID`, `NSE`) VALUES
 (10, 2, 0),
-(11, 3, 0),
+(3, 3, 0),
 (12, 4, 0),
 (13, 5, 0),
 (14, 6, 0),
 (15, 7, 0),
 (16, 8, 0),
-(9, 9, 0),
+(17, 9, 0),
 (18, 10, 0),
-(20, 11, 12);
+(20, 11, 0);
 
 -- --------------------------------------------------------
 
@@ -492,13 +491,13 @@ CREATE TABLE `Teaching` (
 --
 
 INSERT INTO `Teaching` (`tutorID`, `courseID`) VALUES
-(1, 1),
+(2, 1),
 (2, 2),
-(3, 3),
-(4, 4),
-(5, 5),
-(6, 6),
-(7, 7);
+(2, 3),
+(2, 4),
+(2, 5),
+(2, 6),
+(2, 7);
 
 -- --------------------------------------------------------
 
