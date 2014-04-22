@@ -1,3 +1,12 @@
+<?php
+/* 
+  memo:
+  dans le tableaux de chapitres
+  les documents ce sont les exercices (TP/Examens/Projets)
+  et dans notes de cours: le cours de la matiere
+*/
+?>
+
 <!--index fichier d'etudiant-->
 
 <div id="main">
@@ -38,17 +47,14 @@
                 <tr><td>Projet</td> <td><a href="projet_memoire.html">Sujet de projet</a></td></tr>
                 <tr><td>Examen</td> <td><a href="#">Feuille d examen</a></td></tr>
               </table>
-              ';
-             
-              echo '
+
               <p style="padding-top: 15px; display: inline"><span>&nbsp;</span>
-              <input class="bouton" type="submit" name="name" value="Se desinscrire de ce cours" />
+              <a class="bouton" href="'.URL.'Courses/desinscription/?cours='.strval($cours->courseID()).'" name="name">Se desinscrire de ce cours</a>
               </p>
-              <a href="Student/NotesDeCours">
+
               <p style="padding-top: 15px; display: inline"><span>&nbsp;</span>
               <input class="bouton" type="submit" name="name" value="Notes de cours"/>
-              </p>
-              </a>
+              </p>              
               </p>'; 
             }            
       ?>
