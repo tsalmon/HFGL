@@ -32,7 +32,6 @@ class WelcomeModel
         if($person->password()!=$pwd){
             return null;
         }
-                
         return $person;
     }
         

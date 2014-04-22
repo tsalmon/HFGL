@@ -22,22 +22,22 @@ class Student extends Person implements Corrector {
             $this->friendFactory();  //Si ce n'est pas la factory qui a fait l'appel, NUKE.
             $this->db=  PDOHelper::getInstance();   
             if($exists==true){
-                $fetch = $this->getDBEntry($mail, "Student"); 
+                $fetch = $this->getDBEntry($mail, 3); 
                 if($fetch==null){
                     throw new UnexpectedValueException("Utilisateur non existant");
                 }
                 else{ 
                     $this->initiateMembers($fetch);
-                    $this->studentID=$fetch['studentID'];
-                    $this->nse=$fetch['NSE'];
+                    $this->studentID=$fetch['personID'];
+                    // $this->nse=$fetch['NSE'];
                 }
             }
             else {
                 if($this->mailExists($mail)){
                     throw new UnexpectedValueException("Utilisateur existant");
                 }
-                $lastid=$this->createEntry($mail);
-                $this->db->exec("INSERT INTO Student (personID) VALUES (".$lastid.");");   
+                $lastid=$this->createEntry($mail,3);
+                // $this->db->exec("INSERT INTO Person (personID) VALUES (".$lastid.");");   
                 $this->studentID=$this->db->lastInsertId();       
             }
         }

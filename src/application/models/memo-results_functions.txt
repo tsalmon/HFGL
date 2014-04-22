@@ -1,0 +1,33 @@
+SUBSCRIPTION
+
+getcours
+
+Course Object ( 
+	[courseID:protected] => 4 
+	[title:protected] => Philosophy 
+	[description:protected] => 
+		This course will introduce you to some of the most important areas of research in contemporary philosophy. Each week a different philosopher will talk you through some of the most important questions and issues in their area of expertise. 
+	[finalExam:protected] => 
+	[parts:protected] => Array ( ) 
+	[db:protected] => PDO Object ( ) 
+)
+
+courses->parts
+
+Array ( 
+	[0] => Part Object ( 
+		[partID:protected] => 1 
+		[exam:protected] => 
+			ExerciseSheet Object ( 
+				[deadline:ExerciseSheet:private] => 
+				[available:ExerciseSheet:private] => 
+				[questionnaireID:ExerciseSheet:private] => 
+				[questionnaireType:ExerciseSheet:private] => 
+				[questions:ExerciseSheet:private] => 
+				[db:ExerciseSheet:private] => PDO Object ( ) 
+			) 
+		[title:protected] => glouton 
+		[chapters:protected] => Array ( ) 
+		[db:protected] => PDO Object ( ) 
+	) 
+)

@@ -22,7 +22,7 @@ class Chapter {
         public function __construct($id, $exists=true){  
             $this->db=PDOHelper::getInstance();            
             if($exists==true){
-                $res = $this->db->query("SELECT * FROM chapter WHERE `chapterID`=".$id.";");
+                $res = $this->db->query("SELECT * FROM Chapter WHERE `chapterID`=".$id.";");
                 $fetch = $res->fetch(PDO::FETCH_ASSOC);     
                 if($fetch==null){
                     throw new UnexpectedValueException("Chapitre non existant");
