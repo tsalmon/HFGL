@@ -23,10 +23,10 @@ class CourseSubstcription {
         CourseSubstcription::$courses=array();
         CourseSubstcription::$persons=array();   
         
-        $res=CourseSubstcription::$db->query("SELECT studentID, `email` FROM Student JOIN Person on Person.personID=Student.personID");
+        $res=CourseSubstcription::$db->query("SELECT personID, `email` FROM Person where Person.roleID = 3");
         $fetch = $res->fetchAll(PDO::FETCH_ASSOC);
         foreach($fetch as $entry){
-            CourseSubstcription::$persons[$entry['studentID']]=array($entry['email']);
+            CourseSubstcription::$persons[$entry['personID']]=array($entry['email']);
         }
         
         $res=CourseSubstcription::$db->query("SELECT courseID, `title` FROM Course");

@@ -31,6 +31,7 @@
                       <a href="#">'.$chapter->title().'</a>
                   ';
                   }
+                 
                   echo '</td>';
                 }
               echo '
@@ -51,7 +52,6 @@
               </a>
               </p>'; 
             }            
-        }
       ?>
       </div>
     </div>

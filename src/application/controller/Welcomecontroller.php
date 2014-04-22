@@ -68,7 +68,7 @@ class Welcomecontroller extends Controller
             }
             $page = "inscription_failed";
             require 'application/views/_templates/header.php';
-            require 'application/views/Inscription.php';       
+            require 'application/views/inscription.php';       
             require 'application/views/_templates/footer.php';        
         } else {
             $inscription_model->addPerson($_POST["inscr_firstname"],$_POST["inscr_surname"], $_POST["inscr_pwd"], $_POST["inscr_mail"]);

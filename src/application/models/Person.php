@@ -32,8 +32,8 @@ abstract class Person{
         }
         
         //$table est le nom de la table associée à la classe fille
-        protected function getDBEntry($mail,$table){    
-            $res = $this->db->query("SELECT * FROM (Person JOIN ".$table." ON Person.personID = ".$table.".personID) WHERE `email`='".$mail."';");
+        protected function getDBEntry($mail,$role){    
+            $res = $this->db->query("SELECT * FROM Person WHERE email='".$mail."' and roleID=".$role);
             $fetch = $res->fetch(PDO::FETCH_ASSOC);            
             return $fetch;
         }
@@ -51,8 +51,8 @@ abstract class Person{
         
         //Créé une nouvelle personne en BDD à partir de son mail
         
-        protected function createEntry($mail){     
-                $this->db->exec("INSERT INTO Person ( `email`) VALUES ('".$mail."');");
+        protected function createEntry($mail, $role){     
+                $this->db->exec("INSERT INTO Person ( `roleID`,`email`) VALUES ('".$role.",".$mail."');");
                 $this->email=$mail;
                 $this->personID=$this->db->lastInsertId();
                 return intval($this->personID);
