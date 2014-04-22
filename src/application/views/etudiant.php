@@ -26,9 +26,8 @@
                   <td>'.$part->title().'</td>
                   <td>';
                   foreach($part->chapters() as $chapter){
-                  echo ' 
-                  
-                      <a href="#">'.$chapter->title().'</a>
+                  echo '                   
+                      <a href="'.URL.'/Courses/?cours='.strval($cours->courseID()).'&part='.strval($part->partID()).'&chp='.strval($chapter->chapterID()).'">'.$chapter->title().'</a>
                   ';
                   }
                  
