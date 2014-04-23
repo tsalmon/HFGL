@@ -207,6 +207,68 @@ INSERT INTO `Person` (`personID`, `roleID`, `name`, `surname`, `email`, `passwor
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `Tutor`
+--
+
+
+CREATE TABLE `Tutor` (
+`tutorID` int NOT NULL AUTO_INCREMENT,
+`personID` int NOT NULL,
+PRIMARY KEY (`tutorID`) 
+);
+
+--
+-- Contenu de la table `Tutor`
+--
+
+INSERT INTO `Tutor`(`personID`) VALUES
+(2);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `Student`
+--
+
+CREATE TABLE `Student` (
+`personID` int NOT NULL,
+`studentID` int NOT NULL AUTO_INCREMENT,
+`NSE` int NOT NULL,
+PRIMARY KEY (`studentID`) 
+);
+
+
+--
+-- Contenu de la table `Student`
+--
+
+
+INSERT INTO `Student`(`personID`) VALUES
+(3);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `Admin`
+--
+
+CREATE TABLE `Admin` (
+`adminID` int NOT NULL AUTO_INCREMENT,
+`personID` int NOT NULL,
+PRIMARY KEY (`adminID`) 
+);
+
+--
+-- Contenu de la table `Admin`
+--
+
+INSERT INTO `Admin`(`personID`) VALUES
+(1);
+
+-- --------------------------------------------------------
+
+
+--
 -- Structure de la table `Points`
 --
 
@@ -516,112 +578,33 @@ CREATE TABLE `Test` (
 -- Contraintes pour les tables exportées
 --
 
---
--- Contraintes pour la table `Chapter`
---
-ALTER TABLE `Chapter`
-  ADD CONSTRAINT `fk_Chapter_Questionnaire_1` FOREIGN KEY (`questionnaireID`) REFERENCES `Questionnaire` (`questionnaireID`);
+ALTER TABLE `Chapters` ADD CONSTRAINT `fk_Chapter_Chapters_1` FOREIGN KEY (`chapterID`) REFERENCES `Chapter` (`chapterID`);
+ALTER TABLE `Questions` ADD CONSTRAINT `fk_Questions_Questionnaire_1` FOREIGN KEY (`questionnaireID`) REFERENCES `Questionnaire` (`questionnaireID`);
+ALTER TABLE `Points` ADD CONSTRAINT `fk_Points_Question_1` FOREIGN KEY (`questionID`) REFERENCES `Question` (`questionID`);
+ALTER TABLE `Parts` ADD CONSTRAINT `fk_Parts_Part_1` FOREIGN KEY (`partID`) REFERENCES `Part` (`partID`);
+ALTER TABLE `Parts` ADD CONSTRAINT `fk_Parts_Course_1` FOREIGN KEY (`courseID`) REFERENCES `Course` (`courseID`);
+ALTER TABLE `Points` ADD CONSTRAINT `fk_Points_Student_1` FOREIGN KEY (`studentID`) REFERENCES `Student` (`studentID`);
+ALTER TABLE `FinalNote` ADD CONSTRAINT `fk_FinalNote_Course_1` FOREIGN KEY (`courseID`) REFERENCES `Course` (`courseID`);
+ALTER TABLE `FinalNote` ADD CONSTRAINT `fk_FinalNote_Tutor_1` FOREIGN KEY (`tutorID`) REFERENCES `Tutor` (`tutorID`);
+ALTER TABLE `Teaching` ADD CONSTRAINT `fk_Teaching_Course_1` FOREIGN KEY (`courseID`) REFERENCES `Course` (`courseID`);
+ALTER TABLE `Admin` ADD CONSTRAINT `fk_Admin_Person_1` FOREIGN KEY (`adminID`) REFERENCES `Person` (`personID`);
+ALTER TABLE `Tutor` ADD CONSTRAINT `fk_Tutor_Person_1` FOREIGN KEY (`tutorID`) REFERENCES `Person` (`personID`);
+ALTER TABLE `Teaching` ADD CONSTRAINT `fk_Teaching_Tutor_1` FOREIGN KEY (`tutorID`) REFERENCES `Tutor` (`tutorID`);
+ALTER TABLE `FinalNote` ADD CONSTRAINT `fk_FinalNote_Student_1` FOREIGN KEY (`studentID`) REFERENCES `Student` (`studentID`);
+ALTER TABLE `Inscription` ADD CONSTRAINT `fk_Inscription_Student_1` FOREIGN KEY (`studentID`) REFERENCES `Student` (`studentID`);
+ALTER TABLE `Inscription` ADD CONSTRAINT `fk_Inscription_Course_1` FOREIGN KEY (`courseID`) REFERENCES `Course` (`courseID`);
+ALTER TABLE `Response` ADD CONSTRAINT `fk_Responses_Question_1` FOREIGN KEY (`questionID`) REFERENCES `Question` (`questionID`);
+ALTER TABLE `Questions` ADD CONSTRAINT `fk_Questions_Question_1` FOREIGN KEY (`questionID`) REFERENCES `Question` (`questionID`);
+ALTER TABLE `Question` ADD CONSTRAINT `fk_Question_QuestionType_1` FOREIGN KEY (`typeID`) REFERENCES `QuestionType` (`typeID`);
+ALTER TABLE `Questionnaire` ADD CONSTRAINT `fk_Questionnaire_QuestionnaireType_1` FOREIGN KEY (`questionnaireType`) REFERENCES `QuestionnaireType` (`typeID`);
+ALTER TABLE `Chapter` ADD CONSTRAINT `fk_Chapter_Questionnaire_1` FOREIGN KEY (`questionnaireID`) REFERENCES `Questionnaire` (`questionnaireID`);
+ALTER TABLE `Result` ADD CONSTRAINT `fk_Result_Questionnaire_1` FOREIGN KEY (`questionnaireID`) REFERENCES `Questionnaire` (`questionnaireID`);
+ALTER TABLE `Result` ADD CONSTRAINT `fk_Result_Student_1` FOREIGN KEY (`studentID`) REFERENCES `Student` (`studentID`);
+ALTER TABLE `Course` ADD CONSTRAINT `fk_Course_Questionnaire_1` FOREIGN KEY (`questionnaireID`) REFERENCES `Questionnaire` (`questionnaireID`);
+ALTER TABLE `Chapters` ADD CONSTRAINT `fk_Chapters_Part_1` FOREIGN KEY (`partID`) REFERENCES `Part` (`partID`);
+ALTER TABLE `Student` ADD CONSTRAINT `fk_Student_Person_1` FOREIGN KEY (`personID`) REFERENCES `Person` (`personID`);
+ALTER TABLE `Test` ADD CONSTRAINT `fk_Test_Question_1` FOREIGN KEY (`questionID`) REFERENCES `Question` (`questionID`);
+ALTER TABLE `Resource` ADD CONSTRAINT `fk_Resource_Question_1` FOREIGN KEY (`questionID`) REFERENCES `Question` (`questionID`);
+ALTER TABLE `Part` ADD CONSTRAINT `fk_Part_Questionnaire_1` FOREIGN KEY (`questionnaireID`) REFERENCES `Questionnaire` (`questionnaireID`);
+ALTER TABLE `Person` ADD CONSTRAINT `fk_Person_Role_1` FOREIGN KEY (`roleID`) REFERENCES `Role` (`roleID`);
 
---
--- Contraintes pour la table `Chapters`
---
-ALTER TABLE `Chapters`
-  ADD CONSTRAINT `fk_Chapters_Part_1` FOREIGN KEY (`partID`) REFERENCES `Part` (`partID`),
-  ADD CONSTRAINT `fk_Chapter_Chapters_1` FOREIGN KEY (`chapterID`) REFERENCES `Chapter` (`chapterID`);
-
---
--- Contraintes pour la table `Course`
---
-ALTER TABLE `Course`
-  ADD CONSTRAINT `fk_Course_Questionnaire_1` FOREIGN KEY (`questionnaireID`) REFERENCES `Questionnaire` (`questionnaireID`);
-
---
--- Contraintes pour la table `FinalNote`
---
-ALTER TABLE `FinalNote`
-  ADD CONSTRAINT `fk_FinalNote_Course_1` FOREIGN KEY (`courseID`) REFERENCES `Course` (`courseID`),
-  ADD CONSTRAINT `fk_FinalNote_Person_1` FOREIGN KEY (`studentID`) REFERENCES `Person` (`personID`),
-  ADD CONSTRAINT `fk_FinalNote_Person_2` FOREIGN KEY (`tutorID`) REFERENCES `Person` (`personID`);
-
---
--- Contraintes pour la table `Inscription`
---
-ALTER TABLE `Inscription`
-  ADD CONSTRAINT `fk_Inscription_Course_1` FOREIGN KEY (`courseID`) REFERENCES `Course` (`courseID`);
-
---
--- Contraintes pour la table `Part`
---
-ALTER TABLE `Part`
-  ADD CONSTRAINT `fk_Part_Questionnaire_1` FOREIGN KEY (`questionnaireID`) REFERENCES `Questionnaire` (`questionnaireID`);
-
---
--- Contraintes pour la table `Parts`
---
-ALTER TABLE `Parts`
-  ADD CONSTRAINT `fk_Parts_Course_1` FOREIGN KEY (`courseID`) REFERENCES `Course` (`courseID`),
-  ADD CONSTRAINT `fk_Parts_Part_1` FOREIGN KEY (`partID`) REFERENCES `Part` (`partID`);
-
---
--- Contraintes pour la table `Person`
---
-ALTER TABLE `Person`
-  ADD CONSTRAINT `fk_Person_Role_1` FOREIGN KEY (`roleID`) REFERENCES `Role` (`roleID`);
-
---
--- Contraintes pour la table `Points`
---
-ALTER TABLE `Points`
-  ADD CONSTRAINT `fk_Points_Person_1` FOREIGN KEY (`studentID`) REFERENCES `Person` (`personID`),
-  ADD CONSTRAINT `fk_Points_Question_1` FOREIGN KEY (`questionID`) REFERENCES `Question` (`questionID`);
-
---
--- Contraintes pour la table `Question`
---
-ALTER TABLE `Question`
-  ADD CONSTRAINT `fk_Question_QuestionType_1` FOREIGN KEY (`typeID`) REFERENCES `QuestionType` (`typeID`);
-
---
--- Contraintes pour la table `Questionnaire`
---
-ALTER TABLE `Questionnaire`
-  ADD CONSTRAINT `fk_Questionnaire_QuestionnaireType_1` FOREIGN KEY (`questionnaireType`) REFERENCES `QuestionnaireType` (`typeID`);
-
---
--- Contraintes pour la table `Questions`
---
-ALTER TABLE `Questions`
-  ADD CONSTRAINT `fk_Questions_Questionnaire_1` FOREIGN KEY (`questionnaireID`) REFERENCES `Questionnaire` (`questionnaireID`),
-  ADD CONSTRAINT `fk_Questions_Question_1` FOREIGN KEY (`questionID`) REFERENCES `Question` (`questionID`);
-
---
--- Contraintes pour la table `Resource`
---
-ALTER TABLE `Resource`
-  ADD CONSTRAINT `fk_Resource_Question_1` FOREIGN KEY (`questionID`) REFERENCES `Question` (`questionID`);
-
---
--- Contraintes pour la table `Response`
---
-ALTER TABLE `Response`
-  ADD CONSTRAINT `fk_Responses_Question_1` FOREIGN KEY (`questionID`) REFERENCES `Question` (`questionID`);
-
---
--- Contraintes pour la table `Result`
---
-ALTER TABLE `Result`
-  ADD CONSTRAINT `fk_Result_Person_1` FOREIGN KEY (`studentID`) REFERENCES `Person` (`personID`),
-  ADD CONSTRAINT `fk_Result_Questionnaire_1` FOREIGN KEY (`questionnaireID`) REFERENCES `Questionnaire` (`questionnaireID`);
-
---
--- Contraintes pour la table `Teaching`
---
-ALTER TABLE `Teaching`
-  ADD CONSTRAINT `fk_Teaching_Course_1` FOREIGN KEY (`courseID`) REFERENCES `Course` (`courseID`),
-  ADD CONSTRAINT `fk_Teaching_Person_1` FOREIGN KEY (`tutorID`) REFERENCES `Person` (`personID`);
-
---
--- Contraintes pour la table `Test`
---
-ALTER TABLE `Test`
-  ADD CONSTRAINT `fk_Test_Question_1` FOREIGN KEY (`questionID`) REFERENCES `Question` (`questionID`);
