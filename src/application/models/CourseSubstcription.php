@@ -118,7 +118,7 @@ class CourseSubstcription {
         }
     }
     
-    public static function remove($student,$course){       
+    public static function remove($student,$course){ 
         $indice=array_search($student->studentID(), CourseSubstcription::$courses[$course->courseID()]);
         array_splice(CourseSubstcription::$courses[$course->courseID()],$indice,1);
         $indice=array_search($course->courseID(), CourseSubstcription::$persons[$student->studentID()]);

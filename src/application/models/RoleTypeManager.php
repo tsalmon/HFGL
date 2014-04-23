@@ -42,7 +42,7 @@ class RoleTypeManager extends TypeManager{
         {
             $this->student = getIdForTypeName(student);
         }
-        return "'".$this->student."'";
+        return $this->student;
     }
 
     public function getAdminID()
@@ -51,7 +51,7 @@ class RoleTypeManager extends TypeManager{
         {
             $this->admin = getIdForTypeName(admin);
         }
-        return "'".$this->admin."'";
+        return $this->admin;
     }
 
     public function getTutorID()
@@ -60,8 +60,6 @@ class RoleTypeManager extends TypeManager{
         {
             $this->tutor = getIdForTypeName(tutor);
         }
-        return "'".$this->tutor."'";
+        return $this->tutor;
     }
-
-
 } 

@@ -9,21 +9,23 @@ class Professor extends Person implements Corrector{
     //**********************
     
         public $tutorID;
+        public $roleID;
         public $iam_professor; //use to recognize person as professor
 
     //      Constructeur
     //***********************
         
-        public function __construct($mail, $exists=true){    
+        public function __construct($mail, $exists=true){
             $this->db=  PDOHelper::getInstance();
             if($exists==true){
-                $fetch = $this->getDBEntry($mail, "2");
+                $fetch = $this->getDBEntry($mail, 2);
                 if($fetch==null){
                     throw new UnexpectedValueException("Utilisateur non existant");
                 }
                 else{
                     $this->initiateMembers($fetch);
                     $this->tutorID=$fetch['personID'];
+                    $this->roleID=$fetch['roleID'];
                 }
             }
             else {
@@ -42,6 +44,10 @@ class Professor extends Person implements Corrector{
         
         public function tutorID(){  
             return $this->tutorID;          
+        }
+
+        public function roleID(){  
+            return $this->roleID;          
         }
         
         public function getCourses(){
