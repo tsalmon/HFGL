@@ -26,7 +26,7 @@ class Chapter {
                 $fetch = $res->fetch(PDO::FETCH_ASSOC);     
                 if($fetch==null){
                     throw new UnexpectedValueException("Chapitre non existant");
-                }
+                }   
                 else{     
                     $this->chapterID=$id; 
                     if(isset($fetch['questionnaireID'])){
