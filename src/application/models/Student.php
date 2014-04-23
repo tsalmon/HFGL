@@ -9,7 +9,7 @@ class Student extends Person implements Corrector {
     //**********************
     
         protected $studentID;
-        protected $nse;
+        protected $roleID;
         public $iam_student; //use to recognize person as student
 
     //      Constructeur
@@ -29,6 +29,7 @@ class Student extends Person implements Corrector {
                 else{ 
                     $this->initiateMembers($fetch);
                     $this->studentID=$fetch['personID'];
+                    $this->roleID=$fetch['roleID'];
                     // $this->nse=$fetch['NSE'];
                 }
             }
@@ -50,8 +51,8 @@ class Student extends Person implements Corrector {
             return $this->studentID;          
         }
         
-        public function nse(){    
-            return $this->nse;        
+        public function roleID(){    
+            return $this->roleID;        
         }
          
         public function setNse($n){     
