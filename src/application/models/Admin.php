@@ -7,7 +7,7 @@ class Admin extends Person{
     //**********************
     
         protected $adminID;
-
+        public $iam_admin; //use to recognize person as admin
 
     //      Constructeur
     //***********************
