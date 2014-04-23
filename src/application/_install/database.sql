@@ -8,20 +8,18 @@ CREATE TABLE `Person` (
 PRIMARY KEY (`personID`) 
 );
 
-CREATE TABLE IF NOT EXISTS `Student` (
-  `personID` int(11) NOT NULL,
-  `studentID` int(11) NOT NULL AUTO_INCREMENT,
-  `NSE` int(11) NOT NULL,
-  PRIMARY KEY (`studentID`),
-  KEY `fk_Student_Person_1` (`personID`)
-);
-
 CREATE TABLE `Course` (
 `courseID` int NOT NULL AUTO_INCREMENT,
 `title` varchar(255) NOT NULL,
 `description` varchar(2000) NULL,
 `questionnaireID` int NULL,
 PRIMARY KEY (`courseID`) 
+);
+
+CREATE TABLE `Tutor` (
+`tutorID` int NOT NULL AUTO_INCREMENT,
+`personID` int NOT NULL,
+PRIMARY KEY (`tutorID`) 
 );
 
 CREATE TABLE `Inscription` (
@@ -69,7 +67,7 @@ PRIMARY KEY (`questionID`)
 CREATE TABLE `Response` (
 `questionID` int NOT NULL,
 `content` varchar(2000) NOT NULL,
-`correct` bit(1) NULL
+`correct` tinyint(1) NULL
 );
 
 CREATE TABLE `Points` (
@@ -93,6 +91,19 @@ CREATE TABLE `FinalNote` (
 `courseID` int NOT NULL,
 `tutorID` int NOT NULL,
 `note` decimal NOT NULL
+);
+
+CREATE TABLE `Student` (
+`personID` int NOT NULL,
+`studentID` int NOT NULL AUTO_INCREMENT,
+`NSE` int NOT NULL,
+PRIMARY KEY (`studentID`) 
+);
+
+CREATE TABLE `Admin` (
+`adminID` int NOT NULL AUTO_INCREMENT,
+`personID` int NOT NULL,
+PRIMARY KEY (`adminID`) 
 );
 
 CREATE TABLE `Part` (
@@ -148,8 +159,15 @@ ALTER TABLE `Questions` ADD CONSTRAINT `fk_Questions_Questionnaire_1` FOREIGN KE
 ALTER TABLE `Points` ADD CONSTRAINT `fk_Points_Question_1` FOREIGN KEY (`questionID`) REFERENCES `Question` (`questionID`);
 ALTER TABLE `Parts` ADD CONSTRAINT `fk_Parts_Part_1` FOREIGN KEY (`partID`) REFERENCES `Part` (`partID`);
 ALTER TABLE `Parts` ADD CONSTRAINT `fk_Parts_Course_1` FOREIGN KEY (`courseID`) REFERENCES `Course` (`courseID`);
+ALTER TABLE `Points` ADD CONSTRAINT `fk_Points_Student_1` FOREIGN KEY (`studentID`) REFERENCES `Student` (`studentID`);
 ALTER TABLE `FinalNote` ADD CONSTRAINT `fk_FinalNote_Course_1` FOREIGN KEY (`courseID`) REFERENCES `Course` (`courseID`);
+ALTER TABLE `FinalNote` ADD CONSTRAINT `fk_FinalNote_Tutor_1` FOREIGN KEY (`tutorID`) REFERENCES `Tutor` (`tutorID`);
 ALTER TABLE `Teaching` ADD CONSTRAINT `fk_Teaching_Course_1` FOREIGN KEY (`courseID`) REFERENCES `Course` (`courseID`);
+ALTER TABLE `Admin` ADD CONSTRAINT `fk_Admin_Person_1` FOREIGN KEY (`adminID`) REFERENCES `Person` (`personID`);
+ALTER TABLE `Tutor` ADD CONSTRAINT `fk_Tutor_Person_1` FOREIGN KEY (`tutorID`) REFERENCES `Person` (`personID`);
+ALTER TABLE `Teaching` ADD CONSTRAINT `fk_Teaching_Tutor_1` FOREIGN KEY (`tutorID`) REFERENCES `Tutor` (`tutorID`);
+ALTER TABLE `FinalNote` ADD CONSTRAINT `fk_FinalNote_Student_1` FOREIGN KEY (`studentID`) REFERENCES `Student` (`studentID`);
+ALTER TABLE `Inscription` ADD CONSTRAINT `fk_Inscription_Student_1` FOREIGN KEY (`studentID`) REFERENCES `Student` (`studentID`);
 ALTER TABLE `Inscription` ADD CONSTRAINT `fk_Inscription_Course_1` FOREIGN KEY (`courseID`) REFERENCES `Course` (`courseID`);
 ALTER TABLE `Response` ADD CONSTRAINT `fk_Responses_Question_1` FOREIGN KEY (`questionID`) REFERENCES `Question` (`questionID`);
 ALTER TABLE `Questions` ADD CONSTRAINT `fk_Questions_Question_1` FOREIGN KEY (`questionID`) REFERENCES `Question` (`questionID`);
@@ -157,15 +175,12 @@ ALTER TABLE `Question` ADD CONSTRAINT `fk_Question_QuestionType_1` FOREIGN KEY (
 ALTER TABLE `Questionnaire` ADD CONSTRAINT `fk_Questionnaire_QuestionnaireType_1` FOREIGN KEY (`questionnaireType`) REFERENCES `QuestionnaireType` (`typeID`);
 ALTER TABLE `Chapter` ADD CONSTRAINT `fk_Chapter_Questionnaire_1` FOREIGN KEY (`questionnaireID`) REFERENCES `Questionnaire` (`questionnaireID`);
 ALTER TABLE `Result` ADD CONSTRAINT `fk_Result_Questionnaire_1` FOREIGN KEY (`questionnaireID`) REFERENCES `Questionnaire` (`questionnaireID`);
+ALTER TABLE `Result` ADD CONSTRAINT `fk_Result_Student_1` FOREIGN KEY (`studentID`) REFERENCES `Student` (`studentID`);
 ALTER TABLE `Course` ADD CONSTRAINT `fk_Course_Questionnaire_1` FOREIGN KEY (`questionnaireID`) REFERENCES `Questionnaire` (`questionnaireID`);
 ALTER TABLE `Chapters` ADD CONSTRAINT `fk_Chapters_Part_1` FOREIGN KEY (`partID`) REFERENCES `Part` (`partID`);
+ALTER TABLE `Student` ADD CONSTRAINT `fk_Student_Person_1` FOREIGN KEY (`personID`) REFERENCES `Person` (`personID`);
 ALTER TABLE `Test` ADD CONSTRAINT `fk_Test_Question_1` FOREIGN KEY (`questionID`) REFERENCES `Question` (`questionID`);
 ALTER TABLE `Resource` ADD CONSTRAINT `fk_Resource_Question_1` FOREIGN KEY (`questionID`) REFERENCES `Question` (`questionID`);
 ALTER TABLE `Part` ADD CONSTRAINT `fk_Part_Questionnaire_1` FOREIGN KEY (`questionnaireID`) REFERENCES `Questionnaire` (`questionnaireID`);
 ALTER TABLE `Person` ADD CONSTRAINT `fk_Person_Role_1` FOREIGN KEY (`roleID`) REFERENCES `Role` (`roleID`);
-ALTER TABLE `Points` ADD CONSTRAINT `fk_Points_Person_1` FOREIGN KEY (`studentID`) REFERENCES `Person` (`personID`);
-ALTER TABLE `Result` ADD CONSTRAINT `fk_Result_Person_1` FOREIGN KEY (`studentID`) REFERENCES `Person` (`personID`);
-ALTER TABLE `Teaching` ADD CONSTRAINT `fk_Teaching_Person_1` FOREIGN KEY (`tutorID`) REFERENCES `Person` (`personID`);
-ALTER TABLE `FinalNote` ADD CONSTRAINT `fk_FinalNote_Person_1` FOREIGN KEY (`studentID`) REFERENCES `Person` (`personID`);
-ALTER TABLE `FinalNote` ADD CONSTRAINT `fk_FinalNote_Person_2` FOREIGN KEY (`tutorID`) REFERENCES `Person` (`personID`);
 

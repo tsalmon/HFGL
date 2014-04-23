@@ -28,7 +28,7 @@ class Exercicecontroller extends Controller{
 
     public function Exercice_result()
     {
-        // $page = "exercice";
+        $page = "exercice";
         foreach ($_POST as $key => $value) {
             echo "<script type='text/javascript'>alert('".$key." => ".$value."');</script>";
         }

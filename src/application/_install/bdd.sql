@@ -364,7 +364,7 @@ CREATE TABLE `Resource` (
 CREATE TABLE `Response` (
   `questionID` int(11) NOT NULL,
   `content` varchar(2000) NOT NULL,
-  `correct` bit(1) DEFAULT NULL,
+  `correct` tinyint(1) DEFAULT NULL,
   KEY `fk_Responses_Question_1` (`questionID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -372,39 +372,39 @@ CREATE TABLE `Response` (
 -- Contenu de la table `Response`
 --
 
-INSERT INTO `Response` (`questionID`, `content`, `correct`) VALUES
-(1, 'here()', '\0'),
-(1, 'main()', ''),
-(1, 'start()', '\0'),
-(1, 'begin()', '\0'),
-(2, 'Increment', ''),
-(2, 'Decrement', '\0'),
-(2, 'Assigning', '\0'),
-(2, 'Overloading', '\0'),
-(3, 'Value of anther Value', '\0'),
-(3, 'Value of anther variable', '\0'),
-(3, 'Address of another value', '\0'),
-(3, 'Address of another variable', ''),
-(4, 'Single Dimensional', '\0'),
-(4, 'Multi Dimensional', '\0'),
-(4, 'Non Dimensional', '\0'),
-(4, 'A & B', ''),
-(5, 'Null value', '\0'),
-(5, 'Null String', '\0'),
-(5, 'Garbage value', ''),
-(5, 'zero value', '\0'),
-(6, 'fprintf()', '\0'),
-(6, 'printf()', ''),
-(6, 'fclose()', '\0'),
-(6, 'fopen()', '\0'),
-(7, 'No operand', '\0'),
-(7, 'One operand', '\0'),
-(7, 'Two operand', ''),
-(7, 'Three operand', '\0'),
-(8, 'Friend Function', '\0'),
-(8, 'Virtual Function', '\0'),
-(8, 'Recursive Function', ''),
-(8, 'Overloading Function', '\0');
+INSERT INTO `Response`(`questionID`, `content`,`correct`) VALUES
+(1,'here()',0),
+(1,'main()',1),
+(1,'start()',0),
+(1,'begin()',0),
+(2,'Increment',1),
+(2,'Decrement',0),
+(2,'Assigning',0),
+(2,'Overloading',0),
+(3,'Value of anther Value',0),
+(3,'Value of anther variable',0),
+(3,'Address of another value',0),
+(3,'Address of another variable',1),
+(4,'Single Dimensional',0),
+(4,'Multi Dimensional',0),
+(4,'Non Dimensional',0),
+(4,'A & B',1),
+(5,'Null value',0),
+(5,'Null String',0),
+(5,'Garbage value',1),
+(5,'zero value',0),
+(6,'fprintf()',0),
+(6,'printf()',1),
+(6,'fclose()',0),
+(6,'fopen()',0),
+(7,'No operand',0),
+(7,'One operand',0),
+(7,'Two operand',1),
+(7,'Three operand',0),
+(8,'Friend Function',0),
+(8,'Virtual Function',0),
+(8,'Recursive Function',1),
+(8,'Overloading Function',0);
 
 -- --------------------------------------------------------
 
