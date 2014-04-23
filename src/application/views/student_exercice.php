@@ -17,7 +17,7 @@
                $question = $questions[0];
                echo $question->getAssignment().'<br/>';
                $answers = $question->getAnswers();
-               echo '<form action="Exercice_result" method="POST">';
+               echo '<form action="'.URL."Exercice/Exercice_result".'" method="POST">';
                foreach($answers as $answer) {
                 if($question instanceof QCMQuestion)
                 {
