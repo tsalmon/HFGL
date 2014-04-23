@@ -4,11 +4,11 @@ class Exercicecontroller extends Controller{
 
     public function index()
     {
-        $this->exerciseSheetModel = $this->loadModel('ExerciseSheet');
+        $this->exerciseSheetModel = $this->loadModel('ExerciceSheet');
         $this->exerciseSheetModel->loadByID(1);
         $questions = $this->exerciseSheetModel->getQuestions();
         require 'application/views/_templates/header.php';
-        require 'application/views/exercise.php';
+        require 'application/views/exercice.php';
         require 'application/views/_templates/footer.php';
     }
 
@@ -25,4 +25,12 @@ class Exercicecontroller extends Controller{
 		require 'application/views/_templates/header.php';
         require 'application/views/_templates/footer.php';
 	}
+
+    public function Exercice_result()
+    {
+        // $page = "exercice";
+        foreach ($_POST as $key => $value) {
+            echo "<script type='text/javascript'>alert('".$key." => ".$value."');</script>";
+        }
+    }
 }

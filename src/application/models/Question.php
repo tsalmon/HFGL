@@ -31,6 +31,10 @@ abstract class Question {
         return $this->tip;
     }
 
+    public function getID(){
+        return $this->questionID;
+    }
+
     /* Abstract methods */
     abstract protected  function writeToDB();
     abstract protected  function loadByID($questionID);
