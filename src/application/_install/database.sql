@@ -39,6 +39,7 @@ CREATE TABLE `Chapter` (
 `title` varchar(255) NULL,
 `URL` varchar(1000) NULL,
 `questionnaireID` int NULL,
+`description` varchar(2000) NULL,
 PRIMARY KEY (`chapterID`) 
 );
 
