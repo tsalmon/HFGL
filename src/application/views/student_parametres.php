@@ -1,5 +1,3 @@
-// Parametre du compte d'etudiant
-
 <div id="main">
 
     <?php include("_templates/nav_etudiant.php"); ?>
@@ -12,27 +10,24 @@
 
         <h1>Paramètre du compte</h1>
 
-        <form action="#" method="post">
+         <?php echo '<form action="'.URL."Student/Parametres_result".'" method="POST">'; ?>
           <div class="form_settings">
-            <p><span>Nom</span><input type="text" name="name" value="" /></p>
-            <p><span>Prénom</span><input type="text" name="name" value="" /></p>
-            <p><span>Email</span><input type="text" name="email" value="" /></p>
+            <p><span>Nom</span><input type="text" name="name" value=<?php echo("\"".$infos->name()."\""); ?> required/></p>
+            <p><span>Prénom</span><input type="text" name="surname" value=<?php echo("\"".$infos->surname()."\""); ?> required/></p>
+            <p><span>Email</span><input type="text" name="email" value=<?php echo("\"".$infos->email()."\""); ?> required/></p>
           </div>
+          <p><input type="submit" class="bouton" value="changer parametre du compte"/></p>
         </form>
 
         <h3>Modifier le mot de passe</h3>
         
-        <form action="#" method="post">
+         <?php echo '<form action="'.URL."Student/ParametresPWD_result".'" method="POST">'; ?>
           <div class="form_settings">
-
-            <p><span>Ancien mot de passe</span><input type="password" name="password" value="" /></p>
-            <p><span>Nouveau mot de passe</span><input type="password" name="password" value="" /></p>
-            <p><span>Confirmer nouveau mot de passe</span><input type="password" name="password" value="" /></p>
-            
-        
-            <button type="button" class = "bouton">Modifier le mot de passe</button> 
-
+            <p><span>Ancien mot de passe</span><input type="password" name="old_password" value="" /></p>
+            <p><span>Nouveau mot de passe</span><input type="password" name="new_password" value="" /></p>
+            <p><span>Confirmer nouveau mot de passe</span><input type="password" name="confirm_password" value="" /></p>          
           </div>
+          <p><input type="submit" class="bouton" value="changer mot de passe"/></p>
         </form>
 
         
