@@ -16,7 +16,7 @@ define('L',4);
 define('Examen', 1);    
 define('TP', 4);
 
-class ExerciseSheet extends Document{
+class ExerciceSheet extends Document{
 
     private $deadline;
     private $available;
