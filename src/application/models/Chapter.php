@@ -1,6 +1,6 @@
 <?php
 
-require_once 'ExerciseSheet.php';
+require_once 'ExerciceSheet.php';
 require_once 'CourseNote.php';
 require_once 'Part.php';
 class Chapter {
