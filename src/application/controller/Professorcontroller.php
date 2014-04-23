@@ -64,4 +64,11 @@ class Professorcontroller extends Controller{
     public function DesincrireCours(){
     }
 
+    public function Deconnexion(){
+        if(session_destroy()){
+            header('location: '.URL.'Welcome');
+        } else {
+            header('location: '.URL.'Professor');
+        }
+    }
 }
