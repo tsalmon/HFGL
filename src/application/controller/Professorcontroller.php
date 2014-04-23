@@ -1,6 +1,6 @@
 <?php
 
-class Teachercontroller extends Controller{
+class Professorcontroller extends Controller{
 
     public function index() //consulter cours
     { 
@@ -28,7 +28,7 @@ class Teachercontroller extends Controller{
 
     public function Parametres()
     {
-    	$page = "teacher";
+    	$page = "professor";
         require 'application/views/_templates/header.php';
         echo "voir les parametres";
         require 'application/views/_templates/footer.php';    	
@@ -36,14 +36,14 @@ class Teachercontroller extends Controller{
 
     public function Soumissions()
     {
-    	$page = "teacher";
+    	$page = "professor";
         require 'application/views/_templates/header.php';
         require 'application/views/teacher_view_soumissions.php';
         require 'application/views/_templates/footer.php';
     }
 
     public function DonneNote(){
-    	$page = "teacher";
+    	$page = "professor";
         require 'application/views/_templates/header.php';
         echo "DONNER UNE NOTE";
         require 'application/views/_templates/footer.php';    	
