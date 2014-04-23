@@ -8,7 +8,7 @@ class Exercicecontroller extends Controller{
         $this->exerciseSheetModel->loadByID(1);
         $questions = $this->exerciseSheetModel->getQuestions();
         require 'application/views/_templates/header.php';
-        require 'application/views/exercice.php';
+        require 'application/views/student_exercice.php';
         require 'application/views/_templates/footer.php';
     }
 
