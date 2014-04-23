@@ -14,10 +14,10 @@
             <p>
                <?php
                echo 'les questions de chapitre';
-               echo '<form action="Exercice/Exercice_result" method="POST">';
                $question = $questions[0];
                echo $question->getAssignment().'<br/>';
                $answers = $question->getAnswers();
+               echo '<form action="Exercice_result" method="POST">';
                foreach($answers as $answer) {
                 if($question instanceof QCMQuestion)
                 {
@@ -33,6 +33,8 @@
                 }
                }
                echo '<input id="exerciceanswer" type="submit"/>';
+              echo '</form>';
+
                                //     foreach($questions as $question){
                 //         echo $question->getAssignment().'<br/>';
                 //         $answers = $question->getAnswers();

@@ -42,7 +42,7 @@ class QCMQuestion extends Question{
             //enumeration of answers
             while($currentAnswerRow = $answersRequestResult->fetch(PDO::FETCH_ASSOC))
             {
-                $this->answers[] = new Answer($currentAnswerRow['content'], (bool)$currentAnswerRow['correct']);
+                $this->answers[] = new Answer($currentAnswerRow['content'], $currentAnswerRow['correct']);
             }
         }
     }

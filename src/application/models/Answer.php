@@ -5,7 +5,7 @@ class Answer {
     private $content;
 
     public function isCorrect(){
-        return $this->isCorrect();
+        return $this->isCorrect;
     }
 
     public function getContent(){
