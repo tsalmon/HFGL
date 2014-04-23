@@ -12,16 +12,28 @@
           
           <div id="div_scroll">
             <p>
-              <script src="application/quiz/quiz.js" type="text/javascript"> </script>
-              <div class="lueckentext-quiz">
-                    <p>Das<strong>Internet (weltweites Computernetz)</strong> weiß alles.</p>
-              </div>
-
-
                <?php
                echo 'les questions de chapitre';
-               echo '<form action="<?php echo URL; ?>Exercice/Exercice_result" method="POST">';
-                //     foreach($questions as $question){
+               echo '<form action="Exercice/Exercice_result" method="POST">';
+               $question = $questions[0];
+               echo $question->getAssignment().'<br/>';
+               $answers = $question->getAnswers();
+               foreach($answers as $answer) {
+                if($question instanceof QCMQuestion)
+                {
+                  echo '<input type="checkbox" name='.$question->getID().' value='.$answer->isCorrect().'>'.$answer->getContent().'<br>';
+                }
+                else if($question instanceof QRFQuestion || $question instanceof LQuestion || $question instanceof PQuestion)
+                {
+                  echo '<input type="text" name='.$question->getID().' placeholder="Your answer...">';
+                }
+                else
+                {
+                 throw new Exception("Undefined question type");
+                }
+               }
+               echo '<input id="exerciceanswer" type="submit"/>';
+                               //     foreach($questions as $question){
                 //         echo $question->getAssignment().'<br/>';
                 //         $answers = $question->getAnswers();
                 //         foreach($answers as $answer) {
@@ -43,7 +55,7 @@
                 //     echo '<form action="">';
                 //     echo '<input id="exerciceanswer" type="submit"/>';
                 // echo '<br/>';
-                ?>
+              ?>
             </p>
         </div>
 
