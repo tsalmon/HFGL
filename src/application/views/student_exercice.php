@@ -3,7 +3,6 @@
     <?php include("_templates/nav_etudiant.php"); ?>
 
     <div id="site_content">
-      <?php include("_templates/student_sidebar_left.php"); ?>
       <div class="content">
         
         <h1>L'exercice de cours 1</h1>
