@@ -11,9 +11,9 @@
       <nav>
         <div id="menu_container">
           <ul class="sf-menu" id="toolbar">
-              <li><a href="Student">Mes cours</a></li>
-              <li><a href="Student/Notes">Créer un cours<</a></li>
-              <li><a href="Student/Parametres">Parametrès du compte</a></li>
+              <li><a href="Professor">Mes cours</a></li>
+              <li><a href="Professor/Creer_cours">Créer un cours</a></li>
+              <li><a href="Professor/Parametres">Parametrès du compte</a></li>
               <li><a href="#">Déconnexion</a></li>
           </ul>
         </div>
