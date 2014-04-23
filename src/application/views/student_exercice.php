@@ -12,8 +12,14 @@
           
           <div id="div_scroll">
             <p>
+              <script src="application/quiz/quiz.js" type="text/javascript"> </script>
+              <div class="lueckentext-quiz">
+                    <p>Das<strong>Internet (weltweites Computernetz)</strong> weiß alles.</p>
+              </div>
+
+
                <?php
-               echo 'les questions de chapitre'
+               echo 'les questions de chapitre';
                echo '<form action="<?php echo URL; ?>Exercice/Exercice_result" method="POST">';
                 //     foreach($questions as $question){
                 //         echo $question->getAssignment().'<br/>';
