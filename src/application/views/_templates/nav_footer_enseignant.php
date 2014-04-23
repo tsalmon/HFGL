@@ -5,7 +5,7 @@
       <p>
         <a href="Professor">Mes cours</a> | 
         <a href="Professor">Créer un cours</a> |
-        <a href="Professor">Parametrès du compte</a>| 
+        <a href="Professor/Parametres_result">Parametrès du compte</a>| 
         <a href="Professor">Déconnexion</a>
       </p>
       <p>Copyright &copy; HFGL| <a href="#">design from M1 Info Paris 7</a></p>

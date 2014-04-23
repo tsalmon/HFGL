@@ -29,9 +29,21 @@ class Professorcontroller extends Controller{
     public function Parametres()
     {
     	$page = "professor";
+        $MODELparam= $this->loadModel('PersonFactory');
+        $infos = $MODELparam->getPerson($_SESSION["email"]);
         require 'application/views/_templates/header.php';
-        echo "voir les parametres";
+        require 'application/views/teacher_parametres.php';
         require 'application/views/_templates/footer.php';    	
+    }
+
+    public function Parametres_result()
+    {
+        print_r($_POST);
+    }
+
+    public function ParametresPWD_result()
+    {
+        print_r($_POST);
     }
 
     public function Soumissions()
