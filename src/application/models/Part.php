@@ -28,7 +28,7 @@ class Part {
                 else{     
                     $this->partID=$id; 
                     if(isset($fetch['questionnaireID'])){
-                        $this->exam=new ExerciseSheet($fetch['questionnaireID']);}
+                        $this->exam=new ExerciceSheet($fetch['questionnaireID']);}
                     $this->title=$fetch['title'];
                     $this->chapters=$this->getDBChapters();    
                 }
