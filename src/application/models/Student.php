@@ -10,7 +10,7 @@ class Student extends Person implements Corrector {
     
         protected $studentID;
         protected $nse;
-
+        public $iam_student; //use to recognize person as student
 
     //      Constructeur
     //***********************
