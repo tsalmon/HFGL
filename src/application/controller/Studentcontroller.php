@@ -18,33 +18,6 @@ class Studentcontroller extends Controller{
         
     }
 
-    //get id and title of all part for one cours
-    public function CoursParts($courseID, $student_model){
-        //on recupere les parties d'un cours
-        $sql = "SELECT partID FROM Parts WHERE Parts.courseID = ".$courseID."";
-        $query = $student_model->db->prepare($sql);
-        $query->execute();
-        $part = $query->fetchAll();
-
-        //$part =  Array ( [0] => stdClass Object ( [partID] => 1 ) [1] => stdClass Object ( [partID] => 2 ) ... ) 
-        foreach ($part as &$liste) {
-            $sql = "SELECT title FROM Part WHERE Part.partID = ".$liste->partID."";
-            $query = $student_model->db->prepare($sql);
-            $query->execute();
-            $titre_part = $query->fetch();
-            /*echo "<p>";
-            print_r($titre_part);
-            echo "<br>";
-            print_r($liste);
-            echo "<br>";
-            print_r($part);
-            echo "</p><br>";
-            */
-            $this->list_part[$liste->partID] = $titre_part->title;
-        }
-        return $this->list_part;
-    }
-
     public function Parametres()
     {
     	$page = "student";
