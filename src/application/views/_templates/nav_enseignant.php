@@ -12,7 +12,7 @@
         <div id="menu_container">
           <ul class="sf-menu" id="toolbar">
               <li><a href="<?php echo URL; ?>Professor">Mes cours</a></li>
-              <li><a href="<?php echo URL; ?>Professor/Creer_cours">Créer un cours</a></li>
+              <li><a href="<?php echo URL; ?>Professor/Creer_un_cours">Créer un cours</a></li>
               <li><a href="<?php echo URL; ?>Professor/Parametres">Parametrès du compte</a></li>
               <li><a href="<?php echo URL; ?>Professor/Deconnexion">Déconnexion</a></li>
           </ul>
