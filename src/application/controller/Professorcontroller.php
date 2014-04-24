@@ -4,26 +4,12 @@ class Professorcontroller extends Controller{
 
     public function index() //consulter cours
     { 
-        // $student_model = $this->loadModel('WelcomeModel');
-        // $sql = "SELECT courseID FROM Inscription WHERE Inscription.studentID = ".$_SESSION["id"]."";
-        // $query = $student_model->db->prepare($sql);
-        // $query->execute();
-        // $liste_inscription = $query->fetchAll();
-        // $liste_matiere = [];
-        // //print_r($liste_inscription);
-        // foreach ($liste_inscription as &$liste) {
-        //     //$liste->courseID;
+        $prof = $this->loadModel('PersonFactory')->getPerson($_SESSION["email"]);
+        $cours_teaching = $this->loadModel('CourseTeaching')->getCourses($prof);
 
-        //     $sql_matiere = "SELECT title FROM Course WHERE Course.courseID = ".($liste->courseID)."";
-        //     $query_matiere = $student_model->db->prepare($sql_matiere);
-        //     $query_matiere->execute();
-        //     $result = $query_matiere->fetch();
-        //     $liste_matiere[$result->title] = "";
-        // }
         require 'application/views/_templates/header.php';
         require 'application/views/enseignant.php';
-        require 'application/views/_templates/footer.php';
-        
+        require 'application/views/_templates/footer.php';        
     }
 
     public function Parametres()
@@ -44,6 +30,10 @@ class Professorcontroller extends Controller{
     public function ParametresPWD_result()
     {
         print_r($_POST);
+    }
+
+    public function SupprimerCours(){
+        echo "supprimer un cours";
     }
 
     public function Soumissions()

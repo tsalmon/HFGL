@@ -155,6 +155,10 @@ class Course {
             return CourseSubstcription::getStudents($this);
         }
         
+        public function getProfessors(){
+            return CourseSubstcription::getProfessors($this);
+        }
+        
         
         
         //Suppression du cours en BDD

@@ -4,25 +4,36 @@
 
     <div id="site_content">
 
-      <?php include("_templates/teacher_sidebar_left.php"); ?>
+      <?php include("_templates/sidebar_left.php"); ?>
       
 
       <div class="content">
-        <h1>Cours 1</h1>
-        <h2>Déscriptions</h2>
-        <h5>echo le déscription de cours</h5>
-        <h2>Les travaux</h2>
-        <table style="width:100%; border-spacing:0;">
-          <tr><th>Matière</th> <th>Documents</th></tr>
-          <tr><td>Partie 1</td> <td><a href="#">Chapitre 1</a><a href="#">Chapitre 2</a></td></tr>
-          <tr><td>Partie 2</td> <td><a href="#">Chapitre 1</a><a href="#">Chapitre 2</a></td></tr>
-          <tr><td>Projet</td> <td><a href="#">Sujet de projet</a></td></tr>
-          <tr><td>Examen</td> <td><a href="#">Feuille d'examen</a></td></tr>
-        </table>
-          <p style="padding-top: 15px; display: inline"><span>&nbsp;</span><input class="bouton" type="submit" name="name" value="Supprimer ce cours" /></p>
-          <p style="padding-top: 15px; display: inline"><span>&nbsp;</span><input class="bouton" type="submit" name="name" value="Note de cours" /></p>
+
+        <?php 
+        foreach ($cours_teaching as $key => $cours) {
+          echo '<h1>'.$cours->title().'</h1>';
+          echo '<p>'.$cours->description().'</p>
+                <h2>Les travaux</h2>';
+          echo '
+          <table style="width:100%; border-spacing:0;">
+            <tr><th>MatiÃ¨re</th> <th>Documents</th></tr>';
+            foreach ($cours->parts() as $part) {
+                  echo '
+                <tr>
+                  <td>'.$part->title().'</td>
+                  <td>';
+                  foreach($part->chapters() as $chapter){
+                    echo '<a target="blank" href="'.URL.'Courses/?cours='.strval($cours->courseID()).'&part='.strval($part->partID()).'&chp='.strval($chapter->chapterID()).'">'.$chapter->title().'</a>';
+                  }                 
+                  echo '</td>';
+                }
+          echo '</table>
+            <p style="padding-top: 15px; display: inline"><span>&nbsp;</span><a href='.URL.'Professor/SupprimerCours/?cours='.$cours->courseID().'" class="bouton" name="name">Supprimer ce cours</a></p>';
+        }
+        ?>
       </div>
     </div>
 
     <?php include("_templates/nav_footer_enseignant.php"); ?>
 </div>
+
