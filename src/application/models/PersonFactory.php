@@ -1,7 +1,8 @@
-<?php
+    <?php
 require_once 'Student.php';
 require_once 'Admin.php';
 require_once 'Professor.php';
+require_once 'RoleTypeManager.php';
 
 //
 
@@ -36,21 +37,35 @@ class PersonFactory {
         PersonFactory::initiateArrays();
         $key=array_search($m,PersonFactory::$mails);
         if ($key==FALSE){      
-            try{
-                $res=new Student($m);
-               }
-            catch(UnexpectedValueException $e){
+            $db=  PDOHelper::getInstance();
+            $res = $db->query("SELECT roleID FROM Person WHERE `email`='".$m."';");
+            $fetch = $res->fetch(PDO::FETCH_ASSOC); 
+            $roleM=  RoleTypeManager::getInstance();
+            $roleID=$fetch['roleID'];
+            if($roleID==$roleM->getStudentID()){                
+                try{
+                    $res=new Student($m);
+                   }
+                catch(UnexpectedValueException $e){
+                    throw new UnexpectedValueException("Utilisateur non existant");}                
+             
+            }
+            elseif($roleID==$roleM->getTutorID()){                
                 try{
                     $res=new Professor($m);
                    }
                 catch(UnexpectedValueException $e){
-                    try{
-                        $res=new Admin($m);
-                       }
-                    catch(UnexpectedValueException $e){
-                        throw new UnexpectedValueException("Utilisateur non existant");}                
-                 }
-             }
+                    throw new UnexpectedValueException("Utilisateur non existant");}                
+             
+            }
+            elseif($roleID==$roleM->getAdminID()){                
+                try{
+                    $res=new Admin($m);
+                   }
+                catch(UnexpectedValueException $e){
+                    throw new UnexpectedValueException("Utilisateur non existant");}                
+             
+            }
             $key=$res->personID();
             PersonFactory::$persons[$key]=&$res;
             PersonFactory::$mails[$key]=$m;

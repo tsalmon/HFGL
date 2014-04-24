@@ -9,8 +9,8 @@ class Student extends Person implements Corrector {
     //**********************
     
         protected $studentID;
-        protected $roleID;
-        public $iam_student; //use to recognize person as student
+        protected $nse;
+
 
     //      Constructeur
     //***********************
@@ -22,23 +22,22 @@ class Student extends Person implements Corrector {
             $this->friendFactory();  //Si ce n'est pas la factory qui a fait l'appel, NUKE.
             $this->db=  PDOHelper::getInstance();   
             if($exists==true){
-                $fetch = $this->getDBEntry($mail, 3); 
+                $fetch = $this->getDBEntry($mail, "Student"); 
                 if($fetch==null){
                     throw new UnexpectedValueException("Utilisateur non existant");
                 }
                 else{ 
                     $this->initiateMembers($fetch);
-                    $this->studentID=$fetch['personID'];
-                    $this->roleID=$fetch['roleID'];
-                    // $this->nse=$fetch['NSE'];
+                    $this->studentID=$fetch['studentID'];
+                    $this->nse=$fetch['NSE'];
                 }
             }
             else {
                 if($this->mailExists($mail)){
                     throw new UnexpectedValueException("Utilisateur existant");
                 }
-                $lastid=$this->createEntry($mail,3);
-                // $this->db->exec("INSERT INTO Person (personID) VALUES (".$lastid.");");   
+                $lastid=$this->createEntry($mail);
+                $this->db->exec("INSERT INTO Student (personID) VALUES (".$lastid.");");   
                 $this->studentID=$this->db->lastInsertId();       
             }
         }
@@ -51,8 +50,8 @@ class Student extends Person implements Corrector {
             return $this->studentID;          
         }
         
-        public function roleID(){    
-            return $this->roleID;        
+        public function nse(){    
+            return $this->nse;        
         }
          
         public function setNse($n){     
