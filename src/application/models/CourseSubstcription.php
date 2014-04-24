@@ -118,12 +118,12 @@ class CourseSubstcription {
         }
     }
     
-    public static function remove($student,$course){ 
-        $indice=array_search($student->studentID(), CourseSubstcription::$courses[$course->courseID()]);
-        array_splice(CourseSubstcription::$courses[$course->courseID()],$indice,1);
-        $indice=array_search($course->courseID(), CourseSubstcription::$persons[$student->studentID()]);
-        array_splice(CourseSubstcription::$persons[$student->studentID()],$indice,1);
-        CourseSubstcription::$db->exec('DELETE FROM Inscription WHERE courseID='.$course->courseID().' AND studentID='.$student->studentID().';');
+    public static function remove($studentID,$courseID){ 
+        $indice=array_search($studentID, CourseSubstcription::$courses[$courseID]);
+        array_splice(CourseSubstcription::$courses[$courseID],$indice,1);
+        $indice=array_search($courseID, CourseSubstcription::$persons[$studentID]);
+        array_splice(CourseSubstcription::$persons[$studentID],$indice,1);
+        CourseSubstcription::$db->exec('DELETE FROM Inscription WHERE courseID='.$courseID.' AND studentID='.$studentID.';');
     }
     
     public static function deleteStudent($student){

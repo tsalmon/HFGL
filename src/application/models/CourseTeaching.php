@@ -119,12 +119,12 @@ class CourseTeaching {
         }
     }
     
-    public static function remove($tutor,$course){
-        $indice=array_search($tutor->tutorID(), CourseTeaching::$courses[$course->courseID()]);
-        array_splice(CourseTeaching::$courses[$course->courseID()],$indice);
-        $indice=array_search($course->courseID(), CourseTeaching::$persons[$tutor->tutorID()]);
-        array_splice(CourseTeaching::$persons[$tutor->tutorID()],$indice);
-        CourseTeaching::$db->exec('DELETE FROM Teaching WHERE courseID="'.$course->courseID().'" AND tutorID="'.$tutor->tutorID().'";');
+    public static function remove($tutorID,$courseID){
+        $indice=array_search($tutorID, CourseTeaching::$courses[$courseID]);
+        array_splice(CourseTeaching::$courses[$courseID],$indice);
+        $indice=array_search($courseID, CourseTeaching::$persons[$tutorID]);
+        array_splice(CourseTeaching::$persons[$tutorID],$indice);
+        CourseTeaching::$db->exec('DELETE FROM Teaching WHERE courseID="'.$courseID.'" AND tutorID="'.$tutorID.'";');
     }
     
     public static function deleteTutor($tutor){
