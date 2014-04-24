@@ -23,13 +23,13 @@ class CourseTeaching {
         CourseTeaching::$courses=array();
         CourseTeaching::$persons=array();   
         
-        $res=CourseTeaching::$db->query("SELECT tutorID, `email` FROM Tutor JOIN person on person.personID=tutor.personID");
+        $res=CourseTeaching::$db->query("SELECT tutorID, `email` FROM Tutor JOIN Person on Person.personID=Tutor.personID");
         $fetch = $res->fetchAll(PDO::FETCH_ASSOC);
         foreach($fetch as $entry){
             CourseTeaching::$persons[$entry['tutorID']]=array($entry['email']);
         }
         
-        $res=CourseTeaching::$db->query("SELECT courseID, `title` FROM course");
+        $res=CourseTeaching::$db->query("SELECT courseID, `title` FROM Course");
         $fetch = $res->fetchAll(PDO::FETCH_ASSOC);
         foreach($fetch as $entry){
             CourseTeaching::$courses[$entry['courseID']]=array($entry['title']);

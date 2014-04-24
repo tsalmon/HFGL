@@ -50,10 +50,7 @@ class Professorcontroller extends Controller{
         echo "DONNER UNE NOTE";
         require 'application/views/_templates/footer.php';    	
     }
-
-    public function SupprimerCours(){
-    }
-
+    
     public function Deconnexion(){
         if(session_destroy()){
             header('location: '.URL.'Welcome');
