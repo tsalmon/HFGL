@@ -61,7 +61,7 @@ class Professorcontroller extends Controller{
         require 'application/views/_templates/footer.php';    	
     }
 
-    public function DesincrireCours(){
+    public function SupprimerCours(){
     }
 
     public function Deconnexion(){
