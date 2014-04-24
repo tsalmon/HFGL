@@ -9,14 +9,13 @@
         <h2><?php echo $part->title(); ?></h2>
         <h3><?php echo $chp->title(); ?></h3>
 
-        <?php  
-          print_r($chp);
-        ?>
+        <p>
+          Description
+        </p>
 
         <div>
-          
           <a class="bouton" href="<?php echo URL.''.($chp->courseNotes()->getURL());?>" name="name">Cours</a>
-          <a class="bouton" href="<?php echo URL.'Exercice'; ?>" name="name">Exercice</a>
+          <a class="bouton" href=" <?php echo URL.'Exercice/'.($chp->exercices()->getID()); ?>" name="name">Exercice</a>
         </div>
 
       </div>
@@ -24,5 +23,3 @@
     
     <?php include("_templates/nav_footer_etudiant.php"); ?>
 </div>
-
-

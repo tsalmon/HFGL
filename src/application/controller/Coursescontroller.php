@@ -7,8 +7,8 @@ class Coursescontroller extends Controller{
 		$cours = $MODELcours->getCourses($student);	
 		$cours = $cours[intval($_GET["cours"])-1];
 		$part = $cours->parts()[intval($_GET["part"])-1];
-		$chp = $part->chapters()[intval($_GET["cours"])-1];
-		
+		$chp = $part->chapters()[intval($_GET["cours"])-1];		
+
 		require 'application/views/_templates/header.php';
         require 'application/views/student_viewChapter.php';
         require 'application/views/_templates/footer.php';		
