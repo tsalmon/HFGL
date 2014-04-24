@@ -3,10 +3,10 @@
 </div>
 <footer>
       <p>
-        <a href="#">Mes cours</a> | 
-        <a href="#">Créer un cours<</a> |
-        <a href="#">Parametrès du compte</a>| 
-        <a href="#">Déconnexion</a>
+        <a href="<?php echo URL; ?>Professor">Mes cours</a> | 
+        <a href="<?php echo URL; ?>Professor/Creer_cours">Créer un cours</a> |
+        <a href="<?php echo URL; ?>Professor/Parametres">Parametrès du compte</a>| 
+        <a href="<?php echo URL; ?>Professor/Deconnexion">Déconnexion</a>
       </p>
       <p>Copyright &copy; HFGL| <a href="#">design from M1 Info Paris 7</a></p>
 </footer>

@@ -36,7 +36,7 @@ class Course {
                     $this->title=$title;
                     $this->courseID=$fetch['courseID'];
                     if(isset($fetch['questionnaireID'])){
-                        $this->finalExam=new ExerciseSheet($fetch['questionnaireID']);}
+                        $this->finalExam=new ExerciceSheet($fetch['questionnaireID']);}
                     $this->description=$fetch['description'];                    
                     $this->parts=$this->getDBParts();
                 }
@@ -153,6 +153,10 @@ class Course {
         
         public function getStudents(){
             return CourseSubstcription::getStudents($this);
+        }
+        
+        public function getProfessors(){
+            return CourseSubstcription::getProfessors($this);
         }
         
         

@@ -23,13 +23,13 @@ class CourseTeaching {
         CourseTeaching::$courses=array();
         CourseTeaching::$persons=array();   
         
-        $res=CourseTeaching::$db->query("SELECT tutorID, `email` FROM Tutor JOIN person on person.personID=tutor.personID");
+        $res=CourseTeaching::$db->query("SELECT tutorID, `email` FROM Tutor JOIN Person on Person.personID=Tutor.personID");
         $fetch = $res->fetchAll(PDO::FETCH_ASSOC);
         foreach($fetch as $entry){
             CourseTeaching::$persons[$entry['tutorID']]=array($entry['email']);
         }
         
-        $res=CourseTeaching::$db->query("SELECT courseID, `title` FROM course");
+        $res=CourseTeaching::$db->query("SELECT courseID, `title` FROM Course");
         $fetch = $res->fetchAll(PDO::FETCH_ASSOC);
         foreach($fetch as $entry){
             CourseTeaching::$courses[$entry['courseID']]=array($entry['title']);
@@ -119,12 +119,12 @@ class CourseTeaching {
         }
     }
     
-    public static function remove($tutor,$course){
-        $indice=array_search($tutor->tutorID(), CourseTeaching::$courses[$course->courseID()]);
-        array_splice(CourseTeaching::$courses[$course->courseID()],$indice);
-        $indice=array_search($course->courseID(), CourseTeaching::$persons[$tutor->tutorID()]);
-        array_splice(CourseTeaching::$persons[$tutor->tutorID()],$indice);
-        CourseTeaching::$db->exec('DELETE FROM Teaching WHERE courseID="'.$course->courseID().'" AND tutorID="'.$tutor->tutorID().'";');
+    public static function remove($tutorID,$courseID){
+        $indice=array_search($tutorID, CourseTeaching::$courses[$courseID]);
+        array_splice(CourseTeaching::$courses[$courseID],$indice);
+        $indice=array_search($courseID, CourseTeaching::$persons[$tutorID]);
+        array_splice(CourseTeaching::$persons[$tutorID],$indice);
+        CourseTeaching::$db->exec('DELETE FROM Teaching WHERE courseID="'.$courseID.'" AND tutorID="'.$tutorID.'";');
     }
     
     public static function deleteTutor($tutor){

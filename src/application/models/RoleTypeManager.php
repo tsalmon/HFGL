@@ -1,5 +1,5 @@
 <?php
-require_once "application/models/TypeManager.php";
+require_once "TypeManager.php";
 
 define('admin', "admin");
 define('tutor', "tutor");
@@ -30,9 +30,9 @@ class RoleTypeManager extends TypeManager{
 
     public function refresh()
     {
-        $this->student = getIdForTypeName(student);
-        $this->admin = getIdForTypeName(admin);
-        $this->tutor = getIdForTypeName(tutor);
+        $this->student = $this->getIdForTypeName(student);
+        $this->admin = $this->getIdForTypeName(admin);
+        $this->tutor = $this->getIdForTypeName(tutor);
 
     }
 
@@ -40,7 +40,7 @@ class RoleTypeManager extends TypeManager{
     {
         if(!$this->student)
         {
-            $this->student = getIdForTypeName(student);
+            $this->student = $this->getIdForTypeName(student);
         }
         return $this->student;
     }
@@ -49,7 +49,7 @@ class RoleTypeManager extends TypeManager{
     {
         if(!$this->admin)
         {
-            $this->admin = getIdForTypeName(admin);
+            $this->admin = $this->getIdForTypeName(admin);
         }
         return $this->admin;
     }
@@ -58,7 +58,7 @@ class RoleTypeManager extends TypeManager{
     {
         if(!$this->tutor)
         {
-            $this->tutor = getIdForTypeName(tutor);
+            $this->tutor = $this->getIdForTypeName(tutor);
         }
         return $this->tutor;
     }

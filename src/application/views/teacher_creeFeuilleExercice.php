@@ -30,8 +30,10 @@
           </div>
         </form>
 
-          <p style="padding-top: 15px; display: inline"><span>&nbsp;</span><input class="bouton" type="submit" name="name" value="Supprimer ce cours" /></p>
-          <p style="padding-top: 15px; display: inline"><span>&nbsp;</span><input class="bouton" type="submit" name="name" value="Note de cours" /></p>
+          <p style="padding-top: 15px; display: inline"><span>&nbsp;</span>
+            <input class="bouton" type="submit" name="name" value="Supprimer ce cours" /></p>
+          <p style="padding-top: 15px; display: inline"><span>&nbsp;</span>
+            <input class="bouton" type="submit" name="name" value="Note de cours" /></p>
       </div>
     </div>
 

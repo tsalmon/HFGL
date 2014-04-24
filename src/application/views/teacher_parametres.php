@@ -1,6 +1,6 @@
 <div id="main">
 
-    <?php include("_templates/nav_etudiant.php"); ?>
+    <?php include("_templates/nav_enseignant.php"); ?>
 
     <div id="site_content">
 
@@ -10,7 +10,7 @@
 
         <h1>Paramètre du compte</h1>
 
-         <?php echo '<form action="'.URL."Student/Parametres_result".'" method="POST">'; ?>
+         <?php echo '<form action="'.URL."Professor/Parametres_result".'" method="POST">'; ?>
           <div class="form_settings">
             <p><span>Nom</span><input type="text" name="name" value=<?php echo("\"".$infos->name()."\""); ?> required/></p>
             <p><span>Prénom</span><input type="text" name="surname" value=<?php echo("\"".$infos->surname()."\""); ?> required/></p>
@@ -33,5 +33,5 @@
         
       </div>
     </div>
-    <?php include("_templates/nav_footer_etudiant.php"); ?>
+    <?php include("_templates/nav_footer_enseignant.php"); ?>
 </div>

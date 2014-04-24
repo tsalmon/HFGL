@@ -4,34 +4,36 @@ class Professorcontroller extends Controller{
 
     public function index() //consulter cours
     { 
-        // $student_model = $this->loadModel('WelcomeModel');
-        // $sql = "SELECT courseID FROM Inscription WHERE Inscription.studentID = ".$_SESSION["id"]."";
-        // $query = $student_model->db->prepare($sql);
-        // $query->execute();
-        // $liste_inscription = $query->fetchAll();
-        // $liste_matiere = [];
-        // //print_r($liste_inscription);
-        // foreach ($liste_inscription as &$liste) {
-        //     //$liste->courseID;
+        $prof = $this->loadModel('PersonFactory')->getPerson($_SESSION["email"]);
+        $cours_teaching = $this->loadModel('CourseTeaching')->getCourses($prof);
 
-        //     $sql_matiere = "SELECT title FROM Course WHERE Course.courseID = ".($liste->courseID)."";
-        //     $query_matiere = $student_model->db->prepare($sql_matiere);
-        //     $query_matiere->execute();
-        //     $result = $query_matiere->fetch();
-        //     $liste_matiere[$result->title] = "";
-        // }
         require 'application/views/_templates/header.php';
         require 'application/views/enseignant.php';
-        require 'application/views/_templates/footer.php';
-        
+        require 'application/views/_templates/footer.php';        
     }
 
     public function Parametres()
     {
     	$page = "professor";
+        $MODELparam= $this->loadModel('PersonFactory');
+        $infos = $MODELparam->getPerson($_SESSION["email"]);
         require 'application/views/_templates/header.php';
-        echo "voir les parametres";
+        require 'application/views/teacher_parametres.php';
         require 'application/views/_templates/footer.php';    	
+    }
+
+    public function Parametres_result()
+    {
+        print_r($_POST);
+    }
+
+    public function ParametresPWD_result()
+    {
+        print_r($_POST);
+    }
+
+    public function SupprimerCours(){
+        echo "supprimer un cours";
     }
 
     public function Soumissions()
@@ -48,8 +50,12 @@ class Professorcontroller extends Controller{
         echo "DONNER UNE NOTE";
         require 'application/views/_templates/footer.php';    	
     }
-
-    public function DesincrireCours(){
+    
+    public function Deconnexion(){
+        if(session_destroy()){
+            header('location: '.URL.'Welcome');
+        } else {
+            header('location: '.URL.'Professor');
+        }
     }
-
 }

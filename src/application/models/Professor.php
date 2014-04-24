@@ -1,31 +1,28 @@
 <?php
 require_once("Person.php");
 require_once("Corrector.php");
-require_once("RoleTypeManager.php");
 
 class Professor extends Person implements Corrector{
 	
     //      Attribut
     //**********************
     
-        public $tutorID;
-        public $roleID;
-        public $iam_professor; //use to recognize person as professor
+        protected $tutorID;
+
 
     //      Constructeur
     //***********************
         
-        public function __construct($mail, $exists=true){
+        public function __construct($mail, $exists=true){    
             $this->db=  PDOHelper::getInstance();
             if($exists==true){
-                $fetch = $this->getDBEntry($mail, 2);
+                $fetch = $this->getDBEntry($mail, "Tutor");
                 if($fetch==null){
                     throw new UnexpectedValueException("Utilisateur non existant");
                 }
                 else{
                     $this->initiateMembers($fetch);
-                    $this->tutorID=$fetch['personID'];
-                    $this->roleID=$fetch['roleID'];
+                    $this->tutorID=$fetch['tutorID'];
                 }
             }
             else {
@@ -44,10 +41,6 @@ class Professor extends Person implements Corrector{
         
         public function tutorID(){  
             return $this->tutorID;          
-        }
-
-        public function roleID(){  
-            return $this->roleID;          
         }
         
         public function getCourses(){

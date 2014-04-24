@@ -96,19 +96,22 @@ class Welcomecontroller extends Controller
             require 'application/views/connexion.php';
             require 'application/views/_templates/footer.php';       
         } else 
-            if($co->roleID()== 3){
+            $_SESSION["email"] = $_POST["user"];
+            $_SESSION["id"] = strval($co->personID());
+
+            if(method_exists($co, "studentID")){
                 $_SESSION["role"] = "student";
-                $_SESSION["email"] = $_POST["user"];
-                $_SESSION["id"] = strval($co->personID());
                 header('location: '.URL.'Student');
             }
-            else {
+            else if(method_exists($co, "tutorID")){
                 $_SESSION["role"] = "teacher";
-                $_SESSION["email"] = $_POST["user"];
-                $_SESSION["id"] = strval($co->personID());
                 header('location: '.URL.'Professor');
-            }
-
-        
+            } 
+            else if(method_exists($co, "AdminID")){
+                $_SESSION["role"] = "admin";
+                header('location: '.URL.'Admin');
+            } else {
+                echo "erreur de connexion";
+            }      
     }
 }
