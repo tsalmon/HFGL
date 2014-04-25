@@ -82,6 +82,7 @@ class ExerciceSheet extends Document{
 
     //Initializes current questionnaire with data from database using questionnaireID
     public function loadByID($questionnaireID){
+        echo "loadID";
         $questions = array();
         if($questionnaireRequestResult = $this->db->query("SELECT * FROM Questionnaire WHERE questionnaireID=".$questionnaireID.""))
         {
