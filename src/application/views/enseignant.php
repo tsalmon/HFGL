@@ -11,7 +11,7 @@
 
         <?php 
         foreach ($cours_teaching as $key => $cours) {
-          echo '<h1>'.$cours->title().'</h1>';
+          echo '<h1 id="'.$cours->title().'">'.$cours->title().'</h1>';
           echo '<p>'.$cours->description().'</p>
                 <h2>Les travaux</h2>';
           echo '
