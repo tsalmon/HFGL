@@ -13,10 +13,10 @@ class Professor extends Person implements Corrector{
     //      Constructeur
     //***********************
         
-        public function __construct($mail, $exists=true){    
+        public function __construct($mail, $isID, $exists=true){    
             $this->db=  PDOHelper::getInstance();
             if($exists==true){
-                $fetch = $this->getDBEntry($mail, "Tutor");
+                $fetch = $this->getDBEntry($mail, "Tutor",$isID);
                 if($fetch==null){
                     throw new UnexpectedValueException("Utilisateur non existant");
                 }

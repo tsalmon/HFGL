@@ -12,6 +12,14 @@ class Professorcontroller extends Controller{
         require 'application/views/_templates/footer.php';        
     }
 
+    public function Creer_un_cours()
+    {
+        $page = "professor";
+        require 'application/views/_templates/header.php';
+        require 'application/views/teacher_creerUnCours.php';
+        require 'application/views/_templates/footer.php';      
+    }
+
     public function Parametres()
     {
     	$page = "professor";
@@ -51,7 +59,11 @@ class Professorcontroller extends Controller{
         require 'application/views/_templates/footer.php';    	
     }
 
-    public function DesincrireCours(){
+    public function Deconnexion(){
+        if(session_destroy()){
+            header('location: '.URL.'Welcome');
+        } else {
+            header('location: '.URL.'Professor');
+        }
     }
-
 }

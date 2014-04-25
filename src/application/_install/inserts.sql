@@ -21,7 +21,10 @@ INSERT INTO `Question`(`assignment`, `points`, `typeID`) VALUES
 ('In C/CPP Programming an uninitialized variable may have',2,1),
 ('In C/CPP Programming which function is not related to file handling',2,1),
 ('In C/CPP Programming binary operator needs _______ operand.',2,1),
-('A function which invokes itself repeatedly until some condition is satisfied is called ___________',2,1);
+('A function which invokes itself repeatedly until some condition is satisfied is called ___________',2,1),
+('Describe the weather',2,4),
+('Enter five first letters of english alphabet',2,2);
+
 
 INSERT INTO `Response`(`questionID`, `content`,`correct`) VALUES
 (1,'here()',0),
@@ -55,7 +58,9 @@ INSERT INTO `Response`(`questionID`, `content`,`correct`) VALUES
 (8,'Friend Function',0),
 (8,'Virtual Function',0),
 (8,'Recursive Function',1),
-(8,'Overloading Function',0);
+(8,'Overloading Function',0),
+(10, 'abcde', 1),
+(10, 'ABCDE', 1);
 
 INSERT INTO `Questions`(`questionnaireID`, `questionID`) VALUES
 (1,1),(1,2),(1,3),(1,4),(1,5),(1,6),(1,7),(1,8);

@@ -16,50 +16,43 @@
           <div id="div_scroll">
             <p>
                <?php
-               echo 'les questions de chapitre';
-               $question = $questions[0];
-               echo $question->getAssignment().'<br/>';
-               $answers = $question->getAnswers();
-               echo '<form action="'.URL."Exercice/Exercice_result".'" method="POST">';
-               foreach($answers as $answer) {
-                if($question instanceof QCMQuestion)
-                {
-                  echo '<input type="checkbox" name='.$question->getID().' value='.$answer->isCorrect().'>'.$answer->getContent().'<br>';
-                }
-                else if($question instanceof QRFQuestion || $question instanceof LQuestion || $question instanceof PQuestion)
-                {
-                  echo '<input type="text" name='.$question->getID().' placeholder="Your answer...">';
-                }
-                else
-                {
-                 throw new Exception("Undefined question type");
-                }
-               }
-               echo '<input id="exerciceanswer" type="submit"/>';
-              echo '</form>';
+               if (!$this->started) {
+                 echo "Vous allez faire l'exercice de ".$this->questionsCount." questions. Est-ce que vous êtes prêt?<br/>";
+                 echo '<form action="startExercice" method="POST">';
+                 echo '<input id="startexercice" value="Je commence!" type="submit"/>';
+               } else 
+               if ($this->finished){
+                 echo "Vous avez fini cette exercice! Merci.";
+               } else {
+                 echo "Question ".($this->currentQuestionNumber+1)." sur ".$this->questionsCount."<br/>";
+                 echo $currentQuestion->getAssignment().'<br/>';
+                 if ($currentQuestion instanceof QCMQuestion) {
+                     $answers = $currentQuestion->getAnswers();
+                     echo '<form action="QCMExerciceResponse" method="POST">';
+                     foreach($answers as $answer) {
+                        echo '<input type="checkbox" name='.$currentQuestion->getID().' value='.$answer->isCorrect().'>'.$answer->getContent().'<br>';
+                     }   
+                 }
 
-                               //     foreach($questions as $question){
-                //         echo $question->getAssignment().'<br/>';
-                //         $answers = $question->getAnswers();
-                //         foreach($answers as $answer) {
-                //             if($question instanceof QCMQuestion)
-                //             {
-                //                 echo '<input type="checkbox" name=".$question->getID()." value="val">'.$answer->getContent().'<br>';
-                //             }
-                //             else if($question instanceof QRFQuestion || $question instanceof LQuestion || $question instanceof PQuestion)
-                //             {
-                //                 echo '<input type="text" name=".$question->getID()." placeholder="Your answer...">';
-                //             }
-                //             else
-                //             {
-                //                 throw new Exception("Undefined question type");
-                //             }
-                //         }
-                //         echo '<br/>';
-                //     }
-                //     echo '<form action="">';
-                //     echo '<input id="exerciceanswer" type="submit"/>';
-                // echo '<br/>';
+                 if ($currentQuestion instanceof QRFQuestion) {
+                    echo '<form action="QRFExerciceResponse" method="POST">';
+                    echo '<textarea name="'.$currentQuestion->getID().'" cols="25" rows="3" placeholder="Enter your answer here..." autofocus required></textarea><br>';
+                 } 
+
+                 if ($currentQuestion instanceof PQuestion) {
+                    echo '<form action="PExerciceResponse" method="POST">';
+                    echo '<input type="file" name='.$currentQuestion->getID().' <br>';
+                 }
+
+                 if ($currentQuestion instanceof LQuestion) {
+                     echo '<form action="LExerciceResponse" method="POST">';
+                     echo '<textarea name="'.$currentQuestion->getID().'" cols="25" rows="5" placeholder="Enter your answer here..." autofocus required></textarea><br>';
+                 }
+                 echo '<input type="hidden" id="currentQuestionNumber" name="currentQuestionNumber" value="'.$this->currentQuestionNumber.'" />';
+                 echo '<input type="hidden" id="questionsCount" name="questionsCount" value="'.$this->questionsCount.'" />';
+                 echo '<input id="exerciceanswer" type="submit"/>';
+                 echo '</form>';
+               }
               ?>
             </p>
         </div>

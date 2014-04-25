@@ -24,9 +24,31 @@
 
         <form action="#" method="post">
           <div class="form_settings">
-            <p><span>Type de question</span><input type="text" name="name" value="" />(Choisir une type de question au début)</p>
-            <p><span> Sujet </span><input type="text-area" name="name" value="" /></p>
-            <p><span> Réponses </span><input type="text-area" name="name" value="" /></p>
+            <p><span>Type de question</span>
+    <select name="cars">
+      <option id = "qcm">Question à choix multiple</option>
+      <option id = "qrf">Question à réponse formater</option>
+      <option id = "p">Question à réponse est un programme</option>
+      <option id = "l">Question à réponse libre</option>
+    </select>   
+    </br>(Choisir une type de question au début)
+       </p>
+        <div id = "form_qcm">
+        <p><span> Sujet </span><textarea rows="10" cols="30">Sujet d'exercice.</textarea></p>
+        <p><span> Réponses </span><input type="text-area" name="name" value="" /></p>
+    </div>
+    <div id = "form_qrf">
+        <p><span> Sujet </span><textarea rows="10" cols="30">Sujet d'exercice.</textarea></p>
+        <p><span> Réponses </span><input type="text-area" name="name" value="" /></p>
+    </div>
+    <div id = "form_p">
+        <p><span> Sujet </span><textarea rows="10" cols="30">Sujet d'exercice.</textarea></p>
+        <p><span> Réponses </span><input type="text-area" name="name" value="" /></p>
+    </div>
+    <div id = "form_l">
+        <p><span> Sujet </span><textarea rows="10" cols="30">Sujet d'exercice.</textarea></p>
+        <p><span> Réponses </span><input type="text-area" name="name" value="" /></p>
+    </div>
           </div>
         </form>
 

@@ -12,10 +12,10 @@ class Admin extends Person{
     //      Constructeur
     //***********************
         
-        public function __construct($mail, $exists=true){  
+        public function __construct($mail, $isID=false, $exists=true){  
             $this->db=  PDOHelper::getInstance();
             if($exists==true){
-                $fetch = $this->getDBEntry($mail, "Admin");
+                $fetch = $this->getDBEntry($mail, "Admin",$isID);
                 if($fetch==null){
                     throw new UnexpectedValueException("Utilisateur non existant");
                 }
