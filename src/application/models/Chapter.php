@@ -39,7 +39,7 @@ class Chapter {
                 }
             }
             else {
-                $this->db->exec("INSERT INTO Chapter ('title') VALUES ('".$id."');");        
+                $this->db->exec("INSERT INTO Chapter (title) VALUES ('".$id."');");        
             }
         }  
         
