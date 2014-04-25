@@ -25,7 +25,7 @@ class Controller
     public function print_dbg($obj){
         print('<pre>');
         print_r($obj);
-        print('</pre');
+        print('</pre>');
     }
 
     /**
