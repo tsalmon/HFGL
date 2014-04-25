@@ -2,11 +2,7 @@
 <div id="main">
     <?php include("_templates/nav_enseignant.php"); ?>
 
-    <div id="site_content">
-
-      <?php include("_templates/teacher_sidebar_left.php"); ?>
-      
-
+    <div id="site_content">      
       <div class="content">
         <h1>Cours 1</h1>
         <h2>Partie 1 - Chapitre 1</h2>
