@@ -26,8 +26,8 @@
           echo '
                 </tr>
                 <tr>
-                  <td><a href="#">[Ajouter une partie]</a></td>
                   <td><a href="#">&nbsp</a></td>
+                  <td><a href='.URL.'Professor/CreateChapter/?cours='.strval($cours->courseID()).'&part='.null.'>[+]</a></td>
                 </tr>
 
                 <tr>

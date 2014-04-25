@@ -10,6 +10,12 @@
       <div class="content">
 
         <h1>Cours 1</h1>
+
+        <!-- if parti = null do
+         <p><span> Titre de partie </span><input type="text" name="name" value="" /></p>
+         
+         if not:
+       -->
         <h2>Partie 1</h2>
 
         <p><span>Titre de chapitre </span><input type="text" name="name" value="" /></p>
