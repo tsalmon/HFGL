@@ -98,15 +98,16 @@ class Welcomecontroller extends Controller
         } else 
             $_SESSION["email"] = $_POST["user"];
             $_SESSION["id"] = strval($co->personID());
-            if($co->roleID()== 3){
+
+            if(method_exists($co, "studentID")){
                 $_SESSION["role"] = "student";
                 header('location: '.URL.'Student');
             }
-            else if($co->roleID() == 2){
+            else if(method_exists($co, "tutorID")){
                 $_SESSION["role"] = "teacher";
                 header('location: '.URL.'Professor');
             } 
-            else if($co->roleID() == 1){
+            else if(method_exists($co, "AdminID")){
                 $_SESSION["role"] = "admin";
                 header('location: '.URL.'Admin');
             } else {

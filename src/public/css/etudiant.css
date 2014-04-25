@@ -321,7 +321,7 @@ footer a:hover {
   text-align: left;
 }
   
-.form_settings input, .form_settings textarea { 
+.form_settings input, .form_settings textarea, .form_settings select { 
   padding: 5px; 
   width: 299px; 
   font: 100% 'Droid Sans', arial; 

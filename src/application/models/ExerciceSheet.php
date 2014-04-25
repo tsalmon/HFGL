@@ -41,6 +41,11 @@ class ExerciceSheet extends Document{
         return $this->questions;
     }
 
+    public function getQuestionsCount()
+    {
+        return count($this->questions);
+    }
+
     public function addQuestion($question)
     {
         $this->questions[] = $question;

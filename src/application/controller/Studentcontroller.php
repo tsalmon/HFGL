@@ -10,7 +10,6 @@ class Studentcontroller extends Controller{
     { 
         $MODELcours = $this->loadModel('CourseSubstcription');
         $liste_cours = $MODELcours->getCourses(PersonFactory::getPerson($_SESSION["email"]));
-        $page = "student_index";
 
         require 'application/views/_templates/header.php';
         require 'application/views/etudiant.php';

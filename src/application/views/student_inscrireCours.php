@@ -8,6 +8,8 @@
 
       <div class="content">
         
+        <?php print_r($liste_cours); ?>
+
         <h2>Les suggestions de cours</h2>
         <table style="width:100%; border-spacing:0;">
           <tr><th>Nom du cours</th> <th>Nom de l'enseigant</th><th>Description rapide</th> <th>Détail</th></tr>

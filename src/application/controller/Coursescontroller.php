@@ -16,12 +16,11 @@ class Coursescontroller extends Controller{
 
 	public function desinscription(){
 		$MODELcours = $this->loadModel('CourseSubstcription');
-
-		$student=&PersonFactory::getPerson($_SESSION["email"]);
-		$cours = $MODELcours->getCourses($student);
-
-        $MODELcours->remove($student, $cours[intval($_GET["cours"])-1]);
-        header('location: '.URL.'Student');
+        if($MODELcours->remove($_SESSION["studentid"]	, intval($_GET["cours"]))){
+	        header('location: '.URL.'Student');
+	    } else {
+	    	echo "error...";
+	    }
 	}
 }
 ?>
