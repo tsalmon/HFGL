@@ -1,12 +1,8 @@
 <!-- l'acceuille d'enseigant -->
 <div id="main">
     <?php include("_templates/nav_enseignant.php"); ?>
-
     <div id="site_content">
-
       <?php include("_templates/sidebar_left.php"); ?>
-      
-
       <div class="content">
 
         <?php 
@@ -25,7 +21,7 @@
                   foreach($part->chapters() as $chapter){
                     echo '<a target="blank" href="'.URL.'Courses/?cours='.strval($cours->courseID()).'&part='.strval($part->partID()).'&chp='.strval($chapter->chapterID()).'">'.$chapter->title().'</a>';
                   }                 
-                  echo '</td>';
+                  echo '<a target="blank" href="'.URL.'Professor/CreateChapter/?cours='.strval($cours->courseID()).'&part='.strval($part->partID()).'">[+]</a></td>';
                 }
           echo '</table>
             <p style="padding-top: 15px; display: inline"><span>&nbsp;</span><a href='.URL.'Professor/SupprimerCours/?cours='.$cours->courseID().'" class="bouton" name="name">Supprimer ce cours</a></p>';
