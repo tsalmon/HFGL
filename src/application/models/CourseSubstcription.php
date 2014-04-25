@@ -66,7 +66,11 @@ class CourseSubstcription {
             foreach($fetch as $entry){
                 $id=$entry['courseID'];
                 CourseSubstcription::$persons[$idstudent][]=$id;
-                $resultat[]=CourseFactory::getCourse(CourseSubstcription::$courses[$id][0]);
+                $currentCourse=CourseFactory::getCourse($id,true);
+                if(!isset(CourseSubstcription::$courses[$id])){
+                    CourseSubstcription::$courses[$id]=[$currentCourse->title()];
+                }
+                $resultat[]=$currentCourse;
             }
         }
         else{
@@ -85,15 +89,19 @@ class CourseSubstcription {
         $idcourse=$course->courseID();
         if(!isset(CourseSubstcription::$courses[$idcourse][1])){
             $res=array();
-            $req = CourseSubstcription::$db->query("SELECT studentID FROM Inscription where courseID=".$idcourse);
+            $req = CourseSubstcription::$db->query("SELECT personID FROM (Student JOIN Inscription ON Student.studentID=Inscription.studentID) where courseID=".$idcourse);
             if($req===false){
                 return array();
             }
             $fetch = $req->fetchAll(PDO::FETCH_ASSOC);
             foreach($fetch as $entry){
-                $id=$entry['studentID'];
+                $id=$entry['personID'];
                 CourseSubstcription::$courses[$idcourse][]=$id;
-                $resultat[]=PersonFactory::getPerson(CourseSubstcription::$persons[$id][0]);
+                $currentPerson=PersonFactory::getPerson($id,true);
+                if(!isset(CourseSubstcription::$persons[$id])){
+                    CourseSubstcription::$persons[$id]=[$currentPerson->email()];
+                }
+                $resultat[]=$currentPerson;
             }
         }
         else{
@@ -119,11 +127,14 @@ class CourseSubstcription {
     }
     
     public static function remove($studentID,$courseID){ 
-        $indice=array_search($studentID, CourseSubstcription::$courses[$courseID]);
-        array_splice(CourseSubstcription::$courses[$courseID],$indice,1);
-        $indice=array_search($courseID, CourseSubstcription::$persons[$studentID]);
-        array_splice(CourseSubstcription::$persons[$studentID],$indice,1);
-        CourseSubstcription::$db->exec('DELETE FROM Inscription WHERE courseID='.$courseID.' AND studentID='.$studentID.';');
+        try{
+            $indice=array_search($studentID, CourseSubstcription::$courses[$courseID]);
+            array_splice(CourseSubstcription::$courses[$courseID],$indice,1);
+            $indice2=array_search($courseID, CourseSubstcription::$persons[$studentID]);
+            array_splice(CourseSubstcription::$persons[$studentID],$indice2,1);
+            CourseSubstcription::$db->exec('DELETE FROM Inscription WHERE courseID='.$courseID.' AND studentID='.$studentID.';');
+            return true;
+        }catch(Exception $e){return false;}
     }
     
     public static function deleteStudent($student){
@@ -151,10 +162,6 @@ class CourseSubstcription {
         CourseSubstcription::$db->exec("DELETE FROM Inscription WHERE courseID ='".$course->courseID()."'");      
         
     }
-    
-    
-    
-    
 }
 
 CourseSubstcription::initiate();

@@ -31,20 +31,32 @@ class PersonFactory {
         }
     }
 
-
     //Récupérer un objet correspondant à une personne dans la base de donnée
-    public static function &getPerson($m){  
+    public static function &getPerson($m,$isID=false){  
         PersonFactory::initiateArrays();
-        $key=array_search($m,PersonFactory::$mails);
+        if($isID){            
+            if(isset(PersonFactory::$persons[$isID])){
+                $key=$isID;
+            }
+            else{
+                $key=false;
+               $searchCol="`personID`";
+            }
+        }
+        else{
+            $key=array_search($m,PersonFactory::$mails);
+            $searchCol="`email`";
+        }
         if ($key==FALSE){      
             $db=  PDOHelper::getInstance();
-            $res = $db->query("SELECT roleID FROM Person WHERE `email`='".$m."';");
-            $fetch = $res->fetch(PDO::FETCH_ASSOC); 
+            $resRequete = $db->query("SELECT roleID FROM Person WHERE ".$searchCol."='".$m."';");
+            $fetch = $resRequete->fetch(PDO::FETCH_ASSOC); 
             $roleM=  RoleTypeManager::getInstance();
             $roleID=$fetch['roleID'];
+            $res=null;
             if($roleID==$roleM->getStudentID()){                
                 try{
-                    $res=new Student($m);
+                    $res=new Student($m,$isID);
                    }
                 catch(UnexpectedValueException $e){
                     throw new UnexpectedValueException("Utilisateur non existant");}                
@@ -52,7 +64,7 @@ class PersonFactory {
             }
             elseif($roleID==$roleM->getTutorID()){                
                 try{
-                    $res=new Professor($m);
+                    $res=new Professor($m,$isID);
                    }
                 catch(UnexpectedValueException $e){
                     throw new UnexpectedValueException("Utilisateur non existant");}                
@@ -60,7 +72,7 @@ class PersonFactory {
             }
             elseif($roleID==$roleM->getAdminID()){                
                 try{
-                    $res=new Admin($m);
+                    $res=new Admin($m,$isID);
                    }
                 catch(UnexpectedValueException $e){
                     throw new UnexpectedValueException("Utilisateur non existant");}                
@@ -76,7 +88,7 @@ class PersonFactory {
     public static function &createStudent($mail,$name,$surname,$password,$nse){
         PersonFactory::initiateArrays();
         try{
-            $student=new Student($mail, false);
+            $student=new Student($mail, false, false);
         }catch(UnexpectedValueException $e){
             throw new UnexpectedValueException("Utilisateur déjà existant");                
          }
@@ -93,7 +105,7 @@ class PersonFactory {
     public static function &createProfessor($mail,$name,$surname,$password){
         PersonFactory::initiateArrays();
         try{
-          $professor=new Professor($mail, false);
+          $professor=new Professor($mail, false, false);
         }catch(UnexpectedValueException $e){
             throw new UnexpectedValueException("Utilisateur déjà existant");                
          }
@@ -109,7 +121,7 @@ class PersonFactory {
     public static function &createAdmin($mail,$name,$surname,$password){
         PersonFactory::initiateArrays();
         try{
-            $admin=new Admin($mail, false);
+            $admin=new Admin($mail, false, false);
         }catch(UnexpectedValueException $e){
             throw new UnexpectedValueException("Utilisateur déjà existant");                
          }
