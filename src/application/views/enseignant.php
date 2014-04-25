@@ -1,4 +1,3 @@
-<!-- l'acceuille d'enseigant -->
 <div id="main">
     <?php include("_templates/nav_enseignant.php"); ?>
     <div id="site_content">
