@@ -22,7 +22,12 @@
                   }                 
                   echo '<a target="blank" href="'.URL.'Professor/CreateChapter/?cours='.strval($cours->courseID()).'&part='.strval($part->partID()).'">[+]</a></td>';
                 }
-          echo '</table>
+          echo '
+                </tr>
+                <tr><td><a href="#">[Ajouter un partie]</a></td></td> <td><a href="#">&nbsp</a></td></tr>
+                <tr><td>Projet</td> <td><a href="#">[+]</a></td></tr>
+                <tr><td>Examen</td> <td><a href="#">[+]</a></td></tr>
+          </table>
             <p style="padding-top: 15px; display: inline"><span>&nbsp;</span><a href='.URL.'Professor/SupprimerCours/?cours='.$cours->courseID().'" class="bouton" name="name">Supprimer ce cours</a></p>';
         }
         ?>
