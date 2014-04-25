@@ -20,6 +20,15 @@ class Controller
     }
 
     /**
+    * print an object with a regular indentation
+    */
+    public function print_dbg($obj){
+        print('<pre>');
+        print_r($obj);
+        print('</pre');
+    }
+
+    /**
      * Open the database connection with the credentials from application/config/config.php
      */
     private function openDatabaseConnection()
