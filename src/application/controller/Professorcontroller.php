@@ -35,7 +35,7 @@ class Professorcontroller extends Controller{
 
     public function CreateChapter(){
         require 'application/views/_templates/header.php';
-        require 'application/views/teacher_creerUnChapitre.php';
+        require 'application/views/teacher_creerChapitre.php';
         require 'application/views/_templates/footer.php';      
     }
 
