@@ -12,11 +12,35 @@ class Professorcontroller extends Controller{
         require 'application/views/_templates/footer.php';        
     }
 
-    public function Creer_un_cours()
+    public function CreateCour()
     {
         $page = "professor";
         require 'application/views/_templates/header.php';
         require 'application/views/teacher_creerUnCours.php';
+        require 'application/views/_templates/footer.php';      
+    }
+
+    public function CreateExamen()
+    {
+        $page = "professor";
+        require 'application/views/_templates/header.php';
+        require 'application/views/teacher_creerExamen.php';
+        require 'application/views/_templates/footer.php';      
+    }
+
+    public function CreateChapter()
+    {
+        $page = "professor";
+        require 'application/views/_templates/header.php';
+        require 'application/views/teacher_creerChapitre.php';
+        require 'application/views/_templates/footer.php';      
+    }
+
+    public function CreateProjet()
+    {
+        $page = "professor";
+        require 'application/views/_templates/header.php';
+        require 'application/views/teacher_creerProjet.php';
         require 'application/views/_templates/footer.php';      
     }
 

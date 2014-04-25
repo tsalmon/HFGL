@@ -21,13 +21,28 @@
                   foreach($part->chapters() as $chapter){
                     echo '<a target="blank" href="'.URL.'Courses/?cours='.strval($cours->courseID()).'&part='.strval($part->partID()).'&chp='.strval($chapter->chapterID()).'">'.$chapter->title().'</a>';
                   }                 
-                  echo '<a target="blank" href="'.URL.'Professor/CreateChapter/?cours='.strval($cours->courseID()).'&part='.strval($part->partID()).'">[+]</a></td>';
+                  echo '<a href="'.URL.'Professor/CreateChapter/?cours='.strval($cours->courseID()).'&part='.strval($part->partID()).'">[+]</a></td>';
                 }
           echo '
                 </tr>
-                <tr><td><a href="#">[Ajouter un partie]</a></td></td> <td><a href="#">&nbsp</a></td></tr>
-                <tr><td>Projet</td> <td><a href="#">[+]</a></td></tr>
-                <tr><td>Examen</td> <td><a href="#">[+]</a></td></tr>
+                <tr>
+                  <td><a href="#">[Ajouter une partie]</a></td>
+                  <td><a href="#">&nbsp</a></td>
+                </tr>
+
+                <tr>
+                  <td>Projet</td> 
+                  <td><a href='.URL.'Professor/CreateProjet>[+]</a></td>
+                </tr>
+
+                <tr>
+                  <td>Examen</td> 
+                  <td><a href='.URL.'Professor/CreateExamen>[+]</a></td>
+                </tr>
+                <!-- <tr> si l`examen existe
+                    <td>Examen</td> 
+                    <td><a href='.URL.'Professor/Examen>Feuille de l`examen</a></td>
+                    </tr> -->
           </table>
             <p style="padding-top: 15px; display: inline"><span>&nbsp;</span><a href='.URL.'Professor/SupprimerCours/?cours='.$cours->courseID().'" class="bouton" name="name">Supprimer ce cours</a></p>';
         }

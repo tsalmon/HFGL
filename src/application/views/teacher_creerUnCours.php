@@ -3,7 +3,7 @@
       <?php include("_templates/nav_enseignant.php"); ?>
 
       <div id="site_content">
-        <div id="welcome"><h3>Bienvenue</h3></div>
+        <?php include("_templates/sidebar_left.php"); ?>
 
         <div class="content">
           <h1>Créer un cours</h1>
@@ -14,9 +14,7 @@
               <p><span> Nom du cours </span><input type="text-area" name="name" value="" /></p>
               <p><span> Date de début </span><input type="text-area" name="name" value="" /></p>
               <p><span> Date de fin </span><input type="text-area" name="name" value="" /></p>
-              <p><span> Désription rapide </span><textarea rows="10" cols="30"></textarea></p>
-              
-          
+              <p><span> Désription rapide </span><textarea rows="10" cols="30"></textarea></p>          
             </div>
           </form>
 
