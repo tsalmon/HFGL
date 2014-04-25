@@ -37,7 +37,7 @@ class Course {
                     throw new UnexpectedValueException("Cours non existant");
                 }
                 else{     
-                    $this->title=$title;
+                    $this->title=$fetch["title"];
                     $this->courseID=$fetch['courseID'];
                     if(isset($fetch['questionnaireID'])){
                         $this->finalExam=new ExerciceSheet($fetch['questionnaireID']);}

@@ -28,10 +28,10 @@ class CourseFactory {
 
 
     //Récupérer un objet correspondant à un cours dans la base de donnée
-    public static function &getCourse($t,$isID=false){  
+    public static function &getCourse($t,$isID=false){
         CourseFactory::initiateArrays();
         $key=array_search($t,CourseFactory::$titles);
-        if($isID){            
+        if($isID){
             if(isset(CourseFactory::$courses[$isID])){
                 $key=$isID;
             }
@@ -42,9 +42,9 @@ class CourseFactory {
         else{
             $key=array_search($t,CourseFactory::$titles);
         }
-        if ($key==FALSE){      
+        //if ($key==FALSE){
             try{
-                $res=new Course($t);
+                $res=new Course($t,1);
                }
             catch(UnexpectedValueException $e){                
                     throw new UnexpectedValueException("Cours non existant");                
@@ -52,7 +52,7 @@ class CourseFactory {
             $key=$res->courseID();
             CourseFactory::$courses[$key]=&$res;
             CourseFactory::$titles[$key]=$t;
-        }
+        //}
         return CourseFactory::$courses[$key];
     }
     
