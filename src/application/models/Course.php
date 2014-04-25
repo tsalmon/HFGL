@@ -23,11 +23,15 @@ class Course {
         // PAS TOUCHE !!! Voir classe PersonFactory.
         //Impossibilité de mettre des classes friends en php, donc appeler le constructeur
         //directement revient à appuyer sur le nuke button.
-        public function __construct($title, $exists=true){    
+        public function __construct($title, $isID=false, $exists=true){    
             $this->friendFactory();  //Si ce n'est pas la factory qui a fait l'appel, NUKE.
             $this->db=PDOHelper::getInstance();            
             if($exists==true){
-                $res = $this->db->query("SELECT * FROM Course WHERE `title`='".$title."';");
+                if($isID){
+                  $res = $this->db->query("SELECT * FROM Course WHERE `courseID`='".$title."';");
+                }else{
+                    $res = $this->db->query("SELECT * FROM Course WHERE `title`='".$title."';");
+                }
                 $fetch = $res->fetch(PDO::FETCH_ASSOC);     
                 if($fetch==null){
                     throw new UnexpectedValueException("Cours non existant");

@@ -32,8 +32,13 @@ abstract class Person{
         }
         
         //$table est le nom de la table associée à la classe fille
-        protected function getDBEntry($mail,$table){    
-            $res = $this->db->query("SELECT * FROM (Person JOIN ".$table." ON Person.personID = ".$table.".personID) WHERE `email`='".$mail."';");
+        protected function getDBEntry($mail,$table,$isID){    
+            if($isID==false){
+                $res = $this->db->query("SELECT * FROM (Person JOIN ".$table." ON Person.personID = ".$table.".personID) WHERE Person.`email`='".$mail."';");
+            }
+            else{
+                $res = $this->db->query("SELECT * FROM (Person JOIN ".$table." ON Person.personID = ".$table.".personID) WHERE Person.`personID`='".$mail."';");                
+            }
             $fetch = $res->fetch(PDO::FETCH_ASSOC);            
             return $fetch;
         }
