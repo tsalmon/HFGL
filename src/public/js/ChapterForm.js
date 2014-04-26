@@ -42,10 +42,56 @@ function year(id){
 }
 
 function month(id){
-  var e = document.forms.chpform.deadline_month;
-      e = e.options[e.selectedIndex].value;
-}
+  var mois = 0;
+  var annee = 0;
 
+  if(id == "1"){
+    mois  = document.forms.chpform.deadline_month;
+    annee = document.forms.chpform.deadline_year;
+  } else {
+    mois  = document.forms.chpform.avalable_month;
+    annee = document.forms.chpform.avalable_year;
+  }
+  mois = mois.options[mois.selectedIndex].value;
+
+  if(mois == 1 || mois == 3 || mois == 5 || mois == 7 || mois == 10 || mois == 12){
+    options_days(id, 31);
+  } else if(mois == 4 || mois == 6 || mois == 9 || mois == 11){
+    options_days(id, 30);    
+  } else{
+    if(!bissextile(annee.options[annee.selectedIndex].value)){
+      options_days(id, 28);
+    } else {
+      options_days(id, 29);
+    }
+  }
+};
+
+function chpValid() {
+  dy = document.forms.chpform.deadline_year;
+  dm = document.forms.chpform.deadline_month;
+  dd = document.forms.chpform.deadline_day;
+
+  ay = document.forms.chpform.avalable_year;
+  am = document.forms.chpform.avalable_month;
+  ad = document.forms.chpform.avalable_day;
+
+  dy = dy.options[dy.selectedIndex].value;
+  dm = dm.options[dm.selectedIndex].value;
+  dd = dd.options[dd.selectedIndex].value;
+
+  ay = ay.options[ay.selectedIndex].value;
+  am = am.options[am.selectedIndex].value;
+  ad = ad.options[ad.selectedIndex].value;
+
+  if(dy > ay){
+    return true
+  }
+  if(dm > am){ 
+    return true;
+  }
+  return (dd > ad);
+};
 
 function newCHPform(){
   var currentYear = new Date().getFullYear();
@@ -72,10 +118,6 @@ function newCHPform(){
       document.forms.chpform.deadline_day.options[document.forms.chpform.deadline_day.options.length] = new Option(i,i);
       document.forms.chpform.avalable_day.options[document.forms.chpform.avalable_day.options.length] = new Option(i,i);
   }
-
-
-}
+s}
 
 m = newCHPform();
-
-alert("ok syntaxe");
