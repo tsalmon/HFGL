@@ -6,7 +6,7 @@ function url(selectUrl) {
 
 function rep(){
 	if(document.getElementById('lareponse').value=="text"){
-		document.getElementById('thereponse').innerHTML='<input type= "text " name= "reponse "/ placeholder="ecrivez ici la réponse">';
+		document.getElementById('thereponse').innerHTML='<input type= "text " name= "reponse "/ placeholder="ecrivez ici la réponse" required>';
 		document.getElementById('reponses').value="1";
 	}
 	if(document.getElementById('lareponse').value=="textarea"){
@@ -34,10 +34,10 @@ function combien(string){
 	for(i=0;i<how;i++){
 		// si string = 0, c'est un checkbox , sinon c'est un radio
 		if(string=="0"){
-			document.getElementById('thereponse').innerHTML=document.getElementById('thereponse').innerHTML+'<br /><input type= "text " name= "r"+i+" "/><input type="checkbox"  name= "c"/>';
+			document.getElementById('thereponse').innerHTML=document.getElementById('thereponse').innerHTML+'<br /><input type= "text " name= "r"+i+" "/><input type="checkbox"  name= "c" required/>';
 		}
 		else{
-			document.getElementById('thereponse').innerHTML=document.getElementById('thereponse').innerHTML+'<br /><input type= "text " name= "r"+i+" "/><input type="radio" name= "c"/>';
+			document.getElementById('thereponse').innerHTML=document.getElementById('thereponse').innerHTML+'<br /><input type= "text " name= "r"+i+" "/><input type="radio" name= "c" required/>';
 		}
 	}
 	document.getElementById('reponsetype').value=how;
