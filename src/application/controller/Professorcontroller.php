@@ -13,7 +13,7 @@ class Professorcontroller extends Controller{
           
     }
 
-    public function CreateCour(){
+    public function CreateCourse(){
         require 'application/views/_templates/header.php';
         require 'application/views/teacher_creerUnCours.php';
         require 'application/views/_templates/footer.php';      
