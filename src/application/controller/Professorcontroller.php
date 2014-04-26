@@ -81,6 +81,11 @@ class Professorcontroller extends Controller{
         require 'application/views/_templates/footer.php';
     }
 
+    public function ViewNotes(){
+        require 'application/views/_templates/header.php';
+        require 'application/views/teacher_view_notes.php';
+        require 'application/views/_templates/footer.php';
+    }
     public function Parametres()
     {
     	$page = "professor";
