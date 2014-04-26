@@ -11,17 +11,17 @@ function rep(){
 	}
 	if(document.getElementById('lareponse').value=="textarea"){
 		document.getElementById('thereponse').innerHTML='<textarea name= "reponse " disabled></textarea>';
-		document.getElementById('reponsetype').value="1";	
+		document.getElementById('reponsetype').value="2";	
 	}
 	if(document.getElementById('lareponse').value=="checkbox"){
-		document.getElementById('thereponse').innerHTML='<select name= "nombre" id= "nombre" onchange="combien(0)"><option value="null">selection</option>';
+		document.getElementById('thereponse').innerHTML='<select name= "nombre" id= "nombre" onchange="combien(3)"><option value="null">selection</option>';
 		for(i=2;i<6;i++){
 			document.forms.qtform.nombre.options[document.forms.qtform.nombre.options.length] = new Option(i,i); 
  		}
 		document.getElementById('thereponse').innerHTML=document.getElementById('thereponse').innerHTML+"</select>";
 	}
 	if(document.getElementById('lareponse').value=="radio"){
-		document.getElementById('thereponse').innerHTML='<select name= "nombre" id= "nombre" onchange="combien(1)"><option value="null">selection</option>';
+		document.getElementById('thereponse').innerHTML='<select name= "nombre" id= "nombre" onchange="combien(4)"><option value="null">selection</option>';
 		for(i=2;i<6;i++){
 			document.forms.qtform.nombre.options[document.forms.qtform.nombre.options.length] = new Option(i,i); 			
 		}
@@ -32,14 +32,14 @@ function combien(string){
 	var how = parseInt(document.getElementById('nombre').value);
 	document.getElementById('thereponse').innerHTML='';
 	for(i=0;i<how;i++){
-		// si string = 0, c'est un checkbox , sinon c'est un radio
-		if(string=="0"){
+		// si string = 3, c'est un checkbox , sinon c'est un radio
+		if(string=="3"){
 			document.getElementById('thereponse').innerHTML=document.getElementById('thereponse').innerHTML+'<br /><input type= "text " name= "r"+i+" "/><input type="checkbox"  name= "c" required/>';
 		}
 		else{
 			document.getElementById('thereponse').innerHTML=document.getElementById('thereponse').innerHTML+'<br /><input type= "text " name= "r"+i+" "/><input type="radio" name= "c" required/>';
 		}
 	}
-	document.getElementById('reponsetype').value=how;
+	document.getElementById('reponsetype').value=string;
 }	
 
