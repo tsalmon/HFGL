@@ -20,20 +20,19 @@ class Professorcontroller extends Controller{
     }
 
     public function CreateExamen(){
-        $page = "professor";
         require 'application/views/_templates/header.php';
         require 'application/views/teacher_creerExamen.php';
         require 'application/views/_templates/footer.php';      
     }
 
     public function CreateProjet(){
-        $page = "professor";
         require 'application/views/_templates/header.php';
         require 'application/views/teacher_creerProjet.php';
         require 'application/views/_templates/footer.php';      
     }
 
     public function CreateChapter(){
+
         require 'application/views/_templates/header.php';
         require 'application/views/teacher_creerChapitre.php';
         require 'application/views/_templates/footer.php';      
