@@ -1,7 +1,23 @@
+function bissextile(annee){
+  if(annee % 4== 0){
+    if(annee % 400 == 0){
+      return true;
+    }
+    return (annee % 100 != 0);
+  }
+  return false;
+}
+
 function dead_year(){
-  var e = document.forms.chpform.deadline_year;
-      e =  e.options[e.selectedIndex].value;
-  alert("dead_year : " + e);
+  var annee = document.forms.chpform.deadline_year;
+      annee =  e.options[e.selectedIndex].value;
+  
+  if(!bissextile(annee)){
+    return ;
+  }
+
+
+
 }
 
 function dead_month(){
