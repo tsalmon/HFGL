@@ -84,8 +84,6 @@ function chpValid() {
   am = am.options[am.selectedIndex].value;
   ad = ad.options[ad.selectedIndex].value;
 
-  alert("chpValid");
-
   if(dy > ay){
     return true
   }
