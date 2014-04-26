@@ -42,7 +42,6 @@ class CourseFactory {
         else{
             $key=array_search($t,CourseFactory::$titles);
         }
-        var_dump($key);
         if ($key==FALSE){      
             try{
                 $res=new Course($t,$isID);

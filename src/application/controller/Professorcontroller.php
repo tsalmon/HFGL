@@ -10,34 +10,33 @@ class Professorcontroller extends Controller{
         require 'application/views/_templates/header.php';
         require 'application/views/enseignant.php';
         require 'application/views/_templates/footer.php';     
-          
     }
 
     public function CreateCourse(){
         require 'application/views/_templates/header.php';
         require 'application/views/teacher_creerUnCours.php';
-        require 'application/views/_templates/footer.php';      
+        require 'application/views/_templates/footer.php';
     }
 
     public function CreateExamen(){
         require 'application/views/_templates/header.php';
         require 'application/views/teacher_creerExamen.php';
-        require 'application/views/_templates/footer.php';      
+        require 'application/views/_templates/footer.php';
     }
 
     public function CreateProjet(){
         require 'application/views/_templates/header.php';
         require 'application/views/teacher_creerProjet.php';
-        require 'application/views/_templates/footer.php';      
+        require 'application/views/_templates/footer.php';
     }
 
     public function CreateChapter(){
-
+        $cours = CourseFactory::getCourse($_GET["cours"], true);
+        $part = new Part($_GET["part"]);
         require 'application/views/_templates/header.php';
         require 'application/views/teacher_creerChapitre.php';
-        require 'application/views/_templates/footer.php';      
+        require 'application/views/_templates/footer.php';
     }
-
 
     public function CreateChapter_ok(){
         //Controller::print_dbg($_POST);
@@ -64,22 +63,22 @@ class Professorcontroller extends Controller{
         */
 
         /** Good part **/
-        /*
         $chp = new Chapter($_POST["chp_name"], false);
-        $part = new Part($_GET["part"]);
+        $part= new Part($_GET["part"]);
         $part->addChapter($chp);
-        sleep(15);
         $chp->delete();
-        */
-            
-        header('location: '.URL.'Professor/CreateExercice');        
+    
+        $_SESSION["ex_course"] = $_GET["cours"];
+        $_SESSION["ex_part"] = $_GET["cours"];
+        $_SESSION["ex_chpt"] = $chp->chapterID();
+        header('location: '.URL.'Professor/CreateExercice');
     }
 
     public function CreateExercice(){
-        $page = "professor";
+        $page="CreateExercice";
         require 'application/views/_templates/header.php';
         require 'application/views/teacher_creeFeuilleExercice.php';
-        require 'application/views/_templates/footer.php';  
+        require 'application/views/_templates/footer.php';
     }
 
     public function Parametres()
@@ -89,7 +88,7 @@ class Professorcontroller extends Controller{
         $infos = $MODELparam->getPerson($_SESSION["email"]);
         require 'application/views/_templates/header.php';
         require 'application/views/teacher_parametres.php';
-        require 'application/views/_templates/footer.php';    	
+        require 'application/views/_templates/footer.php';
     }
 
     public function Parametres_result()
