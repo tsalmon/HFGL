@@ -35,8 +35,8 @@ class PersonFactory {
     public static function &getPerson($m,$isID=false){  
         PersonFactory::initiateArrays();
         if($isID){            
-            if(isset(PersonFactory::$persons[$isID])){
-                $key=$isID;
+            if(isset(PersonFactory::$persons[$m])){
+                $key=$m;
             }
             else{
                 $key=false;

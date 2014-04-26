@@ -32,8 +32,8 @@ class CourseFactory {
         CourseFactory::initiateArrays();
         $key=array_search($t,CourseFactory::$titles);
         if($isID){            
-            if(isset(CourseFactory::$courses[$isID])){
-                $key=$isID;
+            if(isset(CourseFactory::$courses[$t])){
+                $key=$t;
             }
             else{
                 $key=false;
@@ -42,6 +42,7 @@ class CourseFactory {
         else{
             $key=array_search($t,CourseFactory::$titles);
         }
+        var_dump($key);
         if ($key==FALSE){      
             try{
                 $res=new Course($t,$isID);
