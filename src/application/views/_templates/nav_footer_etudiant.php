@@ -1,5 +1,5 @@
 <div id="scroll">
-      <a title="Scroll to the top" class="top" href="#"><img src="public/images/top.png" alt="top" /></a>
+      <a title="Scroll to the top" class="top" href="#"><img src="<?php echo URL; ?>public/images/top.png" alt="top" /></a>
 </div>
 <footer>
       <p>
