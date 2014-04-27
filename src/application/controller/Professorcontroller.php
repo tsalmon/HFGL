@@ -42,7 +42,7 @@ class Professorcontroller extends Controller{
         //Controller::print_dbg($_POST);
         //Controller::print_dbg($_FILES);
 
-        /*
+        
         if(pathinfo($_FILES["chp_file_lesson"]["name"], PATHINFO_EXTENSION) != "pdf"){
             $error = "pdf";
             Professorcontroller::CreateChapter();
@@ -60,22 +60,25 @@ class Professorcontroller extends Controller{
             Professorcontroller::CreateChapter();
             return ;
         }
-        */
+        
 
         /** Good part **/
         $chp = new Chapter($_POST["chp_name"], false);
         $part= new Part($_GET["part"]);
         $part->addChapter($chp);
-        $chp->delete();
-    
+        
         $_SESSION["ex_course"] = $_GET["cours"];
         $_SESSION["ex_part"] = $_GET["cours"];
         $_SESSION["ex_chpt"] = $chp->chapterID();
+        
         header('location: '.URL.'Professor/CreateExercice');
     }
 
     public function CreateExercice(){
         $page="CreateExercice";
+        
+        //$qt = $this->loadModel('ExerciceSheet');
+        //$qt = 
         require 'application/views/_templates/header.php';
         require 'application/views/teacher_creeFeuilleExercice.php';
         require 'application/views/_templates/footer.php';
