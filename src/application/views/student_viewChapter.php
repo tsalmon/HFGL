@@ -5,12 +5,14 @@
     <div id="site_content">
       <div class="content">
         
-        <h1><?php echo $cours->title(); ?></h1>
-        <h2><?php echo $part->title(); ?></h2>
-        <h3><?php echo $chp->title(); ?></h3>
+        <h1><?php echo $chp->title(); ?></h1>
+        <h3><?php echo $cours->title()." - ".$part->title(); ?></h3>
 
+        <h2>Description</h2>
         <p>
-          Description
+          <?php
+            //Controller::print_dbg($chp);
+          ?>
         </p>
 
         <div>
@@ -23,3 +25,24 @@
     
     <?php include("_templates/nav_footer_etudiant.php"); ?>
 </div>
+<?php
+/*
+Chapter Object ( 
+  [chapterID:protected] => 1 
+  [chapterNumber:protected] => 1 
+  [exercices:protected] => ExerciceSheet Object ( 
+    [deadline:ExerciceSheet:private] => 
+    [available:ExerciceSheet:private] => 
+    [questionnaireID:ExerciceSheet:private] => 
+    [questionnaireType:ExerciceSheet:private] => 
+    [questions:ExerciceSheet:private] => 
+    [db:ExerciceSheet:private] => PDO Object ( ) 
+  ) 
+  [title:protected] => Introduction to C++ 
+  [courseNotes:protected] => CourseNote Object ( 
+    [URL:CourseNote:private] => 
+  ) 
+  [db:protected] => PDO Object ( ) 
+)
+*/
+?>
