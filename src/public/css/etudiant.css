@@ -137,7 +137,7 @@ ol li {
 }
 
 #main {
-  background: #EEEEEE url(../images/dark.png);
+  background: #444;
 }
 
 
@@ -205,9 +205,10 @@ nav {
 
 #site_content { 
   width: 1000px;
+  background: #EEEEEE url(../images/dark.png);
   overflow: hidden;
   margin: 0px auto 0 auto;
-  padding: 15px 0 25px 0;
+  padding: 15px 10px 25px 10px;
   text-shadow: 0 1px #000;} 
 
 #sidebar_container { 

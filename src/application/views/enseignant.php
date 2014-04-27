@@ -43,7 +43,9 @@
                     <td><a href='.URL.'Professor/Examen>Feuille de l`examen</a></td>
                     </tr> -->
           </table>
-            <p style="padding-top: 15px; display: inline"><span>&nbsp;</span><a href='.URL.'Professor/SupprimerCours/?cours='.$cours->courseID().'" class="bouton" name="name">Supprimer ce cours</a></p>';
+            <p style="padding-top: 15px; display: inline"><span>&nbsp;</span><a href='.URL.'Professor/SupprimerCours/?cours='.$cours->courseID().'" class="bouton" name="name">Supprimer ce cours</a></p>
+             <p style="padding-top: 15px; display: inline"><span>&nbsp;</span><a href='.URL.'Professor/ViewNotes class="bouton" name="name">Consulter les notes</a></p>
+            ';
         }
         ?>
       </div>
