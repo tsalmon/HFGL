@@ -1,6 +1,7 @@
 <?php
 
 /**
+ * use https://github.com/panique/php-mvc bootstrap
  * HFGL application website
  *
  * @package hfgl
@@ -17,6 +18,10 @@ if (version_compare(PHP_VERSION, '5.3.7', '<')) {
     //require_once("application/libraries/password_compatibility_library.php");
 }
 
+if(!file_exists(getcwd().'/files') && !mkdir(getcwd().'/files')){
+	exit("Error: can't create repository");
+}
+
 // load the (optional) Composer auto-loader
 if (file_exists('vendor/autoload.php')) {
     require 'vendor/autoload.php';
@@ -29,5 +34,5 @@ require 'application/config/config.php';
 //load application class
 require 'application/libs/application.php';
 require 'application/libs/controller.php';
-$app = new Application();
+//$app = new Application();
 ?>
