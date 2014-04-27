@@ -30,7 +30,8 @@ class Chapter {
                 else{     
                     $this->chapterID=$id; 
                     if(isset($fetch['questionnaireID'])){
-                         $this->exercices=new ExerciceSheet($fetch['questionnaireID']);
+                        $this->exercices=new ExerciceSheet();
+                        $this->exercices->loadByID($fetch['questionnaireID']);
                     }
                     $this->title=$fetch['title']; 
                     $this->chapterNumber=$fetch['chapterNumber']; 
