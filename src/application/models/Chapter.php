@@ -10,6 +10,7 @@ class Chapter {
     //**********************
     
         protected $chapterID;
+        protected $questionnaireID;
         protected $chapterNumber;
         protected $exercices;
         protected $title;
@@ -31,7 +32,7 @@ class Chapter {
                     $this->chapterID=$id; 
                     if(isset($fetch['questionnaireID'])){
                         $this->exercices=new ExerciceSheet();
-                        $this->exercices->loadByID($fetch['questionnaireID']);
+                        $this->questionnaireID = $fetch['questionnaireID'];
                     }
                     $this->title=$fetch['title']; 
                     $this->chapterNumber=$fetch['chapterNumber']; 
@@ -46,8 +47,6 @@ class Chapter {
             }
         }  
         
-        
-        
     //      Accesseurs
     //***********************
                     
@@ -60,6 +59,7 @@ class Chapter {
         }
         
         public function exercices(){   
+            $this->exercices->loadByID($questionnaireID);
             return $this->exercices;         
         }
         
