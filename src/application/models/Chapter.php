@@ -58,8 +58,10 @@ class Chapter {
             return $this->chapterNumber;       
         }
         
-        public function exercices(){   
-            $this->exercices->loadByID($questionnaireID);
+        public function exercices(){ 
+            if(isset($questionnaireID)){
+                $this->exercices->loadByID($questionnaireID);
+            }
             return $this->exercices;         
         }
         
