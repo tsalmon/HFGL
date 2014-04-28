@@ -111,6 +111,14 @@ INSERT INTO `Tutor`(`personID`) VALUES
 INSERT INTO `Admin`(`personID`) VALUES
 (1);
 
+INSERT INTO `Result`(`studentID`, `questionnaireID`, `lastPoints`, `attemptsRemain`) VALUES
+(1, 1, 40, 3);
+
+INSERT INTO `FinalNote`(`studentID`, `courseID`, `tutorID`, `note`) VALUES
+(1,1,1,20),
+(1,2,1,14),
+(1,2,1,11);
+
 INSERT INTO `Teaching`(`tutorID`, `courseID`) VALUES
 (1,1),(1,2),(1,3),(1,4),(1,5),(1,6),(1,7);
 
