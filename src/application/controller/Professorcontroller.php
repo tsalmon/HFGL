@@ -90,13 +90,19 @@ class Professorcontroller extends Controller{
             if($_POST["lareponse"] == "free"){
                 $qt = new LQuestion($_POST["question"], $_POST["tip"], $_POST["points"]);
                 $qt->writeToDB();
-                $qt->writeToDBForQuestionnaireID($_SESSION["ex_id"]);
             } elseif($_POST["lareponse"] == "checkbox"){ //QCM
                 $qt = new QCMQuestion($_POST["question"], $_POST["tip"], $_POST["points"]);
+                $qt_id = $qt->writeToDB();
+                foreach ($_POST["r"] as $key => $value) {
+                    $a = new Answer($value, isset($_POST["c".$key]));
+                    $a->writeToDBForQuestionID($qt_id);
+                }
             } elseif ($_POST["lareponse"] == "lines"){
-
+                
             } elseif($_POST["lareponse"] == "code"){
-
+                $qt = new LQuestion($_POST["question"], $_POST["tip"], $_POST["points"]);
+                $qt->writeToDB();
+                $qt->writeToDBForQuestionnaireID($_SESSION["ex_id"]);
             }
         }
 
