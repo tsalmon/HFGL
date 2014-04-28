@@ -20,7 +20,7 @@ function testQCM(){
 
 function uniqueResponse(responses){
 	responses.sort();
-	for (var i = 0; i < arr.length - 1; i++) {
+	for (var i = 0; i < responses.length - 1; i++) {
     	if (responses[i + 1] == responses[i]) {
     		alert("Il ne doit pas y avoir de doublons dans les réponses d'un QCM");
     		return false;
