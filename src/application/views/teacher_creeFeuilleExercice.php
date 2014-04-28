@@ -3,44 +3,63 @@
     <div id="site_content">
       <div class="content">
         <h3>Création d'exercice</h3>
-        <p>Question n°<?php if(!isset($_POST["nb_qt"])){ echo "1";}else{ echo (intval($_POST["nb_qt"])+1);}?></p>
-        <form name="qtform" method="$_POST" action="<?php echo URL.'Professor/CreateExercice'?>">
-          <input type="hidden" name="nb_qt" value="<?php if(!isset($_POST["nb_qt"])){ echo "1";}else{ echo (intval($_POST["nb_qt"])+1);}?>"/>
+        <?php
+          $qt_nb = (!isset($_POST["nb_qt"])) ? 1 : $_POST["nb_qt"]+1;
+        ?>
+        <p>Question n°<?php echo $qt_nb; ?></p>
+        <?php
+          Controller::print_dbg($qt);
+        ?>
+        <form name="qtform" method="POST" action="<?php echo URL.'Professor/CreateExercice'?>" onsubmit="return testQCM();">
+          <input type="hidden" name="nb_qt" value="<?php echo $qt_nb; ?>"/>
           <table>
             <tr>
               <td>
                 Question
               </td>
               <td>
-                <input type="text" name="question" required/>
+                <span id="laquestion"><input type="text" name="question" required/></span>
               </td>
             </tr>
             <tr>
               <td>
-                Reponse
-                <select name="lareponse" id="lareponse" onchange="rep()">
-                  <option value="text">
-                    text
-                  </option>
-                  <option value="textarea">
-                    textarea
-                  </option>
-                  <option value="checkbox">
-                    checkbox
-                  </option>
-                  <option value="radio">
-                    radio
-                  </option>
-                </select>
-                <input type="hidden" id="reponsetype" name="reponsetype" value="text" />
+                Conseil
               </td>
-              <td id="thereponse">
-                <input type="text" name="reponse" placeholder="ecrivez ici la réponse" required/>
+              <td>
+                <input type="text" name="tip" required/></span>
               </td>
             </tr>
             <tr>
-              <td><input type="submit"/></td>
-              <td><input type="reset"/></td>
+              <td>
+                Points
+              </td>
+              <td>
+                <input type="number" name="points" required/></span>
+              </td>
+            </tr>            
+            <tr>
+              <td>
+                Reponse
+                <select name="lareponse" id="lareponse" onchange="rep()">
+                  <option value="free">
+                    Réponse libre
+                  </option>
+                  <option value="checkbox">
+                    QCM
+                  </option>
+                  <option value="lines">
+                    QRF
+                  </option>
+                 <option value="code">
+                    Programme
+                  </option>
+                </select>
+                <input type="hidden" id="reponsenb" name="reponsenb" value="libre" />
+              </td>
+              <td name="thereponse" id="thereponse">
+                <textarea disabled></textarea>
+                <!--<input type="text" name="reponse" placeholder="ecrivez ici la réponse" required/>-->
+              </td>
             </tr>
           </table>          
           <ul>

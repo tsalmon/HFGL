@@ -10,6 +10,7 @@ class Chapter {
     //**********************
     
         protected $chapterID;
+        protected $questionnaireID;
         protected $chapterNumber;
         protected $exercices;
         protected $title;
@@ -23,7 +24,7 @@ class Chapter {
             $this->db=PDOHelper::getInstance();            
             if($exists==true){
                 $res = $this->db->query("SELECT * FROM Chapter WHERE `chapterID`=".$id.";");
-                $fetch = $res->fetch(PDO::FETCH_ASSOC);     
+                $fetch = $res->fetch(PDO::FETCH_ASSOC);   
                 if($fetch==null){
                     throw new UnexpectedValueException("Chapitre non existant");
                 }   
@@ -31,7 +32,10 @@ class Chapter {
                     $this->chapterID=$id; 
                     if(isset($fetch['questionnaireID'])){
                         $this->exercices=new ExerciceSheet();
-                        $this->exercices->loadByID($fetch['questionnaireID']);
+                        $this->questionnaireID = $fetch['questionnaireID'];
+                    }
+                    if(isset($fetch['description'])){
+                        $this->description = $fetch['description']; 
                     }
                     $this->title=$fetch['title']; 
                     $this->chapterNumber=$fetch['chapterNumber']; 
@@ -46,8 +50,6 @@ class Chapter {
             }
         }  
         
-        
-        
     //      Accesseurs
     //***********************
                     
@@ -59,10 +61,20 @@ class Chapter {
             return $this->chapterNumber;       
         }
         
-        public function exercices(){   
+        public function exercices(){ 
+            if(isset($this->questionnaireID) && (null == $this->exercices->getID())){
+                $this->exercices->loadByID($this->questionnaireID); 
+            }
             return $this->exercices;         
-        }
+        }           
         
+        public function description(){
+            if(isset($this->description)){
+                return $this->description;
+            }
+            return null;
+        }
+
         public function title(){  
             return $this->title;          
         }    

@@ -74,10 +74,10 @@ class ExerciceSheet extends Document{
     //Add current questionnaire to database. Returns questionnaireID.
     public function writeToDatabase()
     {
-        echo "INSERT INTO `Questionnaire`(`questionnaireType`, `deadline`, `available`) VALUES(".Examen.",".$this->deadline.",".$this->available.")<br>";
+        //echo "INSERT INTO `Questionnaire`(`questionnaireType`, `deadline`, `available`) VALUES(".Examen.",".$this->deadline.",".$this->available.")<br>";
         PDOHelper::getInstance()->exec("INSERT INTO `Questionnaire`(`questionnaireType`, `deadline`, `available`) VALUES(".Examen.",".$this->deadline.",".$this->available.")");;
         $questionnaireID = PDOHelper::getInstance()->lastInsertID();
-        echo "Inserted questionnaireID:".$questionnaireID."<br>";
+        //echo "Inserted questionnaireID:".$questionnaireID."<br>";
 
         foreach ($this->questions as $question) {
            $question->writeToDBForQuestionnaireID($questionnaireID);

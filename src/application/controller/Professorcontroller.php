@@ -1,11 +1,16 @@
 <?php
 require_once 'application/models/Chapter.php';
+require_once 'application/models/QCMQuestion.php';
+require_once 'application/models/LQuestion.php';
+require_once 'application/models/QRFQuestion.php';
+require_once 'application/models/PQuestion.php';
 
 class Professorcontroller extends Controller{
 
     public function index(){ 
         $prof = $this->loadModel('PersonFactory')->getPerson($_SESSION["email"]);
         $cours_teaching = $this->loadModel('CourseTeaching')->getCourses($prof);
+        print_r($_SESSION);
         
         require 'application/views/_templates/header.php';
         require 'application/views/enseignant.php';
@@ -31,6 +36,7 @@ class Professorcontroller extends Controller{
     }
 
     public function CreateChapter(){
+        $page = "CreateChapter";
         $cours = CourseFactory::getCourse($_GET["cours"], true);
         $part = new Part($_GET["part"]);
         require 'application/views/_templates/header.php';
@@ -42,7 +48,7 @@ class Professorcontroller extends Controller{
         //Controller::print_dbg($_POST);
         //Controller::print_dbg($_FILES);
 
-        
+        /*
         if(pathinfo($_FILES["chp_file_lesson"]["name"], PATHINFO_EXTENSION) != "pdf"){
             $error = "pdf";
             Professorcontroller::CreateChapter();
@@ -60,7 +66,7 @@ class Professorcontroller extends Controller{
             Professorcontroller::CreateChapter();
             return ;
         }
-        
+        */
 
         /** Good part **/
         $chp = new Chapter($_POST["chp_name"], false);
@@ -71,14 +77,30 @@ class Professorcontroller extends Controller{
         $_SESSION["ex_part"] = $_GET["cours"];
         $_SESSION["ex_chpt"] = $chp->chapterID();
         
+        //todo: create new Questionnaire and save his ID in $_SESSION
+        $_SESSION["ex_id"] = 2;
+
         header('location: '.URL.'Professor/CreateExercice');
     }
 
     public function CreateExercice(){
         $page="CreateExercice";
-        
-        //$qt = $this->loadModel('ExerciceSheet');
-        //$qt = 
+
+        if(isset($_POST["nb_qt"])){ // if it's not the first question
+            if($_POST["lareponse"] == "free"){
+                $qt = new LQuestion($_POST["question"], $_POST["tip"], $_POST["points"]);
+                $qt->writeToDB();
+                $qt->writeToDBForQuestionnaireID($_SESSION["ex_id"]);
+            } elseif($_POST["lareponse"] == "checkbox"){ //QCM
+                $qt = new QCMQuestion($_POST["question"], $_POST["tip"], $_POST["points"]);
+            } elseif ($_POST["lareponse"] == "lines"){
+
+            } elseif($_POST["lareponse"] == "code"){
+
+            }
+        }
+
+        //todo: insert on BDD the last question
         require 'application/views/_templates/header.php';
         require 'application/views/teacher_creeFeuilleExercice.php';
         require 'application/views/_templates/footer.php';
