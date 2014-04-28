@@ -33,6 +33,7 @@ class Chapter {
                     if(isset($fetch['questionnaireID'])){
                         $this->exercices=new ExerciceSheet();
                         $this->questionnaireID = $fetch['questionnaireID'];
+                        echo "qt(".$fetch['title']." : ".$this->questionnaireID.")";
                     }
                     $this->title=$fetch['title']; 
                     $this->chapterNumber=$fetch['chapterNumber']; 
@@ -59,11 +60,11 @@ class Chapter {
         }
         
         public function exercices(){ 
-            if(isset($questionnaireID)){
-                $this->exercices->loadByID($questionnaireID);
+            if(isset($this->questionnaireID) && (null == $this->exercices->getID())){
+                $this->exercices->loadByID($this->questionnaireID); 
             }
             return $this->exercices;         
-        }
+        }           
         
         public function title(){  
             return $this->title;          
