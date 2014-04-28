@@ -24,7 +24,10 @@ class Chapter {
             $this->db=PDOHelper::getInstance();            
             if($exists==true){
                 $res = $this->db->query("SELECT * FROM Chapter WHERE `chapterID`=".$id.";");
-                $fetch = $res->fetch(PDO::FETCH_ASSOC);     
+                $fetch = $res->fetch(PDO::FETCH_ASSOC);   
+                echo "<pre>";
+                print_r($fetch);
+                echo "</pre>";
                 if($fetch==null){
                     throw new UnexpectedValueException("Chapitre non existant");
                 }   
@@ -33,7 +36,6 @@ class Chapter {
                     if(isset($fetch['questionnaireID'])){
                         $this->exercices=new ExerciceSheet();
                         $this->questionnaireID = $fetch['questionnaireID'];
-                        echo "qt(".$fetch['title']." : ".$this->questionnaireID.")";
                     }
                     $this->title=$fetch['title']; 
                     $this->chapterNumber=$fetch['chapterNumber']; 
