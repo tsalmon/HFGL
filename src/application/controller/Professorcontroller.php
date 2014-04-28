@@ -6,6 +6,7 @@ class Professorcontroller extends Controller{
     public function index(){ 
         $prof = $this->loadModel('PersonFactory')->getPerson($_SESSION["email"]);
         $cours_teaching = $this->loadModel('CourseTeaching')->getCourses($prof);
+        print_r($_SESSION);
         
         require 'application/views/_templates/header.php';
         require 'application/views/enseignant.php';
@@ -31,6 +32,7 @@ class Professorcontroller extends Controller{
     }
 
     public function CreateChapter(){
+        $page = "CreateChapter";
         $cours = CourseFactory::getCourse($_GET["cours"], true);
         $part = new Part($_GET["part"]);
         require 'application/views/_templates/header.php';
@@ -42,7 +44,7 @@ class Professorcontroller extends Controller{
         //Controller::print_dbg($_POST);
         //Controller::print_dbg($_FILES);
 
-        
+        /*
         if(pathinfo($_FILES["chp_file_lesson"]["name"], PATHINFO_EXTENSION) != "pdf"){
             $error = "pdf";
             Professorcontroller::CreateChapter();
@@ -60,7 +62,7 @@ class Professorcontroller extends Controller{
             Professorcontroller::CreateChapter();
             return ;
         }
-        
+        */
 
         /** Good part **/
         $chp = new Chapter($_POST["chp_name"], false);
@@ -71,14 +73,36 @@ class Professorcontroller extends Controller{
         $_SESSION["ex_part"] = $_GET["cours"];
         $_SESSION["ex_chpt"] = $chp->chapterID();
         
+        //todo: create new Questionnaire and save his ID in $_SESSION
+        $_SESSION["ex_id"] = 2;
+
         header('location: '.URL.'Professor/CreateExercice');
     }
 
+/*
+Array
+(
+    [nb_qt] => 12
+    [question] => yyyy
+    [lareponse] => checkbox
+    [reponsetype] => 3
+    [r] => Array
+        (
+            [0] => a
+            [1] => a
+            [2] => a
+            [3] => a
+            [4] => a
+        )
+
+    [c0] => on
+    [c2] => on
+    [c4] => on
+)
+*/
     public function CreateExercice(){
         $page="CreateExercice";
-        
-        //$qt = $this->loadModel('ExerciceSheet');
-        //$qt = 
+        //todo: insert on BDD the last question
         require 'application/views/_templates/header.php';
         require 'application/views/teacher_creeFeuilleExercice.php';
         require 'application/views/_templates/footer.php';

@@ -4,7 +4,9 @@
       <div class="content">
         <h3>Création d'exercice</h3>
         <p>Question n°<?php if(!isset($_POST["nb_qt"])){ echo "1";}else{ echo (intval($_POST["nb_qt"])+1);}?></p>
-        <form name="qtform" method="$_POST" action="<?php echo URL.'Professor/CreateExercice'?>">
+        <?php
+        ?>
+        <form name="qtform" method="POST" action="<?php echo URL.'Professor/CreateExercice'?>">
           <input type="hidden" name="nb_qt" value="<?php if(!isset($_POST["nb_qt"])){ echo "1";}else{ echo (intval($_POST["nb_qt"])+1);}?>"/>
           <table>
             <tr>
@@ -12,35 +14,32 @@
                 Question
               </td>
               <td>
-                <input type="text" name="question" required/>
+                <span id="laquestion"><input type="text" name="question" required/></span>
               </td>
             </tr>
             <tr>
               <td>
                 Reponse
                 <select name="lareponse" id="lareponse" onchange="rep()">
-                  <option value="text">
-                    text
-                  </option>
                   <option value="textarea">
-                    textarea
+                    Réponse libre
                   </option>
                   <option value="checkbox">
-                    checkbox
+                    QCM
                   </option>
-                  <option value="radio">
-                    radio
+                  <option value="lines">
+                    QRF
+                  </option>
+                 <option value="code">
+                    Programme
                   </option>
                 </select>
-                <input type="hidden" id="reponsetype" name="reponsetype" value="text" />
+                <input type="hidden" id="reponsetype" name="reponsetype" value="textarea" />
               </td>
               <td id="thereponse">
-                <input type="text" name="reponse" placeholder="ecrivez ici la réponse" required/>
+                <textarea disabled></textarea>
+                <!--<input type="text" name="reponse" placeholder="ecrivez ici la réponse" required/>-->
               </td>
-            </tr>
-            <tr>
-              <td><input type="submit"/></td>
-              <td><input type="reset"/></td>
             </tr>
           </table>          
           <ul>
