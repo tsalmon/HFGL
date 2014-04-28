@@ -1,5 +1,6 @@
 <?php
 require_once("Answer.php");
+require_once("QuestionTypeManager.php");
 
 abstract class Question {
     protected $assignment;
