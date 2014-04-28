@@ -1,5 +1,9 @@
 <?php
 require_once 'application/models/Chapter.php';
+require_once 'application/models/QCMQuestion.php';
+require_once 'application/models/LQuestion.php';
+require_once 'application/models/QRFQuestion.php';
+require_once 'application/models/PQuestion.php';
 
 class Professorcontroller extends Controller{
 
@@ -79,29 +83,23 @@ class Professorcontroller extends Controller{
         header('location: '.URL.'Professor/CreateExercice');
     }
 
-/*
-Array
-(
-    [nb_qt] => 12
-    [question] => yyyy
-    [lareponse] => checkbox
-    [reponsetype] => 3
-    [r] => Array
-        (
-            [0] => a
-            [1] => a
-            [2] => a
-            [3] => a
-            [4] => a
-        )
-
-    [c0] => on
-    [c2] => on
-    [c4] => on
-)
-*/
     public function CreateExercice(){
         $page="CreateExercice";
+
+        if(isset($_POST["nb_qt"])){ // if it's not the first question
+            if($_POST["lareponse"] == "free"){
+                $qt = new LQuestion($_POST["question"], $_POST["tip"], $_POST["points"]);
+                $qt->writeToDB();
+                $qt->writeToDBForQuestionnaireID($_SESSION["ex_id"]);
+            } elseif($_POST["lareponse"] == "checkbox"){ //QCM
+                $qt = new QCMQuestion($_POST["question"], $_POST["tip"], $_POST["points"]);
+            } elseif ($_POST["lareponse"] == "lines"){
+
+            } elseif($_POST["lareponse"] == "code"){
+
+            }
+        }
+
         //todo: insert on BDD the last question
         require 'application/views/_templates/header.php';
         require 'application/views/teacher_creeFeuilleExercice.php';
