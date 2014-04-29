@@ -98,7 +98,11 @@ class Professorcontroller extends Controller{
                     $a->writeToDBForQuestionID($qt_id);
                 }
             } elseif ($_POST["lareponse"] == "lines"){
-                
+                $qt = new QRFQuestion($_POST["question"], $_POST["tip"], $_POST["points"]);
+                foreach ($_POST["r"] as $key => $value) {
+                    $qt->addAnswer(new Answer($value, 1));
+                }
+                $qt->writeToDB();         
             } elseif($_POST["lareponse"] == "code"){
                 $qt = new LQuestion($_POST["question"], $_POST["tip"], $_POST["points"]);
                 $qt->writeToDB();

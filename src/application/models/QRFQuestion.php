@@ -48,10 +48,10 @@ class QRFQuestion extends Question
     /* Store question in DB. Returns questionID. */
 
     public function writeToDB(){
-        echo "INSERT INTO `Question`(`assignment`, `points`, `typeID`) VALUES ('".$this->assignment."',".$this->points.",".QRF.")<br>";
+        //echo "INSERT INTO `Question`(`assignment`, `points`, `typeID`) VALUES ('".$this->assignment."',".$this->points.",".QRF.")<br>";
         PDOHelper::getInstance()->exec("INSERT INTO `Question`(`assignment`, `points`, `typeID`) VALUES ('".$this->assignment."',".$this->points.",".QuestionTypeManager::getInstance()->getQrfID().")");
         $this->questionID = PDOHelper::getInstance()->lastInsertID();
-        echo "Inserted questionID:".$this->questionID."<br>";
+        //echo "Inserted questionID:".$this->questionID."<br>";
 
         foreach ($this->answers as $answer)
         {
