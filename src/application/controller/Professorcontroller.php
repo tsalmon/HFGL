@@ -8,9 +8,9 @@ require_once 'application/models/PQuestion.php';
 class Professorcontroller extends Controller{
 
     public function index(){ 
+        $page = "prof";
         $prof = $this->loadModel('PersonFactory')->getPerson($_SESSION["email"]);
         $cours_teaching = $this->loadModel('CourseTeaching')->getCourses($prof);
-        print_r($_SESSION);
         
         require 'application/views/_templates/header.php';
         require 'application/views/enseignant.php';
@@ -44,11 +44,7 @@ class Professorcontroller extends Controller{
         require 'application/views/_templates/footer.php';
     }
 
-    public function CreateChapter_ok(){
-        //Controller::print_dbg($_POST);
-        //Controller::print_dbg($_FILES);
-
-        /*
+    public function CreateChapter_ok(){ 
         if(pathinfo($_FILES["chp_file_lesson"]["name"], PATHINFO_EXTENSION) != "pdf"){
             $error = "pdf";
             Professorcontroller::CreateChapter();
@@ -66,7 +62,6 @@ class Professorcontroller extends Controller{
             Professorcontroller::CreateChapter();
             return ;
         }
-        */
 
         /** Good part **/
         $chp = new Chapter($_POST["chp_name"], false);
@@ -81,6 +76,11 @@ class Professorcontroller extends Controller{
         $_SESSION["ex_id"] = 2;
 
         header('location: '.URL.'Professor/CreateExercice');
+    }
+
+    public function CreatePart(){
+        
+        print("createpart ok : ".$_GET["cours"]);        
     }
 
     public function CreateExercice(){

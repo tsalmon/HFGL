@@ -47,7 +47,7 @@
                         alert(xmlhttp.responseText);
                     }
                 }
-                xmlhttp.open("GET", "'.URL.'Professor/CreatePart");
+                xmlhttp.open("GET", "'.URL.'Professor/CreatePart?cours="+id_cours+"");
                 xmlhttp.send();
             }
             </script>';
