@@ -11,7 +11,7 @@
                 <h2>Les travaux</h2>';
           echo '
           <table style="width:100%; border-spacing:0;">
-            <tr><th>Matière</th> <th>Documents</th></tr>';
+            <tr><th>Matière<a href="#'.($cours->title()).'" onclick=createPart('.$cours->courseID().');>[+]</a></td></th> <th>Documents</th></tr>';
             foreach ($cours->parts() as $part) {
                   echo '
                 <tr>
@@ -30,7 +30,7 @@
                 </tr>
 
                 <tr>
-                  <td>Projet</td> 
+                  <td>Projet</td>
                   <td><a href='.URL.'Professor/CreateProjet>[+]</a></td>
                 </tr>
 
