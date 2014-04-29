@@ -44,10 +44,15 @@
                 var nom_partie=prompt("Entrez le nom de la partie");
                 xmlhttp.onreadystatechange = function(){
                     if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
-                        alert(xmlhttp.responseText);
+                       var t = xmlhttp.responseText.split(" ");
+                       if(t[0] == "error"){
+                            alert("La partie existe deja");
+                       } else {
+                            location.reload();
+                       }
                     }
                 }
-                xmlhttp.open("GET", "'.URL.'Professor/CreatePart?cours="+id_cours+"");
+                xmlhttp.open("GET", "'.URL.'Professor/CreatePart?cours="+id_cours+"&part="+nom_partie+"");
                 xmlhttp.send();
             }
             </script>';

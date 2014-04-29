@@ -79,8 +79,16 @@ class Professorcontroller extends Controller{
     }
 
     public function CreatePart(){
-        
-        print("createpart ok : ".$_GET["cours"]);        
+        $cours = CourseFactory::getCourse($_GET["cours"], true);
+        foreach ($cours->parts() as $part) {
+            if($part->title() == $_GET["part"]){
+                print("error part_exist");
+                return ;
+            }
+        }
+        $p = new Part($_GET["part"], false);
+        $cours->addPart($p);
+        print("createpart ok");
     }
 
     public function CreateExercice(){
