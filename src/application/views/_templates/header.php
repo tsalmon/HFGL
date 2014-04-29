@@ -36,8 +36,23 @@
     <?php 
         if(isset($page) && $page == "CreateExercice"){
             echo '<script src="'.URL.'public/js/exercice.js"></script>';
+        } elseif(isset($page) && $page == "prof"){
+            echo '<script>
+            xmlhttp = new XMLHttpRequest();
+
+            function createPart(id_cours){
+                var nom_partie=prompt("Entrez le nom de la partie");
+                xmlhttp.onreadystatechange = function(){
+                    if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
+                        alert(xmlhttp.responseText);
+                    }
+                }
+                xmlhttp.open("GET", "'.URL.'Professor/CreatePart");
+                xmlhttp.send();
+            }
+            </script>';
         }
     ?>
-    <script src="<?php echo URL; ?>public/js/application.js"></script>
+    <!--<script src="<?php echo URL; ?>public/js/application.js"></script>-->
 </head>
 <body>
