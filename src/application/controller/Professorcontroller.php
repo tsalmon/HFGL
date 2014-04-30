@@ -8,9 +8,9 @@ require_once 'application/models/PQuestion.php';
 class Professorcontroller extends Controller{
 
     public function index(){ 
+        $page = "prof";
         $prof = $this->loadModel('PersonFactory')->getPerson($_SESSION["email"]);
         $cours_teaching = $this->loadModel('CourseTeaching')->getCourses($prof);
-        print_r($_SESSION);
         
         require 'application/views/_templates/header.php';
         require 'application/views/enseignant.php';
@@ -44,11 +44,7 @@ class Professorcontroller extends Controller{
         require 'application/views/_templates/footer.php';
     }
 
-    public function CreateChapter_ok(){
-        //Controller::print_dbg($_POST);
-        //Controller::print_dbg($_FILES);
-
-        /*
+    public function CreateChapter_ok(){ 
         if(pathinfo($_FILES["chp_file_lesson"]["name"], PATHINFO_EXTENSION) != "pdf"){
             $error = "pdf";
             Professorcontroller::CreateChapter();
@@ -66,7 +62,6 @@ class Professorcontroller extends Controller{
             Professorcontroller::CreateChapter();
             return ;
         }
-        */
 
         /** Good part **/
         $chp = new Chapter($_POST["chp_name"], false);
@@ -81,6 +76,19 @@ class Professorcontroller extends Controller{
         $_SESSION["ex_id"] = 2;
 
         header('location: '.URL.'Professor/CreateExercice');
+    }
+
+    public function CreatePart(){
+        $cours = CourseFactory::getCourse($_GET["cours"], true);
+        foreach ($cours->parts() as $part) {
+            if($part->title() == $_GET["part"]){
+                print("error part_exist");
+                return ;
+            }
+        }
+        $p = new Part($_GET["part"], false);
+        $cours->addPart($p);
+        print("createpart ok");
     }
 
     public function CreateExercice(){
@@ -98,7 +106,11 @@ class Professorcontroller extends Controller{
                     $a->writeToDBForQuestionID($qt_id);
                 }
             } elseif ($_POST["lareponse"] == "lines"){
-                
+                $qt = new QRFQuestion($_POST["question"], $_POST["tip"], $_POST["points"]);
+                foreach ($_POST["r"] as $key => $value) {
+                    $qt->addAnswer(new Answer($value, 1));
+                }
+                $qt->writeToDB();         
             } elseif($_POST["lareponse"] == "code"){
                 $qt = new LQuestion($_POST["question"], $_POST["tip"], $_POST["points"]);
                 $qt->writeToDB();

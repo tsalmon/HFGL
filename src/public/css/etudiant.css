@@ -223,7 +223,7 @@ nav {
   border-radius: 7px 7px 7px 7px;
   -moz-border-radius: 7px 7px 7px 7px;
   -webkit-border: 7px 7px 7px 7px;  
-  position: fixed;
+  /*position: fixed;*/
 }
 
 .sidebar { 
