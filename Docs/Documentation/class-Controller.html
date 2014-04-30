@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 2.8.0" />
+
+	<title>Class Controller | hfgl</title>
+
+	<script type="text/javascript" src="resources/combined.js?3383999903"></script>
+	<script type="text/javascript" src="elementlist.js?293504157"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+		</div>
+
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-Admin.html">Admin</a></li>
+				<li><a href="class-Answer.html">Answer</a></li>
+				<li><a href="class-Application.html">Application</a></li>
+				<li><a href="class-AutomaticCorrector.html">AutomaticCorrector</a></li>
+				<li><a href="class-Chapter.html">Chapter</a></li>
+				<li class="active"><a href="class-Controller.html">Controller</a></li>
+				<li><a href="class-Course.html">Course</a></li>
+				<li><a href="class-CourseFactory.html">CourseFactory</a></li>
+				<li><a href="class-CourseNote.html">CourseNote</a></li>
+				<li><a href="class-Coursescontroller.html">Coursescontroller</a></li>
+				<li><a href="class-CourseSubstcription.html">CourseSubstcription</a></li>
+				<li><a href="class-CourseTeaching.html">CourseTeaching</a></li>
+				<li><a href="class-Document.html">Document</a></li>
+				<li><a href="class-Exercicecontroller.html">Exercicecontroller</a></li>
+				<li><a href="class-ExerciceSheet.html">ExerciceSheet</a></li>
+				<li><a href="class-Logger.html">Logger</a></li>
+				<li><a href="class-LQuestion.html">LQuestion</a></li>
+				<li><a href="class-Part.html">Part</a></li>
+				<li><a href="class-PDOHelper.html">PDOHelper</a></li>
+				<li><a href="class-Person.html">Person</a></li>
+				<li><a href="class-PersonFactory.html">PersonFactory</a></li>
+				<li><a href="class-PQuestion.html">PQuestion</a></li>
+				<li><a href="class-Professor.html">Professor</a></li>
+				<li><a href="class-Professorcontroller.html">Professorcontroller</a></li>
+				<li><a href="class-QCMQuestion.html">QCMQuestion</a></li>
+				<li><a href="class-QRFQuestion.html">QRFQuestion</a></li>
+				<li><a href="class-Question.html">Question</a></li>
+				<li><a href="class-QuestionTypeManager.html">QuestionTypeManager</a></li>
+				<li><a href="class-Resource.html">Resource</a></li>
+				<li><a href="class-RoleTypeManager.html">RoleTypeManager</a></li>
+				<li><a href="class-Student.html">Student</a></li>
+				<li><a href="class-Studentcontroller.html">Studentcontroller</a></li>
+				<li><a href="class-TypeManager.html">TypeManager</a></li>
+				<li><a href="class-Welcomecontroller.html">Welcomecontroller</a></li>
+				<li><a href="class-WelcomeModel.html">WelcomeModel</a></li>
+				<li><a href="class-XMLHelper.html">XMLHelper</a></li>
+			</ul>
+
+			<h3>Interfaces</h3>
+			<ul>
+				<li><a href="class-Corrector.html">Corrector</a></li>
+			</ul>
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="" />
+		<input type="hidden" name="ie" value="UTF-8" />
+		<input type="text" name="q" class="text" />
+		<input type="submit" value="Search" />
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class Controller</h1>
+
+
+	<div class="description">
+	
+<p>This is the "base controller class". All other "real" controllers extend this
+class.</p>
+
+	</div>
+
+
+
+	<div>
+		<h4>Direct known subclasses</h4>
+			<a href="class-Coursescontroller.html">Coursescontroller</a>, 
+			<a href="class-Exercicecontroller.html">Exercicecontroller</a>, 
+			<a href="class-Professorcontroller.html">Professorcontroller</a>, 
+			<a href="class-Studentcontroller.html">Studentcontroller</a>, 
+			<a href="class-Welcomecontroller.html">Welcomecontroller</a>
+	</div>
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		
+		
+
+		<b>Located at</b> <a href="source-class-Controller.html#3-59" title="Go to source code">src/application/libs/controller.php</a><br />
+	</div>
+
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__construct" id="___construct">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___construct">#</a>
+		<code><a href="source-class-Controller.html#13-20" title="Go to source code">__construct</a>( )</code>
+
+		<div class="description short">
+			
+<p>Whenever a controller is created, open a database connection too. The idea
+behind is to have ONE connection that can be used by multiple models (there are
+frameworks that open one connection per model).</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Whenever a controller is created, open a database connection too. The idea
+behind is to have ONE connection that can be used by multiple models (there are
+frameworks that open one connection per model).</p>
+
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="print_dbg" id="_print_dbg">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_print_dbg">#</a>
+		<code><a href="source-class-Controller.html#22-29" title="Go to source code">print_dbg</a>( <span>mixed <var>$obj</var></span> )</code>
+
+		<div class="description short">
+			
+<p>print an object with a regular indentation</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>print an object with a regular indentation</p>
+
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="loadModel" id="_loadModel">
+
+		<td class="attributes"><code>
+			 public 
+			object
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_loadModel">#</a>
+		<code><a href="source-class-Controller.html#47-58" title="Go to source code">loadModel</a>( <span>string <var>$model_name</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Load the model with the given name. Note that the model class name is written
+in "CamelCase", the model's filename is the same in lowercase letters</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Load the model with the given name. Note that the model class name is written
+in "CamelCase", the model's filename is the same in lowercase letters</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$model_name</var></dt>
+					<dd><code>string</code><br>$model_name The name of the model</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>object</code><br>model<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+	<table class="summary" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="db" id="$db">
+		<td class="attributes"><code>
+			public  
+			null
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Controller.html#8-11" title="Go to source code"><var>$db</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">null</span></code></td>
+		<td class="description"><div>
+			<a href="#$db" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Database Connection</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Database Connection</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		hfgl API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>

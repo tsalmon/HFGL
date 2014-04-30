@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 2.8.0" />
+
+	<title>Class Exercicecontroller | hfgl</title>
+
+	<script type="text/javascript" src="resources/combined.js?3383999903"></script>
+	<script type="text/javascript" src="elementlist.js?293504157"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+		</div>
+
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-Admin.html">Admin</a></li>
+				<li><a href="class-Answer.html">Answer</a></li>
+				<li><a href="class-Application.html">Application</a></li>
+				<li><a href="class-AutomaticCorrector.html">AutomaticCorrector</a></li>
+				<li><a href="class-Chapter.html">Chapter</a></li>
+				<li><a href="class-Controller.html">Controller</a></li>
+				<li><a href="class-Course.html">Course</a></li>
+				<li><a href="class-CourseFactory.html">CourseFactory</a></li>
+				<li><a href="class-CourseNote.html">CourseNote</a></li>
+				<li><a href="class-Coursescontroller.html">Coursescontroller</a></li>
+				<li><a href="class-CourseSubstcription.html">CourseSubstcription</a></li>
+				<li><a href="class-CourseTeaching.html">CourseTeaching</a></li>
+				<li><a href="class-Document.html">Document</a></li>
+				<li class="active"><a href="class-Exercicecontroller.html">Exercicecontroller</a></li>
+				<li><a href="class-ExerciceSheet.html">ExerciceSheet</a></li>
+				<li><a href="class-Logger.html">Logger</a></li>
+				<li><a href="class-LQuestion.html">LQuestion</a></li>
+				<li><a href="class-Part.html">Part</a></li>
+				<li><a href="class-PDOHelper.html">PDOHelper</a></li>
+				<li><a href="class-Person.html">Person</a></li>
+				<li><a href="class-PersonFactory.html">PersonFactory</a></li>
+				<li><a href="class-PQuestion.html">PQuestion</a></li>
+				<li><a href="class-Professor.html">Professor</a></li>
+				<li><a href="class-Professorcontroller.html">Professorcontroller</a></li>
+				<li><a href="class-QCMQuestion.html">QCMQuestion</a></li>
+				<li><a href="class-QRFQuestion.html">QRFQuestion</a></li>
+				<li><a href="class-Question.html">Question</a></li>
+				<li><a href="class-QuestionTypeManager.html">QuestionTypeManager</a></li>
+				<li><a href="class-Resource.html">Resource</a></li>
+				<li><a href="class-RoleTypeManager.html">RoleTypeManager</a></li>
+				<li><a href="class-Student.html">Student</a></li>
+				<li><a href="class-Studentcontroller.html">Studentcontroller</a></li>
+				<li><a href="class-TypeManager.html">TypeManager</a></li>
+				<li><a href="class-Welcomecontroller.html">Welcomecontroller</a></li>
+				<li><a href="class-WelcomeModel.html">WelcomeModel</a></li>
+				<li><a href="class-XMLHelper.html">XMLHelper</a></li>
+			</ul>
+
+			<h3>Interfaces</h3>
+			<ul>
+				<li><a href="class-Corrector.html">Corrector</a></li>
+			</ul>
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="" />
+		<input type="hidden" name="ie" value="UTF-8" />
+		<input type="text" name="q" class="text" />
+		<input type="submit" value="Search" />
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class Exercicecontroller</h1>
+
+
+	<div class="description">
+	
+<p>This is the "base controller class". All other "real" controllers extend this
+class.</p>
+
+	</div>
+
+	<dl class="tree">
+		<dd style="padding-left:0px">
+			<a href="class-Controller.html"><span>Controller</span></a>
+			
+			
+			
+		</dd>
+		<dd style="padding-left:30px">
+			<img src="resources/inherit.png" alt="Extended by" />
+<b><span>Exercicecontroller</span></b>			
+			
+			
+		</dd>
+	</dl>
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		
+		
+
+		<b>Located at</b> <a href="source-class-Exercicecontroller.html#2-143" title="Go to source code">src/application/controller/Exercicecontroller.php</a><br />
+	</div>
+
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__construct" id="___construct">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___construct">#</a>
+		<code><a href="source-class-Exercicecontroller.html#12-15" title="Go to source code">__construct</a>( )</code>
+
+		<div class="description short">
+			
+<p>Whenever a controller is created, open a database connection too. The idea
+behind is to have ONE connection that can be used by multiple models (there are
+frameworks that open one connection per model).</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Whenever a controller is created, open a database connection too. The idea
+behind is to have ONE connection that can be used by multiple models (there are
+frameworks that open one connection per model).</p>
+
+
+
+
+
+
+
+				<h4>Overrides</h4>
+				<div class="list"><code><a href="class-Controller.html#___construct">Controller::__construct()</a></code></div>
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="index" id="_index">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_index">#</a>
+		<code><a href="source-class-Exercicecontroller.html#17-26" title="Go to source code">index</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="Liste" id="_Liste">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_Liste">#</a>
+		<code><a href="source-class-Exercicecontroller.html#28-31" title="Go to source code">Liste</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="Rendre" id="_Rendre">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_Rendre">#</a>
+		<code><a href="source-class-Exercicecontroller.html#32-35" title="Go to source code">Rendre</a>( <span>mixed <var>$exercice_id</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="DoExercise" id="_DoExercise">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_DoExercise">#</a>
+		<code><a href="source-class-Exercicecontroller.html#37-40" title="Go to source code">DoExercise</a>( <span>mixed <var>$exercice_id</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="startExercice" id="_startExercice">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_startExercice">#</a>
+		<code><a href="source-class-Exercicecontroller.html#66-69" title="Go to source code">startExercice</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="QCMExerciceResponse" id="_QCMExerciceResponse">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_QCMExerciceResponse">#</a>
+		<code><a href="source-class-Exercicecontroller.html#71-96" title="Go to source code">QCMExerciceResponse</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="QRFExerciceResponse" id="_QRFExerciceResponse">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_QRFExerciceResponse">#</a>
+		<code><a href="source-class-Exercicecontroller.html#98-124" title="Go to source code">QRFExerciceResponse</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="PExerciceResponse" id="_PExerciceResponse">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_PExerciceResponse">#</a>
+		<code><a href="source-class-Exercicecontroller.html#126-129" title="Go to source code">PExerciceResponse</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="LExerciceResponse" id="_LExerciceResponse">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_LExerciceResponse">#</a>
+		<code><a href="source-class-Exercicecontroller.html#131-142" title="Go to source code">LExerciceResponse</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Methods inherited from <a href="class-Controller.html#methods">Controller</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Controller.html#_loadModel">loadModel()</a>, 
+			<a href="class-Controller.html#_print_dbg">print_dbg()</a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+	<table class="summary inherited">
+	<caption>Properties inherited from <a href="class-Controller.html#properties">Controller</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Controller.html#$db"><var>$db</var></a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		hfgl API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>
