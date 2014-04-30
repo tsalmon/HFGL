@@ -115,7 +115,7 @@ class Exercicecontroller extends Controller{
                     }
                 } 
 
-                PDOHelper::getInstance()->exec("INSERT INTO `Points`(`studentID`, `questionID`, `response`, `note`) VALUES (1,".$questionID.", ".$key.", ".$value.")");
+                PDOHelper::getInstance()->exec("INSERT INTO `Points`(`studentID`, `questionID`, `response`, `note`) VALUES (1,".$question->getID().", ".$key.", ".$value.")");
             }
         }
 
@@ -125,7 +125,56 @@ class Exercicecontroller extends Controller{
 
     public function PExerciceResponse()
     {
+        foreach ($_POST as $key => $value) {
+            if(!$this->incCount($key, $value))
+            {
+                $question = Question::getQuestionByID($value);
+                $tests = $question->getTests();
+                $resources = $question->getResources();
+                $note = 0;
+                echo "Nombre de fichiers ".count($_FILES)."<br>";
+                if ($_FILES[$value]["error"] > 0) {
+                    echo "Error: " . $_FILES[$value]["error"] . "<br>";
+                } else {
+                    echo "Upload: " . $_FILES[$value]["name"] . "<br>";
+                    echo "Type: " . $_FILES[$value]["type"] . "<br>";
+                    echo "Size: " . ($_FILES[$value]["size"] / 1024) . " kB<br>";
+                    echo "Stored in: " . $_FILES[$value]["tmp_name"]."<br>";
+                }
 
+                echo "Tests<br /><hr/>";
+                foreach($tests as $test) {
+                    echo "Input: ".$test->getInput()."<br />";
+                    echo "Output: ".$test->getOutput()."<br />";
+
+                    //passer le test
+                } 
+
+                echo "Resources<br /><hr/>";
+                foreach($resources as $resource) {
+                    echo "Content: ".$resource->getContent()."<br />";
+                    $last_line = system($resource->getContent(), $retval);
+                    echo '
+                    </pre>
+                    <hr />Derniere ligne de la sortie: ' . $last_line . '
+                    <hr />Valeur de retour: ' . $retval.'<br />';
+                } 
+
+
+                PDOHelper::getInstance()->exec("INSERT INTO `Points`(`studentID`, `questionID`, `response`, `note`) VALUES (1,".$question->getID().", ".$key.", ".$value.")");
+            }
+        }
+
+        /*
+        foreach ($_POST as $key => $value) {
+            if(!$this->incCount($key, $value))
+            {
+                echo "Pquestion key: ".$key." value: ".$value;
+                //PDOHelper::getInstance()->exec("INSERT INTO `Points`(`studentID`, `questionID`, `response`, `note`) VALUES (1,".$questionID.", ".$key.", ".$value.")");
+            }
+        }*/
+
+        $this->nextQuestion();
     }
 
     public function LExerciceResponse()

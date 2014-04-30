@@ -40,8 +40,10 @@
                  } 
 
                  if ($currentQuestion instanceof PQuestion) {
-                    echo '<form action="PExerciceResponse" method="POST">';
-                    echo '<input type="file" name='.$currentQuestion->getID().' <br>';
+                    echo '<form enctype="multipart/form-data" action="PExerciceResponse" method="POST">';
+                    //echo '<input type="hidden" name="MAX_FILE_SIZE" value="30000" />';
+                    echo '<input type="hidden" name="questionID" value='.$currentQuestion->getID().'>';
+                    echo '<input type="file" name='.$currentQuestion->getID().' id="file" enctype="multipart/form-data"> <br>';
                  }
 
                  if ($currentQuestion instanceof LQuestion) {
