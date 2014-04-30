@@ -3,7 +3,7 @@
 class Resource {
     private $questionID;
     private $type;
-    private $content;
+    private $content
 
     public function getQuestionID(){
         return $this->questionID;
