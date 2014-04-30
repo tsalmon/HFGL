@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 2.8.0" />
+	<meta name="robots" content="noindex" />
+
+	<title>File src/application/models/TypeManager.php | hfgl</title>
+
+	<script type="text/javascript" src="resources/combined.js?3383999903"></script>
+	<script type="text/javascript" src="elementlist.js?293504157"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+		</div>
+
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-Admin.html">Admin</a></li>
+				<li><a href="class-Answer.html">Answer</a></li>
+				<li><a href="class-Application.html">Application</a></li>
+				<li><a href="class-AutomaticCorrector.html">AutomaticCorrector</a></li>
+				<li><a href="class-Chapter.html">Chapter</a></li>
+				<li><a href="class-Controller.html">Controller</a></li>
+				<li><a href="class-Course.html">Course</a></li>
+				<li><a href="class-CourseFactory.html">CourseFactory</a></li>
+				<li><a href="class-CourseNote.html">CourseNote</a></li>
+				<li><a href="class-Coursescontroller.html">Coursescontroller</a></li>
+				<li><a href="class-CourseSubstcription.html">CourseSubstcription</a></li>
+				<li><a href="class-CourseTeaching.html">CourseTeaching</a></li>
+				<li><a href="class-Document.html">Document</a></li>
+				<li><a href="class-Exercicecontroller.html">Exercicecontroller</a></li>
+				<li><a href="class-ExerciceSheet.html">ExerciceSheet</a></li>
+				<li><a href="class-Logger.html">Logger</a></li>
+				<li><a href="class-LQuestion.html">LQuestion</a></li>
+				<li><a href="class-Part.html">Part</a></li>
+				<li><a href="class-PDOHelper.html">PDOHelper</a></li>
+				<li><a href="class-Person.html">Person</a></li>
+				<li><a href="class-PersonFactory.html">PersonFactory</a></li>
+				<li><a href="class-PQuestion.html">PQuestion</a></li>
+				<li><a href="class-Professor.html">Professor</a></li>
+				<li><a href="class-Professorcontroller.html">Professorcontroller</a></li>
+				<li><a href="class-QCMQuestion.html">QCMQuestion</a></li>
+				<li><a href="class-QRFQuestion.html">QRFQuestion</a></li>
+				<li><a href="class-Question.html">Question</a></li>
+				<li><a href="class-QuestionTypeManager.html">QuestionTypeManager</a></li>
+				<li><a href="class-Resource.html">Resource</a></li>
+				<li><a href="class-RoleTypeManager.html">RoleTypeManager</a></li>
+				<li><a href="class-Student.html">Student</a></li>
+				<li><a href="class-Studentcontroller.html">Studentcontroller</a></li>
+				<li class="active"><a href="class-TypeManager.html">TypeManager</a></li>
+				<li><a href="class-Welcomecontroller.html">Welcomecontroller</a></li>
+				<li><a href="class-WelcomeModel.html">WelcomeModel</a></li>
+				<li><a href="class-XMLHelper.html">XMLHelper</a></li>
+			</ul>
+
+			<h3>Interfaces</h3>
+			<ul>
+				<li><a href="class-Corrector.html">Corrector</a></li>
+			</ul>
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="" />
+		<input type="hidden" name="ie" value="UTF-8" />
+		<input type="text" name="q" class="text" />
+		<input type="submit" value="Search" />
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="class-TypeManager.html" title="Summary of TypeManager"><span>Class</span></a>
+			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<pre><code><span id="1" class="l"><a class="l" href="#1"> 1: </a><span class="xlang">&lt;?php</span>
+</span><span id="2" class="l"><a class="l" href="#2"> 2: </a>
+</span><span id="3" class="l"><a class="l" href="#3"> 3: </a><span class="php-keyword1">abstract</span> <span class="php-keyword1">class</span> <a id="TypeManager" href="#TypeManager">TypeManager</a> {
+</span><span id="4" class="l"><a class="l" href="#4"> 4: </a>    <span class="php-keyword1">protected</span>  <span class="php-var"><a id="$typeTable" href="#$typeTable">$typeTable</a></span>;
+</span><span id="5" class="l"><a class="l" href="#5"> 5: </a>    <span class="php-keyword1">protected</span>  <span class="php-var"><a id="$idField" href="#$idField">$idField</a></span>;
+</span><span id="6" class="l"><a class="l" href="#6"> 6: </a>    <span class="php-keyword1">protected</span>  <span class="php-var"><a id="$nameField" href="#$nameField">$nameField</a></span>;
+</span><span id="7" class="l"><a class="l" href="#7"> 7: </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">abstract</span> <span class="php-keyword1">function</span> <a id="_refresh" href="#_refresh">refresh</a>();
+</span><span id="8" class="l"><a class="l" href="#8"> 8: </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">function</span> <a id="_getIdForTypeName" href="#_getIdForTypeName">getIdForTypeName</a>(<span class="php-var">$typeName</span>){
+</span><span id="9" class="l"><a class="l" href="#9"> 9: </a>        <span class="php-var">$typeRequest</span>  = <span class="php-quote">&quot;SELECT &quot;</span>.<span class="php-var">$this</span>-&gt;idField.<span class="php-quote">&quot; FROM &quot;</span>.<span class="php-var">$this</span>-&gt;typeTable.<span class="php-quote">&quot; WHERE &quot;</span>.<span class="php-var">$this</span>-&gt;nameField.<span class="php-quote">&quot;='&quot;</span>.<span class="php-var">$typeName</span>.<span class="php-quote">&quot;'&quot;</span>;
+</span><span id="10" class="l"><a class="l" href="#10">10: </a>        <span class="php-comment">//echo $typeRequest;</span>
+</span><span id="11" class="l"><a class="l" href="#11">11: </a>        <span class="php-keyword1">if</span>(<span class="php-var">$typeRequestResult</span> = PDOHelper::getInstance()-&gt;query(<span class="php-var">$typeRequest</span>))
+</span><span id="12" class="l"><a class="l" href="#12">12: </a>        {
+</span><span id="13" class="l"><a class="l" href="#13">13: </a>            <span class="php-var">$currentTypeRow</span> = <span class="php-var">$typeRequestResult</span>-&gt;fetch(PDO::FETCH_ASSOC);
+</span><span id="14" class="l"><a class="l" href="#14">14: </a>            <span class="php-keyword1">return</span> <span class="php-var">$currentTypeRow</span>[<span class="php-var">$this</span>-&gt;idField];
+</span><span id="15" class="l"><a class="l" href="#15">15: </a>        }
+</span><span id="16" class="l"><a class="l" href="#16">16: </a>        <span class="php-keyword1">else</span>
+</span><span id="17" class="l"><a class="l" href="#17">17: </a>        {
+</span><span id="18" class="l"><a class="l" href="#18">18: </a>            <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> Exception(<span class="php-quote">&quot;No &quot;</span>.<span class="php-var">$typeName</span>.<span class="php-quote">&quot; ID in the table &quot;</span>.<span class="php-var">$this</span>-&gt;typeTable.<span class="php-quote">&quot;&quot;</span>);
+</span><span id="19" class="l"><a class="l" href="#19">19: </a>        }
+</span><span id="20" class="l"><a class="l" href="#20">20: </a>    }
+</span><span id="21" class="l"><a class="l" href="#21">21: </a>    <span class="php-keyword1">protected</span> <span class="php-keyword1">static</span> <span class="php-var"><a id="$sharedInstance" href="#$sharedInstance">$sharedInstance</a></span> = <span class="php-keyword1">null</span>;
+</span><span id="22" class="l"><a class="l" href="#22">22: </a></span>}</code></pre>
+
+	<div id="footer">
+		hfgl API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>
