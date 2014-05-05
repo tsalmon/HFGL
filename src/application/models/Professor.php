@@ -29,8 +29,9 @@ class Professor extends Person implements Corrector{
                 if($this->mailExists($mail)){
                     throw new UnexpectedValueException("Utilisateur existant");
                 }
-                $lastid=$this->createEntry($mail);
-                $this->db->exec("INSERT INTO Tutor (personID) VALUES (".$lastid.");");   
+                $role=RoleTypeManager::getInstance()->getTutorID();
+                $lastid=$this->createEntry($mail,$role);
+                $this->db->exec("INSERT INTO Tutor (personID) VALUES (".$lastid.");"); 
                 $this->tutorID=$this->db->lastInsertId();              
             }
         }

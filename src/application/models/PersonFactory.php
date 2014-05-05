@@ -76,7 +76,6 @@ class PersonFactory {
                    }
                 catch(UnexpectedValueException $e){
                     throw new UnexpectedValueException("Utilisateur non existant");}                
-             
             }
             $key=$res->personID();
             PersonFactory::$persons[$key]=&$res;
