@@ -21,12 +21,13 @@ class Welcomecontroller extends Controller
     {
         $page = "inscription";    
         $inscription_error = array();
-        $inscription_model = $this->loadModel('Welcomemodel');
+        $inscription_model = $this->loadModel('PersonFactory');
+
+        $_POST["inscr_firstname"] = ucfirst($_POST["inscr_firstname"]);
+        $_POST["inscr_surname"] = ucfirst($_POST["inscr_surname"]);
+
 
         //user errors
-        if($inscription_model->user_exist($_POST["inscr_mail"])){ // user already exist (we check if the email address is already saved in the database)
-            $inscription_error["usr"] = true;  
-        }
         if(!preg_match('/^[A-Z][a-z]+$/', $_POST["inscr_firstname"])){ //math usr firstname invalid
             $inscription_error["usr_fn_regex"] = true;              
         }
@@ -66,15 +67,40 @@ class Welcomecontroller extends Controller
             foreach ($inscription_error as $key => $value) {
                 $_POST[$key] = $value;
             }
+            Welcomecontroller::inscription_failed();
+            return ;
+        }
+        // user already exist (we check if the email address is already saved in the database
+
+        if($_POST["role"] == "student"){
+            try{
+                $inscription_model->createStudent($_POST["inscr_mail"], $_POST["inscr_firstname"],$_POST["inscr_surname"],$_POST["inscr_pwd"],0);
+            } catch(UnexpectedValueException $e){
+                $inscription_error["usr"] = true;  
+                Welcomecontroller::inscription_failed();
+            }
+        } elseif($_POST["role"] == "teacher"){
+            try{
+                $inscription_model->createProfessor($_POST["inscr_mail"], $_POST["inscr_firstname"],$_POST["inscr_surname"],$_POST["inscr_pwd"],0); 
+            } catch(UnexpectedValueException $e){
+                $inscription_error["usr"] = true;  
+                Welcomecontroller::inscription_failed();
+            }
+        } elseif($_POST["role"] == "admin") {
+            exit("lol fuck you :)");
+        } else {
+            exit("role not exist");
+        }
+        if(!isset($inscription_error["usr"])){
+            header('location: ' . URL . 'Welcome/Inscription_ok');
+        }   
+    }
+
+    public function inscription_failed(){
             $page = "inscription_failed";
             require 'application/views/_templates/header.php';
             require 'application/views/inscription.php';       
             require 'application/views/_templates/footer.php';        
-        } else {
-            $inscription_model->addPerson($_POST["inscr_firstname"],$_POST["inscr_surname"], $_POST["inscr_pwd"], $_POST["inscr_mail"]);
-            header('location: ' . URL . 'Welcome/Inscription_ok');
-        }
-        //require 'application/views/_templates/footer.php';
     }
 
     public function Inscription_ok(){
