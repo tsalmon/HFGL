@@ -25,7 +25,6 @@
                 $page_css = "connexion";
                 echo '<link href="'.URL.'public/css/inscription.css" rel="stylesheet">';
             } else {
-            echo '<link href="'.URL.'public/css/'.$page_css.'.css" rel="stylesheet">';
                 $page_css = $page;
             }
             echo '<link href="'.URL.'public/css/'.$page_css.'.css" rel="stylesheet">';

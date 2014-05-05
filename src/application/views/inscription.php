@@ -81,7 +81,7 @@ if(isset($_POST)){
 				<?php
 					if($errors_inscr && isset($errors_inscr["mail_regex"])){
 						echo "Votre adresse email n'est pas correcte.";
-					} else if($errors_inscr && $errors_inscr["usr"]){
+					} else if($errors_inscr && isset($errors_inscr["usr"])){
 						echo "Votre adresse est déjà utilisée.";
 					}
 				?>
