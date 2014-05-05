@@ -1,5 +1,4 @@
-﻿<div id="middle">
-	
+﻿<div class="middle_connexion" id="middle"> 
 	<form action="<?php echo URL; ?>Welcome/Connexion" method="POST" id="middleform">
 		<a href="<?php echo URL; ?>Welcome/"><h1 id="hfgl">Bienvenue sur HFGL</h1></a>
 		<p id="quote">Have Fun, Good Learning</p>
