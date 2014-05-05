@@ -67,7 +67,7 @@ class Welcomecontroller extends Controller
             foreach ($inscription_error as $key => $value) {
                 $_POST[$key] = $value;
             }
-            inscription_failed();
+            Welcomecontroller::inscription_failed();
             return ;
         }
         // user already exist (we check if the email address is already saved in the database
@@ -77,14 +77,14 @@ class Welcomecontroller extends Controller
                 $inscription_model->createStudent($_POST["inscr_mail"], $_POST["inscr_firstname"],$_POST["inscr_surname"],$_POST["inscr_pwd"],0);
             } catch(UnexpectedValueException $e){
                 $inscription_error["usr"] = true;  
-                inscription_failed();
+                Welcomecontroller::inscription_failed();
             }
-        } elseif($_POST["role"] == "professor"){
+        } elseif($_POST["role"] == "teacher"){
             try{
                 $inscription_model->createProfessor($_POST["inscr_mail"], $_POST["inscr_firstname"],$_POST["inscr_surname"],$_POST["inscr_pwd"],0); 
             } catch(UnexpectedValueException $e){
                 $inscription_error["usr"] = true;  
-                inscription_failed();
+                Welcomecontroller::inscription_failed();
             }
         } elseif($_POST["role"] == "admin") {
             exit("lol fuck you :)");

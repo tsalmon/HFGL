@@ -22,7 +22,7 @@ if(isset($_POST)){
 					required/>
 			<label>
 				<?php
-					if($errors_inscr && $errors_inscr["usr_sn_regex"]){
+					if($errors_inscr && isset($errors_inscr["usr_sn_regex"])){
 						echo "Votre nom n'est pas correct.";
 					}
 				?>
@@ -36,7 +36,7 @@ if(isset($_POST)){
 					required/>
 			<label>
 				<?php
-					if($errors_inscr && $errors_inscr["usr_fn_regex"]){
+					if($errors_inscr && isset($errors_inscr["usr_fn_regex"])){
 						echo "Votre prénom n'est pas correct.";
 					}
 				?>
