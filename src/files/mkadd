@@ -1,1 +1,0 @@
-gcc -Wall -o add files/add.c;./add 1 2

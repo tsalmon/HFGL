@@ -41,8 +41,8 @@
 
                  if ($currentQuestion instanceof PQuestion) {
                     echo '<form enctype="multipart/form-data" action="PExerciceResponse" method="POST">';
-                    //echo '<input type="hidden" name="MAX_FILE_SIZE" value="30000" />';
                     echo '<input type="hidden" name="questionID" value='.$currentQuestion->getID().'>';
+                    echo 'Le nom de fichier à charger doit être: '.$filename.'<br>';
                     echo '<input type="file" name='.$currentQuestion->getID().' id="file" enctype="multipart/form-data"> <br>';
                  }
 
