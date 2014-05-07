@@ -51,7 +51,7 @@ class Exercicecontroller extends Controller{
             $this->started = True;
             if ($key == "currentQuestionNumber") {
                 $this->currentQuestionNumber = $value+1; 
-                return True;     
+                return True;
             }
 
             if ($key == "questionsCount") {
