@@ -23,8 +23,17 @@ INSERT INTO `Question`(`assignment`, `points`, `typeID`) VALUES
 ('In C/CPP Programming binary operator needs _______ operand.',2,1),
 ('A function which invokes itself repeatedly until some condition is satisfied is called ___________',2,1),
 ('Describe the weather',2,4),
-('Enter five first letters of english alphabet',2,2);
+('Enter five first letters of english alphabet',2,2),
+('Write a C program which takes two int values as parameters and returns the result of their addition. Input example: "1 2" Output: "3".',5,3);
 
+INSERT INTO `Resource`(`questionID`, `type`, `content`) VALUES
+(11, "make", "makeadd"),
+(11, "filename", "add.c"),
+(11, "execname", "add");
+
+INSERT INTO `Tests`(`questionID`,`input`,`output`) VALUES
+(11, "1 2", "3"),
+(11, "5 5", "10");
 
 INSERT INTO `Response`(`questionID`, `content`,`correct`) VALUES
 (1,'here()',0),
@@ -64,7 +73,6 @@ INSERT INTO `Response`(`questionID`, `content`,`correct`) VALUES
 
 INSERT INTO `Questions`(`questionnaireID`, `questionID`) VALUES
 (1,1),(1,2),(1,3),(1,4),(1,5),(1,6),(1,7),(1,8);
-
 
 INSERT INTO `Course`(`title`, `description`) VALUES
 ('Algortihms','In this course you will learn several fundamental principles of algorithm design: divide-and-conquer methods, graph algorithms, practical data structures (heaps, hash tables, search trees), randomized algorithms, and more.'),
@@ -118,6 +126,7 @@ INSERT INTO `FinalNote`(`studentID`, `courseID`, `tutorID`, `note`) VALUES
 (1,1,1,20),
 (1,2,1,14),
 (1,2,1,11);
+
 
 INSERT INTO `Teaching`(`tutorID`, `courseID`) VALUES
 (1,1),(1,2),(1,3),(1,4),(1,5),(1,6),(1,7);

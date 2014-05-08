@@ -22,7 +22,7 @@ if(isset($_POST)){
 					required/>
 			<label>
 				<?php
-					if($errors_inscr && $errors_inscr["usr_sn_regex"]){
+					if($errors_inscr && isset($errors_inscr["usr_sn_regex"])){
 						echo "Votre nom n'est pas correct.";
 					}
 				?>
@@ -36,7 +36,7 @@ if(isset($_POST)){
 					required/>
 			<label>
 				<?php
-					if($errors_inscr && $errors_inscr["usr_fn_regex"]){
+					if($errors_inscr && isset($errors_inscr["usr_fn_regex"])){
 						echo "Votre prénom n'est pas correct.";
 					}
 				?>
@@ -81,7 +81,7 @@ if(isset($_POST)){
 				<?php
 					if($errors_inscr && isset($errors_inscr["mail_regex"])){
 						echo "Votre adresse email n'est pas correcte.";
-					} else if($errors_inscr && $errors_inscr["usr"]){
+					} else if($errors_inscr && isset($errors_inscr["usr"])){
 						echo "Votre adresse est déjà utilisée.";
 					}
 				?>

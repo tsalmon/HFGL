@@ -23,6 +23,7 @@
         if(isset($page)){
             if($page == "inscription_ok" || $page == "inscription_failed"){
                 $page_css = "connexion";
+                echo '<link href="'.URL.'public/css/inscription.css" rel="stylesheet">';
             } else {
                 $page_css = $page;
             }
@@ -58,6 +59,6 @@
             </script>';
         }
     ?>
-    <!--<script src="<?php echo URL; ?>public/js/application.js"></script>-->
+        <!--<script src="<?php /*echo URL;*/ ?>public/js/application.js"></script>-->
 </head>
 <body>

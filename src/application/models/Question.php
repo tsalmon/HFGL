@@ -72,7 +72,7 @@ abstract class Question {
                 }
 
                 if($typeID == QuestionTypeManager::getInstance()->getPID()){
-
+                    $question = new PQuestion($assignment, $tip, $points);
                 }
 
                 $question->loadByID($questionID);
