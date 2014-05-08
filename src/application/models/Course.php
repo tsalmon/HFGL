@@ -162,7 +162,10 @@ class Course {
         public function getProfessors(){
             return CourseSubstcription::getProfessors($this);
         }
-        
+             
+        public function getMark($student){ 
+            return CourseSubstcription::getMark($student,$this);
+        }
         
         
         //Suppression du cours en BDD

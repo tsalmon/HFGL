@@ -126,6 +126,16 @@ class CourseSubstcription {
         }
     }
     
+    
+    public static function getMark($student,$course){  
+        $query="SELECT note FROM `finalnote` WHERE courseID =".$course->courseID()." AND studentID =".$student->studentID();
+        $res=CourseSubstcription::$db->query($query);
+        $fetch=$res->fetch(PDO::FETCH_ASSOC);
+        $mark=$fetch["note"];
+        settype($mark, "int");
+        return $mark;
+    }
+    
     public static function remove($studentID,$courseID){ 
         try{
             $indice=array_search($studentID, CourseSubstcription::$courses[$courseID]);
