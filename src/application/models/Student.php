@@ -41,6 +41,7 @@ class Student extends Person implements Corrector {
                 $this->db->exec("INSERT INTO Student (personID) VALUES (".$lastid.");"); 
                 $this->studentID=$this->db->lastInsertId();       
             }
+            var_dump("test");
         }
         
     //         Accesseurs
