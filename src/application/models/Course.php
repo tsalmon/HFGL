@@ -41,9 +41,10 @@ class Course {
                     $this->courseID=$fetch['courseID'];
                     if(isset($fetch['questionnaireID'])){
                         $this->finalExam=new ExerciceSheet($fetch['questionnaireID']);}
-                    $this->description=$fetch['description'];                    
+                    $this->description=$fetch['description'];                  
                     $this->parts=$this->getDBParts();
                 }
+
             }
             else {
                 if($this->titleExists($title)){

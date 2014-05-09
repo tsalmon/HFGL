@@ -28,7 +28,7 @@ class CourseFactory {
 
 
     //Récupérer un objet correspondant à un cours dans la base de donnée
-    public static function &getCourse($t,$isID=false){  
+    public static function &getCourse($t,$isID=false){ 
         CourseFactory::initiateArrays();
         $key=array_search($t,CourseFactory::$titles);
         if($isID){            

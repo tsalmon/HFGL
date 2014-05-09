@@ -60,7 +60,6 @@ class PersonFactory {
                    }
                 catch(UnexpectedValueException $e){
                     throw new UnexpectedValueException("Utilisateur non existant");}                
-             
             }
             elseif($roleID==$roleM->getTutorID()){                
                 try{
