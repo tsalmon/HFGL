@@ -4,7 +4,7 @@ if(isset($_POST)){
 	$errors_inscr = $_POST;
 }
 ?>
-<article id="middle">
+<div id="middle" class="dark_gray">
 	<form action="<?php echo URL; ?>Welcome/Inscription_result" method="POST" id="middleform">
 		
 		<a href="<?php echo URL; ?>Welcome/"><h1 id="hfgl">Bienvenue sur HFGL</h1></a>
@@ -103,4 +103,4 @@ if(isset($_POST)){
 		</p>		
 		<input id="inscription" type="submit"/>
 	</form>
-</article>
+</div>
