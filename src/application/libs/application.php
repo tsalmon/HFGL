@@ -28,6 +28,10 @@ class Application
         $this->splitUrl();
         // check for controller: does such a controller exist ?
         if (file_exists('./application/controller/' . $this->url_controller . '.php')) {
+            if(count($_SESSION) == 0){
+                header('location: '.URL);            
+            } 
+
            // if so, then load this file and create this controller
             // example: if controller would be "car", then this line would translate into: $this->car = new car();
             require './application/controller/' . $this->url_controller . '.php';
@@ -53,10 +57,8 @@ class Application
                 // default/fallback: call the index() method of a selected controller
                 $this->url_controller->index();
             }
-            
         } else {
-            
-            // invalid URL, so simply show home/index
+            // invalid URL
             require './application/controller/Welcomecontroller.php';
             $home = new Welcomecontroller();
             $home->index();
