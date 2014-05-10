@@ -11,9 +11,9 @@ if(isset($_POST)){
 			 <span id="quote"> Have Fun, Good Learning</span>
 
 		<input type="radio" id="radio1" name="role" value="student" checked>
-		<label for="radio1">Etudient</label>
+		<label for="radio1">Etudiant</label>
 		<input type="radio" id="radio2" name="role" value="teacher">
-		<label for="radio2">Enseignent</label>
+		<label for="radio2">Enseignant</label>
 		<p>
 			<input 	type="text" 
 					placeholder="Entrez votre nom" 
