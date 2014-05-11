@@ -169,7 +169,7 @@ class CourseSubstcription {
                 array_splice(CourseSubstcription::$persons[$student],$ind,1);
             }
         }        
-        unset(CourseSubstcription::$courses[$course->courseID()]);
+        unset(CourseSubscription::$courses[$course->courseID()]);
         CourseSubstcription::$db->exec("DELETE FROM Inscription WHERE courseID ='".$course->courseID()."'");      
         
     }
