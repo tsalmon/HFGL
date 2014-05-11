@@ -49,9 +49,31 @@ class Studentcontroller extends Controller{
         require 'application/views/_templates/footer.php';
     }
 
+    public function desinscription(){
+         $MODELcours = $this->loadModel('CourseSubstcription');
+        if($MODELcours->remove($_SESSION["studentid"] , intval($_GET["cours"]))){
+            header('location: '.URL.'Student');
+        } else {
+            die("error...");
+        }
+    }
+
     public function InscrireCours(){
         $MODELcours = $this->loadModel('CourseSubstcription');
+        $MODELall_cours = new CourseFactory();
+    
         $liste_cours = $MODELcours->getCourses(PersonFactory::getPerson($_SESSION["email"]));
+        $liste_all_cours = $MODELall_cours->getCoursesList();
+
+        foreach ($liste_cours as $key => $value) {
+            $liste_cours[$key] = $value->title();
+        }
+
+        $suggestions = array_diff($liste_all_cours, $liste_cours);
+
+        foreach ($suggestions as $key => $value) {
+            $suggestions[$key] = $MODELall_cours->getCourse($value);
+        }
 
         require 'application/views/_templates/header.php';
         require 'application/views/student_inscrireCours.php';

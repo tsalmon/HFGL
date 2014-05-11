@@ -47,7 +47,7 @@
               </table>
 
               <p style="padding-top: 15px; display: inline"><span>&nbsp;</span>
-              <a class="bouton" href="'.URL.'Courses/desinscription/?cours='.strval($cours->courseID()).'" name="name">Se desinscrire de ce cours</a>
+              <a class="bouton" href="'.URL.'Student/desinscription/?cours='.strval($cours->courseID()).'"">Se desinscrire de ce cours</a>
               </p>
 
               <p style="padding-top: 15px; display: inline"><span>&nbsp;</span>
