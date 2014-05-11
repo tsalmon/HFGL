@@ -1,6 +1,6 @@
 INSERT INTO `QuestionnaireType`(`typeName`) VALUES
 ('Examen'),
-('RenduDeMemoire'),
+('Memoire'),
 ('Projet'),
 ('TP');
 
