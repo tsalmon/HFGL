@@ -85,7 +85,6 @@ class Part {
             return false;        
         }
         
-         
         public function setExam($e){
             $this->db->exec("UPDATE Part SET questionnaireID = '".$e->getId()."' WHERE partID =".$this->partID);
             $this->exam=$e;

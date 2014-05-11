@@ -27,14 +27,34 @@ class Application
     // create array with URL parts in $url
         $this->splitUrl();
         // check for controller: does such a controller exist ?
-        if (file_exists('./application/controller/' . $this->url_controller . '.php')) {
+        if (file_exists('./application/controller/' . $this->url_controller.'controller.php')) {
 
-            if(count($_SESSION) == 0){
-                if($this->url_controller != "Welcomecontroller"){
+            if(count($_SESSION) == 0){ // not connected
+                if($this->url_controller != "Welcome"){
                     header('location: '.URL);
                 } 
+            } else { // professor can only access to professor page, like student, like admin
+                switch ($_SESSION["role"]) {
+                    case 'admin':
+                        if($this->url_controller != "Admin"){
+                            $this->url_controller = "Admin";
+                        }
+                        break; 
+                    case 'teacher':
+                        if($this->url_controller != "Professor"){
+                            $this->url_controller = "Professor";
+                        }
+                        break;
+                    case 'student':
+                        if($this->url_controller != "Student"){
+                            $this->url_controller = "Student";
+                        }
+                        break;                        
+                    default:
+                        break;
+                }
             }
-
+            $this->url_controller = $this->url_controller."controller";
            // if so, then load this file and create this controller
             // example: if controller would be "car", then this line would translate into: $this->car = new car();
             require './application/controller/' . $this->url_controller . '.php';
@@ -83,7 +103,7 @@ class Application
             // Put URL parts into according properties
             // By the way, the syntax here is just a short form of if/else, called "Ternary Operators"
             // @see http://davidwalsh.name/php-shorthand-if-else-ternary-operators
-            $this->url_controller = (isset($url[0]) ? $url[0]."controller" : null);
+            $this->url_controller = (isset($url[0]) ? $url[0] : null);
             $this->url_action = (isset($url[1]) ? $url[1] : null);
             $this->url_parameter_1 = (isset($url[2]) ? $url[2] : null);
             $this->url_parameter_2 = (isset($url[3]) ? $url[3] : null);
