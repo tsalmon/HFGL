@@ -47,7 +47,7 @@ class PersonFactory {
             $key=array_search($m,PersonFactory::$mails);
             $searchCol="`email`";
         }
-        if ($key==FALSE){      
+         if ($key==FALSE){      
             $db=  PDOHelper::getInstance();
             $resRequete = $db->query("SELECT roleID FROM Person WHERE ".$searchCol."='".$m."';");
             $fetch = $resRequete->fetch(PDO::FETCH_ASSOC); 
@@ -60,50 +60,23 @@ class PersonFactory {
             if($roleID==$roleM->getStudentID()){                
                 try{
                     $res=new Student($m,$isID);
-<<<<<<< HEAD
-                    //echo "test 1";
                    }
                 catch(UnexpectedValueException $e){
-                    //echo "test 12";
-=======
-                    // echo "test 1";
-                   }
-                catch(UnexpectedValueException $e){
-                    // echo "test 12";
->>>>>>> 9ea5449a518f4e1fcacf691323f7550dfdb5a899
                     throw new UnexpectedValueException("Utilisateur non existant");}                
             }
             elseif($roleID==$roleM->getTutorID()){                
                 try{
                     $res=new Professor($m,$isID);
-<<<<<<< HEAD
-                    //echo "test 2";
                    }
                 catch(UnexpectedValueException $e){
-                    //echo "test 21";
-=======
-                    // echo "test 2";
-                   }
-                catch(UnexpectedValueException $e){
-                    // echo "test 21";
->>>>>>> 9ea5449a518f4e1fcacf691323f7550dfdb5a899
                     throw new UnexpectedValueException("Utilisateur non existant");}                
              
             }
             elseif($roleID==$roleM->getAdminID()){                
                 try{
                     $res=new Admin($m,$isID);
-<<<<<<< HEAD
-                    //echo "test 3";
                    }
                 catch(UnexpectedValueException $e){
-                    //echo "test 34";
-=======
-                    // echo "test 3";
-                   }
-                catch(UnexpectedValueException $e){
-                    // echo "test 34";
->>>>>>> 9ea5449a518f4e1fcacf691323f7550dfdb5a899
                     throw new UnexpectedValueException("Utilisateur non existant");}                
             }
             $key=$res->personID();
@@ -111,7 +84,7 @@ class PersonFactory {
             PersonFactory::$mails[$key]=$m;
         }
         return PersonFactory::$persons[$key];
-    }     
+    } 
     
     public static function &createStudent($mail,$name,$surname,$password,$nse){
         PersonFactory::initiateArrays();
