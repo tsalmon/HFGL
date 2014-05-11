@@ -28,7 +28,7 @@ class CourseFactory {
 
 
     //Récupérer un objet correspondant à un cours dans la base de donnée
-    public static function &getCourse($t,$isID=false){  
+    public static function &getCourse($t,$isID=false){ 
         CourseFactory::initiateArrays();
         $key=array_search($t,CourseFactory::$titles);
         if($isID){            
@@ -65,6 +65,14 @@ class CourseFactory {
         CourseFactory::$titles[$key]=$title;
         return $course;
         
+    }
+    
+    public static function getCoursesList(){
+        $db=  PDOHelper::getInstance();
+        $query="Select title From Course;";
+        $res=$db->query($query);
+        $fetch=$res->fetchall(PDO::FETCH_COLUMN,"title");
+        return $fetch;
     }
     
     //utilisée pour supprimer du tableau les instances de Course qui ne sont plus utilisées.

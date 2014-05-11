@@ -18,9 +18,9 @@ if (version_compare(PHP_VERSION, '5.3.7', '<')) {
     //require_once("application/libraries/password_compatibility_library.php");
 }
 
-if(!file_exists(getcwd().'/files') && !mkdir(getcwd().'/files')){
-	exit("Error: can't create repository");
-}
+// if(!file_exists(getcwd().'/files') && !mkdir(getcwd().'/files')){
+// 	exit("Error: can't create repository");
+// }
 
 // load the (optional) Composer auto-loader
 if (file_exists('vendor/autoload.php')) {

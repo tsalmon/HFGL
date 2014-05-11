@@ -1,9 +1,7 @@
 #quote{
   font-family: Rockwell, "Courier Bold", Courier, Georgia, Times, "Times New Roman", serif;
-}
-
-#hfgl{
-  font-family: Baskerville, "Baskerville Old Face", "Hoefler Text", Garamond, "Times New Roman", serif;
+  display: block;
+  margin-bottom: 22px;  
 }
 
 .middle_connexion{
@@ -11,7 +9,6 @@
 }
 
 #middle {
-  background-color: rgba(0, 0, 0, 0.6);
   top: 0;
   left: 0;
   right: 0;

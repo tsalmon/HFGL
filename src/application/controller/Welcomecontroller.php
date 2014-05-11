@@ -112,9 +112,12 @@ class Welcomecontroller extends Controller
 
     public function Connexion()
     {
+        if(!isset($_POST["user"]) || !isset($_POST["pwd"])){
+            header('location: '.URL);
+        }
         $log = $this->loadModel('Welcomemodel'); 
         $co = $log->connect($_POST["user"], $_POST["pwd"]);
-        
+
         if($co == null){ // error
             $page = "connexion";
             $incorrect = 1;
@@ -142,6 +145,7 @@ class Welcomecontroller extends Controller
             } else {
                 echo "erreur de connexion";
             }  
-        }    
+            
+        }  
     }
 }

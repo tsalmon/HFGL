@@ -4,16 +4,16 @@ if(isset($_POST)){
 	$errors_inscr = $_POST;
 }
 ?>
-<article id="middle">
+<div id="middle" class="dark_gray">
 	<form action="<?php echo URL; ?>Welcome/Inscription_result" method="POST" id="middleform">
-		<p>
-			<a href="<?php echo URL; ?>Welcome/"><h1 id="hfgl">Bienvenue sur HFGL</h1></a>
+		
+		<a href="<?php echo URL; ?>Welcome/"><h1 id="hfgl">Bienvenue sur HFGL</h1></a>
 			 <span id="quote"> Have Fun, Good Learning</span>
-		</p>
+
 		<input type="radio" id="radio1" name="role" value="student" checked>
-		<label for="radio1">Etudient</label>
+		<label for="radio1">Etudiant</label>
 		<input type="radio" id="radio2" name="role" value="teacher">
-		<label for="radio2">Enseignent</label>
+		<label for="radio2">Enseignant</label>
 		<p>
 			<input 	type="text" 
 					placeholder="Entrez votre nom" 
@@ -103,4 +103,4 @@ if(isset($_POST)){
 		</p>		
 		<input id="inscription" type="submit"/>
 	</form>
-</article>
+</div>

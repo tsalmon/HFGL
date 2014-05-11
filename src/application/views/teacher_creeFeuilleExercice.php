@@ -4,11 +4,11 @@
       <div class="content">
         <h3>Création d'exercice</h3>
         <?php
-          $qt_nb = (!isset($_POST["nb_qt"])) ? 1 : $_POST["nb_qt"]+1;
+          $qt_nb = 1;//(!isset($_POST["nb_qt"])) ? 1 : $_POST["nb_qt"];
         ?>
         <p>Question n°<?php echo $qt_nb; ?></p>
         <?php
-          Controller::print_dbg($qt);
+          Controller::print_dbg($_POST);
         ?>
         <form name="qtform" method="POST" action="<?php echo URL.'Professor/CreateExercice'?>" onsubmit="return testQCM();">
           <input type="hidden" name="nb_qt" value="<?php echo $qt_nb; ?>"/>

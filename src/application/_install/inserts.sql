@@ -31,7 +31,7 @@ INSERT INTO `Resource`(`questionID`, `type`, `content`) VALUES
 (11, "filename", "add.c"),
 (11, "execname", "add");
 
-INSERT INTO `Tests`(`questionID`,`input`,`output`) VALUES
+INSERT INTO `Test`(`questionID`,`input`,`output`) VALUES
 (11, "1 2", "3"),
 (11, "5 5", "10");
 

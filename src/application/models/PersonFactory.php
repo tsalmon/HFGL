@@ -51,30 +51,38 @@ class PersonFactory {
             $db=  PDOHelper::getInstance();
             $resRequete = $db->query("SELECT roleID FROM Person WHERE ".$searchCol."='".$m."';");
             $fetch = $resRequete->fetch(PDO::FETCH_ASSOC); 
+            if ($fetch==false){
+                throw new UnexpectedValueException("Utilisateur non existant");
+            }
             $roleM=  RoleTypeManager::getInstance();
             $roleID=$fetch['roleID'];
             $res=null;
             if($roleID==$roleM->getStudentID()){                
                 try{
                     $res=new Student($m,$isID);
+                    echo "test 1";
                    }
                 catch(UnexpectedValueException $e){
+                    echo "test 12";
                     throw new UnexpectedValueException("Utilisateur non existant");}                
-             
             }
             elseif($roleID==$roleM->getTutorID()){                
                 try{
                     $res=new Professor($m,$isID);
+                    echo "test 2";
                    }
                 catch(UnexpectedValueException $e){
+                    echo "test 21";
                     throw new UnexpectedValueException("Utilisateur non existant");}                
              
             }
             elseif($roleID==$roleM->getAdminID()){                
                 try{
                     $res=new Admin($m,$isID);
+                    echo "test 3";
                    }
                 catch(UnexpectedValueException $e){
+                    echo "test 34";
                     throw new UnexpectedValueException("Utilisateur non existant");}                
             }
             $key=$res->personID();
