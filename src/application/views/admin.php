@@ -6,11 +6,26 @@
       <div class="content">
       	<?php
       		if($page == "liste_student"){
-      			echo "etudients";
+      			echo "<h1>Liste des étudiants</h1>";
+      			echo "<table>";
+      			foreach ($students as $key => $value) {
+      				echo '<tr><td>'.$students[$key]["name"].'</td><td><a href="delete/?type=student&id='.$students[$key]["personID"].'">Supprimer</a></td></tr>';
+      			}
+      			echo "</table>";
       		} elseif($page == "liste_profs"){
-      			echo "profs";
+      			echo "<h1>Liste des enseignents</h1>";
+      			echo "<table>";
+      			foreach ($profs as $key => $value) {
+      				echo '<tr><td>'.$profs[$key]["name"].'</td><td><a href="delete/?type=student&id='.$profs[$key]["personID"].'">Supprimer</a></td></tr>';
+      			}
+      			echo "</table>";
       		} elseif($page == "liste_courses"){
-      			echo "courses";	
+      			echo "<h1>Liste des Cours</h1>";
+      			echo "<table>";
+      			foreach ($students as $key => $value) {
+      				echo '<tr><td>'.$courses[$key]["name"].'</td><td><a href="delete/?type=student&id='.$courses[$key]["personID"].'">Supprimer</a></td></tr>';
+      			}
+      			echo "</table>";
       		} else {
       			echo "accueil";
       		}

@@ -27,13 +27,17 @@ class Admincontroller extends Controller{
 
 	public function liste_courses(){
 		$page = "liste_courses";
-		$MODELperson = $this->loadModel('PersonFactory');
-		$profs = $MODELperson->getAllProfessors();
-		require 'application/views/_templates/header.php';
+		$MODELperson = $this->loadModel('CourseFactory');
+		$courses = $MODELperson->getCoursesList();
+		print_r($courses);
+		/*require 'application/views/_templates/header.php';
         require 'application/views/admin.php';
-        require 'application/views/_templates/footer.php';
+        require 'application/views/_templates/footer.php';*/
 	}
 
+	public function delete(){
+		echo "toto";		
+	}
 
 	public function Deconnexion(){
         if(session_destroy()){
