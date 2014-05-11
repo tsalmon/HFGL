@@ -29,10 +29,9 @@ class Admincontroller extends Controller{
 		$page = "liste_courses";
 		$MODELperson = $this->loadModel('CourseFactory');
 		$courses = $MODELperson->getCoursesList();
-		print_r($courses);
-		/*require 'application/views/_templates/header.php';
+		require 'application/views/_templates/header.php';
         require 'application/views/admin.php';
-        require 'application/views/_templates/footer.php';*/
+        require 'application/views/_templates/footer.php';
 	}
 
 	public function delete(){

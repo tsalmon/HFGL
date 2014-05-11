@@ -16,14 +16,14 @@
       			echo "<h1>Liste des enseignents</h1>";
       			echo "<table>";
       			foreach ($profs as $key => $value) {
-      				echo '<tr><td>'.$profs[$key]["name"].'</td><td><a href="delete/?type=student&id='.$profs[$key]["personID"].'">Supprimer</a></td></tr>';
+      				echo '<tr><td>'.$profs[$key]["name"].'</td><td><a href="delete/?type=prof&id='.$profs[$key]["personID"].'">Supprimer</a></td></tr>';
       			}
       			echo "</table>";
       		} elseif($page == "liste_courses"){
       			echo "<h1>Liste des Cours</h1>";
       			echo "<table>";
-      			foreach ($students as $key => $value) {
-      				echo '<tr><td>'.$courses[$key]["name"].'</td><td><a href="delete/?type=student&id='.$courses[$key]["personID"].'">Supprimer</a></td></tr>';
+      			foreach ($courses as $key => $value) {
+      				echo '<tr><td>'.$value.'</td><td><a href="delete/?type=cours&id='.$value.'">Supprimer</a></td></tr>';
       			}
       			echo "</table>";
       		} else {
