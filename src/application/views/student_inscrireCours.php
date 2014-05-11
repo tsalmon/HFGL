@@ -17,7 +17,7 @@
             <td>'.$value->title().'</td> 
             <td>TODO</td>
             <td>'.$value->description().'</td>
-            <td><input class="bouton" type="submit" name="name" value="S\'inscrit"/></td>
+            <td><a class="bouton" href="'.URL.'Student/suggestion_ok/?id='.$value->courseID().'" name="name" >S\'inscrire</a></td>
           </tr>
         </table>';
         }

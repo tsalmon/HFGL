@@ -58,6 +58,12 @@ class Studentcontroller extends Controller{
         }
     }
 
+    public function suggestion_ok(){
+        $MODELcours = $this->loadModel('CourseSubstcription');
+        $MODELcours->add(PersonFactory::getPerson($_SESSION["personid"], true),$_GET["id"]);
+        
+    }
+
     public function InscrireCours(){
         $MODELcours = $this->loadModel('CourseSubstcription');
         $MODELall_cours = new CourseFactory();
