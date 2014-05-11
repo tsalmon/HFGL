@@ -125,7 +125,7 @@ class PersonFactory {
             $admin=new Admin($mail, false, false);
         }catch(UnexpectedValueException $e){
             throw new UnexpectedValueException("Utilisateur déjà existant");                
-         }
+        }
         $admin->setName($name);
         $admin->setSurname($surname);
         $admin->setPassword($password);
@@ -135,6 +135,20 @@ class PersonFactory {
         return $admin;
         
     }
+
+    public static function getAllStudents(){
+        PersonFactory::initiateArrays();
+        $all_student = new Student(null);
+        $all_student = 
+                //return $all_students;
+    }
+
+    public static function getAllProfessors(){
+        PersonFactory::initiateArrays();
+
+        return $all_professors;
+    }
+
     //utilisée pour supprimer du tableau les instances de Persons qui ne sont plus utilisées.
     public static function onDestruct($id){       
         
