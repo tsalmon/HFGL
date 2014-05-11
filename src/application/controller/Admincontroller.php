@@ -7,7 +7,7 @@ class Admincontroller extends Controller{
         require 'application/views/_templates/footer.php';
 	}
 
-	 public function Deconnexion(){
+	public function Deconnexion(){
         if(session_destroy()){
             header('location: '.URL.'Welcome');
         } else {
