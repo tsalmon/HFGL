@@ -7,7 +7,7 @@ define('Projet', "Projet");
 define('TP', "TP");
 
 
-class QuestionTypeManager extends TypeManager{
+class QuestionnaireTypeManager extends TypeManager{
 
     private $examen;
     private $memoire;
@@ -25,11 +25,11 @@ class QuestionTypeManager extends TypeManager{
     }
 
     public static function getInstance(){
-        if(QuestionTypeManager::$sharedInstance==null){
-            QuestionTypeManager::$sharedInstance=new QuestionTypeManager();
+        if(QuestionnaireTypeManager::$sharedInstance==null){
+            QuestionnaireTypeManager::$sharedInstance=new QuestionnaireTypeManager();
         }
 
-        return QuestionTypeManager::$sharedInstance;
+        return QuestionnaireTypeManager::$sharedInstance;
     }
 
     public function refresh()
@@ -43,37 +43,37 @@ class QuestionTypeManager extends TypeManager{
 
     public function getExamenID()
     {
-        if(!$this->qrf)
+        if(!$this->examen)
         {
-            $this->qrf = $this->getIdForTypeName(Examen);
+            $this->examen = $this->getIdForTypeName(Examen);
         }
-        return $this->qrf;
+        return $this->examen;
     }
 
     public function getMemoireID()
     {
-        if(!$this->qcm)
+        if(!$this->memoire
         {
-            $this->qcm = $this->getIdForTypeName(Memoire);
+            $this->memoire = $this->getIdForTypeName(Memoire);
         }
-        return $this->qcm;
+        return $this->memoire;
     }
 
     public function getProjetID()
     {
-        if(!$this->l)
+        if(!$this->projet)
         {
-            $this->l = $this->getIdForTypeName(Projet);
+            $this->projet = $this->getIdForTypeName(Projet);
         }
-        return $this->l;
+        return $this->projet;
     }
 
     public function getTPID()
     {
-        if(!$this->p)
+        if(!$this->tp)
         {
-            $this->p = $this->getIdForTypeName(TP);
+            $this->tp = $this->getIdForTypeName(TP);
         }
-        return $this->p;
+        return $this->tp;
     }
 } 
