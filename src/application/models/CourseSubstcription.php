@@ -162,14 +162,16 @@ class CourseSubstcription {
     }
     
     public static function deleteCourse($course){
-        $entry=CourseSubstcription::$courses[$course->courseID()];
-        foreach($entry as $student){
-            if(ctype_digit($student)){
-                $ind=array_search($course->courseID(),CourseSubstcription::$persons[$student] );
-                array_splice(CourseSubstcription::$persons[$student],$ind,1);
-            }
-        }        
-        unset(CourseSubscription::$courses[$course->courseID()]);
+        if(isset(CourseSubstcription::$courses[$course->courseID()])){
+            $entry=CourseSubstcription::$courses[$course->courseID()];
+            foreach($entry as $student){
+                if(ctype_digit($student)){
+                    $ind=array_search($course->courseID(),CourseSubstcription::$persons[$student] );
+                    array_splice(CourseSubstcription::$persons[$student],$ind,1);
+                }
+            }        
+            unset(CourseSubscription::$courses[$course->courseID()]);
+        }
         CourseSubstcription::$db->exec("DELETE FROM Inscription WHERE courseID ='".$course->courseID()."'");      
         
     }
