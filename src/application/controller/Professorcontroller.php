@@ -11,7 +11,6 @@ class Professorcontroller extends Controller{
         $page = "prof";
         $prof = $this->loadModel('PersonFactory')->getPerson($_SESSION["email"]);
         $cours_teaching = $this->loadModel('CourseTeaching')->getCourses($prof);
-        
         require 'application/views/_templates/header.php';
         require 'application/views/enseignant.php';
         require 'application/views/_templates/footer.php';     
