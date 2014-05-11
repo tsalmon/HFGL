@@ -1,0 +1,74 @@
+<exercise type="qcm">
+ <question>
+   <text>C/C++ program starts executing from</text>
+   <tip></tip>
+   <answers>
+     <answer good='false'>
+       <text>here()</text>
+     </answer>
+     <answer good='true'>
+       <text>main()</text>
+     </answer>
+     <answer good='false'>
+       <text>start()</text>
+     </answer>
+     <answer good='false'>
+       <text>begin()</text>
+     </answer>
+   </answers>
+ </question>
+ <question>
+   <text>In CPP Programming ++ is ________ operator</text>
+   <tip></tip>
+   <answers>
+     <answer good='true'>
+       <text>Increment</text>
+     </answer>
+     <answer good='false'>
+       <text>Decrement</text>
+     </answer>
+     <answer good='false'>
+       <text>Assigning</text>
+     </answer>
+     <answer good='false'>
+       <text>Overloading</text>
+     </answer>
+   </answers>
+ </question>
+ <question>
+   <text>In C++ Programming a pointer variable stores ________</text>
+   <tip></tip>
+   <answers>
+     <answer good='false'>
+       <text>Value of anther Value</text>
+     </answer>
+     <answer good='false'>
+       <text>Value of anther variable</text>
+     </answer>
+     <answer good='false'>
+       <text>Address of another value</text>
+     </answer>
+     <answer good='true'>
+       <text>Address of another variable</text>
+     </answer>
+   </answers>
+ </question>
+ <question>
+   <text>In C/CPP Programming array can be _________</text>
+   <tip></tip>
+   <answers>
+     <answer good='true'>
+       <text>Single Dimensional</text>
+     </answer>
+     <answer good='false'>
+       <text>Multi Dimensional</text>
+     </answer>
+     <answer good='false'>
+       <text>Non Dimensional</text>
+     </answer>
+     <answer good='false'>
+       <text>A and B</text>
+     </answer>
+   </answers>
+ </question>
+</exercise>

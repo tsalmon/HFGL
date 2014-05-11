@@ -60,29 +60,29 @@ class PersonFactory {
             if($roleID==$roleM->getStudentID()){                
                 try{
                     $res=new Student($m,$isID);
-                    echo "test 1";
+                    // echo "test 1";
                    }
                 catch(UnexpectedValueException $e){
-                    echo "test 12";
+                    // echo "test 12";
                     throw new UnexpectedValueException("Utilisateur non existant");}                
             }
             elseif($roleID==$roleM->getTutorID()){                
                 try{
                     $res=new Professor($m,$isID);
-                    echo "test 2";
+                    // echo "test 2";
                    }
                 catch(UnexpectedValueException $e){
-                    echo "test 21";
+                    // echo "test 21";
                     throw new UnexpectedValueException("Utilisateur non existant");}                
              
             }
             elseif($roleID==$roleM->getAdminID()){                
                 try{
                     $res=new Admin($m,$isID);
-                    echo "test 3";
+                    // echo "test 3";
                    }
                 catch(UnexpectedValueException $e){
-                    echo "test 34";
+                    // echo "test 34";
                     throw new UnexpectedValueException("Utilisateur non existant");}                
             }
             $key=$res->personID();
