@@ -35,7 +35,22 @@ class Admincontroller extends Controller{
 	}
 
 	public function delete(){
-		echo "toto";		
+		if($_GET["type"] == "student" || $_GET["type"] == "prof"){
+			$MODELperson = $this->loadModel('PersonFactory');
+			$person = $MODELperson->getPerson($_GET["id"], true);			
+			$person->delete();
+			if($_GET["type"] == "student"){
+				header('location: '.URL.'Admin/liste_students');
+			} else {
+				header('location: '.URL.'Admin/liste_profs');
+			}
+		} elseif($_GET["type"] == "cours"){
+			$MODELcours = $this->loadModel('CourseFactory');
+			$cours = $MODELcours->getCourse($_GET["id"], false);
+			$cours->delete();
+		} else {
+			die("parametres inconnus");
+		}
 	}
 
 	public function Deconnexion(){
