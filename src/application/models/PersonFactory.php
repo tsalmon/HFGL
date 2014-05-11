@@ -139,14 +139,13 @@ class PersonFactory {
     public static function getAllStudents(){
         PersonFactory::initiateArrays();
         $all_student = new Student(null);
-        $all_student = 
-                //return $all_students;
+        return $all_student->getAll();
     }
 
     public static function getAllProfessors(){
         PersonFactory::initiateArrays();
-
-        return $all_professors;
+        $all_student = new Professor(null);
+        return $all_student->getAll();
     }
 
     //utilisée pour supprimer du tableau les instances de Persons qui ne sont plus utilisées.

@@ -11,9 +11,9 @@
       <nav>
         <div id="menu_container">
           <ul class="sf-menu" id="toolbar">
-              <li><a href="<?php echo URL; ?>Admin">Liste des étudiants</a></li>
-              <li><a href="<?php echo URL; ?>Admin">Liste des professeurs</a></li>
-              <li><a href="<?php echo URL; ?>Admin">Liste des cours</a></li>
+              <li><a href="<?php echo URL; ?>Admin/liste_students">Liste des étudiants</a></li>
+              <li><a href="<?php echo URL; ?>Admin/liste_professors">Liste des professeurs</a></li>
+              <li><a href="<?php echo URL; ?>Admin/liste_courses">Liste des cours</a></li>
               <li><a href="<?php echo URL; ?>Admin/Deconnexion" onclick="return confirm('Êtes vous sûr de vous déconnecter?')">Déconnexion</a></li>
           </ul>
         </div>

@@ -13,8 +13,13 @@ class Professor extends Person implements Corrector{
     //      Constructeur
     //***********************
         
-        public function __construct($mail, $isID, $exists=true){    
+        public function __construct($mail, $isID=false, $exists=true){    
             $this->db=  PDOHelper::getInstance();
+
+            if($mail == null){
+                return ;
+            }
+
             if($exists==true){
                 $fetch = $this->getDBEntry($mail, "Tutor",$isID);
                 if($fetch==null){
@@ -39,6 +44,11 @@ class Professor extends Person implements Corrector{
     //         Accesseurs
     //***************************
         
+        public function getAll(){
+            $res = $this->db->query("SELECT * FROM Person, Tutor WHERE Person.roleid = 2 AND Person.personID = Tutor.personID;");           
+            $fetch =  $res->fetchAll(PDO::FETCH_ASSOC);
+            return $fetch;       
+        }
         
         public function tutorID(){  
             return $this->tutorID;          

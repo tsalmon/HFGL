@@ -50,8 +50,9 @@ class Student extends Person implements Corrector {
     //***************************
         
         public function getAll(){
-            //$this->db->exec("SELECT * FROM Person, Student WHERE Person.roleid = 3 AND Person.personID = Student.personID;");           
-            echo "toto";
+            $res = $this->db->query("SELECT * FROM Person, Student WHERE Person.roleid = 3 AND Person.personID = Student.personID;");           
+            $fetch =  $res->fetchAll(PDO::FETCH_ASSOC);
+            return $fetch;
         }
 
         public function studentID(){  
