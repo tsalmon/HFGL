@@ -137,27 +137,31 @@ class CourseTeaching {
     }
     
     public static function deleteTutor($tutor){
-        $entry=CourseTeaching::$persons[$tutor->tutorID()];
-        foreach($entry as $course){
-            if(ctype_digit($course)){
-                $ind=array_search($tutor->tutorID(),CourseTeaching::$courses[$course] );
-                array_splice(CourseTeaching::$courses[$course],$ind,1);
-            }
-        }        
-        unset(CourseTeaching::$persons[$tutor->tutorID()]);
+        if(isset(CourseTeaching::$persons[$tutor->tutorID()])){
+            $entry=CourseTeaching::$persons[$tutor->tutorID()];
+            foreach($entry as $course){
+                if(ctype_digit($course)){
+                    $ind=array_search($tutor->tutorID(),CourseTeaching::$courses[$course] );
+                    array_splice(CourseTeaching::$courses[$course],$ind,1);
+                }
+            }        
+            unset(CourseTeaching::$persons[$tutor->tutorID()]);
+        }
         CourseTeaching::$db->exec("DELETE FROM Teaching WHERE tutorID ='".$tutor->tutorID()."'");  
         
     }
     
     public static function deleteCourse($course){
-        $entry=CourseTeaching::$courses[$course->courseID()];
-        foreach($entry as $tutor){
-            if(ctype_digit($tutor)){
-                $ind=array_search($course->courseID(),CourseTeaching::$persons[$tutor] );
-                array_splice(CourseTeaching::$persons[$tutor],$ind,1);
-            }
-        }        
-        unset(CourseTeaching::$courses[$courses->courseID()]);
+        if(isset(CourseTeaching::$courses[$course->courseID()])){
+            $entry=CourseTeaching::$courses[$course->courseID()];
+            foreach($entry as $tutor){
+                if(ctype_digit($tutor)){
+                    $ind=array_search($course->courseID(),CourseTeaching::$persons[$tutor] );
+                    array_splice(CourseTeaching::$persons[$tutor],$ind,1);
+                }
+            }        
+            unset(CourseTeaching::$courses[$courses->courseID()]);
+        }
         CourseTeaching::$db->exec("DELETE FROM Teaching WHERE courseID ='".$course->courseID()."'");      
         
     }   
