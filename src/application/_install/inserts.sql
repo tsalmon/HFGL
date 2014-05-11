@@ -10,8 +10,9 @@ INSERT INTO `QuestionType`(`typeName`) VALUES
 ('P'),
 ('L');
 
-INSERT INTO `Questionnaire`(`questionnaireType`, `deadline`, `available`) VALUES
-(1,MAKEDATE(2015,1),NOW());
+INSERT INTO `Questionnaire`(`questionnaireType`,`description`, `deadline`, `available`) VALUES
+(1,'',MAKEDATE(2015,1),NOW()),
+(3,'Projet en C++', MAKEDATE(2015,1), NOW());
 
 INSERT INTO `Question`(`assignment`, `points`, `typeID`) VALUES
 ('C/C++ program starts executing from',2,1),
@@ -85,7 +86,7 @@ INSERT INTO `Course`(`title`, `description`, `questionnaireID`) VALUES
 ('Object Oriented Programming','Intermediate programming in a high-level language and introduction to computer science. Topics include program structure and organization, object-oriented programming (classes, objects, types, sub-typing), graphical user interfaces, algorithm analysis (asymptotic complexity, big “O” notation), recursion, data structures (lists, trees, stacks, queues, heaps, search trees, hash tables, graphs), simple graph algorithms. C++ is the principal programming language.',1);
 
 INSERT INTO `Part` (`title`,`questionnaireID`) VALUES
-('Introduction', 1), ('Main part', 1), ('Advanced chapters', 1);
+('Introduction', 2), ('Main part', 2), ('Advanced chapters', 2);
 
 INSERT INTO `Parts` (`partID`, `courseID`) VALUES
 (1, 1),(2,1),(3,1);
