@@ -18,12 +18,10 @@ class Coursescontroller extends Controller{
 	}
  
    	public function newCourse(){
-		Controller::print_dbg($_POST);
-		Controller::print_dbg($_SESSION);
 		try{
 			$MODELcours = $this->loadModel('CourseFactory');
 			$MODELteaching = $this->loadModel('CourseTeaching');
-			$id_course = $MODELcours->createCourse($_POST["course_title"], $_POST["course_description"]);
+			$id_course = $MODELcours->createCourse($_POST["course_title"], nl2br($_POST["course_description"]));
 			$MODELteaching->add(PersonFactory::getPerson($_SESSION["personid"], 1), $id_course);
 		} catch(UnexpectedValueException $e){
 			echo "error";
