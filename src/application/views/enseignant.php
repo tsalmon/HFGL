@@ -1,7 +1,9 @@
 <div id="main">
     <?php include("_templates/nav_enseignant.php"); ?>
     <div id="site_content">
+      <?php include("_templates/bienvenue_title.php"); ?>
       <?php include("_templates/sidebar_left.php"); ?>
+
       <div class="content">
 
         <?php 
@@ -10,7 +12,7 @@
           echo '<p>'.$cours->description().'</p>
                 <h2>Les travaux</h2>';
           echo '
-          <table style="width:100%; border-spacing:0;">
+          <table>
             <tr><th>Matière<a href="#'.($cours->title()).'" onclick=createPart('.$cours->courseID().');>[+]</a></td></th> <th>Documents</th></tr>';
             foreach ($cours->parts() as $part) {
                   echo '
@@ -43,8 +45,12 @@
                     <td><a href='.URL.'Professor/Examen>Feuille de l`examen</a></td>
                     </tr> -->
           </table>
-            <p style="padding-top: 15px; display: inline"><span>&nbsp;</span><a href='.URL.'Professor/SupprimerCours/?cours='.$cours->courseID().'" class="bouton" name="name">Supprimer ce cours</a></p>
-             <p style="padding-top: 15px; display: inline"><span>&nbsp;</span><a href='.URL.'Professor/ViewNotes class="bouton" name="name">Consulter les notes</a></p>
+            <p class = "pbouton">
+              <span>&nbsp;</span>
+              <a href='.URL.'Professor/SupprimerCours/?cours='.$cours->courseID().'" class="bouton">Supprimer ce cours</a>
+              <span>&nbsp;</span>
+              <a href='.URL.'Professor/ViewNotes class="bouton">Consulter les notes</a>
+            </p>
             ';
         }
         ?>

@@ -16,15 +16,6 @@ class Coursescontroller extends Controller{
     	}
         require 'application/views/_templates/footer.php';		
 	}
-
-	public function desinscription(){
-		$MODELcours = $this->loadModel('CourseSubstcription');
-        if($MODELcours->remove($_SESSION["studentid"]	, intval($_GET["cours"]))){
-	        header('location: '.URL.'Student');
-	    } else {
-	    	die("error...");
-	    }
-	}
  
    	public function newCourse(){
 		Controller::print_dbg($_POST);

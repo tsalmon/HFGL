@@ -4,25 +4,28 @@
 
     <div id="site_content">
 
-      <div id="welcome"><h3>Bienvenue</h3></div>
-
-      <div class="content">
-        
+      <?php include("_templates/bienvenue_title.php"); ?>
+      <div class="content_big">
         <?php print_r($liste_cours); ?>
 
         <h2>Les suggestions de cours</h2>
-        <table style="width:100%; border-spacing:0;">
-          <tr><th>Nom du cours</th> <th>Nom de l'enseigant</th><th>Description rapide</th> <th>Détail</th></tr>
+        <?php
+        foreach ($suggestions as $key => $value) {
+        echo'
+        <table>
+          <tr><th>Nom du cours</th> <th>enseigant</th><th>Description rapide</th> <th></th></tr>
           <tr>
-            <td></td> 
-            <td></td>
-            <td></td>
-            <td><input class="bouton" type="submit" name="name" value="S'inscrit"/></td>
+            <td>'.$value->title().'</td> 
+            <td>TODO</td>
+            <td>'.$value->description().'</td>
+            <td><a class="bouton" href="'.URL.'Student/suggestion_ok/?id='.$value->courseID().'" name="name" >S\'inscrire</a></td>
           </tr>
-        </table>
-          
+        </table>';
+        }
+        ?>          
       </div>
     </div>
+
     
     <?php include("_templates/nav_footer_etudiant.php"); ?>
 </div>

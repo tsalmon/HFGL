@@ -12,31 +12,38 @@ class Professorcontroller extends Controller{
         $page = "prof";
         $prof = $this->loadModel('PersonFactory')->getPerson($_SESSION["email"]);
         $cours_teaching = $this->loadModel('CourseTeaching')->getCourses($prof);
-        
         require 'application/views/_templates/header.php';
         require 'application/views/enseignant.php';
         require 'application/views/_templates/footer.php';     
     }
 
     public function CreateCourse(){
+        $page = "prof";
+        $prof = $this->loadModel('PersonFactory')->getPerson($_SESSION["email"]);
         require 'application/views/_templates/header.php';
         require 'application/views/teacher_creerUnCours.php';
         require 'application/views/_templates/footer.php';
     }
 
     public function CreateExamen(){
+         $page = "prof";
+        $prof = $this->loadModel('PersonFactory')->getPerson($_SESSION["email"]);
         require 'application/views/_templates/header.php';
         require 'application/views/teacher_creerExamen.php';
         require 'application/views/_templates/footer.php';
     }
 
     public function CreateExercicep(){
+         $page = "prof";
+        $prof = $this->loadModel('PersonFactory')->getPerson($_SESSION["email"]);
         require 'application/views/_templates/header.php';
         require 'application/views/teacher_creerExamen.php';
         require 'application/views/_templates/footer.php';
     }
 
     public function CreateProjet(){
+         $page = "prof";
+        $prof = $this->loadModel('PersonFactory')->getPerson($_SESSION["email"]);
         require 'application/views/_templates/header.php';
         require 'application/views/teacher_creerProjet.php';
         require 'application/views/_templates/footer.php';
@@ -44,6 +51,7 @@ class Professorcontroller extends Controller{
 
     public function CreateChapter(){
         $page = "CreateChapter";
+        $prof = $this->loadModel('PersonFactory')->getPerson($_SESSION["email"]);
         $cours = CourseFactory::getCourse($_GET["cours"], true);
         $part = new Part($_GET["part"]);
         require 'application/views/_templates/header.php';
@@ -52,6 +60,7 @@ class Professorcontroller extends Controller{
     }
 
     public function CreateChapter_ok(){ 
+
         if(pathinfo($_FILES["chp_file_lesson"]["name"], PATHINFO_EXTENSION) != "pdf"){
             $error = "pdf";
             Professorcontroller::CreateChapter();
@@ -121,6 +130,8 @@ class Professorcontroller extends Controller{
     }
 
     public function CreateExercice(){
+        $prof = $this->loadModel('PersonFactory')->getPerson($_SESSION["email"]);
+
         $page="CreateExercicep";
 
         if(isset($_POST["nb_qt"])){ // if it's not the first question
@@ -154,6 +165,8 @@ class Professorcontroller extends Controller{
     }
 
     public function ViewNotes(){
+        $prof = $this->loadModel('PersonFactory')->getPerson($_SESSION["email"]);
+
         require 'application/views/_templates/header.php';
         require 'application/views/teacher_view_notes.php';
         require 'application/views/_templates/footer.php';
@@ -161,8 +174,10 @@ class Professorcontroller extends Controller{
     public function Parametres()
     {
     	$page = "professor";
+
         $MODELparam= $this->loadModel('PersonFactory');
         $infos = $MODELparam->getPerson($_SESSION["email"]);
+        $prof = $infos;
         require 'application/views/_templates/header.php';
         require 'application/views/teacher_parametres.php';
         require 'application/views/_templates/footer.php';
@@ -185,6 +200,8 @@ class Professorcontroller extends Controller{
     public function Soumissions()
     {
     	$page = "professor";
+        $prof = $this->loadModel('PersonFactory')->getPerson($_SESSION["email"]);
+
         require 'application/views/_templates/header.php';
         require 'application/views/teacher_view_soumissions.php';
         require 'application/views/_templates/footer.php';
@@ -192,6 +209,8 @@ class Professorcontroller extends Controller{
 
     public function DonneNote(){
     	$page = "professor";
+        $prof = $this->loadModel('PersonFactory')->getPerson($_SESSION["email"]);
+        
         require 'application/views/_templates/header.php';
         echo "DONNER UNE NOTE";
         require 'application/views/_templates/footer.php';    	

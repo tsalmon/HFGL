@@ -44,7 +44,7 @@ class Admin extends Person{
         }
         
         
-        //Suppression de l'etudiant en BDD - Detruit la classe
+        //Suppression de l'admin en BDD - Detruit la classe
         
         public function delete(){
             $this->db->exec("DELETE FROM Admin WHERE adminID ='".$this->adminID."'");   

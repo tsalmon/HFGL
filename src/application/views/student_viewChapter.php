@@ -3,7 +3,9 @@
     <?php include("_templates/nav_etudiant.php"); ?>
 
     <div id="site_content">
-      <div class="content">
+
+      <?php include("_templates/bienvenue_title.php"); ?>
+      <div class="content_big">
         
         <h1><?php echo $chp->title(); ?></h1>
         <h3><?php echo $cours->title()." - ".$part->title(); ?></h3>

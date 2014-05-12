@@ -47,7 +47,7 @@ class PersonFactory {
             $key=array_search($m,PersonFactory::$mails);
             $searchCol="`email`";
         }
-        if ($key==FALSE){      
+         if ($key==FALSE){      
             $db=  PDOHelper::getInstance();
             $resRequete = $db->query("SELECT roleID FROM Person WHERE ".$searchCol."='".$m."';");
             $fetch = $resRequete->fetch(PDO::FETCH_ASSOC); 
@@ -60,29 +60,23 @@ class PersonFactory {
             if($roleID==$roleM->getStudentID()){                
                 try{
                     $res=new Student($m,$isID);
-                    // echo "test 1";
                    }
                 catch(UnexpectedValueException $e){
-                    // echo "test 12";
                     throw new UnexpectedValueException("Utilisateur non existant");}                
             }
             elseif($roleID==$roleM->getTutorID()){                
                 try{
                     $res=new Professor($m,$isID);
-                    // echo "test 2";
                    }
                 catch(UnexpectedValueException $e){
-                    // echo "test 21";
                     throw new UnexpectedValueException("Utilisateur non existant");}                
              
             }
             elseif($roleID==$roleM->getAdminID()){                
                 try{
                     $res=new Admin($m,$isID);
-                    // echo "test 3";
                    }
                 catch(UnexpectedValueException $e){
-                    // echo "test 34";
                     throw new UnexpectedValueException("Utilisateur non existant");}                
             }
             $key=$res->personID();
@@ -90,7 +84,7 @@ class PersonFactory {
             PersonFactory::$mails[$key]=$m;
         }
         return PersonFactory::$persons[$key];
-    }     
+    } 
     
     public static function &createStudent($mail,$name,$surname,$password,$nse){
         PersonFactory::initiateArrays();
@@ -131,7 +125,7 @@ class PersonFactory {
             $admin=new Admin($mail, false, false);
         }catch(UnexpectedValueException $e){
             throw new UnexpectedValueException("Utilisateur déjà existant");                
-         }
+        }
         $admin->setName($name);
         $admin->setSurname($surname);
         $admin->setPassword($password);
@@ -141,6 +135,19 @@ class PersonFactory {
         return $admin;
         
     }
+
+    public static function getAllStudents(){
+        PersonFactory::initiateArrays();
+        $all_student = new Student(null);
+        return $all_student->getAll();
+    }
+
+    public static function getAllProfessors(){
+        PersonFactory::initiateArrays();
+        $all_student = new Professor(null);
+        return $all_student->getAll();
+    }
+
     //utilisée pour supprimer du tableau les instances de Persons qui ne sont plus utilisées.
     public static function onDestruct($id){       
         

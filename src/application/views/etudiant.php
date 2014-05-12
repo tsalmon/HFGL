@@ -14,6 +14,8 @@
     <?php include("_templates/nav_etudiant.php"); ?>
 
     <div id="site_content">
+      
+      <?php include("_templates/bienvenue_title.php"); ?>
 
       <?php include("_templates/sidebar_left.php"); ?>
       
@@ -26,7 +28,7 @@
             echo "<h5>TODO: Enseignant: </h5>";
             echo "
               <h2>Les travaux</h2>
-              <table style='width:100%; border-spacing:0;''>
+              <table>
                 <tr><th>Matière</th> <th>Documents</th></tr>
             ";
                 foreach ($cours->parts() as $part) {
@@ -46,14 +48,9 @@
                 <tr><td>Examen</td> <td><a href="#">Feuille d examen</a></td></tr>
               </table>
 
-              <p style="padding-top: 15px; display: inline"><span>&nbsp;</span>
-              <a class="bouton" href="'.URL.'Courses/desinscription/?cours='.strval($cours->courseID()).'" name="name">Se desinscrire de ce cours</a>
-              </p>
-
-              <p style="padding-top: 15px; display: inline"><span>&nbsp;</span>
-              </p>
+              <p class = "pbouton"><span>&nbsp;</span>
+              <a class="bouton" href="'.URL.'Student/desinscription/?cours='.strval($cours->courseID()).'"">Se desinscrire de ce cours</a>
               </p>'; 
-            /*<input class="bouton" type="submit" name="name" value="Notes de cours"/>*/
             }
       ?>
       </div>

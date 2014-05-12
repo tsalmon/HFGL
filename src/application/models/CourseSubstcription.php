@@ -148,27 +148,30 @@ class CourseSubstcription {
     }
     
     public static function deleteStudent($student){
-        $entry=CourseSubstcription::$persons[$student->studentID()];
-        foreach($entry as $course){
-            if(ctype_digit($course)){
-                $ind=array_search($student->studentID(),CourseSubstcription::$courses[$course] );
-                array_splice(CourseSubstcription::$courses[$course],$ind,1);
-            }
-        }        
-        unset(CourseSubstcription::$persons[$student->studentID()]);
+        if(isset(CourseSubstcription::$persons[$student->studentID()])){
+            $entry=CourseSubstcription::$persons[$student->studentID()];
+            foreach($entry as $course){
+                if(ctype_digit($course)){
+                    $ind=array_search($student->studentID(),CourseSubstcription::$courses[$course] );
+                    array_splice(CourseSubstcription::$courses[$course],$ind,1);
+                }
+            }        
+            unset(CourseSubstcription::$persons[$student->studentID()]);        
+        }
         CourseSubstcription::$db->exec("DELETE FROM Inscription WHERE studentID ='".$student->studentID()."'");  
-        
     }
     
     public static function deleteCourse($course){
-        $entry=CourseSubstcription::$courses[$course->courseID()];
-        foreach($entry as $student){
-            if(ctype_digit($student)){
-                $ind=array_search($course->courseID(),CourseSubstcription::$persons[$student] );
-                array_splice(CourseSubstcription::$persons[$student],$ind,1);
-            }
-        }        
-        unset(CourseSubstcription::$courses[$course->courseID()]);
+        if(isset(CourseSubstcription::$courses[$course->courseID()])){
+            $entry=CourseSubstcription::$courses[$course->courseID()];
+            foreach($entry as $student){
+                if(ctype_digit($student)){
+                    $ind=array_search($course->courseID(),CourseSubstcription::$persons[$student] );
+                    array_splice(CourseSubstcription::$persons[$student],$ind,1);
+                }
+            }        
+            unset(CourseSubscription::$courses[$course->courseID()]);
+        }
         CourseSubstcription::$db->exec("DELETE FROM Inscription WHERE courseID ='".$course->courseID()."'");      
         
     }

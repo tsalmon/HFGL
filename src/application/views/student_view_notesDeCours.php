@@ -5,10 +5,10 @@
     <?php include("_templates/nav_etudiant.php"); ?>
 
     <div id="site_content">
-      
-      <?php include("_templates/student_sidebar_left.php"); ?>
 
-      <div class="content">
+      <?php include("_templates/bienvenue_title.php"); ?>
+
+      <div class="content_big">
         
         <h1>Notes de Cours 1</h1>
         <h5>Enseignant: </h5>
@@ -19,15 +19,15 @@
         </div>
 
         <a href="<?php echo URL; ?>Student/">
-          <p style="padding-top: 15px; display: inline">
+          <p class = "pbouton">
             <span>&nbsp;</span>
-            <input class="bouton"  name="name" value="Traveaux de cours" />
+            <input class="bouton" value="Traveaux de cours" />
           </p>
         </a>
 
-        <p style="padding-top: 15px; display: inline">
+        <p class = "pbouton">
           <span>&nbsp;</span>
-          <input class="bouton" type="submit" name="name" value="Enregistrer" />
+          <input class="bouton" type="submit" value="Enregistrer" />
         </p>
           
       </div>
