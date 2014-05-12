@@ -39,7 +39,8 @@
 
             function createPart(id_cours){
                 var nom_partie=prompt("Entrez le nom de la partie");
-                if(nom == null){
+                if(nom_partie == null){
+                    alert("null");
                     return;
                 }
                 xmlhttp.onreadystatechange = function(){
