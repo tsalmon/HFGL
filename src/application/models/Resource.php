@@ -33,5 +33,5 @@ class Resource {
         return PDOHelper::getInstance()->lastInsertID();
     }
 
-    public static function fileNameForQuestionID($)
+    //public static function fileNameForQuestionID($)
 } 

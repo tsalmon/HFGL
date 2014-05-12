@@ -311,6 +311,12 @@ footer a:hover {
   margin: 15px 0 15px 0;
 }
 
+fieldset{ 
+  border-radius: 16px;
+  padding: 1em 2em;
+  margin: 1em 0em;
+}
+
 .form_settings p { 
   padding-bottom: 15px;
 

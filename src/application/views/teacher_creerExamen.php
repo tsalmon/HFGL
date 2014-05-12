@@ -10,14 +10,8 @@
       <div class="content_big">
         <h1>Cours 1</h1>
 
-        <h2>Créer la feuille de l'examen</h2>
-
-        <div class = "form_settings">
-            <form action="CreateExerciceWithXML" enctype="multipart/form-data" method="post">
-              <p><span>Fichier .xml contenant l'exercice</span><input type="file" name="exerciceXML" enctype="multipart/form-data"></p>
-              <p><span>&nbsp;</span><input class="bouton" type="submit" name="name" value="Charger .xml" /></p>
-            </form>
-        </div>
+        <fieldset>
+        <legend><h2>Créer la feuille de l'examen</h2></legend>
 
         <form action="#" method="post">
           <div class="form_settings">
@@ -26,11 +20,18 @@
           </div>
         </form>
 
+        <div class = "form_settings">
+            <form action="CreateExerciceWithXML" enctype="multipart/form-data" method="post">
+              <p><span>Fichier .xml contenant l'exercice</span><input type="file" name="exerciceXML" enctype="multipart/form-data"></p>
+              <p><span>&nbsp;</span><input class="bouton" type="submit" name="name" value="Charger .xml" /></p>
+            </form>
+        </div>
+
         <div id = "add_question">
-          <h3>Ajouter un question</h3>
 
           <form action="#" enctype="multipart/form-data" method="post">
-
+          <fieldset>
+            <legend><h3>Ajouter un question</h3></legend>
             <div class="form_settings">
 
               <p>
@@ -111,7 +112,7 @@
                     document.getElementById("form_qrf").style.display='none';
                     document.getElementById("form_p").style.display='block';
                     document.getElementById("form_l").style.display='none';
-s                    document.getElementById("sujet").style.display='block';
+                    document.getElementById("sujet").style.display='block';
                   } else 
                   if (optID == "l") {
                     document.getElementById("form_qcm").style.display='none';
@@ -124,9 +125,12 @@ s                    document.getElementById("sujet").style.display='block';
               </script>
 
             </div>
+            <p style="padding-top: 15px; display: inline"><span>&nbsp;</span>
+              <input class="bouton" type="submit" name="name" value="Ajouter ce question" align="right"/>
+            </p>
+            </fieldset>
           </form>
-          <p style="padding-top: 15px; display: inline"><span>&nbsp;</span>
-            <input class="bouton" type="submit" name="name" value="Ajouter ce question" align="right"/></p>
+
         </div>  <!-- end div add_question -->
 
         <p class = "pbouton" ><span>&nbsp;</span>
@@ -134,6 +138,7 @@ s                    document.getElementById("sujet").style.display='block';
             <input class="bouton" type="submit" name="name" value="Enregistrer" /><span>&nbsp;</span>
             <input class="bouton" type="submit" name="name" value="Publier cet examen" />
         </p>
+        </fieldset>
       </div>
     </div>
 
