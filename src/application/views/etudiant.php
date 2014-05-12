@@ -27,7 +27,7 @@
             echo "<h5>TODO: Enseignant: </h5>";
             echo "
               <h2>Les travaux</h2>
-              <table style='width:100%; border-spacing:0;''>
+              <table>
                 <tr><th>Matière</th> <th>Documents</th></tr>
             ";
                 foreach ($cours->parts() as $part) {

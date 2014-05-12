@@ -2,7 +2,6 @@
     <?php include("_templates/nav_enseignant.php"); ?>
     <div id="site_content">
       <div id="welcome"><h3>Bienvenue</h3></div>
-        
       <div class="content">
         <?php
         $create = 1;
@@ -213,6 +212,7 @@ Chapter Object
                         )
 
                     [4] => QCMQuestion Object
+
                         (
                             [answers:QCMQuestion:private] => Array
                                 (

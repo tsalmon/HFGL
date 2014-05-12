@@ -154,7 +154,7 @@ header {
 }
 
 #logo #logo_text { 
-  width: 330px;
+  
   border-radius: 7px;
   -moz-border-radius: 7px;
   -webkit-border: 7px;
@@ -279,6 +279,12 @@ nav {
   margin: 0 0 0 0; 
   padding: 0 0 4px 28px;
   line-height: 1.5em;
+}
+
+.content table {
+  width: 100%; 
+  float: left;
+  border-spacing:0;
 }
 
 footer { 
@@ -580,4 +586,9 @@ ul#toolbar li a:hover,ul#toolbar li a:focus {
   text-align: left;
   margin: 0 20px 0 20px;
   font-size: 120%;
+}
+
+.content_big table{
+  width: 100%;
+  border-spacing:0;
 }
