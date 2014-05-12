@@ -4,6 +4,7 @@ require_once 'application/models/QCMQuestion.php';
 require_once 'application/models/LQuestion.php';
 require_once 'application/models/QRFQuestion.php';
 require_once 'application/models/PQuestion.php';
+require_once 'application/models/XMLHelper.php';
 
 class Professorcontroller extends Controller{
 
@@ -11,7 +12,6 @@ class Professorcontroller extends Controller{
         $page = "prof";
         $prof = $this->loadModel('PersonFactory')->getPerson($_SESSION["email"]);
         $cours_teaching = $this->loadModel('CourseTeaching')->getCourses($prof);
-        
         require 'application/views/_templates/header.php';
         require 'application/views/enseignant.php';
         require 'application/views/_templates/footer.php';     
@@ -24,6 +24,12 @@ class Professorcontroller extends Controller{
     }
 
     public function CreateExamen(){
+        require 'application/views/_templates/header.php';
+        require 'application/views/teacher_creerExamen.php';
+        require 'application/views/_templates/footer.php';
+    }
+
+    public function CreateExercicep(){
         require 'application/views/_templates/header.php';
         require 'application/views/teacher_creerExamen.php';
         require 'application/views/_templates/footer.php';
@@ -78,6 +84,8 @@ class Professorcontroller extends Controller{
         header('location: '.URL.'Professor/CreateExercice');
     }
 
+
+
     public function CreatePart(){
         $cours = CourseFactory::getCourse($_GET["cours"], true);
         foreach ($cours->parts() as $part) {
@@ -91,8 +99,28 @@ class Professorcontroller extends Controller{
         print("createpart ok");
     }
 
+    public function CreateExerciceWithXML(){
+        echo "Nombre de fichiers ".count($_FILES)."<br>";
+        if ($_FILES["exerciceXML"]["error"] > 0) {
+            echo "Error: " . $_FILES["exerciceXML"]["error"] . "<br>";
+        } else {
+            echo "Upload: " . $_FILES["exerciceXML"]["name"] . "<br>";
+            echo "Type: " . $_FILES["exerciceXML"]["type"] . "<br>";
+            echo "Size: " . ($_FILES["exerciceXML"]["size"] / 1024) . " kB<br>";
+            echo "Stored in: " . $_FILES["exerciceXML"]["tmp_name"]."<br>";
+            $temp = $_FILES["exerciceXML"]["tmp_name"];
+            $name_file = $_FILES["exerciceXML"]['name'];
+            move_uploaded_file($temp, "files/loadedxml/".$name_file);
+            $exerciceSheet = XMLHelper::parseXML("files/loadedxml/".$name_file);
+            //Cela retourne l'ID d'un nouveau questionnaire écrit dans la BDD.
+            // Je sais pas comment l'associer avec Part/Chapter/Cours
+            //$newQuestionnaireId = $exerciceSheet->writeToDatabase();
+        }
+        $this->index();
+    }
+
     public function CreateExercice(){
-        $page="CreateExercice";
+        $page="CreateExercicep";
 
         if(isset($_POST["nb_qt"])){ // if it's not the first question
             if($_POST["lareponse"] == "free"){

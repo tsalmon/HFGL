@@ -21,6 +21,9 @@ class Student extends Person implements Corrector {
         public function __construct($mail, $isID=false, $exists=true){ 
             $this->friendFactory();  //Si ce n'est pas la factory qui a fait l'appel, NUKE.
             $this->db=  PDOHelper::getInstance();   
+            if($mail == null){
+                return ;
+            }
             if($exists==true){
                 $fetch = $this->getDBEntry($mail, "Student", $isID); 
                 if($fetch==null){
@@ -46,7 +49,12 @@ class Student extends Person implements Corrector {
     //         Accesseurs
     //***************************
         
-        
+        public function getAll(){
+            $res = $this->db->query("SELECT * FROM Person, Student WHERE Person.roleid = 3 AND Person.personID = Student.personID;");           
+            $fetch =  $res->fetchAll(PDO::FETCH_ASSOC);
+            return $fetch;
+        }
+
         public function studentID(){  
             return $this->studentID;          
         }

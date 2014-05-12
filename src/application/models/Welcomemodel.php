@@ -63,8 +63,7 @@ class WelcomeModel
     */
     public function addPerson($user_name, $user_surname, $user_pwd, $user_mail){
         $sql = "INSERT INTO Person (name, surname, email, password) VALUES('".$user_name."', '".$user_surname."', '".$user_mail."', '".$user_pwd."')";    
-        echo $sql;
         $query = $this->db->prepare($sql);
-        return ($query->execute());
+        $query->execute();
     }
 }

@@ -3,15 +3,14 @@ require_once("application/models/QCMQuestion.php");
 require_once("application/models/QRFQuestion.php");
 require_once("application/models/LQuestion.php");
 require_once("application/models/PQuestion.php");
-
 require_once("application/models/PDOHelper.php");
+require_once("application/models/ExerciceSheet.php");
 
 
 class XMLHelper {
-
     //Parses XML file. Returns ExerciseSheet.
-    public static function parseXML(){
-        $questions = simplexml_load_file("application/models/exo.xml");
+    public static function parseXML($filepath){
+        $questions = simplexml_load_file($filepath);
         $type = $questions->attributes()['type'];
 
         $oquestions = array();
@@ -51,7 +50,7 @@ class XMLHelper {
             $oquestions[] = $oq;
         }
 
-        $nExercise = new ExerciseSheet();
+        $nExercise = new ExerciceSheet();
         $nExercise->setQuestions($oquestions);
         $nExercise->setAvailableDate(time());
         $nExercise->setDeadline(time());
