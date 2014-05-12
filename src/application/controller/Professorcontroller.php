@@ -109,6 +109,20 @@ class Professorcontroller extends Controller{
         print("createpart ok");
     }
 
+    public function DeletePart(){
+        /*$cours = CourseFactory::getCourse($_GET["cours"], true);
+        foreach ($cours->parts() as $part) {
+            if($part->title() == $_GET["part"]){
+                print("error part_exist");
+                return ;
+            }
+        }
+        $p = new Part($_GET["part"], false);
+        $cours->addPart($p);
+        */
+        print("createpart ok");
+    }
+
     public function CreateExerciceWithXML(){
         echo "Nombre de fichiers ".count($_FILES)."<br>";
         if ($_FILES["exerciceXML"]["error"] > 0) {

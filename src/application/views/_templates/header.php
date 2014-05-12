@@ -30,10 +30,6 @@
             echo '<link href="'.URL.'public/css/'.$page_css.'.css" rel="stylesheet">';
         }
     ?>
-
-    <!-- jQuery 
-    <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
-    <!-- our JavaScript -->
     <?php 
         if(isset($page) && $page == "CreateExercice"){
             echo '<script src="'.URL.'public/js/exercice.js"></script>';
@@ -55,6 +51,24 @@
                 }
                 xmlhttp.open("GET", "'.URL.'Professor/CreatePart?cours="+id_cours+"&part="+nom_partie+"");
                 xmlhttp.send();
+            }
+
+            function deletePart(id_cours, id_part, nom_partie){
+                var sure=prompt("Êtes vous sûr de vouloir supprimer la partie '" + nom_partie + "'");
+                alert(sure);
+                return ;
+                xmlhttp.onreadystatechange = function(){
+                    if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
+                       var t = xmlhttp.responseText.split(" ");
+                       if(t[0] == "error"){
+                            alert("La partie existe deja");
+                       } else {
+                            location.reload();
+                       }
+                    }
+                }
+                xmlhttp.open("GET", "'.URL.'Professor/DeletePart?cours="+id_cours+"&part="+id_part+"");
+                xmlhttp.send();            
             }
             </script>';
         }
