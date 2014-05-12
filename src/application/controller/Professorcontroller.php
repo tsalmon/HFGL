@@ -110,17 +110,13 @@ class Professorcontroller extends Controller{
     }
 
     public function DeletePart(){
-        /*$cours = CourseFactory::getCourse($_GET["cours"], true);
-        foreach ($cours->parts() as $part) {
-            if($part->title() == $_GET["part"]){
-                print("error part_exist");
-                return ;
-            }
+        try {
+            $cours = CourseFactory::getCourse($_GET["cours"], true);
+            $cours->part($_GET["part"])->delete();
+            print("createpart ok");            
+        } catch (Exception $e) {
+            print("error delete");
         }
-        $p = new Part($_GET["part"], false);
-        $cours->addPart($p);
-        */
-        print("createpart ok");
     }
 
     public function CreateExerciceWithXML(){

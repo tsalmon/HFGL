@@ -17,7 +17,7 @@
             foreach ($cours->parts() as $part) {
                   echo '
                 <tr>
-                  <td><a href="#" onclick="">[-]</a>'.$part->title().'</td>
+                  <td><a href="#" onclick=deletePart('.$cours->courseID().','.$part->partID().',"'.$part->title().'","'.$cours->title().'");>[-]</a>'.$part->title().'</td>
                   <td>';
                   foreach($part->chapters() as $chapter){
                     echo '<a target="blank" href="'.URL.'Courses/?cours='.strval($cours->courseID()).'&part='.strval($part->partID()).'&chp='.strval($chapter->chapterID()).'">'.$chapter->title().'</a>';
