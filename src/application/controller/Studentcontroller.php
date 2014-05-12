@@ -9,7 +9,8 @@ class Studentcontroller extends Controller{
     public function index() //consulter cours
     { 
         $MODELcours = $this->loadModel('CourseSubstcription');
-        $liste_cours = $MODELcours->getCourses(PersonFactory::getPerson($_SESSION["email"]));
+        $student = PersonFactory::getPerson($_SESSION["email"]);
+        $liste_cours = $MODELcours->getCourses($student);
 
         require 'application/views/_templates/header.php';
         require 'application/views/etudiant.php';
@@ -22,6 +23,7 @@ class Studentcontroller extends Controller{
     	$page = "student";
         $MODELparam= $this->loadModel('PersonFactory');
         $infos = $MODELparam->getPerson($_SESSION["email"]);
+        $student = $infos;
         require 'application/views/_templates/header.php';
         require 'application/views/student_parametres.php';
         require 'application/views/_templates/footer.php';    	
@@ -42,7 +44,8 @@ class Studentcontroller extends Controller{
         
         $page = "student";
         $MODELcours = $this->loadModel('CourseSubstcription');
-        $liste_cours = $MODELcours->getCourses(PersonFactory::getPerson($_SESSION["email"]));
+        $student = PersonFactory::getPerson($_SESSION["email"]);
+        $liste_cours = $MODELcours->getCourses($student);
 
         require 'application/views/_templates/header.php';
         require 'application/views/student_view_notes.php';
@@ -60,6 +63,7 @@ class Studentcontroller extends Controller{
 
     public function suggestion_ok(){
         $MODELcours = $this->loadModel('CourseSubstcription');
+        $student = PersonFactory::getPerson($_SESSION["email"]);
         $MODELcours->add(PersonFactory::getPerson($_SESSION["personid"], true),$_GET["id"]);
         
     }
@@ -68,7 +72,9 @@ class Studentcontroller extends Controller{
         $MODELcours = $this->loadModel('CourseSubstcription');
         $MODELall_cours = new CourseFactory();
     
-        $liste_cours = $MODELcours->getCourses(PersonFactory::getPerson($_SESSION["email"]));
+        $student = PersonFactory::getPerson($_SESSION["email"]);
+        $liste_cours = $MODELcours->getCourses($student);
+        
         $liste_all_cours = $MODELall_cours->getCoursesList();
 
         foreach ($liste_cours as $key => $value) {

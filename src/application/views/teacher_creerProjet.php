@@ -2,12 +2,10 @@
 <div id="main">
     <?php include("_templates/nav_enseignant.php"); ?>
 
-    <div id="site_content">
+    <div id="site_content">     
+      <?php include("_templates/bienvenue_title.php"); ?> 
 
-      <?php include("_templates/teacher_sidebar_left.php"); ?>
-      
-
-      <div class="content">
+      <div class="content_big">
         <h1>Cours 1</h1>
         <h2>Créer le projet de cours</h2>
 
@@ -25,11 +23,12 @@
           </div>
         </form>
           
-          <p style="padding-top: 15px; display: inline"><span>&nbsp;</span>
-            <input class="bouton" type="submit" name="name" value="Importer les notes de projet" /></p>
-          
-          <p style="padding-top: 15px; display: inline"><span>&nbsp;</span>
-            <input class="bouton" type="submit" name="name" value="Publier ce projet" /></p>
+          <p class = "pbouton">
+            <span>&nbsp;</span>
+            <input class="bouton" type="submit" name="name" value="Importer les notes de projet" />
+            <span>&nbsp;</span>
+            <input class="bouton" type="submit" name="name" value="Publier ce projet" />
+          </p>
       </div>
     </div>
 

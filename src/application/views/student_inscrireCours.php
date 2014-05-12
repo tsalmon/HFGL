@@ -4,14 +4,16 @@
 
     <div id="site_content">
 
-      <div id="welcome"><h3>Bienvenue</h3></div>
+      <?php include("_templates/bienvenue_title.php"); ?>
+      
+      <div class="content_big">
+        <?php print_r($liste_cours); ?>
 
-      <div class="content">
         <h2>Les suggestions de cours</h2>
         <?php
         foreach ($suggestions as $key => $value) {
         echo'
-        <table style="width:100%; border-spacing:0;">
+        <table>
           <tr><th>Nom du cours</th> <th>enseigant</th><th>Description rapide</th> <th></th></tr>
           <tr>
             <td>'.$value->title().'</td> 
@@ -24,6 +26,7 @@
         ?>          
       </div>
     </div>
+
     
     <?php include("_templates/nav_footer_etudiant.php"); ?>
 </div>

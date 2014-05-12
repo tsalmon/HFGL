@@ -1,7 +1,8 @@
 <div id="main">
     <?php include("_templates/nav_enseignant.php"); ?>
     <div id="site_content">
-      <div class="content">
+      <?php include("_templates/bienvenue_title.php"); ?>
+      <div class="content_big">
         <?php
         $create = 1;
         if($page == "CreateChapter"){
@@ -211,6 +212,7 @@ Chapter Object
                         )
 
                     [4] => QCMQuestion Object
+
                         (
                             [answers:QCMQuestion:private] => Array
                                 (

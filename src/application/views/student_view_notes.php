@@ -3,11 +3,12 @@
     <?php include("_templates/nav_etudiant.php"); ?>
 
     <div id="site_content">
+    <?php include("_templates/bienvenue_title.php"); ?>
       
-      <div class="content">
+      <div class="content_big">
         
         <h2>Les notes de tous les cours suivis</h2>
-        <table style="width:100%; border-spacing:0;">
+        <table>
           <tr><th>Nom du cours</th> <th>TP</th><th>Projet</th><th>Examen</th><th>Note finale</th></tr>
           
          
