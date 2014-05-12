@@ -5,7 +5,11 @@
     <?php include("_templates/nav_etudiant.php"); ?>
 
     <div id="site_content">
+<<<<<<< HEAD
       <?php include("_templates/bienvenue_title.php"); ?>
+=======
+      <div id="welcome"><h3>Bienvenue</h3></div>
+>>>>>>> f5b7b21adece7fa7f25cc0ecbd4b320f90ec6848
 
       <div class="content_big">
         
