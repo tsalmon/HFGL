@@ -47,14 +47,9 @@
                 <tr><td>Examen</td> <td><a href="#">Feuille d examen</a></td></tr>
               </table>
 
-              <p style="padding-top: 15px; display: inline"><span>&nbsp;</span>
+              <p class = "pbouton"><span>&nbsp;</span>
               <a class="bouton" href="'.URL.'Student/desinscription/?cours='.strval($cours->courseID()).'"">Se desinscrire de ce cours</a>
-              </p>
-
-              <p style="padding-top: 15px; display: inline"><span>&nbsp;</span>
-              </p>
               </p>'; 
-            /*<input class="bouton" type="submit" name="name" value="Notes de cours"/>*/
             }
       ?>
       </div>

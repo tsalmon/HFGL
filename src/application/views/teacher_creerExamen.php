@@ -132,12 +132,11 @@ s                    document.getElementById("sujet").style.display='block';
             <input class="bouton" type="submit" name="name" value="Ajouter ce question" align="right"/></p>
         </div>  <!-- end div add_question -->
 
-        <p style="padding-top: 15px; display: inline"><span>&nbsp;</span>
-            <input class="bouton" type="submit" name="name" value="Avant-première" /></p>
-        <p style="padding-top: 15px; display: inline"><span>&nbsp;</span>
-            <input class="bouton" type="submit" name="name" value="Enregistrer" /></p>
-        <p style="padding-top: 15px; display: inline"><span>&nbsp;</span>
-            <input class="bouton" type="submit" name="name" value="Publier cet examen" /></p>
+        <p class = "pbouton" ><span>&nbsp;</span>
+            <input class="bouton" type="submit" name="name" value="Avant-première" /><span>&nbsp;</span>
+            <input class="bouton" type="submit" name="name" value="Enregistrer" /><span>&nbsp;</span>
+            <input class="bouton" type="submit" name="name" value="Publier cet examen" />
+        </p>
       </div>
     </div>
 

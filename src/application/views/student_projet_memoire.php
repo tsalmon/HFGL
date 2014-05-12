@@ -23,16 +23,16 @@
         <p>Nom du fichier1</p>
 
         <a href="#">
-          <p style="padding-top: 15px; display: inline">
+          <p class = "pbouton">
             <span>&nbsp;</span>
-            <input class="bouton"  name="name" value="Traveaux de cours" />
+            <input class="bouton" value="Traveaux de cours" />
           </p>
         </a>
 
         //quand click sur le bouton Rendre projet, la dernière fichier qui est importé va être soumettre. 
-        <p style="padding-top: 15px; display: inline">
+        <p class = "pbouton">
           <span>&nbsp;</span>
-          <input class="bouton" type="submit" name="name" value="Rendre projet" />
+          <input class="bouton" type="submit" value="Rendre projet" />
         </p>
           
       </div>

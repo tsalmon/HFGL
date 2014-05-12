@@ -14,7 +14,7 @@
           <p><span>Nom du cours</span><input type="text" name="course_title" required/></p>
           <p><span> Description</span><textarea name="course_description" rows="10" cols="30" required></textarea></p>
         </div>
-        <p style="padding-top: 15px; display: inline">
+        <p class = "pbouton">
           <input class="bouton" type="submit" value="Créer Cours" />
         </p>
       </form>            

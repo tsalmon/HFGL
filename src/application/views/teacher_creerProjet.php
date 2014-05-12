@@ -23,11 +23,12 @@
           </div>
         </form>
           
-          <p style="padding-top: 15px; display: inline"><span>&nbsp;</span>
-            <input class="bouton" type="submit" name="name" value="Importer les notes de projet" /></p>
-          
-          <p style="padding-top: 15px; display: inline"><span>&nbsp;</span>
-            <input class="bouton" type="submit" name="name" value="Publier ce projet" /></p>
+          <p class = "pbouton">
+            <span>&nbsp;</span>
+            <input class="bouton" type="submit" name="name" value="Importer les notes de projet" />
+            <span>&nbsp;</span>
+            <input class="bouton" type="submit" name="name" value="Publier ce projet" />
+          </p>
       </div>
     </div>
 

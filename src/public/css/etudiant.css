@@ -269,7 +269,7 @@ nav {
   font-size: 120%;
   padding: 14px 0 0 0;}
   
-.content, .content_big ul { 
+.content ul, .content_big ul { 
   margin: 2px 0 22px 0px;
 }
 
@@ -279,12 +279,6 @@ nav {
   margin: 0 0 0 0; 
   padding: 0 0 4px 28px;
   line-height: 1.5em;
-}
-
-.content table {
-  width: 100%; 
-  float: left;
-  border-spacing:0;
 }
 
 footer { 
@@ -588,7 +582,11 @@ ul#toolbar li a:hover,ul#toolbar li a:focus {
   font-size: 120%;
 }
 
-.content_big table{
+.content_big table, .content table {
   width: 100%;
   border-spacing:0;
+}
+
+.pbouton {
+  display: block;
 }
