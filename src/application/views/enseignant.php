@@ -17,7 +17,7 @@
             foreach ($cours->parts() as $part) {
                   echo '
                 <tr>
-                  <td>'.$part->title().'</td>
+                  <td><a href="#" onclick="deletePart('.$cours->courseID().','.$part->partID().',\''.$part->title().'\',\''.$cours->title().'\')";>[-]</a>'.$part->title().'</td>
                   <td>';
                   foreach($part->chapters() as $chapter){
                     echo '<a target="blank" href="'.URL.'Courses/?cours='.strval($cours->courseID()).'&part='.strval($part->partID()).'&chp='.strval($chapter->chapterID()).'">'.$chapter->title().'</a>';
@@ -25,12 +25,6 @@
                   echo '<a href="'.URL.'Professor/CreateChapter/?cours='.strval($cours->courseID()).'&part='.strval($part->partID()).'">[+]</a></td>';
                 }
           echo '
-                </tr>
-                <tr>
-                  <td><a href="#">&nbsp</a></td>
-                  <td><a href='.URL.'Professor/CreateChapter/?cours='.strval($cours->courseID()).'&part='.null.'>[+]</a></td>
-                </tr>
-
                 <tr>
                   <td>Projet</td>
                   <td><a href='.URL.'Professor/CreateProjet>[+]</a></td>

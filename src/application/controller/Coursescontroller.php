@@ -16,23 +16,5 @@ class Coursescontroller extends Controller{
     	}
         require 'application/views/_templates/footer.php';		
 	}
- 
-   	public function newCourse(){
-		Controller::print_dbg($_POST);
-		Controller::print_dbg($_SESSION);
-		try{
-			$MODELcours = $this->loadModel('CourseFactory');
-			$MODELteaching = $this->loadModel('CourseTeaching');
-			$id_course = $MODELcours->createCourse($_POST["course_title"], $_POST["course_description"]);
-			$MODELteaching->add(PersonFactory::getPerson($_SESSION["personid"], 1), $id_course);
-		} catch(UnexpectedValueException $e){
-			echo "error";
-			require 'application/views/_templates/header.php';
-        	require 'application/views/teacher_creerUnCours.php';
-        	require 'application/views/_templates/footer.php';
-		}
-	}
-
-
 }
 ?>
