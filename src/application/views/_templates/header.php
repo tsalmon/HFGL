@@ -39,6 +39,9 @@
 
             function createPart(id_cours){
                 var nom_partie=prompt("Entrez le nom de la partie");
+                if(nom == null){
+                    return;
+                }
                 xmlhttp.onreadystatechange = function(){
                     if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
                        var t = xmlhttp.responseText.split(" ");
@@ -53,10 +56,11 @@
                 xmlhttp.send();
             }
 
-            function deletePart(id_cours, id_part, nom_partie){
-                var sure=prompt("Êtes vous sûr de vouloir supprimer la partie '" + nom_partie + "'");
-                alert(sure);
-                return ;
+            function deletePart(id_cours, id_part){
+                var sure=confirm("Êtes vous sûr de vouloir supprimer la partie");
+                if(sure == null){
+                    return;
+                }
                 xmlhttp.onreadystatechange = function(){
                     if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
                        var t = xmlhttp.responseText.split(" ");
@@ -68,7 +72,7 @@
                     }
                 }
                 xmlhttp.open("GET", "'.URL.'Professor/DeletePart?cours="+id_cours+"&part="+id_part+"");
-                xmlhttp.send();            
+                xmlhttp.send();       
             }
             </script>';
         }
