@@ -113,7 +113,7 @@ class Professorcontroller extends Controller{
         try {
             $cours = CourseFactory::getCourse($_GET["cours"], true);
             $cours->part($_GET["part"])->delete();
-            print("createpart ok");            
+            print("createpart ok");
         } catch (Exception $e) {
             print("error delete");
         }
@@ -142,7 +142,7 @@ class Professorcontroller extends Controller{
     public function CreateExercice(){
         $prof = $this->loadModel('PersonFactory')->getPerson($_SESSION["email"]);
 
-        $page="CreateExercicep";
+        $page="CreateExercice";
 
         if(isset($_POST["nb_qt"])){ // if it's not the first question
             if($_POST["lareponse"] == "free"){
@@ -201,6 +201,21 @@ class Professorcontroller extends Controller{
     public function ParametresPWD_result()
     {
         print_r($_POST);
+    }
+
+    public function newCourse(){
+        try{
+            $MODELcours = new CourseFactory();
+            $MODELteaching = $this->loadModel('CourseTeaching');
+            $id_course = $MODELcours->createCourse($_POST["course_title"], nl2br($_POST["course_description"]));
+            $MODELteaching->add(PersonFactory::getPerson($_SESSION["personid"], 1), $id_course);
+            header('location: '.URL.'Professor');
+        } catch(UnexpectedValueException $e){
+            $page = "error";
+            require 'application/views/_templates/header.php';
+            require 'application/views/teacher_creerUnCours.php';
+            require 'application/views/_templates/footer.php';
+        }
     }
 
     public function SupprimerCours(){
