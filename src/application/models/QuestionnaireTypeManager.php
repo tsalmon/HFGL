@@ -9,6 +9,7 @@ define('TP', "TP");
 
 class QuestionnaireTypeManager extends TypeManager{
 
+    private static $sharedInstance = null;
     private $examen;
     private $memoire;
     private $projet;
@@ -25,11 +26,10 @@ class QuestionnaireTypeManager extends TypeManager{
     }
 
     public static function getInstance(){
-        if(QuestionnaireTypeManager::$sharedInstance==null){
-            QuestionnaireTypeManager::$sharedInstance=new QuestionnaireTypeManager();
+        if(self::$sharedInstance==null){
+            self::$sharedInstance=new self();
         }
-
-        return QuestionnaireTypeManager::$sharedInstance;
+        return self::$sharedInstance;
     }
 
     public function refresh()

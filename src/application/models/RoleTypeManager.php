@@ -20,12 +20,12 @@ class RoleTypeManager extends TypeManager{
         $this->refresh();
     }
 
+    protected static $sharedInstance = null;
     public static function getInstance(){
-        if(RoleTypeManager::$sharedInstance==null){
-            RoleTypeManager::$sharedInstance=new RoleTypeManager();
+        if(self::$sharedInstance==null){
+            self::$sharedInstance=new self();
         }
-
-        return RoleTypeManager::$sharedInstance;
+        return self::$sharedInstance;
     }
 
     public function refresh()

@@ -5,6 +5,7 @@ abstract class TypeManager {
     protected  $idField;
     protected  $nameField;
     protected abstract function refresh();
+
     protected function getIdForTypeName($typeName){
         $typeRequest  = "SELECT ".$this->idField." FROM ".$this->typeTable." WHERE ".$this->nameField."='".$typeName."'";
         //echo $typeRequest;
@@ -18,5 +19,4 @@ abstract class TypeManager {
             throw new Exception("No ".$typeName." ID in the table ".$this->typeTable."");
         }
     }
-    protected static $sharedInstance = null;
 }
