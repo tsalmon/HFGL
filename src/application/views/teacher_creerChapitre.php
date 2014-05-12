@@ -1,13 +1,10 @@
 <div id="main">
     <?php include("_templates/nav_enseignant.php"); ?>
     <div id="site_content">
-<<<<<<< HEAD
+
       <?php include("_templates/bienvenue_title.php"); ?>
       <div class="content_big">
-=======
-      <div id="welcome"><h3>Bienvenue</h3></div>
       <div class="content">
->>>>>>> f5b7b21adece7fa7f25cc0ecbd4b320f90ec6848
         <?php
         $create = 1;
         if($page == "CreateChapter"){
