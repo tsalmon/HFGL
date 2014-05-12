@@ -14,6 +14,7 @@
     <?php include("_templates/nav_etudiant.php"); ?>
 
     <div id="site_content">
+      <div id="welcome"><h3>Bienvenue</h3></div>
 
       <?php include("_templates/sidebar_left.php"); ?>
       

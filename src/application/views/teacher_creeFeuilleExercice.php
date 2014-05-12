@@ -1,7 +1,9 @@
 <div id="main">
     <?php include("_templates/nav_enseignant.php"); ?>
     <div id="site_content">
-      <div class="content">
+      <div id="welcome"><h3>Bienvenue</h3></div>
+      
+      <div class="content_big">
         <h3>Création d'exercice</h3>
         <?php
           $qt_nb = 1;//(!isset($_POST["nb_qt"])) ? 1 : $_POST["nb_qt"];

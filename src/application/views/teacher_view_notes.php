@@ -5,7 +5,8 @@
 
     <div id="site_content">
       
-      <div class="content">
+      <div id="welcome"><h3>Bienvenue</h3></div>
+      <div class="content_big">
         
         <h2>Le résultat de cours ....</h2>
         <table style="width:100%; border-spacing:0;">

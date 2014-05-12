@@ -1,6 +1,7 @@
 <div id="main">
     <?php include("_templates/nav_enseignant.php"); ?>
     <div id="site_content">
+      <div id="welcome"><h3>Bienvenue</h3></div>
       <?php include("_templates/sidebar_left.php"); ?>
       <div class="content">
 

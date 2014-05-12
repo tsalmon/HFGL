@@ -1,7 +1,8 @@
 <div id="main">
   <?php include("_templates/nav_enseignant.php"); ?>
   <div id="site_content">
-    <div class="content">
+      <div id="welcome"><h3>Bienvenue</h3></div>
+    <div class="content_big">
       <h1>Créer un cours</h1>
       <?php 
         if(isset($page) && $page == "error"){

@@ -3,8 +3,8 @@
     <?php include("_templates/nav_etudiant.php"); ?>
 
     <div id="site_content">
-      
-      <div class="content">
+      <div id="welcome"><h3>Bienvenue</h3></div>
+      <div class="content_big">
         
         <h2>Les notes de tous les cours suivis</h2>
         <table style="width:100%; border-spacing:0;">

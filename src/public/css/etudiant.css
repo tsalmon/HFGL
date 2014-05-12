@@ -269,11 +269,11 @@ nav {
   font-size: 120%;
   padding: 14px 0 0 0;}
   
-.content ul { 
+.content, .content_big ul { 
   margin: 2px 0 22px 0px;
 }
 
-.content ul li, .sidebar ul li { 
+.content ul li, .content_big ul li, .sidebar ul li { 
   list-style-type: none;
   background: url(../images/bullet.png) no-repeat;
   margin: 0 0 0 0; 
@@ -574,4 +574,10 @@ ul#toolbar li a:hover,ul#toolbar li a:focus {
   color: #47433F;
   text-align:justify;
   text-justify:inter-word;
+}
+
+.content_big { 
+  text-align: left;
+  margin: 0 20px 0 20px;
+  font-size: 120%;
 }

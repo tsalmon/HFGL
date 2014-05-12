@@ -2,12 +2,10 @@
 <div id="main">
     <?php include("_templates/nav_enseignant.php"); ?>
 
-    <div id="site_content">
+    <div id="site_content">     
+      <div id="welcome"><h3>Bienvenue</h3></div> 
 
-      <?php include("_templates/teacher_sidebar_left.php"); ?>
-      
-
-      <div class="content">
+      <div class="content_big">
         <h1>Cours 1</h1>
         <h2>Créer le projet de cours</h2>
 

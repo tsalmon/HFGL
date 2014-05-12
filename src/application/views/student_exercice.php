@@ -3,7 +3,9 @@
     <?php include("_templates/nav_etudiant.php"); ?>
 
     <div id="site_content">
-      <div class="content">
+      <div id="welcome"><h3>Bienvenue</h3></div>
+
+      <div class="content_big">
         
         <?php 
           print_r($_GET);

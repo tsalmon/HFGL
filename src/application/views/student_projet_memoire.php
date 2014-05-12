@@ -5,10 +5,9 @@
     <?php include("_templates/nav_etudiant.php"); ?>
 
     <div id="site_content">
-      
-      <?php include("_templates/student_sidebar_left.php"); ?>
+      <div id="welcome"><h3>Bienvenue</h3></div>
 
-      <div class="content">
+      <div class="content_big">
         
         <h1>Projet / Mémoire</h1>
         <h5>Enseignant: </h5>

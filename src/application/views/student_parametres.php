@@ -6,7 +6,7 @@
 
       <div id="welcome"><h3>Bienvenue</h3></div>
 
-      <div class="content">
+      <div class="content_big">
 
         <h1>Paramètre du compte</h1>
 
