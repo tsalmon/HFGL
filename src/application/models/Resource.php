@@ -32,4 +32,6 @@ class Resource {
         PDOHelper::getInstance()->exec("INSERT INTO `Responses`(`questionID`, `content`, `type`) VALUES (".$questionID.",'".$this->content."',".($this->type).")");
         return PDOHelper::getInstance()->lastInsertID();
     }
+
+    public static function fileNameForQuestionID($)
 } 
