@@ -1,6 +1,6 @@
 <div id="sidebar_container">
   <div class="sidebar">
-      <h3>Liste de cours</h3>
+      <h3>Vos Courses</h3>
       <ul>
       		<?php
             if(isset($cours_teaching)){
