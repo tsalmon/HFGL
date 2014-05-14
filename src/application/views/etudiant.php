@@ -20,12 +20,19 @@
       <?php include("_templates/sidebar_left.php"); ?>
       
       <div class="content">
+
       <?php
           foreach($liste_cours as $cours){
 
-            echo '<p><h1 id="'.$cours->title().'">'. $cours->title() .'</h1>';
+            echo '<fieldset>
+        <legend><h1 id="'.$cours->title().'">'. $cours->title() .'</h1></legend>';
             echo "<p>". $cours->description() ."</p>";
-            echo "<h5>TODO: Enseignant: </h5>";
+            $profs = $cours->getProfessors();
+            echo "<h5> Enseignant(s): ";
+            foreach ($profs as $prof) {
+              echo $prof->name();
+            }
+            echo "</h5>";
             echo "
               <h2>Les travaux</h2>
               <table>
@@ -50,7 +57,7 @@
 
               <p class = "pbouton"><span>&nbsp;</span>
               <a class="bouton" href="'.URL.'Student/desinscription/?cours='.strval($cours->courseID()).'"">Se desinscrire de ce cours</a>
-              </p>'; 
+              </fieldset>'; 
             }
       ?>
       </div>
