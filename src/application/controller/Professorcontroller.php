@@ -145,9 +145,8 @@ class Professorcontroller extends Controller{
         $page="CreateExercice";
 
         if(isset($_POST["nb_qt"])){ // if it's not the first question
-            if($_POST["lareponse"] == "free"){
+            if($_POST["lareponse"] == "free"){ //Question libre
                 $qt = new LQuestion($_POST["question"], $_POST["tip"], $_POST["points"]);
-                var_dump($qt);
                 $qt->writeToDB();
             } elseif($_POST["lareponse"] == "checkbox"){ //QCM
                 $qt = new QCMQuestion($_POST["question"], $_POST["tip"], $_POST["points"]);
@@ -156,13 +155,13 @@ class Professorcontroller extends Controller{
                     $a = new Answer($value, isset($_POST["c".$key]));
                     $a->writeToDBForQuestionID($qt_id);
                 }
-            } elseif ($_POST["lareponse"] == "lines"){
+            } elseif ($_POST["lareponse"] == "lines"){ //QRF
                 $qt = new QRFQuestion($_POST["question"], $_POST["tip"], $_POST["points"]);
                 foreach ($_POST["r"] as $key => $value) {
                     $qt->addAnswer(new Answer($value, 1));
                 }
                 $qt->writeToDB();         
-            } elseif($_POST["lareponse"] == "code"){
+            } elseif($_POST["lareponse"] == "code"){ //Programme
                 $qt = new LQuestion($_POST["question"], $_POST["tip"], $_POST["points"]);
                 $qt->writeToDB();
                 $qt->writeToDBForQuestionnaireID($_SESSION["ex_id"]);
