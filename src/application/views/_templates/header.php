@@ -16,6 +16,7 @@
             ?>
             <link href="<?php echo URL; ?>/public/css/board.css" rel="stylesheet">
             <link href="<?php echo URL; ?>/public/css/navigation.css" rel="stylesheet" type="text/css" />
+            
             <?php
         }
         
