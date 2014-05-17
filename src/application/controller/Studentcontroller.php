@@ -11,7 +11,10 @@ class Studentcontroller extends Controller{
         $MODELcours = $this->loadModel('CourseSubstcription');
         $student = PersonFactory::getPerson($_SESSION["email"]);
         $liste_cours = $MODELcours->getCourses($student);
-
+        $currentCourse = null;
+        if (isset($_GET["cours"])){
+            $currentCourse=CourseFactory::getCourse($_GET["cours"],true);
+        }
         require 'application/views/_templates/header.php';
         require 'application/views/etudiant.php';
         require 'application/views/_templates/footer.php';

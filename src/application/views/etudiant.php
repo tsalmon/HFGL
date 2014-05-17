@@ -22,12 +22,12 @@
       <div class="content">
 
       <?php
-          foreach($liste_cours as $cours){
+          if ($currentCourse){
 
             echo '<fieldset>
-        <legend><h1 id="'.$cours->title().'">'. $cours->title() .'</h1></legend>';
-            echo "<p>". $cours->description() ."</p>";
-            $profs = $cours->getProfessors();
+        <legend><h1 id="'.$currentCourse->title().'">'. $currentCourse->title() .'</h1></legend>';
+            echo "<p>". $currentCourse->description() ."</p>";
+            $profs = $currentCourse->getProfessors();
             echo "<h5> Enseignant(s): ";
             foreach ($profs as $prof) {
               echo $prof->name();
@@ -38,13 +38,13 @@
               <table>
                 <tr><th>Matière</th> <th>Documents</th></tr>
             ";
-                foreach ($cours->parts() as $part) {
+                foreach ($currentCourse->parts() as $part) {
                   echo '
                 <tr>
                   <td>'.$part->title().'</td>
                   <td>';
                   foreach($part->chapters() as $chapter){
-                    echo '<a target="blank" href="'.URL.'Courses/?cours='.strval($cours->courseID()).'&part='.strval($part->partID()).'&chp='.strval($chapter->chapterID()).'">'.$chapter->title().'</a>';
+                    echo '<a target="blank" href="'.URL.'Courses/?cours='.strval($currentCourse->courseID()).'&part='.strval($part->partID()).'&chp='.strval($chapter->chapterID()).'">'.$chapter->title().'</a>';
                   }
                  
                   echo '</td>';
@@ -56,7 +56,7 @@
               </table>
 
               <p class = "pbouton"><span>&nbsp;</span>
-              <a class="bouton" href="'.URL.'Student/desinscription/?cours='.strval($cours->courseID()).'"">Se desinscrire de ce cours</a>
+              <a class="bouton" href="'.URL.'Student/desinscription/?cours='.strval($currentCourse->courseID()).'"">Se desinscrire de ce cours</a>
               </fieldset>'; 
             }
       ?>
