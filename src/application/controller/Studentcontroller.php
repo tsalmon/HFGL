@@ -67,7 +67,11 @@ class Studentcontroller extends Controller{
     public function suggestion_ok(){
         $MODELcours = $this->loadModel('CourseSubstcription');
         $student = PersonFactory::getPerson($_SESSION["email"]);
-        $MODELcours->add(PersonFactory::getPerson($_SESSION["personid"], true),$_GET["id"]);
+        if ($MODELcours->add(PersonFactory::getPerson($_SESSION["personid"], true), CourseFactory::getCourse($_GET["cours"],true))) {
+            header('location: '.URL.'Student');
+        } else {
+            die("error...");
+        }
         
     }
 
