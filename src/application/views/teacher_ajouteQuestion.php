@@ -68,7 +68,7 @@
               </tr>
             </table>          
             <ul >
-              <li><input class="bouton" type="submit" name = "addQuestionAction" value="Finir sans valider" formaction="index"/></li>
+              <li><input class="bouton" type="submit" name = "addQuestionAction" value="Finir sans valider"/></li>
               <li><input class="bouton" type="submit" name = "addQuestionAction" value="Valider et finir"/></li>
               <li><input class="bouton" type="submit" name = "addQuestionAction" value="Valider et continuer"/></li>
             </ul>
