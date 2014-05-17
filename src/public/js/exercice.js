@@ -94,8 +94,6 @@ function combien(string){
 
 window.onload = function viewWillLoad(){
 	document.getElementById("createExercice").style.display='inline';
-	document.getElementById("addQuestion").style.display='none';
-	document.getElementById('xmlOrNot').checked = false;
     setForm();
 };
 
