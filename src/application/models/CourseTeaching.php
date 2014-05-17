@@ -128,10 +128,14 @@ class CourseTeaching {
     
     public static function remove($tutorID,$courseID){
         try{
-            $indice=array_search($tutorID, CourseTeaching::$courses[$courseID]);
-            array_splice(CourseTeaching::$courses[$courseID],$indice);
-            $indice2=array_search($courseID, CourseTeaching::$persons[$tutorID]);
-            array_splice(CourseTeaching::$persons[$tutorID],$indice2);
+            if(isset(CourseTeaching::$courses[$courseID])){
+                $indice=array_search($tutorID, CourseTeaching::$courses[$courseID]);
+                array_splice(CourseTeaching::$courses[$courseID],$indice);
+            }
+            if(isset(CourseTeaching::$persons[$tutorID])){
+                $indice2=array_search($courseID, CourseTeaching::$persons[$tutorID]);
+                array_splice(CourseTeaching::$persons[$tutorID],$indice2);
+            }
             CourseTeaching::$db->exec('DELETE FROM Teaching WHERE courseID="'.$courseID.'" AND tutorID="'.$tutorID.'";');
         }catch(Exception $e){return false;}
     }
