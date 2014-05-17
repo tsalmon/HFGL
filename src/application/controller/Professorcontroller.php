@@ -31,15 +31,15 @@ class Professorcontroller extends Controller{
     }
 
     public function CreateExamen(){
-         $page = "prof";
+        $page = "prof";
         $prof = $this->loadModel('PersonFactory')->getPerson($_SESSION["email"]);
-        require 'application/views/_templates/header.php';
-        require 'application/views/teacher_creerExamen.php';
-        require 'application/views/_templates/footer.php';
+        $_SESSION["quest_for"] = "examen";
+        $_SESSION["ex_course"] = $_GET["cours"];
+        header('location: '.URL.'Professor/CreateExercice');
     }
 
     public function CreateProjet(){
-         $page = "prof";
+        $page = "prof";
         $prof = $this->loadModel('PersonFactory')->getPerson($_SESSION["email"]);
         require 'application/views/_templates/header.php';
         require 'application/views/teacher_creerProjet.php';
@@ -84,6 +84,7 @@ class Professorcontroller extends Controller{
         $_SESSION["ex_course"] = $_GET["cours"];
         $_SESSION["ex_part"] = $_GET["cours"];
         $_SESSION["ex_chpt"] = $chp->chapterID();
+        $_SESSION["quest_for"] = "chapter";
 
         header('location: '.URL.'Professor/CreateExercice');
     }
@@ -100,6 +101,7 @@ class Professorcontroller extends Controller{
         }
         $p = new Part($_GET["part"], false);
         $cours->addPart($p);
+        $_SESSION["quest_for"] = "part";
         //print("createpart ok");
     }
 
@@ -114,7 +116,6 @@ class Professorcontroller extends Controller{
     }
 
     public function CreateExerciceFork(){
-        //Controller::print_dbg($_POST);
         if (array_key_exists ("xmlOrNot" , $_POST)){
             $this->CreateExerciceWithXML();
         } else {
@@ -124,22 +125,45 @@ class Professorcontroller extends Controller{
         }
     }
 
+    public function FinalizeExerciceCreation(){
+
+        if($_SESSION["quest_for"] == "chapter"){
+            $questionnaire_table = "Chapter";
+            $table_pk = "chapterID";
+            $session_val = "ex_chpt";
+        }else
+        if ($_SESSION["quest_for"] == "part") {
+            $questionnaire_table = "Part";
+            $table_pk = "partID";
+            $session_val = "ex_part";
+        }else
+        if ($_SESSION["quest_for"] == "examen") {
+            $questionnaire_table = "Course";
+            $table_pk = "courseID";
+            $session_val = "ex_course";
+        }
+        //echo "UPDATE `".$questionnaire_table."` SET `questionnaireID`=".$_SESSION["ex_id"]." WHERE `".$table_pk."`=".$_SESSION[$session_val];
+        PDOHelper::getInstance()->query("UPDATE `".$questionnaire_table."` SET `questionnaireID`=".$_SESSION["ex_id"]." WHERE `".$table_pk."`=".$_SESSION[$session_val]);
+        header('location: '.URL.'Professor/index');
+    }
+
     public function CreateExerciceWithXML(){
-        echo "Nombre de fichiers ".count($_FILES)."<br>";
         if ($_FILES["exerciceXML"]["error"] > 0) {
             echo "Error: " . $_FILES["exerciceXML"]["error"] . "<br>";
         } else {
-            echo "Upload: " . $_FILES["exerciceXML"]["name"] . "<br>";
-            echo "Type: " . $_FILES["exerciceXML"]["type"] . "<br>";
-            echo "Size: " . ($_FILES["exerciceXML"]["size"] / 1024) . " kB<br>";
-            echo "Stored in: " . $_FILES["exerciceXML"]["tmp_name"]."<br>";
             $temp = $_FILES["exerciceXML"]["tmp_name"];
             $name_file = $_FILES["exerciceXML"]['name'];
             move_uploaded_file($temp, "files/loadedxml/".$name_file);
             $exerciceSheet = XMLHelper::parseXML("files/loadedxml/".$name_file);
             $exerciceSheet->setDeadline($_POST["datelimite"]);
             $exerciceSheet->setAvailableDate($_POST["dateaccess"]);
-            var_dump($exerciceSheet);
+
+            $questionnaire_table = null;
+            $table_pk = null;
+            $session_val = null;
+
+            $_SESSION["ex_id"] = $exerciceSheet->writeToDatabase();
+            $this->FinalizeExerciceCreation();
         }
     }
 
@@ -147,18 +171,23 @@ class Professorcontroller extends Controller{
         $prof = $this->loadModel('PersonFactory')->getPerson($_SESSION["email"]);
         $page="AddQuestion";
 
-        $qt_nb++;
+        if (isset($qt_nb)) {
+           $qt_nb++;
+        }
+
         $questionnaire = new ExerciceSheet();
         $questionnaire->loadByID($_SESSION["ex_id"]);
 
         $qt=null;
 
         if(isset($_POST["nb_qt"])){ // if it's not the first question
-            if($_POST["lareponse"] == "libre"){ //Question libre
+            if($_POST["lareponse"] == "libre"){ 
+                //Question libre
 
                 $qt = new LQuestion($_POST["question"], $_POST["tip"], $_POST["points"]);
 
-            } elseif($_POST["lareponse"] == "checkbox"){ //QCM
+            } elseif($_POST["lareponse"] == "checkbox"){ 
+                //QCM
 
                 $qt = new QCMQuestion($_POST["question"], $_POST["tip"], $_POST["points"]);
                 foreach ($_POST["r"] as $key => $value) {
@@ -166,14 +195,16 @@ class Professorcontroller extends Controller{
                     $qt->addAnswer($a);
                 }
 
-            } elseif ($_POST["lareponse"] == "lines"){ //QRF
+            } elseif ($_POST["lareponse"] == "lines"){ 
+                //QRF
 
                 $qt = new QRFQuestion($_POST["question"], $_POST["tip"], $_POST["points"]);
                 foreach ($_POST["r"] as $key => $value) {
                     $qt->addAnswer(new Answer($value, 1));
                 }
 
-            } elseif($_POST["lareponse"] == "code"){ //Programme
+            } elseif($_POST["lareponse"] == "code"){ 
+                //Programme
 
                 $qt = new PQuestion($_POST["question"], $_POST["tip"], $_POST["points"]);
                 $pQuestionID = $qt->writeToDBForQuestionnaireID($_SESSION["ex_id"]);
@@ -220,39 +251,25 @@ class Professorcontroller extends Controller{
                 $exec -> writeToDBForQuestionID($pQuestionID);
 
             }
+
+            $vc = $_POST["addQuestionAction"] == "Valider et continuer";
+            $vf = $_POST["addQuestionAction"] == "Valider et finir";
+            $f  = $_POST["addQuestionAction"] == "Finir sans valider";
+
+
+            if (($vf || $vc) && isset($qt)) {
+                $questionnaire->addQuestion($qt);
+                $_SESSION["ex_id"] = $questionnaire->writeToDatabase();
+            }
+
+            if ($vf || $f) {
+                $this->FinalizeExerciceCreation();
+            }
+            
         }
-
-
-        if (!is_null($qt)) {
-            $questionnaire->addQuestion($qt);
-            // echo "<br><br><br>";
-            // echo "Question:";
-            // var_dump($qt);         
-            // echo "<br><br><br>";
-            // echo "Questionnaire after question addition:";
-            // var_dump($questionnaire);
-        }
-
-        if (isset($_POST["nb_qt"])) {
-            if ($_POST["addQuestionAction"] == "Valider et continuer") {
-                $questionnaire->writeToDatabase();
-                require 'application/views/_templates/header.php';
-                require 'application/views/teacher_ajouteQuestion.php';
-                require 'application/views/_templates/footer.php';
-            } else
-            if ($_POST["addQuestionAction"] == "Valider et finir") {
-                $questionnaire->writeToDatabase();
-                header('location: '.URL.'Professor/index');
-            } else {
-                header('location: '.URL.'Professor/index');
-            }        
-        } else {
-            require 'application/views/_templates/header.php';
-            require 'application/views/teacher_ajouteQuestion.php';
-            require 'application/views/_templates/footer.php';
-        }
-
-
+        require 'application/views/_templates/header.php';
+        require 'application/views/teacher_ajouteQuestion.php';
+        require 'application/views/_templates/footer.php';
     }
 
 
