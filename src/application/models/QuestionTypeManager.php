@@ -9,6 +9,7 @@ define('P', "P");
 
 class QuestionTypeManager extends TypeManager{
 
+    private static $sharedInstance = null;
     private $qrf;
     private $qcm;
     private $l;
@@ -25,11 +26,10 @@ class QuestionTypeManager extends TypeManager{
     }
 
     public static function getInstance(){
-        if(QuestionTypeManager::$sharedInstance==null){
-            QuestionTypeManager::$sharedInstance=new QuestionTypeManager();
+        if(self::$sharedInstance==null){
+            self::$sharedInstance=new self();
         }
-
-        return QuestionTypeManager::$sharedInstance;
+        return self::$sharedInstance;
     }
 
     public function refresh()

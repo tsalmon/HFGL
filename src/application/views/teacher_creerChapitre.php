@@ -4,7 +4,6 @@
 
       <?php include("_templates/bienvenue_title.php"); ?>
       <div class="content_big">
-      <div class="content">
         <?php
         $create = 1;
         if($page == "CreateChapter"){

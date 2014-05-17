@@ -5,7 +5,6 @@ require_once("application/models/QRFQuestion.php");
 require_once("application/models/LQuestion.php");
 require_once("application/models/PQuestion.php");
 require_once("application/models/PDOHelper.php");
-require_once("application/models/Document.php");
 
 /*
 define('QCM',1);
@@ -16,18 +15,17 @@ define('L',4);
 define('Examen', 1);    
 define('TP', 4);
 
-class ExerciceSheet extends Document{
+class ExerciceSheet{
 
     private $deadline;
     private $available;
     private $questionnaireID;
     private $questionnaireType;
     private $questions;
-    private $db;
 
     public function __construct()
     {
-        $this->db = PDOHelper::getInstance();
+
     }
 
     /* Getters & Setters */
@@ -75,23 +73,32 @@ class ExerciceSheet extends Document{
     public function writeToDatabase()
     {
         //echo "INSERT INTO `Questionnaire`(`questionnaireType`, `deadline`, `available`) VALUES(".Examen.",".$this->deadline.",".$this->available.")<br>";
-        PDOHelper::getInstance()->exec("INSERT INTO `Questionnaire`(`questionnaireType`, `deadline`, `available`) VALUES(".Examen.",".$this->deadline.",".$this->available.")");;
-        $questionnaireID = PDOHelper::getInstance()->lastInsertID();
-        //echo "Inserted questionnaireID:".$questionnaireID."<br>";
-
-        foreach ($this->questions as $question) {
-           $question->writeToDBForQuestionnaireID($questionnaireID);
+        if (is_null($this->questionnaireID)) {
+            //PDOHelper::getInstance()->exec("INSERT INTO `Questionnaire`(`questionnaireType`, `deadline`, `available`) VALUES(".Examen.",".$this->deadline.",".$this->available.")");;
+            PDOHelper::getInstance()->exec("INSERT INTO `Questionnaire`(`questionnaireType`, `deadline`, `available`) VALUES(".Examen.", STR_TO_DATE('02/02/2015', '%m/%d/%Y'), STR_TO_DATE('01/02/2015', '%m/%d/%Y'))");;
+            $this->questionnaireID = PDOHelper::getInstance()->lastInsertID();
         }
-        return $questionnaireID;
+
+        //echo "Inserted questionnaireID:".$questionnaireID."<br>";
+        if (!is_null($this->questions)) {
+            foreach ($this->questions as $question) {
+                //echo "Try to write question!";
+                $question->writeToDBForQuestionnaireID($this->questionnaireID);
+            }    
+        }
+    
+
+        return $this->questionnaireID;
     }
 
     //Initializes current questionnaire with data from database using questionnaireID
     public function loadByID($questionnaireID){
-        $questions = array();
-        if($questionnaireRequestResult = $this->db->query("SELECT * FROM Questionnaire WHERE questionnaireID=".$questionnaireID.""))
+
+        if($questionnaireRequestResult = PDOHelper::getInstance()->query("SELECT * FROM Questionnaire WHERE questionnaireID=".$questionnaireID.""))
         {
+            //echo "Questionnaire for id ".$questionnaireID." loaded";
             $questionnaireRow = $questionnaireRequestResult->fetch(PDO::FETCH_ASSOC);
-            $this->questionnaireID = $questionnaireRow['questionnaireID'];
+            $this->questionnaireID = $questionnaireID;
             $this->available = $questionnaireRow['available'];
             $this->deadline = $questionnaireRow['deadline'];
         }
@@ -100,7 +107,7 @@ class ExerciceSheet extends Document{
             throw new Exception('Questionnaire wasnt found.');
         }
 
-        if ($questionsRequestResult = $this->db->query("SELECT questionID FROM Questions WHERE questionnaireID=".$questionnaireID))
+        if ($questionsRequestResult = PDOHelper::getInstance()->query("SELECT questionID FROM Questions WHERE questionnaireID=".$questionnaireID))
         {
             //enumertaion of questions of current questionnaire
             while($currentQuestionsRow = $questionsRequestResult->fetch(PDO::FETCH_ASSOC))
@@ -113,6 +120,5 @@ class ExerciceSheet extends Document{
         {
             throw new Exception('Questions for current questionnaire werent found.');
         }
-        return $questions;
     }
 }

@@ -6,6 +6,7 @@ define('tutor', "tutor");
 define('student', "student");
 
 class RoleTypeManager extends TypeManager{
+    private static $sharedInstance = null;
     private $admin;
     private $tutor;
     private $student;
@@ -21,11 +22,10 @@ class RoleTypeManager extends TypeManager{
     }
 
     public static function getInstance(){
-        if(RoleTypeManager::$sharedInstance==null){
-            RoleTypeManager::$sharedInstance=new RoleTypeManager();
+        if(self::$sharedInstance==null){
+            self::$sharedInstance=new self();
         }
-
-        return RoleTypeManager::$sharedInstance;
+        return self::$sharedInstance;
     }
 
     public function refresh()

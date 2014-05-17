@@ -114,6 +114,38 @@ class CourseSubstcription {
         return $resultat;
         
     }
+
+    public static function getProfessors($course){
+        CourseSubstcription::createEntryCourse($course);
+        $resultat=array();
+        $idcourse=$course->courseID();
+        if(!isset(CourseSubstcription::$courses[$idcourse][1])){
+            $res=array();
+            $req = CourseSubstcription::$db->query("SELECT personID FROM (Tutor JOIN Teaching ON Tutor.tutorID=Teaching.tutorID) where courseID=".$idcourse);
+            if($req===false){
+                return array();
+            }
+            $fetch = $req->fetchAll(PDO::FETCH_ASSOC);
+            foreach($fetch as $entry){
+                $id=$entry['personID'];
+                CourseSubstcription::$courses[$idcourse][]=$id;
+                $currentPerson=PersonFactory::getPerson($id,true);
+                if(!isset(CourseSubstcription::$persons[$id])){
+                    CourseSubstcription::$persons[$id]=[$currentPerson->email()];
+                }
+                $resultat[]=$currentPerson;
+            }
+        }
+        else{
+            foreach(CourseSubstcription::$courses[$idcourse] as $id){
+                if(ctype_digit($id)){
+                  $resultat[]=PersonFactory::getPerson(CourseSubstcription::$persons[$id][0]);
+                }
+            }
+        }
+        return $resultat;
+        
+    }
     
     public static function add($student,$course){  
         CourseSubstcription::createEntryStudent($student);
