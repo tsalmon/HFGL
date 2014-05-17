@@ -3,6 +3,11 @@
 class Test {
     private $input;
     private $output;
+    private $questionID;
+
+    public function getQuestionID(){
+        return $this->questionID;
+    }
 
     public function getOutput(){
         return $this->output;
@@ -22,8 +27,12 @@ class Test {
     }
 
     public function writeToDBForQuestionID($questionID){
-        echo "INSERT INTO `Test`(`questionID`, `input`, `output`) (".$questionID.",'".$this->output."',".$this->input.")<br>";
-        PDOHelper::getInstance()->exec("INSERT INTO `Test`(`questionID`, `input`, `output`) (".$questionID.",'".$this->input."',".$this->output.")");
-        return PDOHelper::getInstance()->lastInsertID();
+        if (is_null($this->questionID)) {
+            $this->questionID = $questionID;
+            // echo "INSERT INTO `Test`(`questionID`, `input`, `output`) VALUES (".$this->questionID.",'".$this->output."','".$this->input."')<br>";
+            PDOHelper::getInstance()->exec("INSERT INTO `Test`(`questionID`, `input`, `output`) VALUES (".$this->questionID.",'".$this->input."','".$this->output."')");
+        }
+
+        return $this->questionID;
     }
 } 

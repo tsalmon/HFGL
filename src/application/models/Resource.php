@@ -28,10 +28,12 @@ class Resource {
     }
 
     public function writeToDBForQuestionID($questionID){
-        echo "INSERT INTO `Resource`(`questionID`, `content`, `type`) (".$questionID.",'".$this->content."',".($this->type).")<br>";
-        PDOHelper::getInstance()->exec("INSERT INTO `Responses`(`questionID`, `content`, `type`) VALUES (".$questionID.",'".$this->content."',".($this->type).")");
-        return PDOHelper::getInstance()->lastInsertID();
-    }
+        if (is_null($this->questionID)) {
+            $this->questionID = $questionID;
+            // echo "INSERT INTO `Resource`(`questionID`, `content`, `type`) VALUES (".$this->questionID.",'".$this->content."','".($this->type)."')<br>";
+            PDOHelper::getInstance()->exec("INSERT INTO `Resource`(`questionID`, `content`, `type`) VALUES (".$this->questionID.",'".$this->content."','".($this->type)."')");
+        }
 
-    //public static function fileNameForQuestionID($)
+        return $this->questionID;
+    }
 } 

@@ -30,19 +30,28 @@ class PQuestion extends Question{
     }
 
     public function writeToDB(){
-   		echo "INSERT INTO `Question`(`assignment`, `points`, `typeID`) VALUES ('".$this->assignment."',".$this->points.",".QCM.")<br>";
-        PDOHelper::getInstance()->exec("INSERT INTO `Question`(`assignment`, `points`, `typeID`) VALUES ('".$this->assignment."',".$this->points.",".QuestionTypeManager::getInstance()->getQcmID().")");
-        $this->questionID = PDOHelper::getInstance()->lastInsertID();
-        echo "Inserted questionID:".$this->questionID."<br>";
-
-        foreach ($this->resources as $resource)
-        {
-            $resource->writeToDBForQuestionID($this->questionID);
+        if (is_null($this->questionID)) {
+            echo "INSERT INTO `Question`(`assignment`, `points`, `typeID`) VALUES ('".$this->assignment."',".$this->points.",".QuestionTypeManager::getInstance()->getPID().")<br>";
+            PDOHelper::getInstance()->exec("INSERT INTO `Question`(`assignment`, `points`, `typeID`) VALUES ('".$this->assignment."',".$this->points.",".QuestionTypeManager::getInstance()->getPID().")");
+            $this->questionID = PDOHelper::getInstance()->lastInsertID();
+            echo "Inserted questionID:".$this->questionID."<br>";
         }
 
-        foreach ($this->tests as $test)
-        {
-            $test->writeToDBForQuestionID($this->questionID);
+
+        if (!is_null($this->resources)) {
+            echo "Insert resources";
+            foreach ($this->resources as $resource)
+            {
+                $resource->writeToDBForQuestionID($this->questionID);
+            }
+        }
+
+        if (!is_null($this->tests)) {
+            echo "Insert tests";
+            foreach ($this->tests as $test)
+            {
+                $test->writeToDBForQuestionID($this->questionID);
+            }
         }
 
         return $this->questionID;
