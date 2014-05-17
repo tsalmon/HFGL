@@ -15,7 +15,7 @@ class XMLHelper {
 
         $oquestions = array();
 
-        echo "Exercise type:".$type."<br>";
+        //echo "Exercise type:".$type."<br>";
         foreach ($questions->question as $question) {
             $oanswers = array();
 

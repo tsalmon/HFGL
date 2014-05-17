@@ -32,7 +32,7 @@
 
                 <tr>
                   <td>Examen</td> 
-                  <td><a href='.URL.'Professor/CreateExamen>[+]</a></td>
+                  <td><a href='.URL.'Professor/CreateExamen/?cours='.strval($currentCourse->courseID()).'>[+]</a></td>
                 </tr>
                 <!-- <tr> si l`examen existe
                     <td>Examen</td> 
