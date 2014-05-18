@@ -151,6 +151,7 @@ CREATE TABLE `Points` (
 `response` varchar(2000) NULL,
 `questionID` int NOT NULL,
 `note` decimal NOT NULL,
+`validated` tinyint(1) NOT NULL,
 PRIMARY KEY (`studentID`, `questionID`) 
 );
 
