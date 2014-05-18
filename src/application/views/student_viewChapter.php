@@ -20,11 +20,13 @@
         ?>
 
         <div>
-          <a class="bouton" href="<?php echo URL.''.($chp->courseNotes()->getURL());?>" name="name">Cours</a>
+
+         
           <?php 
+             echo '<a class="bouton" href="'.URL.'Student/NotesDeCours'.$chp->courseNotes()->getURL().'">Cours</a>';
             $id_exo = $chp->exercices()->getID(); 
             if($id_exo != null){ //if there is an exercice
-              echo '<a class="bouton" href="'.URL.'Exercice/'.$id_exo.'" name="name">Exercice</a>';
+              echo '<a class="bouton" href="'.URL.'Exercice">Exercice</a>';
             }
           ?>
         </div>
