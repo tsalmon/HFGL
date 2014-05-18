@@ -10,7 +10,9 @@
     src: local("News Cycle"), url('../fonts/NewsCycle-Regular.ttf'); 
 } 
 
-html { 
+html, body{ 
+   margin: 0;
+  padding: 0;
   height: 100%;
 }
 
@@ -25,7 +27,6 @@ article, aside, figure, footer, header, hgroup, nav, section {
 }
 
 body { 
-  margin:0;
   font-family: Verdana, Geneva, sans-serif;
   background: #3e464d;
   color: #FFF;
@@ -55,7 +56,7 @@ h1, h2, h3 {
 }
 
 h2 { 
-  font-size: 160%;
+  font-size: 170%;
   padding: 9px 0 5px 0;
 }
 
@@ -137,11 +138,6 @@ ol li {
   margin-right: auto;
 }
 
-#main {
-  background: #444;
-}
-
-
 header { 
   background: #444;
 }
@@ -204,14 +200,6 @@ nav {
   margin: 0 auto 0 auto;
 }
 
-#site_content { 
-  width: 1000px;
-  background: #EEEEEE url(../images/dark.png);
-  overflow: hidden;
-  margin: 0px auto 0 auto;
-  padding: 15px 10px 25px 10px;
-  text-shadow: 0 1px #000;} 
-
 #sidebar_container { 
   float: left;
   width: 234px;
@@ -268,7 +256,8 @@ nav {
   margin: 0 0 15px 0;
   float: right;
   font-size: 120%;
-  padding: 14px 0 0 0;}
+  padding: 14px 0 0 0;
+}
   
 .content ul, .content_big ul { 
   margin: 2px 0 22px 0px;
@@ -282,16 +271,7 @@ nav {
   line-height: 1.5em;
 }
 
-footer { 
-  font: 100% 'Droid Sans', arial, sans-serif;
-  height: 125px;
-  padding: 28px 0 5px 0;
-  text-align: center; 
-  background: #1D1D1D;
-  color: #FFF;
-  margin: 0;
-  border-top: 6px solid #4D8D01;
-}
+
 
 footer p { 
   line-height: 1.7em;
@@ -598,9 +578,37 @@ ul#toolbar li a:hover,ul#toolbar li a:focus {
   display: block;
 }
 
-/*//pour menu sidebar*/
-.fixed {
-    position:fixed;
-    top:0;
-    z-index:99999;
+/*//pour mettre footer en bas*/
+
+
+footer { 
+  font: 100% 'Droid Sans', arial, sans-serif;
+  text-align: center; 
+  background: #1D1D1D;
+  color: #FFF;
+  padding-bottom: 0;
+  margin: 0;
+  border-top: 6px solid #4D8D01;
+  height: 70px;
+  position: relative;
+}
+
+#main {
+  background: #444;
+  min-height: 100%;
+margin-bottom: -70px;
+position: relative;
+}
+
+#site_content { 
+  width: 1000px;
+  background: #EEEEEE url(../images/dark.png);
+  overflow: hidden;
+  margin: 0px auto 0 auto;
+  text-shadow: 0 1px #000;
+ } 
+
+ .clearfooter {
+height: 70px;
+clear: both;
 }
