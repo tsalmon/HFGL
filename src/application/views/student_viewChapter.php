@@ -6,22 +6,24 @@
 
       <?php include("_templates/bienvenue_title.php"); ?>
       <div class="content_big">
-        
         <h1><?php echo $chp->title(); ?></h1>
         <h3><?php echo $cours->title()." - ".$part->title(); ?></h3>
 
         <?php
+          var_dump($chp->courseNotes());
+          echo '<h2>Description</h2><p id="description_chapitre">';
           if(null != $chp->description()){
-            echo '<h2>Description</h2>
-                  <p id="description_chapitre">';
             echo $chp->description();
-            echo '</p>';
+          } else {
+            echo 'A chapter description could be here. If it wasn\'t null...';
           }
+          echo '</p>';
+          //echo '<iframe src="'.$chp->courseNotes()->getURL().'" height="1000" seamless/>';
+          //echo 'Votre navigateur ne supporte pas des iframes. Pensez de le changer!';
+          //echo '</iframe>';
         ?>
 
         <div>
-
-         
           <?php 
             if (null !== ($chp->courseNotes())) {
               echo '<a class="bouton" href="'.URL.'Student/NotesDeCours'.$chp->courseNotes()->getURL().'">Cours</a>';

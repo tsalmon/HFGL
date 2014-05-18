@@ -32,6 +32,11 @@ p {
   line-height: 1.7em;
 }
 
+iframe {
+  width: 100%;
+  height: 1000;
+}
+
 img { 
   border: 0;
   float: right;

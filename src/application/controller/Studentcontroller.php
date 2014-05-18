@@ -56,8 +56,20 @@ class Studentcontroller extends Controller{
         //echo "<script>alert('')</script>";
     }
 
+    public function StartExercice(){
+        $_SESSION["started"] = True;
+        header('location: '.URL.'Student/Exercice');
+    }
+
+    private function NextQuestion(){
+        if ($_SESSION["questionsCount"] == $_SESSION["currentQuestionNumber"]) {
+            $_SESSION["finished"] = True;
+        } 
+
+        header('location: '.URL.'Student/Exercice');
+    }
+
     public function Exercice(){
-        //var_dump($_SESSION);
         $chpt = new Chapter($_SESSION["chapter"]);
         $questionnaire = $chpt->exercices();
         $questions = $questionnaire->getQuestions();
@@ -90,17 +102,9 @@ class Studentcontroller extends Controller{
         require 'application/views/_templates/footer.php';
     }
 
-    private function nextQuestion(){
-        //echo "Current question number:".$_SESSION["currentQuestionNumber"].":::".$_SESSION["questionsCount"];
-        if ($_SESSION["questionsCount"] == $_SESSION["currentQuestionNumber"]) {
-            $_SESSION["finished"] = True;
-        } 
-
-        header('location: '.URL.'Student/Exercice');
-    }
-
-    private function incCount($key, $value){
+    private function SecondaryParameter($key, $value){
             $_SESSION["started"] = True;
+
             if ($key == "currentQuestionNumber") {
                 $_SESSION["currentQuestionNumber"] = $value+1; 
                 return True;
@@ -114,16 +118,10 @@ class Studentcontroller extends Controller{
             return False;
     }
 
-    public function startExercice(){
-        $_SESSION["started"] = True;
-        header('location: '.URL.'Student/Exercice');
-    }
-
-
     public function QCMExerciceResponse()
     {
         foreach ($_POST as $key => $value) {
-            if(!$this->incCount($key, $value))
+            if(!$this->SecondaryParameter($key, $value))
             {
                 $question = Question::getQuestionByID($key);
                 $answers = $question->getAnswers();
@@ -134,43 +132,34 @@ class Studentcontroller extends Controller{
                 PDOHelper::getInstance()->exec("INSERT INTO `Points`(`studentID`, `questionID`, `note`) VALUES (".$_SESSION["studentID"].",".$_GET["questionID"].", ".$note.")");
             }
         }
-        $this->nextQuestion();
+        $this->NextQuestion();
     }
 
     public function QRFExerciceResponse()
     {
         foreach ($_POST as $key => $value) {
-            if(!$this->incCount($key, $value))
+            if(!$this->SecondaryParameter($key, $value))
             {
                 $question = Question::getQuestionByID($key);
                 $answers = $question->getAnswers();
                 $note = 0;
-                //var_dump($question);
+
                 foreach($answers as $answer) {
-                    if ($answer->isCorrect() ) {
-                        //echo "<script type=\"text/javascript\">alert(\"Bonne reponse:".$answer->getContent()." Votre reponse:".$value.");</script>";
-                        if ($answer->getContent() == $value) {
-                            $note = $question->getPoints();
-                        //    echo "<script type=\"text/javascript\">alert(\"Bien joué!\");</script>";
-                        } else {
-                        //    echo "<script type=\"text/javascript\">alert(\"Faux!\");</script>";
-                        }
+                    if ($answer->getContent() == $value) {
+                        $note = $question->getPoints();
                     }
                 } 
-
 
                 PDOHelper::getInstance()->exec("INSERT INTO `Points`(`studentID`, `questionID`, `response`, `note`) VALUES (".$_SESSION["studentID"].",".$_GET["questionID"].", '".$value."', ".$note.")");
             }
         }
-
-        $this->nextQuestion();
-
+        $this->NextQuestion();
     }
 
     public function PExerciceResponse()
     {
         foreach ($_POST as $key => $value) {
-            if(!$this->incCount($key, $value))
+            if(!$this->SecondaryParameter($key, $value))
             {
                 $question = Question::getQuestionByID($value);
                 $tests = $question->getTests();
@@ -180,10 +169,6 @@ class Studentcontroller extends Controller{
                 if ($_FILES[$value]["error"] > 0) {
                     echo "Error: " . $_FILES[$value]["error"] . "<br>";
                 } else {
-                    // echo "Upload: " . $_FILES[$value]["name"] . "<br>";
-                    // echo "Type: " . $_FILES[$value]["type"] . "<br>";
-                    // echo "Size: " . ($_FILES[$value]["size"] / 1024) . " kB<br>";
-                    // echo "Stored in: " . $_FILES[$value]["tmp_name"]."<br>";
                     $temp = $_FILES[$value]["tmp_name"];
                     $name_file = $_FILES[$value]['name'];
                     move_uploaded_file($temp, "files/".$value."/".$name_file);
@@ -205,6 +190,7 @@ class Studentcontroller extends Controller{
                     }
                 } 
                 // echo "<br/>";
+                $note = $question->getPoints();
 
                 /* Compilation de programme chargé */
                 exec("cd ./files/".$value.";bash ".$make,$output, $retval);
@@ -218,39 +204,29 @@ class Studentcontroller extends Controller{
                     if ($test->getOutput() == array_pop($output)) {
                         // echo "Test passed<hr/>";
                     } else {
+                        $note = 0;
                         // echo "Test not passed<hr/>";
                     }
                 } 
                 // echo "<br/>";
 
-                PDOHelper::getInstance()->exec("INSERT INTO `Points`(`studentID`, `questionID`, `note`) VALUES (".$_SESSION["studentID"].",".$_GET["questionID"].", '".$value."')");
+                PDOHelper::getInstance()->exec("INSERT INTO `Points`(`studentID`, `questionID`, `note`) VALUES (".$_SESSION["studentID"].",".$_GET["questionID"].", '".$note."')");
             }
         }
 
-        /*
-        foreach ($_POST as $key => $value) {
-            if(!$this->incCount($key, $value))
-            {
-                echo "Pquestion key: ".$key." value: ".$value;
-                //PDOHelper::getInstance()->exec("INSERT INTO `Points`(`studentID`, `questionID`, `response`, `note`) VALUES (1,".$questionID.", ".$key.", ".$value.")");
-            }
-        }*/
-
-        $this->nextQuestion();
+        $this->NextQuestion();
     }
 
     public function LExerciceResponse()
     {
         foreach ($_POST as $key => $value) {
-            if (!$this->incCount($key, $value))
+            if (!$this->SecondaryParameter($key, $value))
             {   
-                //echo "INSERT INTO `Points`(`studentID`, `questionID`, `response`) VALUES (".$_SESSION["studentID"].",".$_GET["questionID"].", '".$value."')";
                 PDOHelper::getInstance()->exec("INSERT INTO `Points`(`studentID`, `questionID`, `response`) VALUES (".$_SESSION["studentID"].",".$_GET["questionID"].", '".$value."')");
             }
         }
 
-        $this->nextQuestion();
-
+        $this->NextQuestion();
     }
 
     public function Notes()
@@ -333,6 +309,7 @@ class Studentcontroller extends Controller{
         require 'application/views/student_view_notesDeCours.php';
         require 'application/views/_templates/footer.php';
     }
+
     public function Deconnexion(){
         if(session_destroy()){
             header('location: '.URL.'Welcome');

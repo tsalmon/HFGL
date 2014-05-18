@@ -9,16 +9,16 @@
 
         <h1>L'exercice de cours: <?php echo $_SESSION["cours"]; ?></h1>
         <h1>Part: <?php echo $_SESSION["part"]; ?></h1>
-        <h1>Chapitre:<?php echo $_SESSION["chptname"]; ?></h1>
-        <h3>Enseignant:</h5>
-        <h3>Date limite:</h4>
+        <h1>Chapitre: <?php echo $_SESSION["chptname"]; ?></h1>
+        <h3>Enseignant: </h5>
+        <h3>Date limite: </h4>
           
           <div id="div_scroll">
             <p>
                <?php
                if (!$_SESSION["started"]) {
                  echo "Vous allez faire l'exercice de ".$_SESSION["questionsCount"]." questions. Est-ce que vous êtes prêt?<br/>";
-                 echo '<form action="startExercice" method="POST">';
+                 echo '<form action="StartExercice" method="POST">';
                  echo '<input id="startexercice" value="Je commence!" type="submit"/>';
                } else 
                if ($_SESSION["finished"]){
