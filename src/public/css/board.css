@@ -139,6 +139,7 @@ ol li {
 
 header { 
   background: #3e464d;
+  text-align: center;
 }
 
 #logo { 
@@ -613,16 +614,7 @@ footer {
   height: auto !important;
   background: #EEEEEE url(../images/dark.png);
   overflow: hidden;
-
-  width: 1000px;
-  min-height: 100%;
-  height: auto !important;
-  margin-bottom: -70px;
-  position: relative;
-  background: #EEEEEE url(../images/dark.png);
-  overflow: hidden;
   margin: 0px auto 0 auto;
-
   text-shadow: 0 1px #000;
  } 
 
