@@ -155,6 +155,7 @@ class CourseSubstcription {
             CourseSubstcription::$courses[$course->courseID()][]=$student->studentID();
             CourseSubstcription::$persons[$student->studentID()][]=$course->courseID();
             CourseSubstcription::$db->exec('INSERT INTO Inscription (studentID,courseID,date) VALUES ('.$student->studentID().','.$course->courseID().',CURRENT_TIMESTAMP);');            
+            return true;
         }
     }
     
