@@ -31,9 +31,16 @@
         </p>
           
       </div>
+<<<<<<< HEAD
     <div class="clearfooter"></div>
       </div>
 
+=======
+      </div
+    <div class="clearfooter"></div>
+
+    </div>
+>>>>>>> a97800448f784f74304372d2b5adb6bae980f8ce
     
     <?php include("_templates/nav_footer_etudiant.php"); ?>
 </div>
