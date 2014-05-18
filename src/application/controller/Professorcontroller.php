@@ -5,7 +5,6 @@ require_once 'application/models/LQuestion.php';
 require_once 'application/models/QRFQuestion.php';
 require_once 'application/models/PQuestion.php';
 require_once 'application/models/XMLHelper.php';
-//require_once 'application/models/QuestionnairePool.php';
 
 class Professorcontroller extends Controller{
 
@@ -339,6 +338,19 @@ class Professorcontroller extends Controller{
         require 'application/views/_templates/header.php';
         require 'application/views/teacher_view_soumissions.php';
         require 'application/views/_templates/footer.php';
+    }
+
+    public function AfficherCours(){
+        $page = "ViewCours";
+        $prof = $this->loadModel('PersonFactory')->getPerson($_SESSION["email"]);
+
+        $cours = CourseFactory::getCourse($_GET["cours"], true);
+        $part = $cours->part($_GET["part"]);
+        $chp = $part->chapter($_GET["chp"]);
+        
+        require 'application/views/_templates/header.php';
+        require 'application/views/teacher_creerChapitre.php';
+        require 'application/views/_templates/footer.php';  
     }
 
     public function DonneNote(){
