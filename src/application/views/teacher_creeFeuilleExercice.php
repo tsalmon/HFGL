@@ -5,7 +5,6 @@
 
       <?php include("_templates/bienvenue_title.php"); ?>
       
-<<<<<<< HEAD
       <div class="content_big">
         <h3>Création d'exercice</h3>
         <?php
@@ -13,7 +12,7 @@
         ?>
         <p>Question n°<?php echo $qt_nb; ?></p>
         <?php
-          Controller::print_dbg($_POST);
+//          Controller::print_dbg($_POST);
         ?>
         <form name="qtform" method="POST" action="<?php echo URL.'Professor/CreateExercice'?>" onsubmit="return testQCM();">
           <input type="hidden" name="nb_qt" value="<?php echo $qt_nb; ?>"/>
@@ -46,7 +45,7 @@
               <td>
                 Reponse
                 <select name="lareponse" id="lareponse" onchange="rep()">
-                  <option value="free">
+                  <option value="libre">
                     Réponse libre
                   </option>
                   <option value="checkbox">
@@ -65,8 +64,12 @@
                 <textarea disabled></textarea>
                 <!--<input type="text" name="reponse" placeholder="ecrivez ici la réponse" required/>-->
               </td>
-            </tr>
-          </table>          
+            </tr>      
+            <tr id="student_corrector">
+                <td>Correction par pairs :</td>
+                <td><input type="checkbox" id="student_corrector_box" name="student_corrector" value="student_corrector" /></td>
+            </tr>  
+          </table>  
           <ul>
             <li><input type="submit" value="Valider et finir"/></li>
             <li><input type="submit" value="Valider et continuer"/></li>
@@ -76,11 +79,10 @@
               }
             ?>
           </ul>
-=======
       <div id="createExercice" class="content_big">
         <form action="CreateExerciceFork" method="post" enctype="multipart/form-data">
           <fieldset>
-            <legend><h2>Créer la nouvelle questionnaire</h2></legend>
+            <legend><h2>Créer le nouveau questionnaire</h2></legend>
 
             <div class="form_settings">
               <p><span>Description:</span>           
@@ -107,7 +109,6 @@
               <input class="bouton" type="submit" name="name" value="Enregistrer" />
             </p>
           </fieldset>
->>>>>>> 8038364d75adf69a86741c177b598c7d68e30be3
         </form>
       </div>
       

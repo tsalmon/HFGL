@@ -66,6 +66,10 @@
                   <!--<input type="text" name="reponse" placeholder="ecrivez ici la réponse" required/>-->
                 </td>
               </tr>
+            <tr id="student_corrector">
+                <td>Correction par pairs :</td>
+                <td><input type="checkbox" id="student_corrector_box" name="student_corrector" value="student_corrector" /></td>
+            </tr>  
             </table>          
             <ul >
               <li><input class="bouton" type="submit" name = "addQuestionAction" value="Finir sans valider"/></li>
