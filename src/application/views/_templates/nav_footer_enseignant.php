@@ -4,7 +4,7 @@
 <footer>
       <p>
         <a href="<?php echo URL; ?>Professor">Mes cours</a> | 
-        <a href="<?php echo URL; ?>Professor/Creer_un_cours">Créer un cours</a> |
+        <a href="<?php echo URL; ?>Professor/CreateCourse">Créer un cours</a> |
         <a href="<?php echo URL; ?>Professor/Parametres">Parametrès du compte</a>| 
         <a href="<?php echo URL; ?>Professor/Deconnexion">Déconnexion</a>
       </p>
