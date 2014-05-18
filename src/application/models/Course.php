@@ -40,7 +40,9 @@ class Course {
                     $this->title=$fetch["title"];
                     $this->courseID=$fetch['courseID'];
                     if(isset($fetch['questionnaireID'])){
-                        $this->finalExam=new ExerciceSheet($fetch['questionnaireID']);}
+                        $this->finalExam=new ExerciceSheet();
+                        $this->finalExam->loadByID($fetch['questionnaireID']);
+                    }
                     $this->description=$fetch['description'];                  
                     $this->parts=$this->getDBParts();
                 }
