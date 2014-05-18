@@ -10,12 +10,6 @@
     src: local("News Cycle"), url('../fonts/NewsCycle-Regular.ttf'); 
 } 
 
-html, body{ 
-   margin: 0;
-  padding: 0;
-  height: 100%;
-}
-
 * { 
   margin: 0;
   padding: 0;
@@ -139,7 +133,7 @@ ol li {
 }
 
 header { 
-  background: #444;
+  background: #3e464d;
 }
 
 #logo { 
@@ -276,11 +270,13 @@ nav {
 footer p { 
   line-height: 1.7em;
   padding: 0 0 10px 0;
+  text-align: center;
 }
 
 footer a { 
   color: #FFF;
   text-decoration: none;
+  text-align: center;
 }
 
 footer a:hover { 
@@ -580,8 +576,14 @@ ul#toolbar li a:hover,ul#toolbar li a:focus {
 
 /*//pour mettre footer en bas*/
 
-
+html, body{ 
+   margin: 0;
+   margin-bottom: -70px;
+  padding: 0;
+  height: 100%;
+}
 footer { 
+  position: relative;
   font: 100% 'Droid Sans', arial, sans-serif;
   text-align: center; 
   background: #1D1D1D;
@@ -590,18 +592,20 @@ footer {
   margin: 0;
   border-top: 6px solid #4D8D01;
   height: 70px;
-  position: relative;
 }
 
 #main {
-  background: #444;
-  min-height: 100%;
-margin-bottom: -70px;
-position: relative;
+  background: #3e464d;
+  position: relative;
+  height: 100%
 }
 
 #site_content { 
   width: 1000px;
+  min-height: 100%;
+  height: auto !important;
+  margin-bottom: -70px;
+  position: relative;
   background: #EEEEEE url(../images/dark.png);
   overflow: hidden;
   margin: 0px auto 0 auto;
@@ -609,6 +613,43 @@ position: relative;
  } 
 
  .clearfooter {
-height: 70px;
-clear: both;
+  height: 70px;
+  clear: both;
 }
+
+
+/*html, body, #main { height: 100%; }
+body > #main { height: auto; min-height: 100%; }
+#main {
+  background: #444;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+
+#site_content { 
+  width: 1000px;
+  background: #EEEEEE url(../images/dark.png);
+  overflow: hidden;
+  margin: 0px auto 0 auto;
+  padding-left: 10px;
+  padding-right: 10px;  
+  text-shadow: 0 1px #000;
+  height: 100%;
+  padding-bottom: 3em;
+ } 
+
+ #footer {
+  font: 100% 'Droid Sans', arial, sans-serif;
+  text-align: center; 
+  background: #1D1D1D;
+  color: #FFF;
+  padding-bottom: 0;
+  margin: 0;
+  border-top: 6px solid #4D8D01;
+ clear: both;
+ position: relative;
+ z-index: 10;
+ height: 3em;
+ margin-top: -3em;
+}*/

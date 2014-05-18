@@ -31,6 +31,9 @@
 
         </table>      
       </div>
+      
+    <div class="clearfooter"></div>
+
     </div>
 
     
