@@ -41,7 +41,7 @@
           </table>
             <p class = "pbouton">
               <span>&nbsp;</span>
-              <a href='.URL.'Professor/SupprimerCours/?cours='.$cours->courseID().'" class="bouton">Supprimer ce cours</a>
+              <a href="'.URL.'Professor/SupprimerCours/?cours='.$cours->courseID().'" class="bouton">Supprimer ce cours</a>
               <span>&nbsp;</span>
               <a href='.URL.'Professor/ViewNotes class="bouton">Consulter les notes</a>
             </p>

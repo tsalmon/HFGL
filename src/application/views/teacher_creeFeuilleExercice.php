@@ -7,7 +7,7 @@
       <div class="content_big">
         <h3>Création d'exercice</h3>
         <?php
-          $qt_nb = 1;//(!isset($_POST["nb_qt"])) ? 1 : $_POST["nb_qt"];
+          $qt_nb = (!isset($_POST["nb_qt"])) ? 1 : $_POST["nb_qt"] + 1;
         ?>
         <p>Question n°<?php echo $qt_nb; ?></p>
         <?php
