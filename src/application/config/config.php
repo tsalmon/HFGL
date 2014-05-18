@@ -7,6 +7,7 @@ ini_set("display_errors", 1);
  define('URL', 'http://localhost/GL/src/');
 
 
+
 /*Configuration for: Database*/
 define('DB_TYPE', 'mysql');
 define('DB_HOST', 'localhost');
