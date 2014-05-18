@@ -4,6 +4,7 @@ require_once "application/models/TypeManager.php";
 define('QRF', "QRF");
 define('QCM', "QCM");
 define('L', "L");
+define('LS', "LS");
 define('P', "P");
 
 
@@ -14,6 +15,7 @@ class QuestionTypeManager extends TypeManager{
     private $qcm;
     private $l;
     private $p;
+    private $ls;
 
     //      Constructeur private : singleton
     //*********************************************
@@ -38,6 +40,7 @@ class QuestionTypeManager extends TypeManager{
         $this->qcm = $this->getIdForTypeName(QCM);
         $this->l = $this->getIdForTypeName(L);
         $this->p = $this->getIdForTypeName(P);
+        $this->ls = $this->getIdForTypeName(LS);
 
     }
 
@@ -66,6 +69,15 @@ class QuestionTypeManager extends TypeManager{
             $this->l = $this->getIdForTypeName(L);
         }
         return $this->l;
+    }
+
+    public function getLSID()
+    {
+        if(!$this->ls)
+        {
+            $this->ls = $this->getIdForTypeName(LS);
+        }
+        return $this->ls;
     }
 
     public function getPID()
