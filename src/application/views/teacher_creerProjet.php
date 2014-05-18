@@ -30,6 +30,7 @@
             <input class="bouton" type="submit" name="name" value="Publier ce projet" />
           </p>
       </div>
+    <div class="clearfooter"></div>
     </div>
 
     <?php include("_templates/nav_footer_enseignant.php"); ?>

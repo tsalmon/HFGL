@@ -7,8 +7,8 @@ class Coursescontroller extends Controller{
 		$cours = CourseFactory::getCourse($_GET["cours"], true);
 		$part = $cours->part($_GET["part"]);
 		$chp = $part->chapter($_GET["chp"]);
-
 		require 'application/views/_templates/header.php';
+		echo "<script>alert(Hello!)</script>";
 		if($_SESSION["role"] == "teacher"){
        		require 'application/views/teacher_creerChapitre.php';			
 		} else {

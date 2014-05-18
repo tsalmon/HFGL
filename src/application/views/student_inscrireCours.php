@@ -6,8 +6,6 @@
 
       <?php include("_templates/bienvenue_title.php"); ?>
       <div class="content_big">
-        <?php print_r($liste_cours); ?>
-
         <h2>Les suggestions de cours</h2>
         <table>
           <tr><th>Nom du cours</th> <th>Enseigants</th><th>Description rapide</th> <th></th></tr>
@@ -31,6 +29,9 @@
 
         </table>      
       </div>
+      
+    <div class="clearfooter"></div>
+
     </div>
 
     

@@ -5,7 +5,7 @@
       <p>
         <a href="<?php echo URL; ?>Student">Mes cours</a> | 
         <a href="<?php echo URL; ?>Student/Notes">Mes notes</a> |
-        <a href="<?php echo URL; ?>index.php?page=suggestions">S'incrire à un cours</a> | 
+        <a href="<?php echo URL; ?>Student/InscrireCours">S'incrire à un cours</a> | 
         <a href="<?php echo URL; ?>Student/Parametres">Parametrès du compte</a>| 
         <a href="<?php echo URL; ?>Student/Deconnexion">Déconnexion</a>
       </p>

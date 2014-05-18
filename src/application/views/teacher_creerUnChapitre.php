@@ -25,6 +25,7 @@
       			</section>
       		</form>
       </div>
+    <div class="clearfooter"></div>
     </div>
 
     <?php include("_templates/nav_footer_enseignant.php"); ?>
