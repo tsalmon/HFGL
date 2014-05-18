@@ -99,9 +99,25 @@ class Studentcontroller extends Controller{
         require 'application/views/_templates/footer.php';    	
     }
 
+    public function AfficherCours(){
+        $page = "ViewCours";
+        $student = $this->loadModel('PersonFactory')->getPerson($_SESSION["email"]);
+
+        $cours = CourseFactory::getCourse($_GET["cours"], true);
+        $part = $cours->part($_GET["part"]);
+        $chp = $part->chapter($_GET["chp"]);
+        
+        require 'application/views/_templates/header.php';
+        require 'application/views/student_viewChapter.php';
+        require 'application/views/_templates/footer.php';  
+    }
+
     public function NotesDeCours()
     {
         $page = "student";
+        $MODELcours = $this->loadModel('CourseSubstcription');
+        $student = PersonFactory::getPerson($_SESSION["email"]);
+
         require 'application/views/_templates/header.php';
         require 'application/views/student_view_notesDeCours.php';
         require 'application/views/_templates/footer.php';

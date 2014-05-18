@@ -20,7 +20,7 @@
                   <td><a href="#" onclick="deletePart('.$currentCourse->courseID().','.$part->partID().',\''.$part->title().'\',\''.$currentCourse->title().'\')";>[-]</a>'.$part->title().'</td>
                   <td>';
                   foreach($part->chapters() as $chapter){
-                    echo '<a target="blank" href="'.URL.'Courses/?cours='.strval($currentCourse->courseID()).'&part='.strval($part->partID()).'&chp='.strval($chapter->chapterID()).'">'.$chapter->title().'</a>';
+                    echo '<a target="blank" href="'.URL.'Professor/AfficherCours/?cours='.strval($currentCourse->courseID()).'&part='.strval($part->partID()).'&chp='.strval($chapter->chapterID()).'">'.$chapter->title().'</a>';
                   }                 
                   echo '<a href="'.URL.'Professor/CreateChapter/?cours='.strval($currentCourse->courseID()).'&part='.strval($part->partID()).'">[+]</a></td>';
                 }
@@ -51,6 +51,8 @@
         }
         ?>
       </div>
+    <div class="clearfooter"></div>
+      
     </div>
 
     <?php include("_templates/nav_footer_enseignant.php"); ?>

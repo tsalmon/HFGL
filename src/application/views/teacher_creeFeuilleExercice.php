@@ -110,6 +110,10 @@
 >>>>>>> 8038364d75adf69a86741c177b598c7d68e30be3
         </form>
       </div>
+      
+    <div class="clearfooter"></div>
+
+      </div>
 
     <?php include("_templates/nav_footer_enseignant.php"); ?>
 </div>

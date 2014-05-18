@@ -16,6 +16,7 @@ class Chapter {
         protected $title;
         protected $courseNotes;
         protected $db;
+        protected $description;
         
     //      Constructeur
     //**************************
@@ -69,10 +70,7 @@ class Chapter {
         }           
         
         public function description(){
-            if(isset($this->description)){
-                return $this->description;
-            }
-            return null;
+            return $this->description;
         }
 
         public function title(){  
@@ -83,6 +81,10 @@ class Chapter {
             return $this->courseNotes;          
         }    
         
+        public function setDescription($d){
+            $this->db->exec("UPDATE Chapter SET description = ".$d." WHERE chapterID =".$this->chapterID);
+            $this->description=$d;
+        }
          
         public function setChapterNumber($num){
             $this->db->exec("UPDATE Chapter SET chapterNumber = ".$num." WHERE chapterID =".$this->chapterID);
