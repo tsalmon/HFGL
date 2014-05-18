@@ -52,7 +52,7 @@ class QuestionnaireTypeManager extends TypeManager{
 
     public function getMemoireID()
     {
-        if(!$this->memoire
+        if(!$this->memoire)
         {
             $this->memoire = $this->getIdForTypeName(Memoire);
         }
