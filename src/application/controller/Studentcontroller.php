@@ -115,6 +115,9 @@ class Studentcontroller extends Controller{
     public function NotesDeCours()
     {
         $page = "student";
+        $MODELcours = $this->loadModel('CourseSubstcription');
+        $student = PersonFactory::getPerson($_SESSION["email"]);
+
         require 'application/views/_templates/header.php';
         require 'application/views/student_view_notesDeCours.php';
         require 'application/views/_templates/footer.php';
