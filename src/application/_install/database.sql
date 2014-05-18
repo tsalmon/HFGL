@@ -225,12 +225,6 @@ CREATE TABLE `Role` (
 PRIMARY KEY (`roleID`) 
 );
 
-CREATE TABLE `Revision` (
-);
-
-CREATE TABLE `RevisionType` (
-);
-
 
 ALTER TABLE `Chapters` ADD CONSTRAINT `fk_Chapter_Chapters_1` FOREIGN KEY (`chapterID`) REFERENCES `Chapter` (`chapterID`);
 ALTER TABLE `Questions` ADD CONSTRAINT `fk_Questions_Questionnaire_1` FOREIGN KEY (`questionnaireID`) REFERENCES `Questionnaire` (`questionnaireID`);
