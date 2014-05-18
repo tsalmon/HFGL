@@ -3,7 +3,7 @@
     <div id="site_content">
       <?php include("_templates/bienvenue_title.php"); ?>
       <div class="content_big">
-      		<form method="post" action="<?php echo URL; ?>Professor/CreateChapter_ok?cours=<?php echo $_GET["part"]; ?>&part=<?php echo $_GET["part"]; ?>" enctype="multipart/form-data">
+      		<form name"chpform" method="post" action="<?php echo URL; ?>Professor/CreateChapter_ok?cours=<?php echo $_GET["part"]; ?>&part=<?php echo $_GET["part"]; ?>" onsubmit="return chpValid();" enctype="multipart/form-data">
       			<?php 
       				if(isset($error)){
       					echo '<p class="error">'.$error."</p>";
