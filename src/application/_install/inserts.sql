@@ -8,7 +8,8 @@ INSERT INTO `QuestionType`(`typeName`) VALUES
 ('QCM'),
 ('QRF'),
 ('P'),
-('L');
+('L'),
+('LS');
 
 INSERT INTO `Questionnaire`(`questionnaireType`,`description`, `deadline`, `available`) VALUES
 (1,'',MAKEDATE(2015,1),NOW()),

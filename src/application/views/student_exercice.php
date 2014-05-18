@@ -9,7 +9,7 @@
 
         <h1>L'exercice de cours: <?php echo $_SESSION["cours"]; ?></h1>
         <h1>Part: <?php echo $_SESSION["part"]; ?></h1>
-        <h1>Chapitre: <?php echo $_SESSION["chptname"]; ?></h1>
+        <h1>Chapitre: <?php echo $_SESSION["chapterTitle"]; ?></h1>
         <h3>Enseignant: </h5>
         <h3>Date limite: </h4>
           

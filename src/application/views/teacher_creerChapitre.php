@@ -14,7 +14,7 @@
           echo '<h3>Modifier un chapitre</h3>';
         }
         ?>
-        <p>Pour le cours "<?php echo $cours->title(); ?>" - partie "<?php echo $part->title();  ?>"</p>
+        <p>Pour la partie "<?php echo $cours->title(); ?>" - partie "<?php echo $part->title();  ?>"</p>
         <?php
           //Controller::print_dbg($chp);
         ?>

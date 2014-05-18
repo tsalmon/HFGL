@@ -45,15 +45,21 @@ class Studentcontroller extends Controller{
     }
 
     public function DoExercice(){
-        $_SESSION["chapter"] = intval($_GET["chp"]);
-        $_SESSION["chptname"] = $_GET["chptname"];
-        $_SESSION["cours"] = $_GET["cours"];
-        $_SESSION["part"] = $_GET["part"];
+        if ($_SESSION["type"] == "chapter") {
+            $_SESSION["cours"] = $_GET["courseTitle"];
+            $_SESSION["part"] = $_GET["partTitle"];
+            $_SESSION["chapterTitle"] = $_GET["chapterTitle"];
+            $_SESSION["chapter"] = intval($_GET["chapterID"]);
+        } else 
+        if ($_SESSION["type"] == "examen") {
+            $_SESSION["courseTitle"] = $_GET["courseTitle"];
+            $_SESSION["courseID"] = $_GET["courseID"];
+        }
+
         $_SESSION["currentQuestionNumber"] = 0;
         $_SESSION["started"] = False;
         $_SESSION["finished"] = False;
         header('location: '.URL.'Student/Exercice');
-        //echo "<script>alert('')</script>";
     }
 
     public function StartExercice(){
@@ -70,6 +76,10 @@ class Studentcontroller extends Controller{
     }
 
     public function Exercice(){
+        if ($_SESSION["type"] == "chapter") {
+        } else 
+        if ($_SESSION["type"] == "examen") {
+        }
         $chpt = new Chapter($_SESSION["chapter"]);
         $questionnaire = $chpt->exercices();
         $questions = $questionnaire->getQuestions();

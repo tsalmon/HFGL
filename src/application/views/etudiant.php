@@ -52,7 +52,7 @@
               echo '
                 </tr>
                 <tr><td>Projet</td> <td><a href="projet_memoire.html">Sujet de projet</a></td></tr>
-                <tr><td>Examen</td> <td><a href="#">Feuille d examen</a></td></tr>
+                <tr><td>Examen</td> <td><a href="'.URL.'Student/DoExercice/?type=examen&courseTitle='.$currentCourse->title().'&courseID='.$currentCourse->courseID().'">Feuille d examen</a></td></tr>
               </table>
 
               <p class = "pbouton"><span>&nbsp;</span>

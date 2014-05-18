@@ -10,7 +10,6 @@
         <h3><?php echo $cours->title()." - ".$part->title(); ?></h3>
 
         <?php
-          var_dump($chp->courseNotes());
           echo '<h2>Description</h2><p id="description_chapitre">';
           if(null != $chp->description()){
             echo $chp->description();
@@ -18,9 +17,6 @@
             echo 'A chapter description could be here. If it wasn\'t null...';
           }
           echo '</p>';
-          //echo '<iframe src="'.$chp->courseNotes()->getURL().'" height="1000" seamless/>';
-          //echo 'Votre navigateur ne supporte pas des iframes. Pensez de le changer!';
-          //echo '</iframe>';
         ?>
 
         <div>
@@ -32,7 +28,7 @@
             if (null !== ($chp->exercices())) {
               $id_exo = $chp->exercices()->getID(); 
               if($id_exo != null){ //if there is an exercice
-                echo '<a class="bouton" href="'.URL.'Student/DoExercice/?chp='.$chp->chapterID().'&cours='.$cours->title().'&part='.$part->title().'&chptname='.$chp->title().'">Exercice</a>';
+                echo '<a class="bouton" href="'.URL.'Student/DoExercice/?type=chapter&chapterID='.$chp->chapterID().'&courseTitle='.$cours->title().'&partTitle='.$part->title().'&chapterTitle='.$chp->title().'">Exercice</a>';
               }
             }
           ?>

@@ -48,10 +48,11 @@ function url(selectUrl) {
 function rep(){
 	if(document.getElementById('lareponse').value=="libre"){
 		document.getElementById('laquestion').innerHTML='<input type="text" name="question" required/>';
-
+		document.getElementById('student_corrector').setAttribute("style","");
 		document.getElementById('thereponse').innerHTML='<textarea name="reponse" disabled></textarea>';
 	}
 	if(document.getElementById('lareponse').value=="checkbox"){
+		document.getElementById('student_corrector').setAttribute("style","display:none;");
 		document.getElementById('laquestion').innerHTML='<input type="text" name="question" required/>';
 
 		document.getElementById('thereponse').innerHTML='<select name= "nombre" id= "nombre" onchange="combien(3)"><option value="null">selection</option>';
@@ -61,6 +62,7 @@ function rep(){
 		document.getElementById('thereponse').innerHTML=document.getElementById('thereponse').innerHTML+"</select>";
 	}
 	if(document.getElementById('lareponse').value=="lines"){
+		document.getElementById('student_corrector').setAttribute("style","display:none;");
 		document.getElementById('laquestion').innerHTML='<input type="text" name="question" required/>';
 
 		document.getElementById('thereponse').innerHTML='<select name= "nombre" id= "nombre" onchange="combien(4)"><option value="null">selection</option>';
@@ -70,8 +72,9 @@ function rep(){
 		document.getElementById('thereponse').innerHTML=document.getElementById('thereponse').innerHTML+"</select>";
 	}
 	if(document.getElementById('lareponse').value=="code"){
+		document.getElementById('student_corrector').setAttribute("style","display:none;");
 		document.getElementById('laquestion').innerHTML='<textarea name="question" placeholder="ecrivez ici la question" required></textarea>';
-		document.getElementById('thereponse').innerHTML='<p>Votre fichier make prend comme u<br>n parametre un source avec un tel nom<br> Nom de fichier source<br><input type="text-area" name="source"/></p>';
+		document.getElementById('thereponse').innerHTML='<p>Votre fichier make prend comme en parametre un fichier source nommé ainsi<br> Nom de fichier source<br><input type="text-area" name="source"/></p>';
 		document.getElementById('thereponse').innerHTML=document.getElementById('thereponse').innerHTML+'<p>Votre fichier make produit un fichier executable avec un tel nom<br> Nom de fichier executable <br><input type="text-area" name="executable"/></p>';
 		document.getElementById('thereponse').innerHTML=document.getElementById('thereponse').innerHTML+'<p>Fichier make<br><br><input type="file" name="makefile" enctype="multipart/form-data"></p>';
 		document.getElementById('thereponse').innerHTML=document.getElementById('thereponse').innerHTML+'<p>Chaque test a un format:` "input", "output" ` <br> Fichier .csv de tests <br> <input type="file" name="tests" enctype="multipart/form-data"></p>';	
