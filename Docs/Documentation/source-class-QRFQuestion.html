@@ -8,7 +8,7 @@
 	<title>File src/application/models/QRFQuestion.php | hfgl</title>
 
 	<script type="text/javascript" src="resources/combined.js?3197842001"></script>
-	<script type="text/javascript" src="elementlist.js?293504157"></script>
+	<script type="text/javascript" src="elementlist.js?181387811"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -28,6 +28,7 @@
 			<h3>Classes</h3>
 			<ul>
 				<li><a href="class-Admin.html">Admin</a></li>
+				<li><a href="class-Admincontroller.html">Admincontroller</a></li>
 				<li><a href="class-Answer.html">Answer</a></li>
 				<li><a href="class-Application.html">Application</a></li>
 				<li><a href="class-AutomaticCorrector.html">AutomaticCorrector</a></li>
@@ -54,11 +55,16 @@
 				<li><a href="class-QCMQuestion.html">QCMQuestion</a></li>
 				<li class="active"><a href="class-QRFQuestion.html">QRFQuestion</a></li>
 				<li><a href="class-Question.html">Question</a></li>
+				<li><a href="class-Questionnaire.html">Questionnaire</a></li>
+				<li><a href="class-QuestionnaireFactory.html">QuestionnaireFactory</a></li>
+				<li><a href="class-QuestionnaireTypeManager.html">QuestionnaireTypeManager</a></li>
 				<li><a href="class-QuestionTypeManager.html">QuestionTypeManager</a></li>
 				<li><a href="class-Resource.html">Resource</a></li>
+				<li><a href="class-Result.html">Result</a></li>
 				<li><a href="class-RoleTypeManager.html">RoleTypeManager</a></li>
 				<li><a href="class-Student.html">Student</a></li>
 				<li><a href="class-Studentcontroller.html">Studentcontroller</a></li>
+				<li><a href="class-Test.html">Test</a></li>
 				<li><a href="class-TypeManager.html">TypeManager</a></li>
 				<li><a href="class-Welcomecontroller.html">Welcomecontroller</a></li>
 				<li><a href="class-WelcomeModel.html">WelcomeModel</a></li>
@@ -156,20 +162,23 @@
 </span><span id="48" class="l"><a class="l" href="#48">48: </a>    <span class="php-comment">/* Store question in DB. Returns questionID. */</span>
 </span><span id="49" class="l"><a class="l" href="#49">49: </a>
 </span><span id="50" class="l"><a class="l" href="#50">50: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_writeToDB" href="#_writeToDB">writeToDB</a>(){
-</span><span id="51" class="l"><a class="l" href="#51">51: </a>        <span class="php-comment">//echo &quot;INSERT INTO `Question`(`assignment`, `points`, `typeID`) VALUES ('&quot;.$this-&gt;assignment.&quot;',&quot;.$this-&gt;points.&quot;,&quot;.QRF.&quot;)&lt;br&gt;&quot;;</span>
-</span><span id="52" class="l"><a class="l" href="#52">52: </a>        PDOHelper::getInstance()-&gt;<span class="php-keyword2">exec</span>(<span class="php-quote">&quot;INSERT INTO `Question`(`assignment`, `points`, `typeID`) VALUES ('&quot;</span>.<span class="php-var">$this</span>-&gt;assignment.<span class="php-quote">&quot;',&quot;</span>.<span class="php-var">$this</span>-&gt;points.<span class="php-quote">&quot;,&quot;</span>.QuestionTypeManager::getInstance()-&gt;getQrfID().<span class="php-quote">&quot;)&quot;</span>);
-</span><span id="53" class="l"><a class="l" href="#53">53: </a>        <span class="php-var">$this</span>-&gt;questionID = PDOHelper::getInstance()-&gt;lastInsertID();
-</span><span id="54" class="l"><a class="l" href="#54">54: </a>        <span class="php-comment">//echo &quot;Inserted questionID:&quot;.$this-&gt;questionID.&quot;&lt;br&gt;&quot;;</span>
-</span><span id="55" class="l"><a class="l" href="#55">55: </a>
-</span><span id="56" class="l"><a class="l" href="#56">56: </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$this</span>-&gt;answers <span class="php-keyword1">as</span> <span class="php-var">$answer</span>)
-</span><span id="57" class="l"><a class="l" href="#57">57: </a>        {
-</span><span id="58" class="l"><a class="l" href="#58">58: </a>            <span class="php-var">$answer</span>-&gt;writeToDBForQuestionID(<span class="php-var">$this</span>-&gt;questionID);
-</span><span id="59" class="l"><a class="l" href="#59">59: </a>        }
-</span><span id="60" class="l"><a class="l" href="#60">60: </a>
-</span><span id="61" class="l"><a class="l" href="#61">61: </a>
-</span><span id="62" class="l"><a class="l" href="#62">62: </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;questionID;
-</span><span id="63" class="l"><a class="l" href="#63">63: </a>    }
-</span><span id="64" class="l"><a class="l" href="#64">64: </a></span>} </code></pre>
+</span><span id="51" class="l"><a class="l" href="#51">51: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">is_null</span>(<span class="php-var">$this</span>-&gt;questionID)) {
+</span><span id="52" class="l"><a class="l" href="#52">52: </a>            <span class="php-comment">//echo &quot;INSERT INTO `Question`(`assignment`, `points`, `typeID`) VALUES ('&quot;.$this-&gt;assignment.&quot;',&quot;.$this-&gt;points.&quot;,&quot;.QRF.&quot;)&lt;br&gt;&quot;;</span>
+</span><span id="53" class="l"><a class="l" href="#53">53: </a>            PDOHelper::getInstance()-&gt;<span class="php-keyword2">exec</span>(<span class="php-quote">&quot;INSERT INTO `Question`(`assignment`, `points`, `typeID`) VALUES ('&quot;</span>.<span class="php-var">$this</span>-&gt;assignment.<span class="php-quote">&quot;',&quot;</span>.<span class="php-var">$this</span>-&gt;points.<span class="php-quote">&quot;,&quot;</span>.QuestionTypeManager::getInstance()-&gt;getQrfID().<span class="php-quote">&quot;)&quot;</span>);
+</span><span id="54" class="l"><a class="l" href="#54">54: </a>            <span class="php-var">$this</span>-&gt;questionID = PDOHelper::getInstance()-&gt;lastInsertID();
+</span><span id="55" class="l"><a class="l" href="#55">55: </a>            <span class="php-comment">//echo &quot;Inserted questionID:&quot;.$this-&gt;questionID.&quot;&lt;br&gt;&quot;;</span>
+</span><span id="56" class="l"><a class="l" href="#56">56: </a>            
+</span><span id="57" class="l"><a class="l" href="#57">57: </a>            <span class="php-keyword1">if</span> (!<span class="php-keyword2">is_null</span>(<span class="php-var">$this</span>-&gt;answers)) {
+</span><span id="58" class="l"><a class="l" href="#58">58: </a>                <span class="php-keyword1">foreach</span> (<span class="php-var">$this</span>-&gt;answers <span class="php-keyword1">as</span> <span class="php-var">$answer</span>)
+</span><span id="59" class="l"><a class="l" href="#59">59: </a>                {
+</span><span id="60" class="l"><a class="l" href="#60">60: </a>                    <span class="php-var">$answer</span>-&gt;writeToDBForQuestionID(<span class="php-var">$this</span>-&gt;questionID);
+</span><span id="61" class="l"><a class="l" href="#61">61: </a>                }
+</span><span id="62" class="l"><a class="l" href="#62">62: </a>            }
+</span><span id="63" class="l"><a class="l" href="#63">63: </a>        }
+</span><span id="64" class="l"><a class="l" href="#64">64: </a>
+</span><span id="65" class="l"><a class="l" href="#65">65: </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;questionID;
+</span><span id="66" class="l"><a class="l" href="#66">66: </a>    }
+</span><span id="67" class="l"><a class="l" href="#67">67: </a></span>} </code></pre>
 
 	<div id="footer">
 		hfgl API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>

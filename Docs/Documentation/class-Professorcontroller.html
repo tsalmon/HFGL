@@ -7,7 +7,7 @@
 	<title>Class Professorcontroller | hfgl</title>
 
 	<script type="text/javascript" src="resources/combined.js?3197842001"></script>
-	<script type="text/javascript" src="elementlist.js?293504157"></script>
+	<script type="text/javascript" src="elementlist.js?181387811"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -27,6 +27,7 @@
 			<h3>Classes</h3>
 			<ul>
 				<li><a href="class-Admin.html">Admin</a></li>
+				<li><a href="class-Admincontroller.html">Admincontroller</a></li>
 				<li><a href="class-Answer.html">Answer</a></li>
 				<li><a href="class-Application.html">Application</a></li>
 				<li><a href="class-AutomaticCorrector.html">AutomaticCorrector</a></li>
@@ -53,11 +54,16 @@
 				<li><a href="class-QCMQuestion.html">QCMQuestion</a></li>
 				<li><a href="class-QRFQuestion.html">QRFQuestion</a></li>
 				<li><a href="class-Question.html">Question</a></li>
+				<li><a href="class-Questionnaire.html">Questionnaire</a></li>
+				<li><a href="class-QuestionnaireFactory.html">QuestionnaireFactory</a></li>
+				<li><a href="class-QuestionnaireTypeManager.html">QuestionnaireTypeManager</a></li>
 				<li><a href="class-QuestionTypeManager.html">QuestionTypeManager</a></li>
 				<li><a href="class-Resource.html">Resource</a></li>
+				<li><a href="class-Result.html">Result</a></li>
 				<li><a href="class-RoleTypeManager.html">RoleTypeManager</a></li>
 				<li><a href="class-Student.html">Student</a></li>
 				<li><a href="class-Studentcontroller.html">Studentcontroller</a></li>
+				<li><a href="class-Test.html">Test</a></li>
 				<li><a href="class-TypeManager.html">TypeManager</a></li>
 				<li><a href="class-Welcomecontroller.html">Welcomecontroller</a></li>
 				<li><a href="class-WelcomeModel.html">WelcomeModel</a></li>
@@ -143,7 +149,7 @@ class.</p>
 		
 		
 
-		<b>Located at</b> <a href="source-class-Professorcontroller.html#8-178" title="Go to source code">src/application/controller/Professorcontroller.php</a><br />
+		<b>Located at</b> <a href="source-class-Professorcontroller.html#10-360" title="Go to source code">src/application/controller/Professorcontroller.php</a><br />
 	</div>
 
 
@@ -161,7 +167,7 @@ class.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_index">#</a>
-		<code><a href="source-class-Professorcontroller.html#10-18" title="Go to source code">index</a>( )</code>
+		<code><a href="source-class-Professorcontroller.html#12-23" title="Go to source code">index</a>( )</code>
 
 		<div class="description short">
 			
@@ -190,7 +196,7 @@ class.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_CreateCourse">#</a>
-		<code><a href="source-class-Professorcontroller.html#20-24" title="Go to source code">CreateCourse</a>( )</code>
+		<code><a href="source-class-Professorcontroller.html#25-31" title="Go to source code">CreateCourse</a>( )</code>
 
 		<div class="description short">
 			
@@ -219,7 +225,7 @@ class.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_CreateExamen">#</a>
-		<code><a href="source-class-Professorcontroller.html#26-30" title="Go to source code">CreateExamen</a>( )</code>
+		<code><a href="source-class-Professorcontroller.html#33-39" title="Go to source code">CreateExamen</a>( )</code>
 
 		<div class="description short">
 			
@@ -248,7 +254,7 @@ class.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_CreateProjet">#</a>
-		<code><a href="source-class-Professorcontroller.html#32-36" title="Go to source code">CreateProjet</a>( )</code>
+		<code><a href="source-class-Professorcontroller.html#41-47" title="Go to source code">CreateProjet</a>( )</code>
 
 		<div class="description short">
 			
@@ -277,7 +283,7 @@ class.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_CreateChapter">#</a>
-		<code><a href="source-class-Professorcontroller.html#38-45" title="Go to source code">CreateChapter</a>( )</code>
+		<code><a href="source-class-Professorcontroller.html#49-57" title="Go to source code">CreateChapter</a>( )</code>
 
 		<div class="description short">
 			
@@ -306,7 +312,7 @@ class.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_CreateChapter_ok">#</a>
-		<code><a href="source-class-Professorcontroller.html#47-79" title="Go to source code">CreateChapter_ok</a>( )</code>
+		<code><a href="source-class-Professorcontroller.html#59-90" title="Go to source code">CreateChapter_ok</a>( )</code>
 
 		<div class="description short">
 			
@@ -335,7 +341,152 @@ class.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_CreatePart">#</a>
-		<code><a href="source-class-Professorcontroller.html#81-92" title="Go to source code">CreatePart</a>( )</code>
+		<code><a href="source-class-Professorcontroller.html#94-106" title="Go to source code">CreatePart</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="DeletePart" id="_DeletePart">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_DeletePart">#</a>
+		<code><a href="source-class-Professorcontroller.html#108-116" title="Go to source code">DeletePart</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="CreateExerciceFork" id="_CreateExerciceFork">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_CreateExerciceFork">#</a>
+		<code><a href="source-class-Professorcontroller.html#118-126" title="Go to source code">CreateExerciceFork</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="FinalizeExerciceCreation" id="_FinalizeExerciceCreation">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_FinalizeExerciceCreation">#</a>
+		<code><a href="source-class-Professorcontroller.html#128-148" title="Go to source code">FinalizeExerciceCreation</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="CreateExerciceWithXML" id="_CreateExerciceWithXML">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_CreateExerciceWithXML">#</a>
+		<code><a href="source-class-Professorcontroller.html#150-168" title="Go to source code">CreateExerciceWithXML</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="AddQuestion" id="_AddQuestion">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_AddQuestion">#</a>
+		<code><a href="source-class-Professorcontroller.html#170-273" title="Go to source code">AddQuestion</a>( )</code>
 
 		<div class="description short">
 			
@@ -364,7 +515,7 @@ class.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_CreateExercice">#</a>
-		<code><a href="source-class-Professorcontroller.html#94-125" title="Go to source code">CreateExercice</a>( )</code>
+		<code><a href="source-class-Professorcontroller.html#276-284" title="Go to source code">CreateExercice</a>( )</code>
 
 		<div class="description short">
 			
@@ -393,7 +544,7 @@ class.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_ViewNotes">#</a>
-		<code><a href="source-class-Professorcontroller.html#127-131" title="Go to source code">ViewNotes</a>( )</code>
+		<code><a href="source-class-Professorcontroller.html#286-292" title="Go to source code">ViewNotes</a>( )</code>
 
 		<div class="description short">
 			
@@ -422,7 +573,7 @@ class.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_Parametres">#</a>
-		<code><a href="source-class-Professorcontroller.html#132-140" title="Go to source code">Parametres</a>( )</code>
+		<code><a href="source-class-Professorcontroller.html#293-303" title="Go to source code">Parametres</a>( )</code>
 
 		<div class="description short">
 			
@@ -451,7 +602,7 @@ class.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_Parametres_result">#</a>
-		<code><a href="source-class-Professorcontroller.html#142-145" title="Go to source code">Parametres_result</a>( )</code>
+		<code><a href="source-class-Professorcontroller.html#305-308" title="Go to source code">Parametres_result</a>( )</code>
 
 		<div class="description short">
 			
@@ -480,7 +631,36 @@ class.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_ParametresPWD_result">#</a>
-		<code><a href="source-class-Professorcontroller.html#147-150" title="Go to source code">ParametresPWD_result</a>( )</code>
+		<code><a href="source-class-Professorcontroller.html#310-313" title="Go to source code">ParametresPWD_result</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="newCourse" id="_newCourse">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_newCourse">#</a>
+		<code><a href="source-class-Professorcontroller.html#315-328" title="Go to source code">newCourse</a>( )</code>
 
 		<div class="description short">
 			
@@ -509,7 +689,7 @@ class.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_SupprimerCours">#</a>
-		<code><a href="source-class-Professorcontroller.html#152-154" title="Go to source code">SupprimerCours</a>( )</code>
+		<code><a href="source-class-Professorcontroller.html#330-332" title="Go to source code">SupprimerCours</a>( )</code>
 
 		<div class="description short">
 			
@@ -538,7 +718,7 @@ class.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_Soumissions">#</a>
-		<code><a href="source-class-Professorcontroller.html#156-162" title="Go to source code">Soumissions</a>( )</code>
+		<code><a href="source-class-Professorcontroller.html#334-342" title="Go to source code">Soumissions</a>( )</code>
 
 		<div class="description short">
 			
@@ -567,7 +747,7 @@ class.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_DonneNote">#</a>
-		<code><a href="source-class-Professorcontroller.html#164-169" title="Go to source code">DonneNote</a>( )</code>
+		<code><a href="source-class-Professorcontroller.html#344-351" title="Go to source code">DonneNote</a>( )</code>
 
 		<div class="description short">
 			
@@ -596,7 +776,7 @@ class.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_Deconnexion">#</a>
-		<code><a href="source-class-Professorcontroller.html#171-177" title="Go to source code">Deconnexion</a>( )</code>
+		<code><a href="source-class-Professorcontroller.html#353-359" title="Go to source code">Deconnexion</a>( )</code>
 
 		<div class="description short">
 			

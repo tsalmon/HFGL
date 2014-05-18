@@ -7,7 +7,7 @@
 	<title>Class PQuestion | hfgl</title>
 
 	<script type="text/javascript" src="resources/combined.js?3197842001"></script>
-	<script type="text/javascript" src="elementlist.js?293504157"></script>
+	<script type="text/javascript" src="elementlist.js?181387811"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -27,6 +27,7 @@
 			<h3>Classes</h3>
 			<ul>
 				<li><a href="class-Admin.html">Admin</a></li>
+				<li><a href="class-Admincontroller.html">Admincontroller</a></li>
 				<li><a href="class-Answer.html">Answer</a></li>
 				<li><a href="class-Application.html">Application</a></li>
 				<li><a href="class-AutomaticCorrector.html">AutomaticCorrector</a></li>
@@ -53,11 +54,16 @@
 				<li><a href="class-QCMQuestion.html">QCMQuestion</a></li>
 				<li><a href="class-QRFQuestion.html">QRFQuestion</a></li>
 				<li><a href="class-Question.html">Question</a></li>
+				<li><a href="class-Questionnaire.html">Questionnaire</a></li>
+				<li><a href="class-QuestionnaireFactory.html">QuestionnaireFactory</a></li>
+				<li><a href="class-QuestionnaireTypeManager.html">QuestionnaireTypeManager</a></li>
 				<li><a href="class-QuestionTypeManager.html">QuestionTypeManager</a></li>
 				<li><a href="class-Resource.html">Resource</a></li>
+				<li><a href="class-Result.html">Result</a></li>
 				<li><a href="class-RoleTypeManager.html">RoleTypeManager</a></li>
 				<li><a href="class-Student.html">Student</a></li>
 				<li><a href="class-Studentcontroller.html">Studentcontroller</a></li>
+				<li><a href="class-Test.html">Test</a></li>
 				<li><a href="class-TypeManager.html">TypeManager</a></li>
 				<li><a href="class-Welcomecontroller.html">Welcomecontroller</a></li>
 				<li><a href="class-WelcomeModel.html">WelcomeModel</a></li>
@@ -137,7 +143,7 @@
 		
 		
 
-		<b>Located at</b> <a href="source-class-PQuestion.html#6-41" title="Go to source code">src/application/models/PQuestion.php</a><br />
+		<b>Located at</b> <a href="source-class-PQuestion.html#7-84" title="Go to source code">src/application/models/PQuestion.php</a><br />
 	</div>
 
 
@@ -155,7 +161,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getResources">#</a>
-		<code><a href="source-class-PQuestion.html#9-11" title="Go to source code">getResources</a>( )</code>
+		<code><a href="source-class-PQuestion.html#11-13" title="Go to source code">getResources</a>( )</code>
 
 		<div class="description short">
 			
@@ -173,6 +179,124 @@
 		</div>
 		</div></td>
 	</tr>
+	<tr data-order="getTests" id="_getTests">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getTests">#</a>
+		<code><a href="source-class-PQuestion.html#15-17" title="Go to source code">getTests</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="addTest" id="_addTest">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_addTest">#</a>
+		<code><a href="source-class-PQuestion.html#19-21" title="Go to source code">addTest</a>( <span>mixed <var>$test</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="addResource" id="_addResource">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_addResource">#</a>
+		<code><a href="source-class-PQuestion.html#23-25" title="Go to source code">addResource</a>( <span>mixed <var>$res</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="__construct" id="___construct">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___construct">#</a>
+		<code><a href="source-class-PQuestion.html#27-30" title="Go to source code">__construct</a>( <span>mixed <var>$assignment</var></span>, <span>mixed <var>$tip</var></span>, <span>mixed <var>$points</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+				<h4>Overrides</h4>
+				<div class="list"><code><a href="class-Question.html#___construct">Question::__construct()</a></code></div>
+
+		</div>
+		</div></td>
+	</tr>
 	<tr data-order="writeToDB" id="_writeToDB">
 
 		<td class="attributes"><code>
@@ -184,7 +308,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_writeToDB">#</a>
-		<code><a href="source-class-PQuestion.html#13-25" title="Go to source code">writeToDB</a>( )</code>
+		<code><a href="source-class-PQuestion.html#32-58" title="Go to source code">writeToDB</a>( )</code>
 
 		<div class="description short">
 			
@@ -213,7 +337,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_loadByID">#</a>
-		<code><a href="source-class-PQuestion.html#27-39" title="Go to source code">loadByID</a>( <span>mixed <var>$questionID</var></span> )</code>
+		<code><a href="source-class-PQuestion.html#60-82" title="Go to source code">loadByID</a>( <span>mixed <var>$questionID</var></span> )</code>
 
 		<div class="description short">
 			
@@ -237,7 +361,6 @@
 	<caption>Methods inherited from <a href="class-Question.html#methods">Question</a></caption>
 	<tr>
 		<td><code>
-			<a href="class-Question.html#___construct">__construct()</a>, 
 			<a href="class-Question.html#___destruct">__destruct()</a>, 
 			<a href="class-Question.html#_getAssignment">getAssignment()</a>, 
 			<a href="class-Question.html#_getID">getID()</a>, 

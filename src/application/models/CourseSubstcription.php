@@ -161,7 +161,7 @@ class CourseSubstcription {
     
     
     public static function getMark($student,$course){  
-        $query="SELECT note FROM `finalnote` WHERE courseID =".$course->courseID()." AND studentID =".$student->studentID();
+        $query="SELECT note FROM `FinalNote` WHERE courseID =".$course->courseID()." AND studentID =".$student->studentID();
         $res=CourseSubstcription::$db->query($query);
         $fetch=$res->fetch(PDO::FETCH_ASSOC);
         $mark=$fetch["note"];
