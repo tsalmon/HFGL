@@ -13,7 +13,7 @@
                 <h2>Les travaux</h2>';
           echo '
           <table>
-            <tr><th>Matière<a href="#'.($currentCourse->title()).'" onclick=createPart('.$currentCourse->courseID().');>[+]</a></td></th> <th>Documents</th></tr>';
+            <tr><th>Partie<a href="#'.($currentCourse->title()).'" onclick=createPart('.$currentCourse->courseID().');>[+]</a></td></th> <th>Documents</th></tr>';
             foreach ($currentCourse->parts() as $part) {
                   echo '
                 <tr>
