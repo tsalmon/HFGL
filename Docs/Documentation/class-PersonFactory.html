@@ -7,7 +7,7 @@
 	<title>Class PersonFactory | hfgl</title>
 
 	<script type="text/javascript" src="resources/combined.js?3197842001"></script>
-	<script type="text/javascript" src="elementlist.js?293504157"></script>
+	<script type="text/javascript" src="elementlist.js?181387811"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -27,6 +27,7 @@
 			<h3>Classes</h3>
 			<ul>
 				<li><a href="class-Admin.html">Admin</a></li>
+				<li><a href="class-Admincontroller.html">Admincontroller</a></li>
 				<li><a href="class-Answer.html">Answer</a></li>
 				<li><a href="class-Application.html">Application</a></li>
 				<li><a href="class-AutomaticCorrector.html">AutomaticCorrector</a></li>
@@ -53,11 +54,16 @@
 				<li><a href="class-QCMQuestion.html">QCMQuestion</a></li>
 				<li><a href="class-QRFQuestion.html">QRFQuestion</a></li>
 				<li><a href="class-Question.html">Question</a></li>
+				<li><a href="class-Questionnaire.html">Questionnaire</a></li>
+				<li><a href="class-QuestionnaireFactory.html">QuestionnaireFactory</a></li>
+				<li><a href="class-QuestionnaireTypeManager.html">QuestionnaireTypeManager</a></li>
 				<li><a href="class-QuestionTypeManager.html">QuestionTypeManager</a></li>
 				<li><a href="class-Resource.html">Resource</a></li>
+				<li><a href="class-Result.html">Result</a></li>
 				<li><a href="class-RoleTypeManager.html">RoleTypeManager</a></li>
 				<li><a href="class-Student.html">Student</a></li>
 				<li><a href="class-Studentcontroller.html">Studentcontroller</a></li>
+				<li><a href="class-Test.html">Test</a></li>
 				<li><a href="class-TypeManager.html">TypeManager</a></li>
 				<li><a href="class-Welcomecontroller.html">Welcomecontroller</a></li>
 				<li><a href="class-WelcomeModel.html">WelcomeModel</a></li>
@@ -123,7 +129,7 @@
 		
 		
 
-		<b>Located at</b> <a href="source-class-PersonFactory.html#9-153" title="Go to source code">src/application/models/PersonFactory.php</a><br />
+		<b>Located at</b> <a href="source-class-PersonFactory.html#9-167" title="Go to source code">src/application/models/PersonFactory.php</a><br />
 	</div>
 
 
@@ -170,7 +176,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getPerson">#</a>
-		<code><a href="source-class-PersonFactory.html#35-86" title="Go to source code">getPerson</a>( <span>mixed <var>$m</var></span>, <span>mixed <var>$isID</var> = <span class="php-keyword1">false</span></span> )</code>
+		<code><a href="source-class-PersonFactory.html#35-87" title="Go to source code">getPerson</a>( <span>mixed <var>$m</var></span>, <span>mixed <var>$isID</var> = <span class="php-keyword1">false</span></span> )</code>
 
 		<div class="description short">
 			
@@ -199,7 +205,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_createStudent">#</a>
-		<code><a href="source-class-PersonFactory.html#88-104" title="Go to source code">createStudent</a>( <span>mixed <var>$mail</var></span>, <span>mixed <var>$name</var></span>, <span>mixed <var>$surname</var></span>, <span>mixed <var>$password</var></span>, <span>mixed <var>$nse</var></span> )</code>
+		<code><a href="source-class-PersonFactory.html#89-105" title="Go to source code">createStudent</a>( <span>mixed <var>$mail</var></span>, <span>mixed <var>$name</var></span>, <span>mixed <var>$surname</var></span>, <span>mixed <var>$password</var></span>, <span>mixed <var>$nse</var></span> )</code>
 
 		<div class="description short">
 			
@@ -228,7 +234,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_createProfessor">#</a>
-		<code><a href="source-class-PersonFactory.html#105-120" title="Go to source code">createProfessor</a>( <span>mixed <var>$mail</var></span>, <span>mixed <var>$name</var></span>, <span>mixed <var>$surname</var></span>, <span>mixed <var>$password</var></span> )</code>
+		<code><a href="source-class-PersonFactory.html#106-121" title="Go to source code">createProfessor</a>( <span>mixed <var>$mail</var></span>, <span>mixed <var>$name</var></span>, <span>mixed <var>$surname</var></span>, <span>mixed <var>$password</var></span> )</code>
 
 		<div class="description short">
 			
@@ -257,7 +263,65 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_createAdmin">#</a>
-		<code><a href="source-class-PersonFactory.html#121-136" title="Go to source code">createAdmin</a>( <span>mixed <var>$mail</var></span>, <span>mixed <var>$name</var></span>, <span>mixed <var>$surname</var></span>, <span>mixed <var>$password</var></span> )</code>
+		<code><a href="source-class-PersonFactory.html#122-137" title="Go to source code">createAdmin</a>( <span>mixed <var>$mail</var></span>, <span>mixed <var>$name</var></span>, <span>mixed <var>$surname</var></span>, <span>mixed <var>$password</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getAllStudents" id="_getAllStudents">
+
+		<td class="attributes"><code>
+			 public static
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getAllStudents">#</a>
+		<code><a href="source-class-PersonFactory.html#139-143" title="Go to source code">getAllStudents</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getAllProfessors" id="_getAllProfessors">
+
+		<td class="attributes"><code>
+			 public static
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getAllProfessors">#</a>
+		<code><a href="source-class-PersonFactory.html#145-149" title="Go to source code">getAllProfessors</a>( )</code>
 
 		<div class="description short">
 			
@@ -286,7 +350,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_onDestruct">#</a>
-		<code><a href="source-class-PersonFactory.html#138-151" title="Go to source code">onDestruct</a>( <span>mixed <var>$id</var></span> )</code>
+		<code><a href="source-class-PersonFactory.html#152-165" title="Go to source code">onDestruct</a>( <span>mixed <var>$id</var></span> )</code>
 
 		<div class="description short">
 			

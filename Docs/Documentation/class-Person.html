@@ -7,7 +7,7 @@
 	<title>Class Person | hfgl</title>
 
 	<script type="text/javascript" src="resources/combined.js?3197842001"></script>
-	<script type="text/javascript" src="elementlist.js?293504157"></script>
+	<script type="text/javascript" src="elementlist.js?181387811"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -27,6 +27,7 @@
 			<h3>Classes</h3>
 			<ul>
 				<li><a href="class-Admin.html">Admin</a></li>
+				<li><a href="class-Admincontroller.html">Admincontroller</a></li>
 				<li><a href="class-Answer.html">Answer</a></li>
 				<li><a href="class-Application.html">Application</a></li>
 				<li><a href="class-AutomaticCorrector.html">AutomaticCorrector</a></li>
@@ -53,11 +54,16 @@
 				<li><a href="class-QCMQuestion.html">QCMQuestion</a></li>
 				<li><a href="class-QRFQuestion.html">QRFQuestion</a></li>
 				<li><a href="class-Question.html">Question</a></li>
+				<li><a href="class-Questionnaire.html">Questionnaire</a></li>
+				<li><a href="class-QuestionnaireFactory.html">QuestionnaireFactory</a></li>
+				<li><a href="class-QuestionnaireTypeManager.html">QuestionnaireTypeManager</a></li>
 				<li><a href="class-QuestionTypeManager.html">QuestionTypeManager</a></li>
 				<li><a href="class-Resource.html">Resource</a></li>
+				<li><a href="class-Result.html">Result</a></li>
 				<li><a href="class-RoleTypeManager.html">RoleTypeManager</a></li>
 				<li><a href="class-Student.html">Student</a></li>
 				<li><a href="class-Studentcontroller.html">Studentcontroller</a></li>
+				<li><a href="class-Test.html">Test</a></li>
 				<li><a href="class-TypeManager.html">TypeManager</a></li>
 				<li><a href="class-Welcomecontroller.html">Welcomecontroller</a></li>
 				<li><a href="class-WelcomeModel.html">WelcomeModel</a></li>
@@ -129,7 +135,7 @@
 		
 		
 
-		<b>Located at</b> <a href="source-class-Person.html#3-122" title="Go to source code">src/application/models/Person.php</a><br />
+		<b>Located at</b> <a href="source-class-Person.html#4-125" title="Go to source code">src/application/models/Person.php</a><br />
 	</div>
 
 
@@ -147,7 +153,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_mailExists">#</a>
-		<code><a href="source-class-Person.html#19-23" title="Go to source code">mailExists</a>( <span>mixed <var>$m</var></span> )</code>
+		<code><a href="source-class-Person.html#20-26" title="Go to source code">mailExists</a>( <span>mixed <var>$m</var></span> )</code>
 
 		<div class="description short">
 			
@@ -176,7 +182,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_friendFactory">#</a>
-		<code><a href="source-class-Person.html#25-32" title="Go to source code">friendFactory</a>( )</code>
+		<code><a href="source-class-Person.html#28-35" title="Go to source code">friendFactory</a>( )</code>
 
 		<div class="description short">
 			
@@ -205,7 +211,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getDBEntry">#</a>
-		<code><a href="source-class-Person.html#35-44" title="Go to source code">getDBEntry</a>( <span>mixed <var>$mail</var></span>, <span>mixed <var>$table</var></span>, <span>mixed <var>$isID</var></span> )</code>
+		<code><a href="source-class-Person.html#38-47" title="Go to source code">getDBEntry</a>( <span>mixed <var>$mail</var></span>, <span>mixed <var>$table</var></span>, <span>mixed <var>$isID</var></span> )</code>
 
 		<div class="description short">
 			
@@ -234,7 +240,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_initiateMembers">#</a>
-		<code><a href="source-class-Person.html#48-54" title="Go to source code">initiateMembers</a>( <span>mixed <var>$fetch</var></span> )</code>
+		<code><a href="source-class-Person.html#51-57" title="Go to source code">initiateMembers</a>( <span>mixed <var>$fetch</var></span> )</code>
 
 		<div class="description short">
 			
@@ -263,7 +269,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_createEntry">#</a>
-		<code><a href="source-class-Person.html#59-64" title="Go to source code">createEntry</a>( <span>mixed <var>$mail</var></span> )</code>
+		<code><a href="source-class-Person.html#62-67" title="Go to source code">createEntry</a>( <span>mixed <var>$mail</var></span>, <span>mixed <var>$role</var></span> )</code>
 
 		<div class="description short">
 			
@@ -292,7 +298,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_name">#</a>
-		<code><a href="source-class-Person.html#69-71" title="Go to source code">name</a>( )</code>
+		<code><a href="source-class-Person.html#72-74" title="Go to source code">name</a>( )</code>
 
 		<div class="description short">
 			
@@ -321,7 +327,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_email">#</a>
-		<code><a href="source-class-Person.html#73-75" title="Go to source code">email</a>( )</code>
+		<code><a href="source-class-Person.html#76-78" title="Go to source code">email</a>( )</code>
 
 		<div class="description short">
 			
@@ -350,7 +356,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_password">#</a>
-		<code><a href="source-class-Person.html#77-79" title="Go to source code">password</a>( )</code>
+		<code><a href="source-class-Person.html#80-82" title="Go to source code">password</a>( )</code>
 
 		<div class="description short">
 			
@@ -379,7 +385,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_surname">#</a>
-		<code><a href="source-class-Person.html#81-83" title="Go to source code">surname</a>( )</code>
+		<code><a href="source-class-Person.html#84-86" title="Go to source code">surname</a>( )</code>
 
 		<div class="description short">
 			
@@ -408,7 +414,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_personID">#</a>
-		<code><a href="source-class-Person.html#85-87" title="Go to source code">personID</a>( )</code>
+		<code><a href="source-class-Person.html#88-90" title="Go to source code">personID</a>( )</code>
 
 		<div class="description short">
 			
@@ -437,7 +443,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setName">#</a>
-		<code><a href="source-class-Person.html#89-92" title="Go to source code">setName</a>( <span>mixed <var>$n</var></span> )</code>
+		<code><a href="source-class-Person.html#92-95" title="Go to source code">setName</a>( <span>mixed <var>$n</var></span> )</code>
 
 		<div class="description short">
 			
@@ -466,7 +472,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setEmail">#</a>
-		<code><a href="source-class-Person.html#94-97" title="Go to source code">setEmail</a>( <span>mixed <var>$m</var></span> )</code>
+		<code><a href="source-class-Person.html#97-100" title="Go to source code">setEmail</a>( <span>mixed <var>$m</var></span> )</code>
 
 		<div class="description short">
 			
@@ -495,7 +501,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setPassword">#</a>
-		<code><a href="source-class-Person.html#99-102" title="Go to source code">setPassword</a>( <span>mixed <var>$p</var></span> )</code>
+		<code><a href="source-class-Person.html#102-105" title="Go to source code">setPassword</a>( <span>mixed <var>$p</var></span> )</code>
 
 		<div class="description short">
 			
@@ -524,7 +530,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setSurname">#</a>
-		<code><a href="source-class-Person.html#104-107" title="Go to source code">setSurname</a>( <span>mixed <var>$s</var></span> )</code>
+		<code><a href="source-class-Person.html#107-110" title="Go to source code">setSurname</a>( <span>mixed <var>$s</var></span> )</code>
 
 		<div class="description short">
 			
@@ -553,7 +559,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_delete">#</a>
-		<code><a href="source-class-Person.html#112-114" title="Go to source code">delete</a>( )</code>
+		<code><a href="source-class-Person.html#115-117" title="Go to source code">delete</a>( )</code>
 
 		<div class="description short">
 			
@@ -582,7 +588,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#___destruct">#</a>
-		<code><a href="source-class-Person.html#118-120" title="Go to source code">__destruct</a>( )</code>
+		<code><a href="source-class-Person.html#121-123" title="Go to source code">__destruct</a>( )</code>
 
 		<div class="description short">
 			
@@ -622,7 +628,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Person.html#9" title="Go to source code"><var>$name</var></a>
+				<a href="source-class-Person.html#10" title="Go to source code"><var>$name</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -645,7 +651,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Person.html#10" title="Go to source code"><var>$email</var></a>
+				<a href="source-class-Person.html#11" title="Go to source code"><var>$email</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -668,7 +674,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Person.html#11" title="Go to source code"><var>$password</var></a>
+				<a href="source-class-Person.html#12" title="Go to source code"><var>$password</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -691,7 +697,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Person.html#12" title="Go to source code"><var>$personID</var></a>
+				<a href="source-class-Person.html#13" title="Go to source code"><var>$personID</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -714,7 +720,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Person.html#13" title="Go to source code"><var>$surname</var></a>
+				<a href="source-class-Person.html#14" title="Go to source code"><var>$surname</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -737,7 +743,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Person.html#14" title="Go to source code"><var>$db</var></a>
+				<a href="source-class-Person.html#15" title="Go to source code"><var>$db</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>

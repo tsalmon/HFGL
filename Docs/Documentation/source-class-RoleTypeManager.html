@@ -8,7 +8,7 @@
 	<title>File src/application/models/RoleTypeManager.php | hfgl</title>
 
 	<script type="text/javascript" src="resources/combined.js?3197842001"></script>
-	<script type="text/javascript" src="elementlist.js?293504157"></script>
+	<script type="text/javascript" src="elementlist.js?181387811"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -28,6 +28,7 @@
 			<h3>Classes</h3>
 			<ul>
 				<li><a href="class-Admin.html">Admin</a></li>
+				<li><a href="class-Admincontroller.html">Admincontroller</a></li>
 				<li><a href="class-Answer.html">Answer</a></li>
 				<li><a href="class-Application.html">Application</a></li>
 				<li><a href="class-AutomaticCorrector.html">AutomaticCorrector</a></li>
@@ -54,11 +55,16 @@
 				<li><a href="class-QCMQuestion.html">QCMQuestion</a></li>
 				<li><a href="class-QRFQuestion.html">QRFQuestion</a></li>
 				<li><a href="class-Question.html">Question</a></li>
+				<li><a href="class-Questionnaire.html">Questionnaire</a></li>
+				<li><a href="class-QuestionnaireFactory.html">QuestionnaireFactory</a></li>
+				<li><a href="class-QuestionnaireTypeManager.html">QuestionnaireTypeManager</a></li>
 				<li><a href="class-QuestionTypeManager.html">QuestionTypeManager</a></li>
 				<li><a href="class-Resource.html">Resource</a></li>
+				<li><a href="class-Result.html">Result</a></li>
 				<li class="active"><a href="class-RoleTypeManager.html">RoleTypeManager</a></li>
 				<li><a href="class-Student.html">Student</a></li>
 				<li><a href="class-Studentcontroller.html">Studentcontroller</a></li>
+				<li><a href="class-Test.html">Test</a></li>
 				<li><a href="class-TypeManager.html">TypeManager</a></li>
 				<li><a href="class-Welcomecontroller.html">Welcomecontroller</a></li>
 				<li><a href="class-WelcomeModel.html">WelcomeModel</a></li>
@@ -114,26 +120,26 @@
 </span><span id="6" class="l"><a class="l" href="#6"> 6: </a><span class="php-keyword2">define</span>(<span class="php-quote">'student'</span>, <span class="php-quote">&quot;student&quot;</span>);
 </span><span id="7" class="l"><a class="l" href="#7"> 7: </a>
 </span><span id="8" class="l"><a class="l" href="#8"> 8: </a><span class="php-keyword1">class</span> <a id="RoleTypeManager" href="#RoleTypeManager">RoleTypeManager</a> <span class="php-keyword1">extends</span> TypeManager{
-</span><span id="9" class="l"><a class="l" href="#9"> 9: </a>    <span class="php-keyword1">private</span> <span class="php-var"><a id="$admin" href="#$admin">$admin</a></span>;
-</span><span id="10" class="l"><a class="l" href="#10">10: </a>    <span class="php-keyword1">private</span> <span class="php-var"><a id="$tutor" href="#$tutor">$tutor</a></span>;
-</span><span id="11" class="l"><a class="l" href="#11">11: </a>    <span class="php-keyword1">private</span> <span class="php-var"><a id="$student" href="#$student">$student</a></span>;
-</span><span id="12" class="l"><a class="l" href="#12">12: </a>
-</span><span id="13" class="l"><a class="l" href="#13">13: </a>    <span class="php-comment">//      Constructeur private : singleton</span>
-</span><span id="14" class="l"><a class="l" href="#14">14: </a>    <span class="php-comment">//*********************************************</span>
-</span><span id="15" class="l"><a class="l" href="#15">15: </a>
-</span><span id="16" class="l"><a class="l" href="#16">16: </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> <a id="___construct" href="#___construct">__construct</a>(){
-</span><span id="17" class="l"><a class="l" href="#17">17: </a>        <span class="php-var">$this</span>-&gt;typeTable = <span class="php-quote">&quot;Role&quot;</span>;
-</span><span id="18" class="l"><a class="l" href="#18">18: </a>        <span class="php-var">$this</span>-&gt;idField = <span class="php-quote">&quot;roleID&quot;</span>;
-</span><span id="19" class="l"><a class="l" href="#19">19: </a>        <span class="php-var">$this</span>-&gt;nameField = <span class="php-quote">&quot;name&quot;</span>;
-</span><span id="20" class="l"><a class="l" href="#20">20: </a>        <span class="php-var">$this</span>-&gt;refresh();
-</span><span id="21" class="l"><a class="l" href="#21">21: </a>    }
-</span><span id="22" class="l"><a class="l" href="#22">22: </a>
-</span><span id="23" class="l"><a class="l" href="#23">23: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a id="_getInstance" href="#_getInstance">getInstance</a>(){
-</span><span id="24" class="l"><a class="l" href="#24">24: </a>        <span class="php-keyword1">if</span>(RoleTypeManager::<span class="php-var">$sharedInstance</span>==<span class="php-keyword1">null</span>){
-</span><span id="25" class="l"><a class="l" href="#25">25: </a>            RoleTypeManager::<span class="php-var">$sharedInstance</span>=<span class="php-keyword1">new</span> RoleTypeManager();
-</span><span id="26" class="l"><a class="l" href="#26">26: </a>        }
-</span><span id="27" class="l"><a class="l" href="#27">27: </a>
-</span><span id="28" class="l"><a class="l" href="#28">28: </a>        <span class="php-keyword1">return</span> RoleTypeManager::<span class="php-var">$sharedInstance</span>;
+</span><span id="9" class="l"><a class="l" href="#9"> 9: </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">static</span> <span class="php-var"><a id="$sharedInstance" href="#$sharedInstance">$sharedInstance</a></span> = <span class="php-keyword1">null</span>;
+</span><span id="10" class="l"><a class="l" href="#10">10: </a>    <span class="php-keyword1">private</span> <span class="php-var"><a id="$admin" href="#$admin">$admin</a></span>;
+</span><span id="11" class="l"><a class="l" href="#11">11: </a>    <span class="php-keyword1">private</span> <span class="php-var"><a id="$tutor" href="#$tutor">$tutor</a></span>;
+</span><span id="12" class="l"><a class="l" href="#12">12: </a>    <span class="php-keyword1">private</span> <span class="php-var"><a id="$student" href="#$student">$student</a></span>;
+</span><span id="13" class="l"><a class="l" href="#13">13: </a>
+</span><span id="14" class="l"><a class="l" href="#14">14: </a>    <span class="php-comment">//      Constructeur private : singleton</span>
+</span><span id="15" class="l"><a class="l" href="#15">15: </a>    <span class="php-comment">//*********************************************</span>
+</span><span id="16" class="l"><a class="l" href="#16">16: </a>
+</span><span id="17" class="l"><a class="l" href="#17">17: </a>    <span class="php-keyword1">private</span> <span class="php-keyword1">function</span> <a id="___construct" href="#___construct">__construct</a>(){
+</span><span id="18" class="l"><a class="l" href="#18">18: </a>        <span class="php-var">$this</span>-&gt;typeTable = <span class="php-quote">&quot;Role&quot;</span>;
+</span><span id="19" class="l"><a class="l" href="#19">19: </a>        <span class="php-var">$this</span>-&gt;idField = <span class="php-quote">&quot;roleID&quot;</span>;
+</span><span id="20" class="l"><a class="l" href="#20">20: </a>        <span class="php-var">$this</span>-&gt;nameField = <span class="php-quote">&quot;name&quot;</span>;
+</span><span id="21" class="l"><a class="l" href="#21">21: </a>        <span class="php-var">$this</span>-&gt;refresh();
+</span><span id="22" class="l"><a class="l" href="#22">22: </a>    }
+</span><span id="23" class="l"><a class="l" href="#23">23: </a>
+</span><span id="24" class="l"><a class="l" href="#24">24: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a id="_getInstance" href="#_getInstance">getInstance</a>(){
+</span><span id="25" class="l"><a class="l" href="#25">25: </a>        <span class="php-keyword1">if</span>(self::<span class="php-var">$sharedInstance</span>==<span class="php-keyword1">null</span>){
+</span><span id="26" class="l"><a class="l" href="#26">26: </a>            self::<span class="php-var">$sharedInstance</span>=<span class="php-keyword1">new</span> self();
+</span><span id="27" class="l"><a class="l" href="#27">27: </a>        }
+</span><span id="28" class="l"><a class="l" href="#28">28: </a>        <span class="php-keyword1">return</span> self::<span class="php-var">$sharedInstance</span>;
 </span><span id="29" class="l"><a class="l" href="#29">29: </a>    }
 </span><span id="30" class="l"><a class="l" href="#30">30: </a>
 </span><span id="31" class="l"><a class="l" href="#31">31: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_refresh" href="#_refresh">refresh</a>()

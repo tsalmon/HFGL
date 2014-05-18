@@ -8,7 +8,7 @@
 	<title>File src/application/models/Admin.php | hfgl</title>
 
 	<script type="text/javascript" src="resources/combined.js?3197842001"></script>
-	<script type="text/javascript" src="elementlist.js?293504157"></script>
+	<script type="text/javascript" src="elementlist.js?181387811"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -28,6 +28,7 @@
 			<h3>Classes</h3>
 			<ul>
 				<li class="active"><a href="class-Admin.html">Admin</a></li>
+				<li><a href="class-Admincontroller.html">Admincontroller</a></li>
 				<li><a href="class-Answer.html">Answer</a></li>
 				<li><a href="class-Application.html">Application</a></li>
 				<li><a href="class-AutomaticCorrector.html">AutomaticCorrector</a></li>
@@ -54,11 +55,16 @@
 				<li><a href="class-QCMQuestion.html">QCMQuestion</a></li>
 				<li><a href="class-QRFQuestion.html">QRFQuestion</a></li>
 				<li><a href="class-Question.html">Question</a></li>
+				<li><a href="class-Questionnaire.html">Questionnaire</a></li>
+				<li><a href="class-QuestionnaireFactory.html">QuestionnaireFactory</a></li>
+				<li><a href="class-QuestionnaireTypeManager.html">QuestionnaireTypeManager</a></li>
 				<li><a href="class-QuestionTypeManager.html">QuestionTypeManager</a></li>
 				<li><a href="class-Resource.html">Resource</a></li>
+				<li><a href="class-Result.html">Result</a></li>
 				<li><a href="class-RoleTypeManager.html">RoleTypeManager</a></li>
 				<li><a href="class-Student.html">Student</a></li>
 				<li><a href="class-Studentcontroller.html">Studentcontroller</a></li>
+				<li><a href="class-Test.html">Test</a></li>
 				<li><a href="class-TypeManager.html">TypeManager</a></li>
 				<li><a href="class-Welcomecontroller.html">Welcomecontroller</a></li>
 				<li><a href="class-WelcomeModel.html">WelcomeModel</a></li>
@@ -136,30 +142,31 @@
 </span><span id="28" class="l"><a class="l" href="#28">28: </a>                <span class="php-keyword1">if</span>(<span class="php-var">$this</span>-&gt;mailExists(<span class="php-var">$mail</span>)){
 </span><span id="29" class="l"><a class="l" href="#29">29: </a>                    <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> UnexpectedValueException(<span class="php-quote">&quot;Utilisateur existant&quot;</span>);
 </span><span id="30" class="l"><a class="l" href="#30">30: </a>                }
-</span><span id="31" class="l"><a class="l" href="#31">31: </a>                <span class="php-var">$lastid</span>=<span class="php-var">$this</span>-&gt;createEntry(<span class="php-var">$mail</span>);
-</span><span id="32" class="l"><a class="l" href="#32">32: </a>                <span class="php-var">$this</span>-&gt;db-&gt;<span class="php-keyword2">exec</span>(<span class="php-quote">&quot;INSERT INTO Admin (personID) VALUES (&quot;</span>.<span class="php-var">$lastid</span>.<span class="php-quote">&quot;);&quot;</span>);     
-</span><span id="33" class="l"><a class="l" href="#33">33: </a>                <span class="php-var">$this</span>-&gt;adminID=<span class="php-var">$this</span>-&gt;db-&gt;lastInsertId();            
-</span><span id="34" class="l"><a class="l" href="#34">34: </a>            }
-</span><span id="35" class="l"><a class="l" href="#35">35: </a>        }
-</span><span id="36" class="l"><a class="l" href="#36">36: </a>        
-</span><span id="37" class="l"><a class="l" href="#37">37: </a>    <span class="php-comment">//         Accesseurs</span>
-</span><span id="38" class="l"><a class="l" href="#38">38: </a>    <span class="php-comment">//***************************</span>
-</span><span id="39" class="l"><a class="l" href="#39">39: </a>        
+</span><span id="31" class="l"><a class="l" href="#31">31: </a>                <span class="php-var">$role</span>=RoleTypeManager::getInstance()-&gt;getAdminID();
+</span><span id="32" class="l"><a class="l" href="#32">32: </a>                <span class="php-var">$lastid</span>=<span class="php-var">$this</span>-&gt;createEntry(<span class="php-var">$mail</span>,<span class="php-var">$role</span>);
+</span><span id="33" class="l"><a class="l" href="#33">33: </a>                <span class="php-var">$this</span>-&gt;db-&gt;<span class="php-keyword2">exec</span>(<span class="php-quote">&quot;INSERT INTO Admin (personID) VALUES (&quot;</span>.<span class="php-var">$lastid</span>.<span class="php-quote">&quot;);&quot;</span>);   
+</span><span id="34" class="l"><a class="l" href="#34">34: </a>                <span class="php-var">$this</span>-&gt;adminID=<span class="php-var">$this</span>-&gt;db-&gt;lastInsertId();            
+</span><span id="35" class="l"><a class="l" href="#35">35: </a>            }
+</span><span id="36" class="l"><a class="l" href="#36">36: </a>        }
+</span><span id="37" class="l"><a class="l" href="#37">37: </a>        
+</span><span id="38" class="l"><a class="l" href="#38">38: </a>    <span class="php-comment">//         Accesseurs</span>
+</span><span id="39" class="l"><a class="l" href="#39">39: </a>    <span class="php-comment">//***************************</span>
 </span><span id="40" class="l"><a class="l" href="#40">40: </a>        
-</span><span id="41" class="l"><a class="l" href="#41">41: </a>        <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_adminID" href="#_adminID">adminID</a>(){  
-</span><span id="42" class="l"><a class="l" href="#42">42: </a>            <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;adminID;          
-</span><span id="43" class="l"><a class="l" href="#43">43: </a>        }
-</span><span id="44" class="l"><a class="l" href="#44">44: </a>        
+</span><span id="41" class="l"><a class="l" href="#41">41: </a>        
+</span><span id="42" class="l"><a class="l" href="#42">42: </a>        <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_adminID" href="#_adminID">adminID</a>(){  
+</span><span id="43" class="l"><a class="l" href="#43">43: </a>            <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;adminID;          
+</span><span id="44" class="l"><a class="l" href="#44">44: </a>        }
 </span><span id="45" class="l"><a class="l" href="#45">45: </a>        
-</span><span id="46" class="l"><a class="l" href="#46">46: </a>        <span class="php-comment">//Suppression de l'etudiant en BDD - Detruit la classe</span>
-</span><span id="47" class="l"><a class="l" href="#47">47: </a>        
-</span><span id="48" class="l"><a class="l" href="#48">48: </a>        <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <span class="php-keyword2">delete</span>(){
-</span><span id="49" class="l"><a class="l" href="#49">49: </a>            <span class="php-var">$this</span>-&gt;db-&gt;<span class="php-keyword2">exec</span>(<span class="php-quote">&quot;DELETE FROM Admin WHERE adminID ='&quot;</span>.<span class="php-var">$this</span>-&gt;adminID.<span class="php-quote">&quot;'&quot;</span>);   
-</span><span id="50" class="l"><a class="l" href="#50">50: </a>            parent::<span class="php-keyword2">delete</span>();            
-</span><span id="51" class="l"><a class="l" href="#51">51: </a>        }
-</span><span id="52" class="l"><a class="l" href="#52">52: </a>        
-</span><span id="53" class="l"><a class="l" href="#53">53: </a>    
-</span><span id="54" class="l"><a class="l" href="#54">54: </a></span>}</code></pre>
+</span><span id="46" class="l"><a class="l" href="#46">46: </a>        
+</span><span id="47" class="l"><a class="l" href="#47">47: </a>        <span class="php-comment">//Suppression de l'admin en BDD - Detruit la classe</span>
+</span><span id="48" class="l"><a class="l" href="#48">48: </a>        
+</span><span id="49" class="l"><a class="l" href="#49">49: </a>        <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <span class="php-keyword2">delete</span>(){
+</span><span id="50" class="l"><a class="l" href="#50">50: </a>            <span class="php-var">$this</span>-&gt;db-&gt;<span class="php-keyword2">exec</span>(<span class="php-quote">&quot;DELETE FROM Admin WHERE adminID ='&quot;</span>.<span class="php-var">$this</span>-&gt;adminID.<span class="php-quote">&quot;'&quot;</span>);   
+</span><span id="51" class="l"><a class="l" href="#51">51: </a>            parent::<span class="php-keyword2">delete</span>();            
+</span><span id="52" class="l"><a class="l" href="#52">52: </a>        }
+</span><span id="53" class="l"><a class="l" href="#53">53: </a>        
+</span><span id="54" class="l"><a class="l" href="#54">54: </a>    
+</span><span id="55" class="l"><a class="l" href="#55">55: </a></span>}</code></pre>
 
 	<div id="footer">
 		hfgl API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
