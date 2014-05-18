@@ -6,54 +6,52 @@
       <?php include("_templates/bienvenue_title.php"); ?>
 
       <div class="content_big">
-        
-        <?php 
-          print_r($_GET);
-        ?>
 
-        <h1>L'exercice de cours 1</h1>
-        <h5>Enseignant: </h5>
-          <h4>Date limite: </h4>
+        <h1>L'exercice de cours: <?php echo $_SESSION["cours"]; ?></h1>
+        <h1>Part: <?php echo $_SESSION["part"]; ?></h1>
+        <h1>Chapitre:<?php echo $_SESSION["chptname"]; ?></h1>
+        <h3>Enseignant:</h5>
+        <h3>Date limite:</h4>
           
           <div id="div_scroll">
             <p>
                <?php
-               if (!$this->started) {
-                 echo "Vous allez faire l'exercice de ".$this->questionsCount." questions. Est-ce que vous êtes prêt?<br/>";
+               if (!$_SESSION["started"]) {
+                 echo "Vous allez faire l'exercice de ".$_SESSION["questionsCount"]." questions. Est-ce que vous êtes prêt?<br/>";
                  echo '<form action="startExercice" method="POST">';
                  echo '<input id="startexercice" value="Je commence!" type="submit"/>';
                } else 
-               if ($this->finished){
+               if ($_SESSION["finished"]){
                  echo "Vous avez fini cette exercice! Merci.";
                } else {
-                 echo "Question ".($this->currentQuestionNumber+1)." sur ".$this->questionsCount."<br/>";
+                 echo "Question ".($_SESSION["currentQuestionNumber"]+1)." sur ".$_SESSION["questionsCount"]."<br/>";
                  echo $currentQuestion->getAssignment().'<br/>';
                  if ($currentQuestion instanceof QCMQuestion) {
                      $answers = $currentQuestion->getAnswers();
-                     echo '<form action="QCMExerciceResponse" method="POST">';
+                     echo '<form action="QCMExerciceResponse?questionID='.$currentQuestion->getID().'" method="POST">';
                      foreach($answers as $answer) {
                         echo '<input type="checkbox" name='.$currentQuestion->getID().' value='.$answer->isCorrect().'>'.$answer->getContent().'<br>';
                      }   
                  }
 
                  if ($currentQuestion instanceof QRFQuestion) {
-                    echo '<form action="QRFExerciceResponse" method="POST">';
+                    echo '<form action="QRFExerciceResponse?questionID='.$currentQuestion->getID().'" method="POST">';
                     echo '<textarea name="'.$currentQuestion->getID().'" cols="25" rows="3" placeholder="Enter your answer here..." autofocus required></textarea><br>';
                  } 
 
                  if ($currentQuestion instanceof PQuestion) {
-                    echo '<form enctype="multipart/form-data" action="PExerciceResponse" method="POST">';
+                    echo '<form enctype="multipart/form-data" action="PExerciceResponse?questionID='.$currentQuestion->getID().'" method="POST">';
                     echo '<input type="hidden" name="questionID" value='.$currentQuestion->getID().'>';
                     echo 'Le nom de fichier à charger doit être: '.$filename.'<br>';
                     echo '<input type="file" name='.$currentQuestion->getID().' id="file" enctype="multipart/form-data"> <br>';
                  }
 
                  if ($currentQuestion instanceof LQuestion) {
-                     echo '<form action="LExerciceResponse" method="POST">';
+                     echo '<form action="LExerciceResponse?questionID='.$currentQuestion->getID().'" method="POST">';
                      echo '<textarea name="'.$currentQuestion->getID().'" cols="25" rows="5" placeholder="Enter your answer here..." autofocus required></textarea><br>';
                  }
-                 echo '<input type="hidden" id="currentQuestionNumber" name="currentQuestionNumber" value="'.$this->currentQuestionNumber.'" />';
-                 echo '<input type="hidden" id="questionsCount" name="questionsCount" value="'.$this->questionsCount.'" />';
+                 echo '<input type="hidden" id="currentQuestionNumber" name="currentQuestionNumber" value="'.$_SESSION["currentQuestionNumber"].'" />';
+                 echo '<input type="hidden" id="questionsCount" name="questionsCount" value="'.$_SESSION["questionsCount"].'" />';
                  echo '<input id="exerciceanswer" type="submit"/>';
                  echo '</form>';
                }

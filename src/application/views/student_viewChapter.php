@@ -30,7 +30,7 @@
             if (null !== ($chp->exercices())) {
               $id_exo = $chp->exercices()->getID(); 
               if($id_exo != null){ //if there is an exercice
-                echo '<a class="bouton" href="'.URL.'Exercice">Exercice</a>';
+                echo '<a class="bouton" href="'.URL.'Student/DoExercice/?chp='.$chp->chapterID().'&cours='.$cours->title().'&part='.$part->title().'&chptname='.$chp->title().'">Exercice</a>';
               }
             }
           ?>

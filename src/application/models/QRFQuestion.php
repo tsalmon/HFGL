@@ -35,7 +35,7 @@ class QRFQuestion extends Question
     public function loadByID($questionID)
     {
         $this->questionID = $questionID;
-        if($answersRequestResult = PDOHelper::getInstance()->query("SELECT * FROM Responses WHERE questionID=".$questionID))
+        if($answersRequestResult = PDOHelper::getInstance()->query("SELECT * FROM Response WHERE questionID=".$questionID))
         {
             //enumeration of answers
             while($currentAnswerRow = $answersRequestResult->fetch(PDO::FETCH_ASSOC))
