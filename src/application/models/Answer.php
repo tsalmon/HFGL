@@ -23,8 +23,8 @@ class Answer {
     }
 
     public function writeToDBForQuestionID($questionID){
-        //echo "INSERT INTO `Responses`(`questionID`, `content`, `correct`) (".$questionID.",'".$this->content."',".($this->isCorrect?1:0).")<br>";
-        PDOHelper::getInstance()->exec("INSERT INTO `Responses`(`questionID`, `content`, `correct`) VALUES (".$questionID.",'".$this->content."',".($this->isCorrect?1:0).")");
+        //echo "INSERT INTO `Response`(`questionID`, `content`, `correct`) (".$questionID.",'".$this->content."',".($this->isCorrect?1:0).")<br>";
+        PDOHelper::getInstance()->exec("INSERT INTO `Response`(`questionID`, `content`, `correct`) VALUES (".$questionID.",'".$this->content."',".($this->isCorrect?1:0).")");
         return PDOHelper::getInstance()->lastInsertID();
     }
 } 

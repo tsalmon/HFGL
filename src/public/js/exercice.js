@@ -1,3 +1,13 @@
+
+function setForm(){
+	if(document.getElementById('xmlOrNot').checked){
+      document.getElementById("fromXML").style.display='block';
+    }
+    else{
+      document.getElementById("fromXML").style.display='none';
+    }
+}
+
 function testQCM(){
 	if(document.forms.qtform.lareponse.value != "checkbox"){
 		return true;
@@ -61,7 +71,10 @@ function rep(){
 	}
 	if(document.getElementById('lareponse').value=="code"){
 		document.getElementById('laquestion').innerHTML='<textarea name="question" placeholder="ecrivez ici la question" required></textarea>';
-		document.getElementById('thereponse').innerHTML="L'eleve devra entrer un programme ici";
+		document.getElementById('thereponse').innerHTML='<p>Votre fichier make prend comme u<br>n parametre un source avec un tel nom<br> Nom de fichier source<br><input type="text-area" name="source"/></p>';
+		document.getElementById('thereponse').innerHTML=document.getElementById('thereponse').innerHTML+'<p>Votre fichier make produit un fichier executable avec un tel nom<br> Nom de fichier executable <br><input type="text-area" name="executable"/></p>';
+		document.getElementById('thereponse').innerHTML=document.getElementById('thereponse').innerHTML+'<p>Fichier make<br><br><input type="file" name="makefile" enctype="multipart/form-data"></p>';
+		document.getElementById('thereponse').innerHTML=document.getElementById('thereponse').innerHTML+'<p>Chaque test a un format:` "input", "output" ` <br> Fichier .csv de tests <br> <input type="file" name="tests" enctype="multipart/form-data"></p>';	
 	}
 }
 function combien(string){
@@ -78,4 +91,9 @@ function combien(string){
 	}
 	document.getElementById('reponsenb').value=how;
 }	
+
+window.onload = function viewWillLoad(){
+	document.getElementById("createExercice").style.display='inline';
+    setForm();
+};
 

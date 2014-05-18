@@ -7,7 +7,7 @@
 	<title>Class ExerciceSheet | hfgl</title>
 
 	<script type="text/javascript" src="resources/combined.js?3197842001"></script>
-	<script type="text/javascript" src="elementlist.js?293504157"></script>
+	<script type="text/javascript" src="elementlist.js?181387811"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -27,6 +27,7 @@
 			<h3>Classes</h3>
 			<ul>
 				<li><a href="class-Admin.html">Admin</a></li>
+				<li><a href="class-Admincontroller.html">Admincontroller</a></li>
 				<li><a href="class-Answer.html">Answer</a></li>
 				<li><a href="class-Application.html">Application</a></li>
 				<li><a href="class-AutomaticCorrector.html">AutomaticCorrector</a></li>
@@ -53,11 +54,16 @@
 				<li><a href="class-QCMQuestion.html">QCMQuestion</a></li>
 				<li><a href="class-QRFQuestion.html">QRFQuestion</a></li>
 				<li><a href="class-Question.html">Question</a></li>
+				<li><a href="class-Questionnaire.html">Questionnaire</a></li>
+				<li><a href="class-QuestionnaireFactory.html">QuestionnaireFactory</a></li>
+				<li><a href="class-QuestionnaireTypeManager.html">QuestionnaireTypeManager</a></li>
 				<li><a href="class-QuestionTypeManager.html">QuestionTypeManager</a></li>
 				<li><a href="class-Resource.html">Resource</a></li>
+				<li><a href="class-Result.html">Result</a></li>
 				<li><a href="class-RoleTypeManager.html">RoleTypeManager</a></li>
 				<li><a href="class-Student.html">Student</a></li>
 				<li><a href="class-Studentcontroller.html">Studentcontroller</a></li>
+				<li><a href="class-Test.html">Test</a></li>
 				<li><a href="class-TypeManager.html">TypeManager</a></li>
 				<li><a href="class-Welcomecontroller.html">Welcomecontroller</a></li>
 				<li><a href="class-WelcomeModel.html">WelcomeModel</a></li>
@@ -109,20 +115,6 @@
 
 
 
-	<dl class="tree">
-		<dd style="padding-left:0px">
-			<a href="class-Document.html"><span>Document</span></a>
-			
-			
-			
-		</dd>
-		<dd style="padding-left:30px">
-			<img src="resources/inherit.png" alt="Extended by" />
-<b><span>ExerciceSheet</span></b>			
-			
-			
-		</dd>
-	</dl>
 
 
 
@@ -137,7 +129,7 @@
 		
 		
 
-		<b>Located at</b> <a href="source-class-ExerciceSheet.html#19-118" title="Go to source code">src/application/models/ExerciceSheet.php</a><br />
+		<b>Located at</b> <a href="source-class-ExerciceSheet.html#18-124" title="Go to source code">src/application/models/ExerciceSheet.php</a><br />
 	</div>
 
 
@@ -155,7 +147,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#___construct">#</a>
-		<code><a href="source-class-ExerciceSheet.html#28-31" title="Go to source code">__construct</a>( )</code>
+		<code><a href="source-class-ExerciceSheet.html#26-29" title="Go to source code">__construct</a>( )</code>
 
 		<div class="description short">
 			
@@ -184,7 +176,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getID">#</a>
-		<code><a href="source-class-ExerciceSheet.html#34-37" title="Go to source code">getID</a>( )</code>
+		<code><a href="source-class-ExerciceSheet.html#32-35" title="Go to source code">getID</a>( )</code>
 
 		<div class="description short">
 			
@@ -213,7 +205,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getQuestions">#</a>
-		<code><a href="source-class-ExerciceSheet.html#39-42" title="Go to source code">getQuestions</a>( )</code>
+		<code><a href="source-class-ExerciceSheet.html#37-40" title="Go to source code">getQuestions</a>( )</code>
 
 		<div class="description short">
 			
@@ -242,7 +234,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getQuestionsCount">#</a>
-		<code><a href="source-class-ExerciceSheet.html#44-47" title="Go to source code">getQuestionsCount</a>( )</code>
+		<code><a href="source-class-ExerciceSheet.html#42-45" title="Go to source code">getQuestionsCount</a>( )</code>
 
 		<div class="description short">
 			
@@ -271,7 +263,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_addQuestion">#</a>
-		<code><a href="source-class-ExerciceSheet.html#49-52" title="Go to source code">addQuestion</a>( <span>mixed <var>$question</var></span> )</code>
+		<code><a href="source-class-ExerciceSheet.html#47-50" title="Go to source code">addQuestion</a>( <span>mixed <var>$question</var></span> )</code>
 
 		<div class="description short">
 			
@@ -300,7 +292,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setDeadline">#</a>
-		<code><a href="source-class-ExerciceSheet.html#54-57" title="Go to source code">setDeadline</a>( <span>mixed <var>$deadline</var></span> )</code>
+		<code><a href="source-class-ExerciceSheet.html#52-55" title="Go to source code">setDeadline</a>( <span>mixed <var>$deadline</var></span> )</code>
 
 		<div class="description short">
 			
@@ -329,7 +321,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setAvailableDate">#</a>
-		<code><a href="source-class-ExerciceSheet.html#59-62" title="Go to source code">setAvailableDate</a>( <span>mixed <var>$available</var></span> )</code>
+		<code><a href="source-class-ExerciceSheet.html#57-60" title="Go to source code">setAvailableDate</a>( <span>mixed <var>$available</var></span> )</code>
 
 		<div class="description short">
 			
@@ -358,7 +350,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setQuestions">#</a>
-		<code><a href="source-class-ExerciceSheet.html#64-67" title="Go to source code">setQuestions</a>( <span>mixed <var>$questions</var></span> )</code>
+		<code><a href="source-class-ExerciceSheet.html#62-65" title="Go to source code">setQuestions</a>( <span>mixed <var>$questions</var></span> )</code>
 
 		<div class="description short">
 			
@@ -387,7 +379,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setQuestionnaireType">#</a>
-		<code><a href="source-class-ExerciceSheet.html#69-72" title="Go to source code">setQuestionnaireType</a>( <span>mixed <var>$type</var></span> )</code>
+		<code><a href="source-class-ExerciceSheet.html#67-70" title="Go to source code">setQuestionnaireType</a>( <span>mixed <var>$type</var></span> )</code>
 
 		<div class="description short">
 			
@@ -416,7 +408,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_writeToDatabase">#</a>
-		<code><a href="source-class-ExerciceSheet.html#75-86" title="Go to source code">writeToDatabase</a>( )</code>
+		<code><a href="source-class-ExerciceSheet.html#73-92" title="Go to source code">writeToDatabase</a>( )</code>
 
 		<div class="description short">
 			
@@ -445,7 +437,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_loadByID">#</a>
-		<code><a href="source-class-ExerciceSheet.html#89-117" title="Go to source code">loadByID</a>( <span>mixed <var>$questionnaireID</var></span> )</code>
+		<code><a href="source-class-ExerciceSheet.html#95-123" title="Go to source code">loadByID</a>( <span>mixed <var>$questionnaireID</var></span> )</code>
 
 		<div class="description short">
 			

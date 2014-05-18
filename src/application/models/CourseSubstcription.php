@@ -114,6 +114,38 @@ class CourseSubstcription {
         return $resultat;
         
     }
+
+    public static function getProfessors($course){
+        CourseSubstcription::createEntryCourse($course);
+        $resultat=array();
+        $idcourse=$course->courseID();
+        if(!isset(CourseSubstcription::$courses[$idcourse][1])){
+            $res=array();
+            $req = CourseSubstcription::$db->query("SELECT personID FROM (Tutor JOIN Teaching ON Tutor.tutorID=Teaching.tutorID) where courseID=".$idcourse);
+            if($req===false){
+                return array();
+            }
+            $fetch = $req->fetchAll(PDO::FETCH_ASSOC);
+            foreach($fetch as $entry){
+                $id=$entry['personID'];
+                CourseSubstcription::$courses[$idcourse][]=$id;
+                $currentPerson=PersonFactory::getPerson($id,true);
+                if(!isset(CourseSubstcription::$persons[$id])){
+                    CourseSubstcription::$persons[$id]=[$currentPerson->email()];
+                }
+                $resultat[]=$currentPerson;
+            }
+        }
+        else{
+            foreach(CourseSubstcription::$courses[$idcourse] as $id){
+                if(ctype_digit($id)){
+                  $resultat[]=PersonFactory::getPerson(CourseSubstcription::$persons[$id][0]);
+                }
+            }
+        }
+        return $resultat;
+        
+    }
     
     public static function add($student,$course){  
         CourseSubstcription::createEntryStudent($student);
@@ -123,12 +155,13 @@ class CourseSubstcription {
             CourseSubstcription::$courses[$course->courseID()][]=$student->studentID();
             CourseSubstcription::$persons[$student->studentID()][]=$course->courseID();
             CourseSubstcription::$db->exec('INSERT INTO Inscription (studentID,courseID,date) VALUES ('.$student->studentID().','.$course->courseID().',CURRENT_TIMESTAMP);');            
+            return true;
         }
     }
     
     
     public static function getMark($student,$course){  
-        $query="SELECT note FROM `finalnote` WHERE courseID =".$course->courseID()." AND studentID =".$student->studentID();
+        $query="SELECT note FROM `FinalNote` WHERE courseID =".$course->courseID()." AND studentID =".$student->studentID();
         $res=CourseSubstcription::$db->query($query);
         $fetch=$res->fetch(PDO::FETCH_ASSOC);
         $mark=$fetch["note"];
@@ -138,10 +171,14 @@ class CourseSubstcription {
     
     public static function remove($studentID,$courseID){ 
         try{
-            $indice=array_search($studentID, CourseSubstcription::$courses[$courseID]);
-            array_splice(CourseSubstcription::$courses[$courseID],$indice,1);
-            $indice2=array_search($courseID, CourseSubstcription::$persons[$studentID]);
-            array_splice(CourseSubstcription::$persons[$studentID],$indice2,1);
+            if(isset(CourseSubstcription::$courses[$courseID])){
+                $indice=array_search($studentID, CourseSubstcription::$courses[$courseID]);
+                array_splice(CourseSubstcription::$courses[$courseID],$indice,1);
+            }
+            if(isset(CourseSubstcription::$persons[$studentID])){
+                $indice2=array_search($courseID, CourseSubstcription::$persons[$studentID]);
+                array_splice(CourseSubstcription::$persons[$studentID],$indice2,1);
+            }
             CourseSubstcription::$db->exec('DELETE FROM Inscription WHERE courseID='.$courseID.' AND studentID='.$studentID.';');
             return true;
         }catch(Exception $e){return false;}

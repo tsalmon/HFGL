@@ -86,8 +86,11 @@ abstract class Question {
 
     /* Store question in DB as a question of questionnaire with $questionnaireID. */
     public function writeToDBForQuestionnaireID($questionnaireID){
-        $questionID = $this->writeToDB();
-        echo "INSERT INTO `Questions`(`questionnaireID`, `questionID`) VALUES (".$questionnaireID.",".$questionID.")<br>";
-        PDOHelper::getInstance()->exec("INSERT INTO `Questions`(`questionnaireID`, `questionID`) VALUES (".$questionnaireID.",".$questionID.")");
+        if (is_null($this->questionID)) {
+            $this->questionID = $this->writeToDB();
+            //echo "INSERT INTO `Questions`(`questionnaireID`, `questionID`) VALUES (".$questionnaireID.",".$this->questionID.")<br>";
+            PDOHelper::getInstance()->exec("INSERT INTO `Questions`(`questionnaireID`, `questionID`) VALUES (".$questionnaireID.",".$this->questionID.")");
+        }
+        return $this->questionID;
     }
 }

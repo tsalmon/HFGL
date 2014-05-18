@@ -8,7 +8,7 @@
 	<title>File src/application/models/PQuestion.php | hfgl</title>
 
 	<script type="text/javascript" src="resources/combined.js?3197842001"></script>
-	<script type="text/javascript" src="elementlist.js?293504157"></script>
+	<script type="text/javascript" src="elementlist.js?181387811"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -28,6 +28,7 @@
 			<h3>Classes</h3>
 			<ul>
 				<li><a href="class-Admin.html">Admin</a></li>
+				<li><a href="class-Admincontroller.html">Admincontroller</a></li>
 				<li><a href="class-Answer.html">Answer</a></li>
 				<li><a href="class-Application.html">Application</a></li>
 				<li><a href="class-AutomaticCorrector.html">AutomaticCorrector</a></li>
@@ -54,11 +55,16 @@
 				<li><a href="class-QCMQuestion.html">QCMQuestion</a></li>
 				<li><a href="class-QRFQuestion.html">QRFQuestion</a></li>
 				<li><a href="class-Question.html">Question</a></li>
+				<li><a href="class-Questionnaire.html">Questionnaire</a></li>
+				<li><a href="class-QuestionnaireFactory.html">QuestionnaireFactory</a></li>
+				<li><a href="class-QuestionnaireTypeManager.html">QuestionnaireTypeManager</a></li>
 				<li><a href="class-QuestionTypeManager.html">QuestionTypeManager</a></li>
 				<li><a href="class-Resource.html">Resource</a></li>
+				<li><a href="class-Result.html">Result</a></li>
 				<li><a href="class-RoleTypeManager.html">RoleTypeManager</a></li>
 				<li><a href="class-Student.html">Student</a></li>
 				<li><a href="class-Studentcontroller.html">Studentcontroller</a></li>
+				<li><a href="class-Test.html">Test</a></li>
 				<li><a href="class-TypeManager.html">TypeManager</a></li>
 				<li><a href="class-Welcomecontroller.html">Welcomecontroller</a></li>
 				<li><a href="class-WelcomeModel.html">WelcomeModel</a></li>
@@ -110,43 +116,86 @@
 </span><span id="2" class="l"><a class="l" href="#2"> 2: </a><span class="php-keyword1">require_once</span>(<span class="php-quote">&quot;application/models/Question.php&quot;</span>);
 </span><span id="3" class="l"><a class="l" href="#3"> 3: </a><span class="php-keyword1">require_once</span>(<span class="php-quote">&quot;application/models/QuestionTypeManager.php&quot;</span>);
 </span><span id="4" class="l"><a class="l" href="#4"> 4: </a><span class="php-keyword1">require_once</span>(<span class="php-quote">&quot;application/models/Resource.php&quot;</span>);
-</span><span id="5" class="l"><a class="l" href="#5"> 5: </a>
-</span><span id="6" class="l"><a class="l" href="#6"> 6: </a><span class="php-keyword1">class</span> <a id="PQuestion" href="#PQuestion">PQuestion</a> <span class="php-keyword1">extends</span> Question{
-</span><span id="7" class="l"><a class="l" href="#7"> 7: </a>    <span class="php-keyword1">private</span> <span class="php-var"><a id="$resources" href="#$resources">$resources</a></span>;
-</span><span id="8" class="l"><a class="l" href="#8"> 8: </a>
-</span><span id="9" class="l"><a class="l" href="#9"> 9: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_getResources" href="#_getResources">getResources</a>(){
-</span><span id="10" class="l"><a class="l" href="#10">10: </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;resources;
-</span><span id="11" class="l"><a class="l" href="#11">11: </a>    }
-</span><span id="12" class="l"><a class="l" href="#12">12: </a>
-</span><span id="13" class="l"><a class="l" href="#13">13: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_writeToDB" href="#_writeToDB">writeToDB</a>(){
-</span><span id="14" class="l"><a class="l" href="#14">14: </a>        <span class="php-keyword1">echo</span> <span class="php-quote">&quot;INSERT INTO `Question`(`assignment`, `points`, `typeID`) VALUES ('&quot;</span>.<span class="php-var">$this</span>-&gt;assignment.<span class="php-quote">&quot;',&quot;</span>.<span class="php-var">$this</span>-&gt;points.<span class="php-quote">&quot;,&quot;</span>.QCM.<span class="php-quote">&quot;)&lt;br&gt;&quot;</span>;
-</span><span id="15" class="l"><a class="l" href="#15">15: </a>        PDOHelper::getInstance()-&gt;<span class="php-keyword2">exec</span>(<span class="php-quote">&quot;INSERT INTO `Question`(`assignment`, `points`, `typeID`) VALUES ('&quot;</span>.<span class="php-var">$this</span>-&gt;assignment.<span class="php-quote">&quot;',&quot;</span>.<span class="php-var">$this</span>-&gt;points.<span class="php-quote">&quot;,&quot;</span>.QuestionTypeManager::getInstance()-&gt;getQcmID().<span class="php-quote">&quot;)&quot;</span>);
-</span><span id="16" class="l"><a class="l" href="#16">16: </a>        <span class="php-var">$this</span>-&gt;questionID = PDOHelper::getInstance()-&gt;lastInsertID();
-</span><span id="17" class="l"><a class="l" href="#17">17: </a>        <span class="php-keyword1">echo</span> <span class="php-quote">&quot;Inserted questionID:&quot;</span>.<span class="php-var">$this</span>-&gt;questionID.<span class="php-quote">&quot;&lt;br&gt;&quot;</span>;
+</span><span id="5" class="l"><a class="l" href="#5"> 5: </a><span class="php-keyword1">require_once</span>(<span class="php-quote">&quot;application/models/Test.php&quot;</span>);
+</span><span id="6" class="l"><a class="l" href="#6"> 6: </a>
+</span><span id="7" class="l"><a class="l" href="#7"> 7: </a><span class="php-keyword1">class</span> <a id="PQuestion" href="#PQuestion">PQuestion</a> <span class="php-keyword1">extends</span> Question{
+</span><span id="8" class="l"><a class="l" href="#8"> 8: </a>    <span class="php-keyword1">private</span> <span class="php-var"><a id="$resources" href="#$resources">$resources</a></span>;
+</span><span id="9" class="l"><a class="l" href="#9"> 9: </a>    <span class="php-keyword1">private</span> <span class="php-var"><a id="$tests" href="#$tests">$tests</a></span>;
+</span><span id="10" class="l"><a class="l" href="#10">10: </a>
+</span><span id="11" class="l"><a class="l" href="#11">11: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_getResources" href="#_getResources">getResources</a>(){
+</span><span id="12" class="l"><a class="l" href="#12">12: </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;resources;
+</span><span id="13" class="l"><a class="l" href="#13">13: </a>    }
+</span><span id="14" class="l"><a class="l" href="#14">14: </a>
+</span><span id="15" class="l"><a class="l" href="#15">15: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_getTests" href="#_getTests">getTests</a>(){
+</span><span id="16" class="l"><a class="l" href="#16">16: </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;tests;
+</span><span id="17" class="l"><a class="l" href="#17">17: </a>    }
 </span><span id="18" class="l"><a class="l" href="#18">18: </a>
-</span><span id="19" class="l"><a class="l" href="#19">19: </a>        <span class="php-keyword1">foreach</span> (<span class="php-var">$this</span>-&gt;resources <span class="php-keyword1">as</span> <span class="php-var">$resource</span>)
-</span><span id="20" class="l"><a class="l" href="#20">20: </a>        {
-</span><span id="21" class="l"><a class="l" href="#21">21: </a>            <span class="php-var">$resource</span>-&gt;writeToDBForQuestionID(<span class="php-var">$this</span>-&gt;questionID);
-</span><span id="22" class="l"><a class="l" href="#22">22: </a>        }
-</span><span id="23" class="l"><a class="l" href="#23">23: </a>
-</span><span id="24" class="l"><a class="l" href="#24">24: </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;questionID;
+</span><span id="19" class="l"><a class="l" href="#19">19: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_addTest" href="#_addTest">addTest</a>(<span class="php-var">$test</span>){
+</span><span id="20" class="l"><a class="l" href="#20">20: </a>        <span class="php-var">$this</span>-&gt;tests[] = <span class="php-var">$test</span>;
+</span><span id="21" class="l"><a class="l" href="#21">21: </a>    }
+</span><span id="22" class="l"><a class="l" href="#22">22: </a>
+</span><span id="23" class="l"><a class="l" href="#23">23: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_addResource" href="#_addResource">addResource</a>(<span class="php-var">$res</span>){
+</span><span id="24" class="l"><a class="l" href="#24">24: </a>        <span class="php-var">$this</span>-&gt;resources[] = <span class="php-var">$res</span>;
 </span><span id="25" class="l"><a class="l" href="#25">25: </a>    }
 </span><span id="26" class="l"><a class="l" href="#26">26: </a>
-</span><span id="27" class="l"><a class="l" href="#27">27: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_loadByID" href="#_loadByID">loadByID</a>(<span class="php-var">$questionID</span>){
-</span><span id="28" class="l"><a class="l" href="#28">28: </a>        <span class="php-var">$this</span>-&gt;questionID = <span class="php-var">$questionID</span>;
-</span><span id="29" class="l"><a class="l" href="#29">29: </a>
-</span><span id="30" class="l"><a class="l" href="#30">30: </a>        <span class="php-comment">//Getting resources for current question</span>
-</span><span id="31" class="l"><a class="l" href="#31">31: </a>        <span class="php-keyword1">if</span>(<span class="php-var">$resourcesRequestResult</span> = PDOHelper::getInstance()-&gt;query(<span class="php-quote">&quot;SELECT * FROM Resource WHERE questionID=&quot;</span>.<span class="php-var">$questionID</span>))
-</span><span id="32" class="l"><a class="l" href="#32">32: </a>        {
-</span><span id="33" class="l"><a class="l" href="#33">33: </a>            <span class="php-comment">//enumeration of resources</span>
-</span><span id="34" class="l"><a class="l" href="#34">34: </a>            <span class="php-keyword1">while</span>(<span class="php-var">$currentResourceRow</span> = <span class="php-var">$resourcesRequestResult</span>-&gt;fetch(PDO::FETCH_ASSOC))
-</span><span id="35" class="l"><a class="l" href="#35">35: </a>            {
-</span><span id="36" class="l"><a class="l" href="#36">36: </a>                <span class="php-var">$this</span>-&gt;resources[] = <span class="php-keyword1">new</span> Resource(<span class="php-var">$currentResourceRow</span>[<span class="php-quote">'type'</span>], <span class="php-var">$currentAnswerRow</span>[<span class="php-quote">'content'</span>]);
-</span><span id="37" class="l"><a class="l" href="#37">37: </a>            }
+</span><span id="27" class="l"><a class="l" href="#27">27: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="___construct" href="#___construct">__construct</a>(<span class="php-var">$assignment</span>, <span class="php-var">$tip</span>, <span class="php-var">$points</span>)
+</span><span id="28" class="l"><a class="l" href="#28">28: </a>    {
+</span><span id="29" class="l"><a class="l" href="#29">29: </a>        parent::__construct(<span class="php-var">$assignment</span>, <span class="php-var">$tip</span>, <span class="php-var">$points</span>);
+</span><span id="30" class="l"><a class="l" href="#30">30: </a>    }
+</span><span id="31" class="l"><a class="l" href="#31">31: </a>
+</span><span id="32" class="l"><a class="l" href="#32">32: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_writeToDB" href="#_writeToDB">writeToDB</a>(){
+</span><span id="33" class="l"><a class="l" href="#33">33: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">is_null</span>(<span class="php-var">$this</span>-&gt;questionID)) {
+</span><span id="34" class="l"><a class="l" href="#34">34: </a>            <span class="php-keyword1">echo</span> <span class="php-quote">&quot;INSERT INTO `Question`(`assignment`, `points`, `typeID`) VALUES ('&quot;</span>.<span class="php-var">$this</span>-&gt;assignment.<span class="php-quote">&quot;',&quot;</span>.<span class="php-var">$this</span>-&gt;points.<span class="php-quote">&quot;,&quot;</span>.QuestionTypeManager::getInstance()-&gt;getPID().<span class="php-quote">&quot;)&lt;br&gt;&quot;</span>;
+</span><span id="35" class="l"><a class="l" href="#35">35: </a>            PDOHelper::getInstance()-&gt;<span class="php-keyword2">exec</span>(<span class="php-quote">&quot;INSERT INTO `Question`(`assignment`, `points`, `typeID`) VALUES ('&quot;</span>.<span class="php-var">$this</span>-&gt;assignment.<span class="php-quote">&quot;',&quot;</span>.<span class="php-var">$this</span>-&gt;points.<span class="php-quote">&quot;,&quot;</span>.QuestionTypeManager::getInstance()-&gt;getPID().<span class="php-quote">&quot;)&quot;</span>);
+</span><span id="36" class="l"><a class="l" href="#36">36: </a>            <span class="php-var">$this</span>-&gt;questionID = PDOHelper::getInstance()-&gt;lastInsertID();
+</span><span id="37" class="l"><a class="l" href="#37">37: </a>            <span class="php-keyword1">echo</span> <span class="php-quote">&quot;Inserted questionID:&quot;</span>.<span class="php-var">$this</span>-&gt;questionID.<span class="php-quote">&quot;&lt;br&gt;&quot;</span>;
 </span><span id="38" class="l"><a class="l" href="#38">38: </a>        }
-</span><span id="39" class="l"><a class="l" href="#39">39: </a>    }
+</span><span id="39" class="l"><a class="l" href="#39">39: </a>
 </span><span id="40" class="l"><a class="l" href="#40">40: </a>
-</span><span id="41" class="l"><a class="l" href="#41">41: </a></span>} </code></pre>
+</span><span id="41" class="l"><a class="l" href="#41">41: </a>        <span class="php-keyword1">if</span> (!<span class="php-keyword2">is_null</span>(<span class="php-var">$this</span>-&gt;resources)) {
+</span><span id="42" class="l"><a class="l" href="#42">42: </a>            <span class="php-keyword1">echo</span> <span class="php-quote">&quot;Insert resources&quot;</span>;
+</span><span id="43" class="l"><a class="l" href="#43">43: </a>            <span class="php-keyword1">foreach</span> (<span class="php-var">$this</span>-&gt;resources <span class="php-keyword1">as</span> <span class="php-var">$resource</span>)
+</span><span id="44" class="l"><a class="l" href="#44">44: </a>            {
+</span><span id="45" class="l"><a class="l" href="#45">45: </a>                <span class="php-var">$resource</span>-&gt;writeToDBForQuestionID(<span class="php-var">$this</span>-&gt;questionID);
+</span><span id="46" class="l"><a class="l" href="#46">46: </a>            }
+</span><span id="47" class="l"><a class="l" href="#47">47: </a>        }
+</span><span id="48" class="l"><a class="l" href="#48">48: </a>
+</span><span id="49" class="l"><a class="l" href="#49">49: </a>        <span class="php-keyword1">if</span> (!<span class="php-keyword2">is_null</span>(<span class="php-var">$this</span>-&gt;tests)) {
+</span><span id="50" class="l"><a class="l" href="#50">50: </a>            <span class="php-keyword1">echo</span> <span class="php-quote">&quot;Insert tests&quot;</span>;
+</span><span id="51" class="l"><a class="l" href="#51">51: </a>            <span class="php-keyword1">foreach</span> (<span class="php-var">$this</span>-&gt;tests <span class="php-keyword1">as</span> <span class="php-var">$test</span>)
+</span><span id="52" class="l"><a class="l" href="#52">52: </a>            {
+</span><span id="53" class="l"><a class="l" href="#53">53: </a>                <span class="php-var">$test</span>-&gt;writeToDBForQuestionID(<span class="php-var">$this</span>-&gt;questionID);
+</span><span id="54" class="l"><a class="l" href="#54">54: </a>            }
+</span><span id="55" class="l"><a class="l" href="#55">55: </a>        }
+</span><span id="56" class="l"><a class="l" href="#56">56: </a>
+</span><span id="57" class="l"><a class="l" href="#57">57: </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;questionID;
+</span><span id="58" class="l"><a class="l" href="#58">58: </a>    }
+</span><span id="59" class="l"><a class="l" href="#59">59: </a>
+</span><span id="60" class="l"><a class="l" href="#60">60: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_loadByID" href="#_loadByID">loadByID</a>(<span class="php-var">$questionID</span>){
+</span><span id="61" class="l"><a class="l" href="#61">61: </a>        <span class="php-var">$this</span>-&gt;questionID = <span class="php-var">$questionID</span>;
+</span><span id="62" class="l"><a class="l" href="#62">62: </a>
+</span><span id="63" class="l"><a class="l" href="#63">63: </a>        <span class="php-comment">//Getting resources for current question</span>
+</span><span id="64" class="l"><a class="l" href="#64">64: </a>        <span class="php-keyword1">if</span>(<span class="php-var">$resourcesRequestResult</span> = PDOHelper::getInstance()-&gt;query(<span class="php-quote">&quot;SELECT * FROM Resource WHERE questionID=&quot;</span>.<span class="php-var">$questionID</span>))
+</span><span id="65" class="l"><a class="l" href="#65">65: </a>        {
+</span><span id="66" class="l"><a class="l" href="#66">66: </a>            <span class="php-comment">//enumeration of resources</span>
+</span><span id="67" class="l"><a class="l" href="#67">67: </a>            <span class="php-keyword1">while</span>(<span class="php-var">$currentResourceRow</span> = <span class="php-var">$resourcesRequestResult</span>-&gt;fetch(PDO::FETCH_ASSOC))
+</span><span id="68" class="l"><a class="l" href="#68">68: </a>            {
+</span><span id="69" class="l"><a class="l" href="#69">69: </a>                <span class="php-var">$this</span>-&gt;resources[] = <span class="php-keyword1">new</span> Resource(<span class="php-var">$currentResourceRow</span>[<span class="php-quote">'type'</span>], <span class="php-var">$currentResourceRow</span>[<span class="php-quote">'content'</span>]);
+</span><span id="70" class="l"><a class="l" href="#70">70: </a>            }
+</span><span id="71" class="l"><a class="l" href="#71">71: </a>        }
+</span><span id="72" class="l"><a class="l" href="#72">72: </a>
+</span><span id="73" class="l"><a class="l" href="#73">73: </a>        <span class="php-comment">//Getting tests for current question</span>
+</span><span id="74" class="l"><a class="l" href="#74">74: </a>        <span class="php-keyword1">if</span>(<span class="php-var">$testsRequestResult</span> = PDOHelper::getInstance()-&gt;query(<span class="php-quote">&quot;SELECT * FROM Test WHERE questionID=&quot;</span>.<span class="php-var">$questionID</span>))
+</span><span id="75" class="l"><a class="l" href="#75">75: </a>        {
+</span><span id="76" class="l"><a class="l" href="#76">76: </a>            <span class="php-comment">//enumeration of tests</span>
+</span><span id="77" class="l"><a class="l" href="#77">77: </a>            <span class="php-keyword1">while</span>(<span class="php-var">$currentTestRow</span> = <span class="php-var">$testsRequestResult</span>-&gt;fetch(PDO::FETCH_ASSOC))
+</span><span id="78" class="l"><a class="l" href="#78">78: </a>            {
+</span><span id="79" class="l"><a class="l" href="#79">79: </a>                <span class="php-var">$this</span>-&gt;tests[] = <span class="php-keyword1">new</span> Test(<span class="php-var">$currentTestRow</span>[<span class="php-quote">'input'</span>], <span class="php-var">$currentTestRow</span>[<span class="php-quote">'output'</span>]);
+</span><span id="80" class="l"><a class="l" href="#80">80: </a>            }
+</span><span id="81" class="l"><a class="l" href="#81">81: </a>        }
+</span><span id="82" class="l"><a class="l" href="#82">82: </a>    }
+</span><span id="83" class="l"><a class="l" href="#83">83: </a>
+</span><span id="84" class="l"><a class="l" href="#84">84: </a></span>} </code></pre>
 
 	<div id="footer">
 		hfgl API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>

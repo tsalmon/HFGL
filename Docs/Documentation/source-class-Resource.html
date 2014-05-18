@@ -8,7 +8,7 @@
 	<title>File src/application/models/Resource.php | hfgl</title>
 
 	<script type="text/javascript" src="resources/combined.js?3197842001"></script>
-	<script type="text/javascript" src="elementlist.js?293504157"></script>
+	<script type="text/javascript" src="elementlist.js?181387811"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -28,6 +28,7 @@
 			<h3>Classes</h3>
 			<ul>
 				<li><a href="class-Admin.html">Admin</a></li>
+				<li><a href="class-Admincontroller.html">Admincontroller</a></li>
 				<li><a href="class-Answer.html">Answer</a></li>
 				<li><a href="class-Application.html">Application</a></li>
 				<li><a href="class-AutomaticCorrector.html">AutomaticCorrector</a></li>
@@ -54,11 +55,16 @@
 				<li><a href="class-QCMQuestion.html">QCMQuestion</a></li>
 				<li><a href="class-QRFQuestion.html">QRFQuestion</a></li>
 				<li><a href="class-Question.html">Question</a></li>
+				<li><a href="class-Questionnaire.html">Questionnaire</a></li>
+				<li><a href="class-QuestionnaireFactory.html">QuestionnaireFactory</a></li>
+				<li><a href="class-QuestionnaireTypeManager.html">QuestionnaireTypeManager</a></li>
 				<li><a href="class-QuestionTypeManager.html">QuestionTypeManager</a></li>
 				<li class="active"><a href="class-Resource.html">Resource</a></li>
+				<li><a href="class-Result.html">Result</a></li>
 				<li><a href="class-RoleTypeManager.html">RoleTypeManager</a></li>
 				<li><a href="class-Student.html">Student</a></li>
 				<li><a href="class-Studentcontroller.html">Studentcontroller</a></li>
+				<li><a href="class-Test.html">Test</a></li>
 				<li><a href="class-TypeManager.html">TypeManager</a></li>
 				<li><a href="class-Welcomecontroller.html">Welcomecontroller</a></li>
 				<li><a href="class-WelcomeModel.html">WelcomeModel</a></li>
@@ -136,11 +142,15 @@
 </span><span id="28" class="l"><a class="l" href="#28">28: </a>    }
 </span><span id="29" class="l"><a class="l" href="#29">29: </a>
 </span><span id="30" class="l"><a class="l" href="#30">30: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_writeToDBForQuestionID" href="#_writeToDBForQuestionID">writeToDBForQuestionID</a>(<span class="php-var">$questionID</span>){
-</span><span id="31" class="l"><a class="l" href="#31">31: </a>        <span class="php-keyword1">echo</span> <span class="php-quote">&quot;INSERT INTO `Resource`(`questionID`, `content`, `type`) (&quot;</span>.<span class="php-var">$questionID</span>.<span class="php-quote">&quot;,'&quot;</span>.<span class="php-var">$this</span>-&gt;content.<span class="php-quote">&quot;',&quot;</span>.(<span class="php-var">$this</span>-&gt;type).<span class="php-quote">&quot;)&lt;br&gt;&quot;</span>;
-</span><span id="32" class="l"><a class="l" href="#32">32: </a>        PDOHelper::getInstance()-&gt;<span class="php-keyword2">exec</span>(<span class="php-quote">&quot;INSERT INTO `Responses`(`questionID`, `content`, `type`) VALUES (&quot;</span>.<span class="php-var">$questionID</span>.<span class="php-quote">&quot;,'&quot;</span>.<span class="php-var">$this</span>-&gt;content.<span class="php-quote">&quot;',&quot;</span>.(<span class="php-var">$this</span>-&gt;type).<span class="php-quote">&quot;)&quot;</span>);
-</span><span id="33" class="l"><a class="l" href="#33">33: </a>        <span class="php-keyword1">return</span> PDOHelper::getInstance()-&gt;lastInsertID();
-</span><span id="34" class="l"><a class="l" href="#34">34: </a>    }
-</span><span id="35" class="l"><a class="l" href="#35">35: </a></span>} </code></pre>
+</span><span id="31" class="l"><a class="l" href="#31">31: </a>        <span class="php-keyword1">if</span> (<span class="php-keyword2">is_null</span>(<span class="php-var">$this</span>-&gt;questionID)) {
+</span><span id="32" class="l"><a class="l" href="#32">32: </a>            <span class="php-var">$this</span>-&gt;questionID = <span class="php-var">$questionID</span>;
+</span><span id="33" class="l"><a class="l" href="#33">33: </a>            <span class="php-comment">// echo &quot;INSERT INTO `Resource`(`questionID`, `content`, `type`) VALUES (&quot;.$this-&gt;questionID.&quot;,'&quot;.$this-&gt;content.&quot;','&quot;.($this-&gt;type).&quot;')&lt;br&gt;&quot;;</span>
+</span><span id="34" class="l"><a class="l" href="#34">34: </a>            PDOHelper::getInstance()-&gt;<span class="php-keyword2">exec</span>(<span class="php-quote">&quot;INSERT INTO `Resource`(`questionID`, `content`, `type`) VALUES (&quot;</span>.<span class="php-var">$this</span>-&gt;questionID.<span class="php-quote">&quot;,'&quot;</span>.<span class="php-var">$this</span>-&gt;content.<span class="php-quote">&quot;','&quot;</span>.(<span class="php-var">$this</span>-&gt;type).<span class="php-quote">&quot;')&quot;</span>);
+</span><span id="35" class="l"><a class="l" href="#35">35: </a>        }
+</span><span id="36" class="l"><a class="l" href="#36">36: </a>
+</span><span id="37" class="l"><a class="l" href="#37">37: </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;questionID;
+</span><span id="38" class="l"><a class="l" href="#38">38: </a>    }
+</span><span id="39" class="l"><a class="l" href="#39">39: </a></span>} </code></pre>
 
 	<div id="footer">
 		hfgl API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>

@@ -16,11 +16,13 @@ class LQuestion extends Question{
     /* Store question in DB. Returns questionID. */
 
     public function writeToDB(){
-        print_r(QuestionTypeManager::getInstance());
-        echo "INSERT INTO `Question`(`assignment`, `points`, `typeID`) VALUES ('".$this->assignment."',".$this->points.",".QuestionTypeManager::getInstance()->getLID().")<br>";
-        PDOHelper::getInstance()->exec("INSERT INTO `Question`(`assignment`, `points`, `typeID`) VALUES ('".$this->assignment."',".$this->points.",".QuestionTypeManager::getInstance()->getLID().")");
-        $this->questionID = PDOHelper::getInstance()->lastInsertID();
-        echo "Inserted questionID:".$this->questionID."<br>";
+        if (is_null($this->questionID)) {
+            //echo "INSERT INTO `Question`(`assignment`, `points`, `typeID`) VALUES ('".$this->assignment."',".$this->points.",".QuestionTypeManager::getInstance()->getLID().")<br>";
+            PDOHelper::getInstance()->exec("INSERT INTO `Question`(`assignment`, `points`, `typeID`) VALUES ('".$this->assignment."',".$this->points.",".QuestionTypeManager::getInstance()->getLID().")");
+            $this->questionID = PDOHelper::getInstance()->lastInsertID();
+            //echo "Inserted questionID:".$this->questionID."<br>";
+        }
+
         return $this->questionID;
     }
 } 

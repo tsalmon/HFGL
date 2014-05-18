@@ -7,22 +7,22 @@
       <div class="content">
 
         <?php 
-        foreach ($cours_teaching as $key => $cours) {
-          echo '<h1 id="'.$cours->title().'">'.$cours->title().'</h1>';
-          echo '<p>'.$cours->description().'</p>
+        if ($currentCourse){
+          echo '<h1 id="'.$currentCourse->title().'">'.$currentCourse->title().'</h1>';
+          echo '<p>'.$currentCourse->description().'</p>
                 <h2>Les travaux</h2>';
           echo '
           <table>
-            <tr><th>Matière<a href="#'.($cours->title()).'" onclick=createPart('.$cours->courseID().');>[+]</a></td></th> <th>Documents</th></tr>';
-            foreach ($cours->parts() as $part) {
+            <tr><th>Matière<a href="#'.($currentCourse->title()).'" onclick=createPart('.$currentCourse->courseID().');>[+]</a></td></th> <th>Documents</th></tr>';
+            foreach ($currentCourse->parts() as $part) {
                   echo '
                 <tr>
-                  <td><a href="#" onclick="deletePart('.$cours->courseID().','.$part->partID().',\''.$part->title().'\',\''.$cours->title().'\')";>[-]</a>'.$part->title().'</td>
+                  <td><a href="#" onclick="deletePart('.$currentCourse->courseID().','.$part->partID().',\''.$part->title().'\',\''.$currentCourse->title().'\')";>[-]</a>'.$part->title().'</td>
                   <td>';
                   foreach($part->chapters() as $chapter){
-                    echo '<a target="blank" href="'.URL.'Courses/?cours='.strval($cours->courseID()).'&part='.strval($part->partID()).'&chp='.strval($chapter->chapterID()).'">'.$chapter->title().'</a>';
+                    echo '<a target="blank" href="'.URL.'Courses/?cours='.strval($currentCourse->courseID()).'&part='.strval($part->partID()).'&chp='.strval($chapter->chapterID()).'">'.$chapter->title().'</a>';
                   }                 
-                  echo '<a href="'.URL.'Professor/CreateChapter/?cours='.strval($cours->courseID()).'&part='.strval($part->partID()).'">[+]</a></td>';
+                  echo '<a href="'.URL.'Professor/CreateChapter/?cours='.strval($currentCourse->courseID()).'&part='.strval($part->partID()).'">[+]</a></td>';
                 }
           echo '
                 <tr>
@@ -32,7 +32,7 @@
 
                 <tr>
                   <td>Examen</td> 
-                  <td><a href='.URL.'Professor/CreateExamen>[+]</a></td>
+                  <td><a href='.URL.'Professor/CreateExamen/?cours='.strval($currentCourse->courseID()).'>[+]</a></td>
                 </tr>
                 <!-- <tr> si l`examen existe
                     <td>Examen</td> 
@@ -41,11 +41,13 @@
           </table>
             <p class = "pbouton">
               <span>&nbsp;</span>
-              <a href="'.URL.'Professor/SupprimerCours/?cours='.$cours->courseID().'" class="bouton">Supprimer ce cours</a>
+              <a href='.URL.'Professor/SupprimerCours/?cours='.$currentCourse->courseID().'" class="bouton">Supprimer ce cours</a>
               <span>&nbsp;</span>
               <a href='.URL.'Professor/ViewNotes class="bouton">Consulter les notes</a>
             </p>
             ';
+        } else {
+          echo 'write something in hear for teacher';
         }
         ?>
       </div>
@@ -53,4 +55,3 @@
 
     <?php include("_templates/nav_footer_enseignant.php"); ?>
 </div>
-

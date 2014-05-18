@@ -18,7 +18,9 @@ abstract class Person{
     //****************************
         
         protected function mailExists($m){
-            $res=$this->db->query("Select * FROM Person WHERE email='".$m."';");
+            $query="Select * FROM Person WHERE email='".$m."';";
+            echo $query;
+            $res=$this->db->query($query);
             $fetch=$res->fetch(PDO::FETCH_ASSOC);
             return isset($fetch["email"]);
         }

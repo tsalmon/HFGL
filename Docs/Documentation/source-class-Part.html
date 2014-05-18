@@ -8,7 +8,7 @@
 	<title>File src/application/models/Part.php | hfgl</title>
 
 	<script type="text/javascript" src="resources/combined.js?3197842001"></script>
-	<script type="text/javascript" src="elementlist.js?293504157"></script>
+	<script type="text/javascript" src="elementlist.js?181387811"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -28,6 +28,7 @@
 			<h3>Classes</h3>
 			<ul>
 				<li><a href="class-Admin.html">Admin</a></li>
+				<li><a href="class-Admincontroller.html">Admincontroller</a></li>
 				<li><a href="class-Answer.html">Answer</a></li>
 				<li><a href="class-Application.html">Application</a></li>
 				<li><a href="class-AutomaticCorrector.html">AutomaticCorrector</a></li>
@@ -54,11 +55,16 @@
 				<li><a href="class-QCMQuestion.html">QCMQuestion</a></li>
 				<li><a href="class-QRFQuestion.html">QRFQuestion</a></li>
 				<li><a href="class-Question.html">Question</a></li>
+				<li><a href="class-Questionnaire.html">Questionnaire</a></li>
+				<li><a href="class-QuestionnaireFactory.html">QuestionnaireFactory</a></li>
+				<li><a href="class-QuestionnaireTypeManager.html">QuestionnaireTypeManager</a></li>
 				<li><a href="class-QuestionTypeManager.html">QuestionTypeManager</a></li>
 				<li><a href="class-Resource.html">Resource</a></li>
+				<li><a href="class-Result.html">Result</a></li>
 				<li><a href="class-RoleTypeManager.html">RoleTypeManager</a></li>
 				<li><a href="class-Student.html">Student</a></li>
 				<li><a href="class-Studentcontroller.html">Studentcontroller</a></li>
+				<li><a href="class-Test.html">Test</a></li>
 				<li><a href="class-TypeManager.html">TypeManager</a></li>
 				<li><a href="class-Welcomecontroller.html">Welcomecontroller</a></li>
 				<li><a href="class-WelcomeModel.html">WelcomeModel</a></li>
@@ -193,49 +199,48 @@
 </span><span id="85" class="l"><a class="l" href="#85"> 85: </a>            <span class="php-keyword1">return</span> <span class="php-keyword1">false</span>;        
 </span><span id="86" class="l"><a class="l" href="#86"> 86: </a>        }
 </span><span id="87" class="l"><a class="l" href="#87"> 87: </a>        
-</span><span id="88" class="l"><a class="l" href="#88"> 88: </a>         
-</span><span id="89" class="l"><a class="l" href="#89"> 89: </a>        <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_setExam" href="#_setExam">setExam</a>(<span class="php-var">$e</span>){
-</span><span id="90" class="l"><a class="l" href="#90"> 90: </a>            <span class="php-var">$this</span>-&gt;db-&gt;<span class="php-keyword2">exec</span>(<span class="php-quote">&quot;UPDATE Part SET questionnaireID = '&quot;</span>.<span class="php-var">$e</span>-&gt;getId().<span class="php-quote">&quot;' WHERE partID =&quot;</span>.<span class="php-var">$this</span>-&gt;partID);
-</span><span id="91" class="l"><a class="l" href="#91"> 91: </a>            <span class="php-var">$this</span>-&gt;exam=<span class="php-var">$e</span>;
-</span><span id="92" class="l"><a class="l" href="#92"> 92: </a>        }
-</span><span id="93" class="l"><a class="l" href="#93"> 93: </a>        
-</span><span id="94" class="l"><a class="l" href="#94"> 94: </a>        <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_setTitle" href="#_setTitle">setTitle</a>(<span class="php-var">$t</span>){     
-</span><span id="95" class="l"><a class="l" href="#95"> 95: </a>            <span class="php-var">$this</span>-&gt;db-&gt;<span class="php-keyword2">exec</span>(<span class="php-quote">&quot;UPDATE Part SET title = '&quot;</span>.<span class="php-var">$t</span>.<span class="php-quote">&quot;' WHERE partID =&quot;</span>.<span class="php-var">$this</span>-&gt;partID);
-</span><span id="96" class="l"><a class="l" href="#96"> 96: </a>            <span class="php-var">$this</span>-&gt;title=<span class="php-var">$t</span>;
-</span><span id="97" class="l"><a class="l" href="#97"> 97: </a>        }
-</span><span id="98" class="l"><a class="l" href="#98"> 98: </a>        
-</span><span id="99" class="l"><a class="l" href="#99"> 99: </a>        <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_addChapter" href="#_addChapter">addChapter</a>(<span class="php-var">$chapter</span>){  
-</span><span id="100" class="l"><a class="l" href="#100">100: </a>            <span class="php-var">$this</span>-&gt;db-&gt;<span class="php-keyword2">exec</span>(<span class="php-quote">&quot;INSERT INTO Chapters VALUES (&quot;</span>.<span class="php-var">$chapter</span>-&gt;chapterID().<span class="php-quote">&quot;, &quot;</span>.<span class="php-var">$this</span>-&gt;partID.<span class="php-quote">&quot;);&quot;</span>);
-</span><span id="101" class="l"><a class="l" href="#101">101: </a>            <span class="php-var">$this</span>-&gt;chapters[]=<span class="php-var">$chapter</span>;
-</span><span id="102" class="l"><a class="l" href="#102">102: </a>        }
-</span><span id="103" class="l"><a class="l" href="#103">103: </a>        
-</span><span id="104" class="l"><a class="l" href="#104">104: </a>        <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> &amp;createNewChapter(<span class="php-var">$title</span>){  
-</span><span id="105" class="l"><a class="l" href="#105">105: </a>            <span class="php-var">$chap</span>=<span class="php-keyword1">new</span> Chapter(<span class="php-var">$title</span>,<span class="php-keyword1">false</span>);
-</span><span id="106" class="l"><a class="l" href="#106">106: </a>            <span class="php-var">$this</span>-&gt;addChapter(<span class="php-var">$chap</span>);
-</span><span id="107" class="l"><a class="l" href="#107">107: </a>            <span class="php-keyword1">return</span> <span class="php-var">$chap</span>;
-</span><span id="108" class="l"><a class="l" href="#108">108: </a>        }
-</span><span id="109" class="l"><a class="l" href="#109">109: </a>        
-</span><span id="110" class="l"><a class="l" href="#110">110: </a>        <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_removeChapter" href="#_removeChapter">removeChapter</a>(<span class="php-var">$chapter</span>){  
-</span><span id="111" class="l"><a class="l" href="#111">111: </a>            <span class="php-var">$this</span>-&gt;db-&gt;<span class="php-keyword2">exec</span>(<span class="php-quote">&quot;DELETE FROM Chapters WHERE chapterID=&quot;</span>.<span class="php-var">$chapter</span>-&gt;chapterID());
-</span><span id="112" class="l"><a class="l" href="#112">112: </a>            <span class="php-var">$key</span>= <span class="php-keyword2">array_search</span>(<span class="php-var">$chapter</span>, <span class="php-var">$this</span>-&gt;chapters);           
-</span><span id="113" class="l"><a class="l" href="#113">113: </a>            <span class="php-keyword2">array_splice</span>(<span class="php-var">$this</span>-&gt;chapters, <span class="php-var">$key</span>, <span class="php-num">1</span>);
-</span><span id="114" class="l"><a class="l" href="#114">114: </a>        }
-</span><span id="115" class="l"><a class="l" href="#115">115: </a>
-</span><span id="116" class="l"><a class="l" href="#116">116: </a>        <span class="php-comment">//Suppression de la part en BDD</span>
-</span><span id="117" class="l"><a class="l" href="#117">117: </a>        
-</span><span id="118" class="l"><a class="l" href="#118">118: </a>        <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <span class="php-keyword2">delete</span>(){
-</span><span id="119" class="l"><a class="l" href="#119">119: </a>            <span class="php-var">$res</span>=<span class="php-var">$this</span>-&gt;db-&gt;query(<span class="php-quote">&quot;SELECT title FROM Course JOIN (SELECT courseID FROM Parts WHERE partID ='&quot;</span>.<span class="php-var">$this</span>-&gt;partID.<span class="php-quote">&quot;') AS thispart ON Course.courseID=thispart.courseID&quot;</span>);  
-</span><span id="120" class="l"><a class="l" href="#120">120: </a>            <span class="php-var">$fetch</span>=<span class="php-var">$res</span>-&gt;fetchAll(PDO::FETCH_ASSOC);
-</span><span id="121" class="l"><a class="l" href="#121">121: </a>            <span class="php-keyword1">foreach</span>(<span class="php-var">$fetch</span> <span class="php-keyword1">as</span> <span class="php-var">$line</span>){
-</span><span id="122" class="l"><a class="l" href="#122">122: </a>                <span class="php-var">$course</span>=&amp;CourseFactory::getCourse(<span class="php-var">$line</span>[<span class="php-quote">&quot;title&quot;</span>]);
-</span><span id="123" class="l"><a class="l" href="#123">123: </a>                <span class="php-var">$course</span>-&gt;removePart(<span class="php-var">$this</span>);
-</span><span id="124" class="l"><a class="l" href="#124">124: </a>            }
-</span><span id="125" class="l"><a class="l" href="#125">125: </a>            <span class="php-var">$this</span>-&gt;db-&gt;<span class="php-keyword2">exec</span>(<span class="php-quote">&quot;DELETE FROM Part WHERE partID ='&quot;</span>.<span class="php-var">$this</span>-&gt;partID.<span class="php-quote">&quot;'&quot;</span>); 
-</span><span id="126" class="l"><a class="l" href="#126">126: </a>        }
-</span><span id="127" class="l"><a class="l" href="#127">127: </a>        
-</span><span id="128" class="l"><a class="l" href="#128">128: </a>}
-</span><span id="129" class="l"><a class="l" href="#129">129: </a><span class="xlang">?&gt;</span>
-</span><span id="130" class="l"><a class="l" href="#130">130: </a></span></code></pre>
+</span><span id="88" class="l"><a class="l" href="#88"> 88: </a>        <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_setExam" href="#_setExam">setExam</a>(<span class="php-var">$e</span>){
+</span><span id="89" class="l"><a class="l" href="#89"> 89: </a>            <span class="php-var">$this</span>-&gt;db-&gt;<span class="php-keyword2">exec</span>(<span class="php-quote">&quot;UPDATE Part SET questionnaireID = '&quot;</span>.<span class="php-var">$e</span>-&gt;getId().<span class="php-quote">&quot;' WHERE partID =&quot;</span>.<span class="php-var">$this</span>-&gt;partID);
+</span><span id="90" class="l"><a class="l" href="#90"> 90: </a>            <span class="php-var">$this</span>-&gt;exam=<span class="php-var">$e</span>;
+</span><span id="91" class="l"><a class="l" href="#91"> 91: </a>        }
+</span><span id="92" class="l"><a class="l" href="#92"> 92: </a>        
+</span><span id="93" class="l"><a class="l" href="#93"> 93: </a>        <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_setTitle" href="#_setTitle">setTitle</a>(<span class="php-var">$t</span>){     
+</span><span id="94" class="l"><a class="l" href="#94"> 94: </a>            <span class="php-var">$this</span>-&gt;db-&gt;<span class="php-keyword2">exec</span>(<span class="php-quote">&quot;UPDATE Part SET title = '&quot;</span>.<span class="php-var">$t</span>.<span class="php-quote">&quot;' WHERE partID =&quot;</span>.<span class="php-var">$this</span>-&gt;partID);
+</span><span id="95" class="l"><a class="l" href="#95"> 95: </a>            <span class="php-var">$this</span>-&gt;title=<span class="php-var">$t</span>;
+</span><span id="96" class="l"><a class="l" href="#96"> 96: </a>        }
+</span><span id="97" class="l"><a class="l" href="#97"> 97: </a>        
+</span><span id="98" class="l"><a class="l" href="#98"> 98: </a>        <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_addChapter" href="#_addChapter">addChapter</a>(<span class="php-var">$chapter</span>){  
+</span><span id="99" class="l"><a class="l" href="#99"> 99: </a>            <span class="php-var">$this</span>-&gt;db-&gt;<span class="php-keyword2">exec</span>(<span class="php-quote">&quot;INSERT INTO Chapters VALUES (&quot;</span>.<span class="php-var">$chapter</span>-&gt;chapterID().<span class="php-quote">&quot;, &quot;</span>.<span class="php-var">$this</span>-&gt;partID.<span class="php-quote">&quot;);&quot;</span>);
+</span><span id="100" class="l"><a class="l" href="#100">100: </a>            <span class="php-var">$this</span>-&gt;chapters[]=<span class="php-var">$chapter</span>;
+</span><span id="101" class="l"><a class="l" href="#101">101: </a>        }
+</span><span id="102" class="l"><a class="l" href="#102">102: </a>        
+</span><span id="103" class="l"><a class="l" href="#103">103: </a>        <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> &amp;createNewChapter(<span class="php-var">$title</span>){  
+</span><span id="104" class="l"><a class="l" href="#104">104: </a>            <span class="php-var">$chap</span>=<span class="php-keyword1">new</span> Chapter(<span class="php-var">$title</span>,<span class="php-keyword1">false</span>);
+</span><span id="105" class="l"><a class="l" href="#105">105: </a>            <span class="php-var">$this</span>-&gt;addChapter(<span class="php-var">$chap</span>);
+</span><span id="106" class="l"><a class="l" href="#106">106: </a>            <span class="php-keyword1">return</span> <span class="php-var">$chap</span>;
+</span><span id="107" class="l"><a class="l" href="#107">107: </a>        }
+</span><span id="108" class="l"><a class="l" href="#108">108: </a>        
+</span><span id="109" class="l"><a class="l" href="#109">109: </a>        <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_removeChapter" href="#_removeChapter">removeChapter</a>(<span class="php-var">$chapter</span>){  
+</span><span id="110" class="l"><a class="l" href="#110">110: </a>            <span class="php-var">$this</span>-&gt;db-&gt;<span class="php-keyword2">exec</span>(<span class="php-quote">&quot;DELETE FROM Chapters WHERE chapterID=&quot;</span>.<span class="php-var">$chapter</span>-&gt;chapterID());
+</span><span id="111" class="l"><a class="l" href="#111">111: </a>            <span class="php-var">$key</span>= <span class="php-keyword2">array_search</span>(<span class="php-var">$chapter</span>, <span class="php-var">$this</span>-&gt;chapters);           
+</span><span id="112" class="l"><a class="l" href="#112">112: </a>            <span class="php-keyword2">array_splice</span>(<span class="php-var">$this</span>-&gt;chapters, <span class="php-var">$key</span>, <span class="php-num">1</span>);
+</span><span id="113" class="l"><a class="l" href="#113">113: </a>        }
+</span><span id="114" class="l"><a class="l" href="#114">114: </a>
+</span><span id="115" class="l"><a class="l" href="#115">115: </a>        <span class="php-comment">//Suppression de la part en BDD</span>
+</span><span id="116" class="l"><a class="l" href="#116">116: </a>        
+</span><span id="117" class="l"><a class="l" href="#117">117: </a>        <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <span class="php-keyword2">delete</span>(){
+</span><span id="118" class="l"><a class="l" href="#118">118: </a>            <span class="php-var">$res</span>=<span class="php-var">$this</span>-&gt;db-&gt;query(<span class="php-quote">&quot;SELECT title FROM Course JOIN (SELECT courseID FROM Parts WHERE partID ='&quot;</span>.<span class="php-var">$this</span>-&gt;partID.<span class="php-quote">&quot;') AS thispart ON Course.courseID=thispart.courseID&quot;</span>);  
+</span><span id="119" class="l"><a class="l" href="#119">119: </a>            <span class="php-var">$fetch</span>=<span class="php-var">$res</span>-&gt;fetchAll(PDO::FETCH_ASSOC);
+</span><span id="120" class="l"><a class="l" href="#120">120: </a>            <span class="php-keyword1">foreach</span>(<span class="php-var">$fetch</span> <span class="php-keyword1">as</span> <span class="php-var">$line</span>){
+</span><span id="121" class="l"><a class="l" href="#121">121: </a>                <span class="php-var">$course</span>=&amp;CourseFactory::getCourse(<span class="php-var">$line</span>[<span class="php-quote">&quot;title&quot;</span>]);
+</span><span id="122" class="l"><a class="l" href="#122">122: </a>                <span class="php-var">$course</span>-&gt;removePart(<span class="php-var">$this</span>);
+</span><span id="123" class="l"><a class="l" href="#123">123: </a>            }
+</span><span id="124" class="l"><a class="l" href="#124">124: </a>            <span class="php-var">$this</span>-&gt;db-&gt;<span class="php-keyword2">exec</span>(<span class="php-quote">&quot;DELETE FROM Part WHERE partID ='&quot;</span>.<span class="php-var">$this</span>-&gt;partID.<span class="php-quote">&quot;'&quot;</span>); 
+</span><span id="125" class="l"><a class="l" href="#125">125: </a>        }
+</span><span id="126" class="l"><a class="l" href="#126">126: </a>        
+</span><span id="127" class="l"><a class="l" href="#127">127: </a>}
+</span><span id="128" class="l"><a class="l" href="#128">128: </a><span class="xlang">?&gt;</span>
+</span><span id="129" class="l"><a class="l" href="#129">129: </a></span></code></pre>
 
 	<div id="footer">
 		hfgl API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>

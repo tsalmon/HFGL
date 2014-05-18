@@ -9,20 +9,27 @@
         <?php print_r($liste_cours); ?>
 
         <h2>Les suggestions de cours</h2>
+        <table>
+          <tr><th>Nom du cours</th> <th>Enseigants</th><th>Description rapide</th> <th></th></tr>
         <?php
         foreach ($suggestions as $key => $value) {
         echo'
-        <table>
-          <tr><th>Nom du cours</th> <th>enseigant</th><th>Description rapide</th> <th></th></tr>
+        
           <tr>
             <td>'.$value->title().'</td> 
-            <td>TODO</td>
+            <td>';
+            $profs = $value->getProfessors();
+            foreach ($profs as $prof) {
+              echo $prof->name();
+            }
+            echo '</td>
             <td>'.$value->description().'</td>
-            <td><a class="bouton" href="'.URL.'Student/suggestion_ok/?id='.$value->courseID().'" name="name" >S\'inscrire</a></td>
-          </tr>
-        </table>';
+            <td><a class="bouton" href="'.URL.'Student/suggestion_ok/?cours='.strval($value->courseID()).'">S\'inscrire</a></td>
+          </tr>';
         }
-        ?>          
+        ?>    
+
+        </table>      
       </div>
     </div>
 

@@ -11,7 +11,10 @@ class Studentcontroller extends Controller{
         $MODELcours = $this->loadModel('CourseSubstcription');
         $student = PersonFactory::getPerson($_SESSION["email"]);
         $liste_cours = $MODELcours->getCourses($student);
-
+        $currentCourse = null;
+        if (isset($_GET["cours"])){
+            $currentCourse=CourseFactory::getCourse($_GET["cours"],true);
+        }
         require 'application/views/_templates/header.php';
         require 'application/views/etudiant.php';
         require 'application/views/_templates/footer.php';
@@ -64,7 +67,11 @@ class Studentcontroller extends Controller{
     public function suggestion_ok(){
         $MODELcours = $this->loadModel('CourseSubstcription');
         $student = PersonFactory::getPerson($_SESSION["email"]);
-        $MODELcours->add(PersonFactory::getPerson($_SESSION["personid"], true),$_GET["id"]);
+        if ($MODELcours->add(PersonFactory::getPerson($_SESSION["personid"], true), CourseFactory::getCourse($_GET["cours"],true))) {
+            header('location: '.URL.'Student');
+        } else {
+            die("error...");
+        }
         
     }
 

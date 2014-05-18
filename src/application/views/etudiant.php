@@ -20,24 +20,31 @@
       <?php include("_templates/sidebar_left.php"); ?>
       
       <div class="content">
-      <?php
-          foreach($liste_cours as $cours){
 
-            echo '<p><h1 id="'.$cours->title().'">'. $cours->title() .'</h1>';
-            echo "<p>". $cours->description() ."</p>";
-            echo "<h5>TODO: Enseignant: </h5>";
+      <?php
+          if ($currentCourse){
+
+            echo '<fieldset>
+        <legend><h1 id="'.$currentCourse->title().'">'. $currentCourse->title() .'</h1></legend>';
+            echo "<p>". $currentCourse->description() ."</p>";
+            $profs = $currentCourse->getProfessors();
+            echo "<h5> Enseignant(s): ";
+            foreach ($profs as $prof) {
+              echo $prof->name();
+            }
+            echo "</h5>";
             echo "
               <h2>Les travaux</h2>
               <table>
                 <tr><th>Matière</th> <th>Documents</th></tr>
             ";
-                foreach ($cours->parts() as $part) {
+                foreach ($currentCourse->parts() as $part) {
                   echo '
                 <tr>
                   <td>'.$part->title().'</td>
                   <td>';
                   foreach($part->chapters() as $chapter){
-                    echo '<a target="blank" href="'.URL.'Courses/?cours='.strval($cours->courseID()).'&part='.strval($part->partID()).'&chp='.strval($chapter->chapterID()).'">'.$chapter->title().'</a>';
+                    echo '<a target="blank" href="'.URL.'Courses/?cours='.strval($currentCourse->courseID()).'&part='.strval($part->partID()).'&chp='.strval($chapter->chapterID()).'">'.$chapter->title().'</a>';
                   }
                  
                   echo '</td>';
@@ -49,11 +56,14 @@
               </table>
 
               <p class = "pbouton"><span>&nbsp;</span>
-              <a class="bouton" href="'.URL.'Student/desinscription/?cours='.strval($cours->courseID()).'"">Se desinscrire de ce cours</a>
-              </p>'; 
+              <a class="bouton" href="'.URL.'Student/desinscription/?cours='.strval($currentCourse->courseID()).'"">Se desinscrire de ce cours</a>
+              </fieldset>'; 
+            } else {
+              echo 'write something in hear for student';
             }
       ?>
       </div>
     </div>
     <?php include("_templates/nav_footer_etudiant.php"); ?>
+    <div class="clearfooter"></div>
 </div>  

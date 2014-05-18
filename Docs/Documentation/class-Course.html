@@ -7,7 +7,7 @@
 	<title>Class Course | hfgl</title>
 
 	<script type="text/javascript" src="resources/combined.js?3197842001"></script>
-	<script type="text/javascript" src="elementlist.js?293504157"></script>
+	<script type="text/javascript" src="elementlist.js?181387811"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -27,6 +27,7 @@
 			<h3>Classes</h3>
 			<ul>
 				<li><a href="class-Admin.html">Admin</a></li>
+				<li><a href="class-Admincontroller.html">Admincontroller</a></li>
 				<li><a href="class-Answer.html">Answer</a></li>
 				<li><a href="class-Application.html">Application</a></li>
 				<li><a href="class-AutomaticCorrector.html">AutomaticCorrector</a></li>
@@ -53,11 +54,16 @@
 				<li><a href="class-QCMQuestion.html">QCMQuestion</a></li>
 				<li><a href="class-QRFQuestion.html">QRFQuestion</a></li>
 				<li><a href="class-Question.html">Question</a></li>
+				<li><a href="class-Questionnaire.html">Questionnaire</a></li>
+				<li><a href="class-QuestionnaireFactory.html">QuestionnaireFactory</a></li>
+				<li><a href="class-QuestionnaireTypeManager.html">QuestionnaireTypeManager</a></li>
 				<li><a href="class-QuestionTypeManager.html">QuestionTypeManager</a></li>
 				<li><a href="class-Resource.html">Resource</a></li>
+				<li><a href="class-Result.html">Result</a></li>
 				<li><a href="class-RoleTypeManager.html">RoleTypeManager</a></li>
 				<li><a href="class-Student.html">Student</a></li>
 				<li><a href="class-Studentcontroller.html">Studentcontroller</a></li>
+				<li><a href="class-Test.html">Test</a></li>
 				<li><a href="class-TypeManager.html">TypeManager</a></li>
 				<li><a href="class-Welcomecontroller.html">Welcomecontroller</a></li>
 				<li><a href="class-WelcomeModel.html">WelcomeModel</a></li>
@@ -123,7 +129,7 @@
 		
 		
 
-		<b>Located at</b> <a href="source-class-Course.html#5-181" title="Go to source code">src/application/models/Course.php</a><br />
+		<b>Located at</b> <a href="source-class-Course.html#5-185" title="Go to source code">src/application/models/Course.php</a><br />
 	</div>
 
 
@@ -141,7 +147,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#___construct">#</a>
-		<code><a href="source-class-Course.html#26-56" title="Go to source code">__construct</a>( <span>mixed <var>$title</var></span>, <span>mixed <var>$isID</var> = <span class="php-keyword1">false</span></span>, <span>mixed <var>$exists</var> = <span class="php-keyword1">true</span></span> )</code>
+		<code><a href="source-class-Course.html#26-57" title="Go to source code">__construct</a>( <span>mixed <var>$title</var></span>, <span>mixed <var>$isID</var> = <span class="php-keyword1">false</span></span>, <span>mixed <var>$exists</var> = <span class="php-keyword1">true</span></span> )</code>
 
 		<div class="description short">
 			
@@ -170,7 +176,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_titleExists">#</a>
-		<code><a href="source-class-Course.html#63-67" title="Go to source code">titleExists</a>( <span>mixed <var>$t</var></span> )</code>
+		<code><a href="source-class-Course.html#64-68" title="Go to source code">titleExists</a>( <span>mixed <var>$t</var></span> )</code>
 
 		<div class="description short">
 			
@@ -199,7 +205,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_friendFactory">#</a>
-		<code><a href="source-class-Course.html#71-78" title="Go to source code">friendFactory</a>( )</code>
+		<code><a href="source-class-Course.html#72-79" title="Go to source code">friendFactory</a>( )</code>
 
 		<div class="description short">
 			
@@ -228,7 +234,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getDBParts">#</a>
-		<code><a href="source-class-Course.html#80-90" title="Go to source code">getDBParts</a>( )</code>
+		<code><a href="source-class-Course.html#81-91" title="Go to source code">getDBParts</a>( )</code>
 
 		<div class="description short">
 			
@@ -257,7 +263,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_courseID">#</a>
-		<code><a href="source-class-Course.html#95-97" title="Go to source code">courseID</a>( )</code>
+		<code><a href="source-class-Course.html#96-98" title="Go to source code">courseID</a>( )</code>
 
 		<div class="description short">
 			
@@ -286,7 +292,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_title">#</a>
-		<code><a href="source-class-Course.html#99-101" title="Go to source code">title</a>( )</code>
+		<code><a href="source-class-Course.html#100-102" title="Go to source code">title</a>( )</code>
 
 		<div class="description short">
 			
@@ -315,7 +321,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_description">#</a>
-		<code><a href="source-class-Course.html#103-105" title="Go to source code">description</a>( )</code>
+		<code><a href="source-class-Course.html#104-106" title="Go to source code">description</a>( )</code>
 
 		<div class="description short">
 			
@@ -344,7 +350,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_parts">#</a>
-		<code><a href="source-class-Course.html#107-109" title="Go to source code">parts</a>( )</code>
+		<code><a href="source-class-Course.html#108-110" title="Go to source code">parts</a>( )</code>
 
 		<div class="description short">
 			
@@ -373,7 +379,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_part">#</a>
-		<code><a href="source-class-Course.html#111-120" title="Go to source code">part</a>( <span>mixed <var>$id</var></span> )</code>
+		<code><a href="source-class-Course.html#112-121" title="Go to source code">part</a>( <span>mixed <var>$id</var></span> )</code>
 
 		<div class="description short">
 			
@@ -402,7 +408,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_finalExam">#</a>
-		<code><a href="source-class-Course.html#122-124" title="Go to source code">finalExam</a>( )</code>
+		<code><a href="source-class-Course.html#123-125" title="Go to source code">finalExam</a>( )</code>
 
 		<div class="description short">
 			
@@ -431,7 +437,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setFinalExam">#</a>
-		<code><a href="source-class-Course.html#126-129" title="Go to source code">setFinalExam</a>( <span>mixed <var>$fe</var></span> )</code>
+		<code><a href="source-class-Course.html#127-130" title="Go to source code">setFinalExam</a>( <span>mixed <var>$fe</var></span> )</code>
 
 		<div class="description short">
 			
@@ -460,7 +466,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setTitle">#</a>
-		<code><a href="source-class-Course.html#131-134" title="Go to source code">setTitle</a>( <span>mixed <var>$t</var></span> )</code>
+		<code><a href="source-class-Course.html#132-135" title="Go to source code">setTitle</a>( <span>mixed <var>$t</var></span> )</code>
 
 		<div class="description short">
 			
@@ -489,7 +495,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setDescription">#</a>
-		<code><a href="source-class-Course.html#136-139" title="Go to source code">setDescription</a>( <span>mixed <var>$d</var></span> )</code>
+		<code><a href="source-class-Course.html#137-140" title="Go to source code">setDescription</a>( <span>mixed <var>$d</var></span> )</code>
 
 		<div class="description short">
 			
@@ -518,7 +524,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_addPart">#</a>
-		<code><a href="source-class-Course.html#141-144" title="Go to source code">addPart</a>( <span>mixed <var>$part</var></span> )</code>
+		<code><a href="source-class-Course.html#142-145" title="Go to source code">addPart</a>( <span>mixed <var>$part</var></span> )</code>
 
 		<div class="description short">
 			
@@ -547,7 +553,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_createNewPart">#</a>
-		<code><a href="source-class-Course.html#146-150" title="Go to source code">createNewPart</a>( <span>mixed <var>$title</var></span> )</code>
+		<code><a href="source-class-Course.html#147-151" title="Go to source code">createNewPart</a>( <span>mixed <var>$title</var></span> )</code>
 
 		<div class="description short">
 			
@@ -576,7 +582,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_removePart">#</a>
-		<code><a href="source-class-Course.html#152-156" title="Go to source code">removePart</a>( <span>mixed <var>$part</var></span> )</code>
+		<code><a href="source-class-Course.html#153-157" title="Go to source code">removePart</a>( <span>mixed <var>$part</var></span> )</code>
 
 		<div class="description short">
 			
@@ -605,7 +611,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getStudents">#</a>
-		<code><a href="source-class-Course.html#158-160" title="Go to source code">getStudents</a>( )</code>
+		<code><a href="source-class-Course.html#159-161" title="Go to source code">getStudents</a>( )</code>
 
 		<div class="description short">
 			
@@ -634,7 +640,36 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getProfessors">#</a>
-		<code><a href="source-class-Course.html#162-164" title="Go to source code">getProfessors</a>( )</code>
+		<code><a href="source-class-Course.html#163-165" title="Go to source code">getProfessors</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getMark" id="_getMark">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getMark">#</a>
+		<code><a href="source-class-Course.html#167-169" title="Go to source code">getMark</a>( <span>mixed <var>$student</var></span> )</code>
 
 		<div class="description short">
 			
@@ -663,7 +698,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_delete">#</a>
-		<code><a href="source-class-Course.html#170-173" title="Go to source code">delete</a>( )</code>
+		<code><a href="source-class-Course.html#174-177" title="Go to source code">delete</a>( )</code>
 
 		<div class="description short">
 			
@@ -692,7 +727,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#___destruct">#</a>
-		<code><a href="source-class-Course.html#177-179" title="Go to source code">__destruct</a>( )</code>
+		<code><a href="source-class-Course.html#181-183" title="Go to source code">__destruct</a>( )</code>
 
 		<div class="description short">
 			
