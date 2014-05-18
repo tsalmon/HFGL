@@ -14,7 +14,9 @@
         <h5>Enseignant: </h5>
         <div id="div_scroll">
             <p>
-              <!-- echo Les Notes ou les memoire de cours-->
+              <iframe src="http://www.liafa.univ-paris-diderot.fr/~yunes/cours/interfaces/fiches/Examens/2011/Sujet.pdf" height="1000" seamless/>
+                Votre navigateur ne supporte pas des iframes. Pensez de le jeter et installer un autre!
+              </iframe>
             </p>
         </div>
 

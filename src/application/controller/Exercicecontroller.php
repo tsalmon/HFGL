@@ -11,6 +11,7 @@ class Exercicecontroller extends Controller{
     
     public function __construct(){      
         $this->exerciseSheetModel = $this->loadModel('ExerciceSheet');
+        echo "<script>alert('Hey!')</script>";
         $this->exerciseSheetModel->loadByID(1);  
     }
 

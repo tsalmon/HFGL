@@ -1,6 +1,7 @@
 <?php
 require_once("Person.php");
 require_once("Corrector.php");
+require_once("QuestionTypeManager.php");
 
 class Professor extends Person implements Corrector{
 	
@@ -66,4 +67,47 @@ class Professor extends Person implements Corrector{
             $this->db->exec("DELETE FROM Tutor WHERE tutorID ='".$this->tutorID."'");    
             parent::delete();            
         }
+
+        public function addQuestionToCorrect($question) {
+
+        }
+    
+        public function correctQuestion($questionID, $corrected_student_ID,$note) {
+            $query="UPDATE Points SET note=".$note.", validated=1 WHERE questionID=".$questionID."
+                AND studentID=".corrected_student_ID;
+            $this->db->exec($query);
+        }
+
+        public function getQuestionsToCorrect() {
+            $questionsheets=array();
+            $courses=$this->getCourses();
+            foreach ($courses as $course) {                                
+                $questionsheets[]=$course->finalExam();
+                foreach($course->parts() as $part){
+                    $questionsheets[]=$part->exam;
+                    foreach($part->chapters() as $chapter){
+                        $questionsheets[]=$chapter->exercices();
+                    }
+                }
+            }
+            $questions=array();
+            foreach ($questionsheets as $questionsheet) {                
+                $questions=array_merge($questions,$questionsheet->getQuestions());
+            }
+            $ids=array();
+            foreach ($questions as $question){
+                $query="SELECT questionID FROM (SELECT * FROM (SELECT questionID, typeID FROM (
+                        StudentEstimation NATURAL JOIN  Question )) as s NATURAL JOIN Points) as r 
+                        WHERE r.questionID=".$question->getID()." and 
+                            r.typeID=".QuestionTypeManager::getInstance()->getLSID();
+                $res=$this->db->query($query);
+                if($res!=false){
+                    $fetch=$res->fetchAll(PDO::FETCH_ASSOC);
+                    $ids=merge_array($ids,$fetch["questionID"]);
+                }
+               
+            }
+            return $ids;
+            
+       }   
 }

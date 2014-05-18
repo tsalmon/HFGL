@@ -10,7 +10,7 @@
           echo "<p>Le nom du cours existe déjà</p>";
         } 
       ?>
-      <form action="<?php echo URL.'Courses/newCourse'; ?>" method="post">
+      <form action="<?php echo URL.'Professor/newCourse'; ?>" method="post">
         <div class="form_settings">
           <p><span>Nom du cours</span><input type="text" name="course_title" required/></p>
           <p><span> Description</span><textarea name="course_description" rows="10" cols="30" required></textarea></p>

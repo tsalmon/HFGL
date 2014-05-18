@@ -1,4 +1,6 @@
 <?php
+require_once 'application/models/Chapter.php';
+//require_once 'application/models/PersonFactory.php';
 
 class Studentcontroller extends Controller{
     private $titre_firstpart;
@@ -40,6 +42,191 @@ class Studentcontroller extends Controller{
     public function ParametresPWD_result()
     {
         print_r($_POST);
+    }
+
+    public function DoExercice(){
+        $_SESSION["chapter"] = intval($_GET["chp"]);
+        $_SESSION["chptname"] = $_GET["chptname"];
+        $_SESSION["cours"] = $_GET["cours"];
+        $_SESSION["part"] = $_GET["part"];
+        $_SESSION["currentQuestionNumber"] = 0;
+        $_SESSION["started"] = False;
+        $_SESSION["finished"] = False;
+        header('location: '.URL.'Student/Exercice');
+        //echo "<script>alert('')</script>";
+    }
+
+    public function StartExercice(){
+        $_SESSION["started"] = True;
+        header('location: '.URL.'Student/Exercice');
+    }
+
+    private function NextQuestion(){
+        if ($_SESSION["questionsCount"] == $_SESSION["currentQuestionNumber"]) {
+            $_SESSION["finished"] = True;
+        } 
+
+        header('location: '.URL.'Student/Exercice');
+    }
+
+    public function Exercice(){
+        $chpt = new Chapter($_SESSION["chapter"]);
+        $questionnaire = $chpt->exercices();
+        $questions = $questionnaire->getQuestions();
+        $MODELparam= $this->loadModel('PersonFactory');
+        $student = $MODELparam->getPerson($_SESSION["email"]);
+
+        $_SESSION["studentID"] = $student->studentID();
+        $_SESSION["questionsCount"] = count($questions);
+
+
+        if (!$_SESSION["finished"]) {
+            $currentQuestion = $questions[$_SESSION["currentQuestionNumber"]];
+            $currentQuestionNumber = $_SESSION["currentQuestionNumber"];
+
+            /*
+                Recuperation d'un nom de fichier pour la question de type P
+                pour la montrer comme une indication
+            */
+            if ($currentQuestion instanceof PQuestion) {
+                foreach($currentQuestion->getResources() as $resource){
+                    if ($resource->getType() == "filename") {
+                        $filename = $resource->getContent();
+                    }
+                } 
+            }
+        }
+
+        require 'application/views/_templates/header.php';
+        require 'application/views/student_exercice.php';
+        require 'application/views/_templates/footer.php';
+    }
+
+    private function SecondaryParameter($key, $value){
+            $_SESSION["started"] = True;
+
+            if ($key == "currentQuestionNumber") {
+                $_SESSION["currentQuestionNumber"] = $value+1; 
+                return True;
+            }
+
+            if ($key == "questionsCount") {
+                $_SESSION["questionsCount"] = $value;     
+                return True; 
+            }    
+
+            return False;
+    }
+
+    public function QCMExerciceResponse()
+    {
+        foreach ($_POST as $key => $value) {
+            if(!$this->SecondaryParameter($key, $value))
+            {
+                $question = Question::getQuestionByID($key);
+                $answers = $question->getAnswers();
+                $note = 0;
+                if ($value == 1) {
+                    $note = $question->getPoints();
+                }
+                PDOHelper::getInstance()->exec("INSERT INTO `Points`(`studentID`, `questionID`, `note`) VALUES (".$_SESSION["studentID"].",".$_GET["questionID"].", ".$note.")");
+            }
+        }
+        $this->NextQuestion();
+    }
+
+    public function QRFExerciceResponse()
+    {
+        foreach ($_POST as $key => $value) {
+            if(!$this->SecondaryParameter($key, $value))
+            {
+                $question = Question::getQuestionByID($key);
+                $answers = $question->getAnswers();
+                $note = 0;
+
+                foreach($answers as $answer) {
+                    if ($answer->getContent() == $value) {
+                        $note = $question->getPoints();
+                    }
+                } 
+
+                PDOHelper::getInstance()->exec("INSERT INTO `Points`(`studentID`, `questionID`, `response`, `note`) VALUES (".$_SESSION["studentID"].",".$_GET["questionID"].", '".$value."', ".$note.")");
+            }
+        }
+        $this->NextQuestion();
+    }
+
+    public function PExerciceResponse()
+    {
+        foreach ($_POST as $key => $value) {
+            if(!$this->SecondaryParameter($key, $value))
+            {
+                $question = Question::getQuestionByID($value);
+                $tests = $question->getTests();
+                $resources = $question->getResources();
+                $note = 0;
+                //echo "Nombre de fichiers ".count($_FILES)."<br>";
+                if ($_FILES[$value]["error"] > 0) {
+                    echo "Error: " . $_FILES[$value]["error"] . "<br>";
+                } else {
+                    $temp = $_FILES[$value]["tmp_name"];
+                    $name_file = $_FILES[$value]['name'];
+                    move_uploaded_file($temp, "files/".$value."/".$name_file);
+                }
+                // echo "<br/>";
+                // echo "Resources:<hr/>";
+                foreach($resources as $resource) {
+                    if ($resource->getType() == "make") {
+                        $make = $resource->getContent();
+                        // echo "Make: " .$make."<hr/>";
+                    } else 
+                    if ($resource->getType() == "filename") {
+                        $filename = $resource->getContent();
+                        // echo "Filename: " .$filename."<hr/>";
+                    } else 
+                    if ($resource->getType() == "execname") {
+                        $execname = $resource->getContent();
+                        // echo "Execname: " .$execname."<hr/>";
+                    }
+                } 
+                // echo "<br/>";
+                $note = $question->getPoints();
+
+                /* Compilation de programme chargé */
+                exec("cd ./files/".$value.";bash ".$make,$output, $retval);
+
+                /* Passage de tests */
+                // echo "Tests<hr/>";
+                foreach($tests as $test) {
+                    // echo "Input: ".$test->getInput()."<br/>";
+                    // echo "Output: ".$test->getOutput()."<br/>";
+                    exec("cd ./files/".$value.";./".$execname." ".$test->getInput(),$output, $retval);
+                    if ($test->getOutput() == array_pop($output)) {
+                        // echo "Test passed<hr/>";
+                    } else {
+                        $note = 0;
+                        // echo "Test not passed<hr/>";
+                    }
+                } 
+                // echo "<br/>";
+
+                PDOHelper::getInstance()->exec("INSERT INTO `Points`(`studentID`, `questionID`, `note`) VALUES (".$_SESSION["studentID"].",".$_GET["questionID"].", '".$note."')");
+            }
+        }
+
+        $this->NextQuestion();
+    }
+
+    public function LExerciceResponse()
+    {
+        foreach ($_POST as $key => $value) {
+            if (!$this->SecondaryParameter($key, $value))
+            {   
+                PDOHelper::getInstance()->exec("INSERT INTO `Points`(`studentID`, `questionID`, `response`) VALUES (".$_SESSION["studentID"].",".$_GET["questionID"].", '".$value."')");
+            }
+        }
+
+        $this->NextQuestion();
     }
 
     public function Notes()
@@ -122,6 +309,7 @@ class Studentcontroller extends Controller{
         require 'application/views/student_view_notesDeCours.php';
         require 'application/views/_templates/footer.php';
     }
+
     public function Deconnexion(){
         if(session_destroy()){
             header('location: '.URL.'Welcome');
