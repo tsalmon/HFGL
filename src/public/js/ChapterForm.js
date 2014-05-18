@@ -90,6 +90,9 @@ function chpValid() {
   if(dm > am){ 
     return true;
   }
+  if(dd > ad == false){
+    alert("Le chapitre doit pouvoir se faire au moins en 1 jour.");
+  } 
   return (dd > ad);
 };
 
@@ -118,6 +121,6 @@ function newCHPform(){
       document.forms.chpform.deadline_day.options[document.forms.chpform.deadline_day.options.length] = new Option(i,i);
       document.forms.chpform.avalable_day.options[document.forms.chpform.avalable_day.options.length] = new Option(i,i);
   }
-s}
+}
 
 m = newCHPform();

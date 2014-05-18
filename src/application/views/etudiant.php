@@ -36,7 +36,7 @@
             echo "
               <h2>Les travaux</h2>
               <table>
-                <tr><th>Matière</th> <th>Documents</th></tr>
+                <tr><th>Partie</th> <th>Documents</th></tr>
             ";
                 foreach ($currentCourse->parts() as $part) {
                   echo '

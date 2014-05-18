@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="utf-8">
@@ -32,7 +32,7 @@
     ?>
     <?php 
         if(isset($page) && $page == "CreateExercice"){
-            echo '<script src="'.URL.'public/js/exercice.js"></script>';
+            echo '<script src="'.URL.'public/js/exercice.js"></script>';          
         } elseif(isset($page) && $page == "prof"){
             echo '<script>
             xmlhttp = new XMLHttpRequest();
@@ -40,7 +40,6 @@
             function createPart(id_cours){
                 var nom_partie=prompt("Entrez le nom de la partie");
                 if(nom_partie == null){
-                    alert("null");
                     return;
                 }
                 xmlhttp.onreadystatechange = function(){
