@@ -45,20 +45,21 @@ class Studentcontroller extends Controller{
     }
 
     public function DoExercice(){
+        $_SESSION["type"] = $_GET["type"];
+        $_SESSION["coursTitle"] = $_GET["courseTitle"];
         if ($_SESSION["type"] == "chapter") {
-            $_SESSION["cours"] = $_GET["courseTitle"];
-            $_SESSION["part"] = $_GET["partTitle"];
+            $_SESSION["partTitle"] = $_GET["partTitle"];
             $_SESSION["chapterTitle"] = $_GET["chapterTitle"];
-            $_SESSION["chapter"] = intval($_GET["chapterID"]);
+            $_SESSION["chapterID"] = intval($_GET["chapterID"]);
         } else 
         if ($_SESSION["type"] == "examen") {
-            $_SESSION["courseTitle"] = $_GET["courseTitle"];
             $_SESSION["courseID"] = $_GET["courseID"];
         }
 
         $_SESSION["currentQuestionNumber"] = 0;
         $_SESSION["started"] = False;
         $_SESSION["finished"] = False;
+
         header('location: '.URL.'Student/Exercice');
     }
 
@@ -77,11 +78,18 @@ class Studentcontroller extends Controller{
 
     public function Exercice(){
         if ($_SESSION["type"] == "chapter") {
+            $chpt = new Chapter($_SESSION["chapterID"]);
+            $questionnaire = $chpt->exercices();
         } else 
         if ($_SESSION["type"] == "examen") {
+            $course = CourseFactory::getCourse($_SESSION["courseID"],true);
+            $questionnaire = $course->finalExam();
         }
-        $chpt = new Chapter($_SESSION["chapter"]);
-        $questionnaire = $chpt->exercices();
+
+        if (is_null($questionnaire)) {
+            header('location: '.URL.'Student');
+        }
+
         $questions = $questionnaire->getQuestions();
         $MODELparam= $this->loadModel('PersonFactory');
         $student = $MODELparam->getPerson($_SESSION["email"]);

@@ -6,10 +6,17 @@
       <?php include("_templates/bienvenue_title.php"); ?>
 
       <div class="content_big">
-
-        <h1>L'exercice de cours: <?php echo $_SESSION["cours"]; ?></h1>
-        <h1>Part: <?php echo $_SESSION["part"]; ?></h1>
-        <h1>Chapitre: <?php echo $_SESSION["chapterTitle"]; ?></h1>
+        <?php
+          if ($_SESSION["type"] == "chapter") {
+            echo '<h1>Exercice de cours: '.$_SESSION["coursTitle"].'</h1>';
+            echo '<h1>Part: '.$_SESSION["partTitle"].'</h1>';
+            echo '<h1>Chapitre: '.$_SESSION["chapterTitle"].'</h1>';
+          } else 
+          if ($_SESSION["type"] == "examen") {
+            echo '<h1>Examen de cours: '.$_SESSION["coursTitle"].'</h1>';
+          }
+        ?>
+       
         <h3>Enseignant: </h5>
         <h3>Date limite: </h4>
           
