@@ -23,10 +23,15 @@
 
          
           <?php 
-             echo '<a class="bouton" href="'.URL.'Student/NotesDeCours'.$chp->courseNotes()->getURL().'">Cours</a>';
-            $id_exo = $chp->exercices()->getID(); 
-            if($id_exo != null){ //if there is an exercice
-              echo '<a class="bouton" href="'.URL.'Exercice">Exercice</a>';
+            if (null !== ($chp->courseNotes())) {
+              echo '<a class="bouton" href="'.URL.'Student/NotesDeCours'.$chp->courseNotes()->getURL().'">Cours</a>';
+            }
+
+            if (null !== ($chp->exercices())) {
+              $id_exo = $chp->exercices()->getID(); 
+              if($id_exo != null){ //if there is an exercice
+                echo '<a class="bouton" href="'.URL.'Exercice">Exercice</a>';
+              }
             }
           ?>
         </div>
