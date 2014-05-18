@@ -30,6 +30,7 @@ ALTER TABLE `Person` DROP FOREIGN KEY `fk_Person_Role_1`;
 ALTER TABLE `StudentEstimation` DROP FOREIGN KEY `fk_StudentGrading`;
 ALTER TABLE `StudentEstimation` DROP FOREIGN KEY `fk_StudentGrading_1`;
 ALTER TABLE `StudentEstimation` DROP FOREIGN KEY `fk_StudentGrading_2`;
+ALTER TABLE `StudentEstimation` DROP FOREIGN KEY `fk_StudentEstimation`;
 
 ALTER TABLE `Person`DROP PRIMARY KEY;
 ALTER TABLE `Course`DROP PRIMARY KEY;
@@ -232,7 +233,8 @@ CREATE TABLE `StudentEstimation` (
 `estimatingStudentID` int NOT NULL,
 `estimatedStudentID` int NOT NULL,
 `questionID` int NOT NULL,
-PRIMARY KEY (`estimatingStudentID`, `questionID`, `estimatedStudentID`) 
+`delegatedTutorID` int NOT NULL,
+PRIMARY KEY (`estimatingStudentID`, `questionID`, `estimatedStudentID`, `delegatedTutorID`) 
 );
 
 
@@ -268,4 +270,5 @@ ALTER TABLE `Person` ADD CONSTRAINT `fk_Person_Role_1` FOREIGN KEY (`roleID`) RE
 ALTER TABLE `StudentEstimation` ADD CONSTRAINT `fk_StudentGrading` FOREIGN KEY (`estimatingStudentID`) REFERENCES `Student` (`studentID`);
 ALTER TABLE `StudentEstimation` ADD CONSTRAINT `fk_StudentGrading_1` FOREIGN KEY (`estimatedStudentID`) REFERENCES `Student` (`studentID`);
 ALTER TABLE `StudentEstimation` ADD CONSTRAINT `fk_StudentGrading_2` FOREIGN KEY (`questionID`) REFERENCES `Question` (`questionID`);
+ALTER TABLE `StudentEstimation` ADD CONSTRAINT `fk_StudentEstimation` FOREIGN KEY (`delegatedTutorID`) REFERENCES `Tutor` (`tutorID`);
 
