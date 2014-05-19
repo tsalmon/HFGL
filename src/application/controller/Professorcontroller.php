@@ -77,6 +77,10 @@ class Professorcontroller extends Controller{
 
         /** Good part **/
         $chp = new Chapter($_POST["chp_name"], false);
+        $notes = new CourseNote();
+        $notes->setURL($dir."/files/".$_FILES["chp_file_lesson"]["name"]);
+        $chp->setDescription($_POST["chp_descr"]);
+        $chp->setCourseNotes($notes);
         $part= new Part($_GET["part"]);
         $part->addChapter($chp);
         
