@@ -181,7 +181,7 @@
 </span><span id="67" class="l"><a class="l" href="#67">67: </a>                    <span class="php-var">$question</span> = <span class="php-keyword1">new</span> QRFQuestion(<span class="php-var">$assignment</span>, <span class="php-var">$tip</span>, <span class="php-var">$points</span>);
 </span><span id="68" class="l"><a class="l" href="#68">68: </a>                }
 </span><span id="69" class="l"><a class="l" href="#69">69: </a>
-</span><span id="70" class="l"><a class="l" href="#70">70: </a>                <span class="php-keyword1">if</span>(<span class="php-var">$typeID</span> == QuestionTypeManager::getInstance()-&gt;getLID()){
+</span><span id="70" class="l"><a class="l" href="#70">70: </a>                <span class="php-keyword1">if</span>(<span class="php-var">$typeID</span> == QuestionTypeManager::getInstance()-&gt;getLID() || <span class="php-var">$typeID</span> == QuestionTypeManager::getInstance()-&gt;getLSID()){
 </span><span id="71" class="l"><a class="l" href="#71">71: </a>                    <span class="php-var">$question</span> = <span class="php-keyword1">new</span> LQuestion(<span class="php-var">$assignment</span>, <span class="php-var">$tip</span>, <span class="php-var">$points</span>);
 </span><span id="72" class="l"><a class="l" href="#72">72: </a>                }
 </span><span id="73" class="l"><a class="l" href="#73">73: </a>

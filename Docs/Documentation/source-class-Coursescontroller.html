@@ -121,8 +121,8 @@
 </span><span id="7" class="l"><a class="l" href="#7"> 7: </a>        <span class="php-var">$cours</span> = CourseFactory::getCourse(<span class="php-var">$_GET</span>[<span class="php-quote">&quot;cours&quot;</span>], <span class="php-keyword1">true</span>);
 </span><span id="8" class="l"><a class="l" href="#8"> 8: </a>        <span class="php-var">$part</span> = <span class="php-var">$cours</span>-&gt;part(<span class="php-var">$_GET</span>[<span class="php-quote">&quot;part&quot;</span>]);
 </span><span id="9" class="l"><a class="l" href="#9"> 9: </a>        <span class="php-var">$chp</span> = <span class="php-var">$part</span>-&gt;chapter(<span class="php-var">$_GET</span>[<span class="php-quote">&quot;chp&quot;</span>]);
-</span><span id="10" class="l"><a class="l" href="#10">10: </a>
-</span><span id="11" class="l"><a class="l" href="#11">11: </a>        <span class="php-keyword1">require</span> <span class="php-quote">'application/views/_templates/header.php'</span>;
+</span><span id="10" class="l"><a class="l" href="#10">10: </a>        <span class="php-keyword1">require</span> <span class="php-quote">'application/views/_templates/header.php'</span>;
+</span><span id="11" class="l"><a class="l" href="#11">11: </a>        <span class="php-keyword1">echo</span> <span class="php-quote">&quot;&lt;script&gt;alert(Hello!)&lt;/script&gt;&quot;</span>;
 </span><span id="12" class="l"><a class="l" href="#12">12: </a>        <span class="php-keyword1">if</span>(<span class="php-var">$_SESSION</span>[<span class="php-quote">&quot;role&quot;</span>] == <span class="php-quote">&quot;teacher&quot;</span>){
 </span><span id="13" class="l"><a class="l" href="#13">13: </a>            <span class="php-keyword1">require</span> <span class="php-quote">'application/views/teacher_creerChapitre.php'</span>;          
 </span><span id="14" class="l"><a class="l" href="#14">14: </a>        } <span class="php-keyword1">else</span> {
