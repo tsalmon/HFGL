@@ -98,7 +98,7 @@ class Professor extends Person implements Corrector{
             foreach ($questions as $question){
                 $query="SELECT questionID FROM (SELECT * FROM (SELECT questionID, typeID FROM (
                         StudentEstimation NATURAL JOIN  Question )) as s NATURAL JOIN Points) as r 
-                        WHERE r.questionID=".$question->getID()." and 
+                        WHERE r.questionID=".$question->getID()." and validated!=1 and 
                             r.typeID=".QuestionTypeManager::getInstance()->getLSID();
                 $res=$this->db->query($query);
                 if($res!=false){

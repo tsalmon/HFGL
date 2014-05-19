@@ -240,7 +240,47 @@ class Studentcontroller extends Controller{
         foreach ($_POST as $key => $value) {
             if (!$this->SecondaryParameter($key, $value))
             {   
-                PDOHelper::getInstance()->exec("INSERT INTO `Points`(`studentID`, `questionID`, `response`) VALUES (".$_SESSION["studentID"].",".$_GET["questionID"].", '".$value."')");
+                $db=PDOHelper::getInstance();
+                $db->exec("INSERT INTO `Points`(`studentID`, `questionID`, `response`) VALUES (".$_SESSION["studentID"].",".$_GET["questionID"].", '".$value."')");
+                $query="SELECT roleID FROM (Points NATURAL JOIN Question) WHERE questionID=".$_GET["questionID"];
+                $res=$db->query($query);
+                $fetch=fetch(PDO::FETCH_ASSOC);
+                $roleID=$fetch["roleID"];
+                if ($roleID==QuestionTypeManager::getInstance()->getLSID()){
+                    
+                    $query="SELECT studentID FROM (SELECT * FROM Student JOIN StudentEstimation AS se ON Student.studentID=se.estimatingStudentID) as test WHERE questionID=".$_GET["questionID"];
+                    $res=$db->query($query);
+                    $fetch=fetchAll(PDO::FETCH_ASSOC);
+                    $students=$fetch["studentID"];
+                    $query_course="SELECT DISTINCT Course.courseID FROM (
+                        SELECT t5.questionnaireID, courseID FROM (
+                        SELECT Part.partID, t4.questionnaireID FROM (
+                        SELECT Chapters.partID, t3.questionnaireID FROM (
+                        SELECT chapterID, t2.questionnaireID From (
+                        SELECT table1.questionnaireID FROM (
+                        SELECT questionnaireID FROM Questions WHERE questionID =1) as table1 
+                        JOIN Questionnaire ON table1.questionnaireID=Questionnaire.questionnaireID) as t2 
+                        JOIN Chapter ON Chapter.questionnaireID=t2.questionnaireID) as t3 
+                        JOIN Chapters on Chapters.chapterID=t3.chapterID) as t4 
+                        JOIN Part ON Part.partID=t4.partID or Part.questionnaireID=t4.questionnaireID) as t5 
+                        JOIN Parts on Parts.partID= t5.partID)as t6 JOIN 
+                        Course on Course.questionnaireID=t6.questionnaireID or Course.courseID=t6.courseID";
+                    $resCourse=$db->query($query_course);
+                    $fetch=$resCourse->fetch(PDO::FETCH_ASSOC);
+                    $course=  CourseFactory::getCourse($fetch["courseID"], true);
+                    $courseStudentsID=[];
+                    foreach($course->getStudents() as $student){
+                        $courseStudentsID=$student->studentID();
+                    }
+                    $freeStudents=array_diff($courseStudentsID,$students);
+                    if($freeStudents==[]){
+                        $studentID=$students[0];
+                    }
+                    else{
+                        $studentID=$freeStudents[0];
+                    }
+                    $db->exec("INSERT INTO StudentEstimation (estimatingStudentID, estimatedStudentID, questionID) VALUES(".$studentID.",".$_SESSION["studentID"].",".$_GET["questionID"]);
+                }      
             }
         }
 
