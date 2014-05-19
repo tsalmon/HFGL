@@ -310,6 +310,12 @@ fieldset{
   width: 250px; 
   text-align: left;
 }
+
+.form_settings span { 
+  float: left; 
+  width: 250px; 
+  text-align: left;
+}
   
 .form_settings input, .form_settings textarea, .form_settings select { 
   padding: 5px; 
@@ -342,6 +348,10 @@ fieldset{
 
 .form_settings select { 
   width: 310px;
+}
+
+.form_settings .date select {
+  width: 80px;
 }
 
 .form_settings .checkbox { 

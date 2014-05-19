@@ -82,7 +82,7 @@ class Chapter {
         }    
         
         public function setDescription($d){
-            $this->db->exec("UPDATE Chapter SET description = ".$d." WHERE chapterID =".$this->chapterID);
+            $this->db->exec("UPDATE Chapter SET description = '".$d."' WHERE chapterID =".$this->chapterID);
             $this->description=$d;
         }
          
@@ -102,7 +102,7 @@ class Chapter {
         }
         
         public function setCourseNotes($n){
-            $this->db->exec("UPDATE Chapter SET URL = '".$n->getId()."' WHERE chapterID =".$this->chapterID);
+            $this->db->exec("UPDATE Chapter SET URL = '".$n->getURL()."' WHERE chapterID =".$this->chapterID);
             $this->courseNotes=$n;
         }
 
