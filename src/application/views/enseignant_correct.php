@@ -47,8 +47,7 @@
             </p>
             ';
         } else {
-            $this->printQuestionsToCorrect($prof);
-            $this->printQuestionsToValidate($prof);
+            $this->printQuestionCorrect($id);
         }
         ?>
       </div>

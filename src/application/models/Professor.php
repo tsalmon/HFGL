@@ -82,29 +82,33 @@ class Professor extends Person implements Corrector{
             $questionsheets=array();
             $courses=$this->getCourses();
             foreach ($courses as $course) {                                
-                $questionsheets[]=$course->finalExam();
-                foreach($course->parts() as $part){
-                    $questionsheets[]=$part->exam;
-                    foreach($part->chapters() as $chapter){
-                        $questionsheets[]=$chapter->exercices();
+                if($course->finalExam()!=null){
+                    $questionsheets[]=$course->finalExam();}
+                foreach($course->parts() as $part){                           
+                if($part->exam()!=null){$questionsheets[]=$part->exam();}
+                    foreach($part->chapters() as $chapter){  
+                if($chapter->exercices()!=null){$questionsheets[]=$chapter->exercices();}
                     }
                 }
             }
             $questions=array();
-            foreach ($questionsheets as $questionsheet) {                
-                $questions=array_merge($questions,$questionsheet->getQuestions());
+            foreach ($questionsheets as $questionsheet) {     
+                if($questionsheet->getQuestions()!=null){
+                
+                    $questions=array_merge($questions,$questionsheet->getQuestions());
+                }
             }
             $ids=array();
             foreach ($questions as $question){
-                $query="SELECT questionID FROM Points WHERE validated=2 AND questionID=".$question->getID();
+                $query="SELECT DISTINCT questionID FROM Points WHERE validated=2 AND questionID=".$question->getID();
                 $res=$this->db->query($query);
-                if($res!=false){
-                    $fetch=$res->fetchAll(PDO::FETCH_ASSOC);
-                    $ids=merge_array($ids,$fetch["questionID"]);
+                $fetch=$res->fetch(PDO::FETCH_ASSOC);
+                if($fetch!=false){
+                    $ids[]=$fetch["questionID"];
                 }
                
             }
-            return $ids;
+            return  array_unique($ids);
             
        }   
        
@@ -112,29 +116,33 @@ class Professor extends Person implements Corrector{
             $questionsheets=array();
             $courses=$this->getCourses();
             foreach ($courses as $course) {                                
-                $questionsheets[]=$course->finalExam();
-                foreach($course->parts() as $part){
-                    $questionsheets[]=$part->exam;
-                    foreach($part->chapters() as $chapter){
-                        $questionsheets[]=$chapter->exercices();
+                if($course->finalExam()!=null){
+                    $questionsheets[]=$course->finalExam();}
+                foreach($course->parts() as $part){                           
+                if($part->exam()!=null){$questionsheets[]=$part->exam();}
+                    foreach($part->chapters() as $chapter){  
+                if($chapter->exercices()!=null){$questionsheets[]=$chapter->exercices();}
                     }
                 }
             }
             $questions=array();
-            foreach ($questionsheets as $questionsheet) {                
-                $questions=array_merge($questions,$questionsheet->getQuestions());
+            foreach ($questionsheets as $questionsheet) {     
+                if($questionsheet->getQuestions()!=null){
+                
+                    $questions=array_merge($questions,$questionsheet->getQuestions());
+                }
             }
             $ids=array();
             foreach ($questions as $question){
-                $query="SELECT questionID FROM Points WHERE validated=0 AND questionID=".$question->getID();
+                $query="SELECT DISTINCT questionID FROM Points WHERE validated=0 AND questionID=".$question->getID();
                 $res=$this->db->query($query);
-                if($res!=false){
                     $fetch=$res->fetchAll(PDO::FETCH_ASSOC);
+                if($fetch!=false){
                     $ids=merge_array($ids,$fetch["questionID"]);
                 }
                
             }
-            return $ids;
+            return array_unique($ids);
             
        }   
 }

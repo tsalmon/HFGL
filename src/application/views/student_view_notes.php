@@ -10,7 +10,7 @@
         
         <h2>Les notes de tous les cours suivis</h2>
         <table>
-          <tr><th>Nom du cours</th> <th>TP</th><th>Projet</th><th>Examen</th><th>Note finale</th></tr>
+          <tr><th>Nom du cours</th> <th>Note finale</th></tr>
           
          
             <?php
@@ -20,10 +20,7 @@
             foreach($liste_cours as $cours){
               echo ' <tr>
                       <td>'.($cours->title()).'</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
+                      <td>'.$student->getMark($cours).'</td>
                     </tr>';
             }
           ?>

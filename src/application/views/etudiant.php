@@ -59,7 +59,6 @@
               <a class="bouton" href="'.URL.'Student/desinscription/?cours='.strval($currentCourse->courseID()).'"">Se desinscrire de ce cours</a>
               </fieldset>'; 
             } else {
-              echo 'write something in hear for student';
             }
       ?>
       </div>

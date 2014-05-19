@@ -20,6 +20,32 @@ class Professorcontroller extends Controller{
         require 'application/views/enseignant.php';
         require 'application/views/_templates/footer.php';     
     }
+    
+    public function correct($id){ 
+        $page = "prof";
+        $prof = $this->loadModel('PersonFactory')->getPerson($_SESSION["email"]);
+        $cours_teaching = $this->loadModel('CourseTeaching')->getCourses($prof);
+        $currentCourse = null;
+        if (isset($_GET["cours"])){
+            $currentCourse=CourseFactory::getCourse($_GET["cours"],true);
+        }
+        require 'application/views/_templates/header.php';
+        require 'application/views/enseignant_correct.php';
+        require 'application/views/_templates/footer.php';     
+    }
+    
+    public function validate($id){ 
+        $page = "prof";
+        $prof = $this->loadModel('PersonFactory')->getPerson($_SESSION["email"]);
+        $cours_teaching = $this->loadModel('CourseTeaching')->getCourses($prof);
+        $currentCourse = null;
+        if (isset($_GET["cours"])){
+            $currentCourse=CourseFactory::getCourse($_GET["cours"],true);
+        }
+        require 'application/views/_templates/header.php';
+        require 'application/views/enseignant_correct.php';
+        require 'application/views/_templates/footer.php';     
+    }
 
     public function CreateCourse(){
         $page = "prof";
@@ -186,7 +212,6 @@ class Professorcontroller extends Controller{
         if(isset($_POST["nb_qt"])){ // if it's not the first question
             if($_POST["lareponse"] == "libre"){ 
                 //Question libre
-                var_dump($_POST);
                 if($_POST["student_corrector"]==[]){
                     $qt = new LQuestion($_POST["question"], $_POST["tip"], $_POST["points"]);
                 }else{
@@ -316,6 +341,83 @@ class Professorcontroller extends Controller{
     public function ParametresPWD_result()
     {
         print_r($_POST);
+    }
+    
+    public function printQuestionsToCorrect($prof){
+        $questions=$prof->getQuestionsToCorrect();
+        echo "<h3> Questions à corriger</h3>";
+        echo "<ul>";
+        foreach($questions as $questionID){
+            $db=  PDOHelper::getInstance();
+            $res=$db->query("SELECT assignment FROM Question WHERE questionID=".$questionID);
+            $fetch=$res->fetch(PDO::FETCH_ASSOC);
+            $description=$fetch["assignment"];
+            echo "<li><a href=".URL.'Professor/correct/'.$questionID.">".$description."</a></li>";
+        }
+        echo "<ul>";
+        
+    }
+    
+    public function printQuestionsToValidate($prof){
+        $questions=$prof->getQuestionsToValidate();
+        echo "<h3> Questions à valider</h3>";
+        echo "<ul>";
+        foreach($questions as $question){
+            $db=  PDOHelper::getInstance();
+            $res=$db->query("SELECT assignment FROM Question WHERE questionID=".$questionID);
+            $fetch=$res->fetch(PDO::FETCH_ASSOC);
+            $description=$fetch["assignment"];
+            echo "<li><a href=".URL.'Professor/validate/'.$questionID."/>".$description."</a></li>";
+        }
+        echo "<ul>";
+    }
+    public function printQuestionCorrect($id){
+        $db=  PDOHelper::getInstance();
+        $res=$db->query("SELECT assignment FROM Question WHERE questionID=".$id);
+        $fetch=$res->fetch(PDO::FETCH_ASSOC);
+        $description=$fetch["assignment"];
+        echo "<h3> Question : ".$description."</h3>";
+        echo' <form action="ValidateNote" method="post" enctype="multipart/form-data">';
+        echo "<table style='width:95%;'><tr><th>Reponse</th><th>Points</th></tr>";
+        $query="SELECT points FROM Question WHERE questionID=".$id;
+        $res1=$db->query($query);
+        $fetch=$res1->fetch(PDO::FETCH_ASSOC);
+        $points=$fetch["points"];
+        $query="SELECT response, studentID FROM Points WHERE validated=2 AND questionID=".$id;
+        $res=$db->query($query);
+        $fetch=$res->fetchAll(PDO::FETCH_ASSOC);
+        foreach($fetch as $reponse){            
+            echo "<tr><td>".$reponse["response"]."</td>
+                <td><input type='text' name='".$reponse["studentID"]."' value='' />/".$points."</td></tr>";
+        }
+        echo "</table>";
+        echo '<input class="bouton" type="submit" name="'.$id.'" value="Enregistrer" />';
+        echo "</form>";
+        
+    }
+    
+    public function printQuestionValidate($id){
+        $db=  PDOHelper::getInstance();
+        $res=$db->query("SELECT assignment FROM Question WHERE questionID=".$id);
+        $fetch=$res->fetch(PDO::FETCH_ASSOC);
+        $description=$fetch["assignment"];
+        echo "<h3> Question : ".$description."</h3>";
+        echo' <form action="ValidateNote" method="post" enctype="multipart/form-data">';
+        echo "<table style='width:95%;'><tr><th>Reponse</th><th>Points</th></tr>";
+        $query="SELECT response, studentID FROM Points WHERE validated=1 AND questionID=".$id;
+        $res=$db->query($query);
+        $fetch=$res->fetchAll(PDO::FETCH_ASSOC);
+        foreach($fetch as $reponse){            
+            $query="SELECT note FROM Points WHERE questionID=".$id." AND studentID=".$reponse["studentID"];
+            $res1=$db->query($query);
+            $fetch=$res1->fetch(PDO::FETCH_ASSOC);
+            $points=$fetch["note"];
+            echo "<tr><td>".$reponse["response"]."</td>
+                <td><input type='text' name='note' value='' />/".$points."</td></tr>";
+        }
+        echo "</table>";
+        echo '<input class="bouton" type="submit" name="enregistrer" value="Enregistrer" />';
+        echo "</form>";
     }
 
     public function newCourse(){
