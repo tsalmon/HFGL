@@ -46,6 +46,7 @@ function url(selectUrl) {
 }
 
 function rep(){
+    alert();
 	if(document.getElementById('lareponse').value=="libre"){
 		document.getElementById('laquestion').innerHTML='<input type="text" name="question" required/>';
 		document.getElementById('student_corrector').setAttribute("style","");
