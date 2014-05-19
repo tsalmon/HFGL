@@ -1,4 +1,3 @@
-
 function setForm(){
 	if(document.getElementById('xmlOrNot').checked){
       document.getElementById("fromXML").style.display='block';
@@ -46,7 +45,6 @@ function url(selectUrl) {
 }
 
 function rep(){
-    alert();
 	if(document.getElementById('lareponse').value=="libre"){
 		document.getElementById('laquestion').innerHTML='<input type="text" name="question" required/>';
 		document.getElementById('student_corrector').setAttribute("style","");
