@@ -243,7 +243,7 @@ class Studentcontroller extends Controller{
                 $db=PDOHelper::getInstance();
                 $query="SELECT roleID FROM (Points NATURAL JOIN Question) WHERE questionID=".$_GET["questionID"];
                 $res=$db->query($query);
-                $fetch=fetch(PDO::FETCH_ASSOC);
+                $fetch=$res->fetch(PDO::FETCH_ASSOC);
                 $roleID=$fetch["roleID"];
                 if ($roleID==QuestionTypeManager::getInstance()->getLSID()){
                     
