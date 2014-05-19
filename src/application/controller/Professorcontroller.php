@@ -186,6 +186,7 @@ class Professorcontroller extends Controller{
         if(isset($_POST["nb_qt"])){ // if it's not the first question
             if($_POST["lareponse"] == "libre"){ 
                 //Question libre
+                var_dump($_POST);
                 if($_POST["student_corrector"]==[]){
                     $qt = new LQuestion($_POST["question"], $_POST["tip"], $_POST["points"]);
                 }else{
