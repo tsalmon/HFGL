@@ -96,10 +96,37 @@ class Professor extends Person implements Corrector{
             }
             $ids=array();
             foreach ($questions as $question){
-                $query="SELECT questionID FROM (SELECT * FROM (SELECT questionID, typeID FROM (
-                        StudentEstimation NATURAL JOIN  Question )) as s NATURAL JOIN Points) as r 
-                        WHERE r.questionID=".$question->getID()." and validated!=1 and 
-                            r.typeID=".QuestionTypeManager::getInstance()->getLSID();
+                $query="SELECT questionID FROM Points WHERE validated=2 AND questionID=".$question->getID();
+                $res=$this->db->query($query);
+                if($res!=false){
+                    $fetch=$res->fetchAll(PDO::FETCH_ASSOC);
+                    $ids=merge_array($ids,$fetch["questionID"]);
+                }
+               
+            }
+            return $ids;
+            
+       }   
+       
+        public function getQuestionsToValidate() {
+            $questionsheets=array();
+            $courses=$this->getCourses();
+            foreach ($courses as $course) {                                
+                $questionsheets[]=$course->finalExam();
+                foreach($course->parts() as $part){
+                    $questionsheets[]=$part->exam;
+                    foreach($part->chapters() as $chapter){
+                        $questionsheets[]=$chapter->exercices();
+                    }
+                }
+            }
+            $questions=array();
+            foreach ($questionsheets as $questionsheet) {                
+                $questions=array_merge($questions,$questionsheet->getQuestions());
+            }
+            $ids=array();
+            foreach ($questions as $question){
+                $query="SELECT questionID FROM Points WHERE validated=0 AND questionID=".$question->getID();
                 $res=$this->db->query($query);
                 if($res!=false){
                     $fetch=$res->fetchAll(PDO::FETCH_ASSOC);

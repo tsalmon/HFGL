@@ -241,7 +241,6 @@ class Studentcontroller extends Controller{
             if (!$this->SecondaryParameter($key, $value))
             {   
                 $db=PDOHelper::getInstance();
-                $db->exec("INSERT INTO `Points`(`studentID`, `questionID`, `response`) VALUES (".$_SESSION["studentID"].",".$_GET["questionID"].", '".$value."')");
                 $query="SELECT roleID FROM (Points NATURAL JOIN Question) WHERE questionID=".$_GET["questionID"];
                 $res=$db->query($query);
                 $fetch=fetch(PDO::FETCH_ASSOC);
@@ -280,7 +279,12 @@ class Studentcontroller extends Controller{
                         $studentID=$freeStudents[0];
                     }
                     $db->exec("INSERT INTO StudentEstimation (estimatingStudentID, estimatedStudentID, questionID) VALUES(".$studentID.",".$_SESSION["studentID"].",".$_GET["questionID"]);
-                }      
+                    $validated=3;
+                }    
+                else{
+                   $validated=2;
+                }
+                $db->exec("INSERT INTO `Points`(`studentID`, `questionID`, `response`, validated) VALUES (".$_SESSION["studentID"].",".$_GET["questionID"].", '".$value."', ".$validated.")");
             }
         }
 
