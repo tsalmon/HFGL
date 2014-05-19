@@ -186,9 +186,11 @@ class Professorcontroller extends Controller{
         if(isset($_POST["nb_qt"])){ // if it's not the first question
             if($_POST["lareponse"] == "libre"){ 
                 //Question libre
-
-                $qt = new LQuestion($_POST["question"], $_POST["tip"], $_POST["points"]);
-
+                if($_POST["student_corrector"]==[]){
+                    $qt = new LQuestion($_POST["question"], $_POST["tip"], $_POST["points"]);
+                }else{
+                    $qt = new LQuestion($_POST["question"], $_POST["tip"], $_POST["points"], true);
+                }
             } elseif($_POST["lareponse"] == "checkbox"){ 
                 //QCM
 
