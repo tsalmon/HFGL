@@ -241,8 +241,7 @@ class Studentcontroller extends Controller{
             if (!$this->SecondaryParameter($key, $value))
             {   
                 $db=PDOHelper::getInstance();
-                $query="SELECT roleID FROM (Points NATURAL JOIN Question) WHERE questionID=".$_GET["questionID"];
-                echo $query;
+                $query="SELECT Question.typeID FROM Question WHERE Question.questionID =".$_GET["questionID"];
                 $res=$db->query($query);
                 $fetch=$res->fetch(PDO::FETCH_ASSOC);
                 $roleID=$fetch["roleID"];
@@ -250,8 +249,13 @@ class Studentcontroller extends Controller{
                     
                     $query="SELECT studentID FROM (SELECT * FROM Student JOIN StudentEstimation AS se ON Student.studentID=se.estimatingStudentID) as test WHERE questionID=".$_GET["questionID"];
                     $res=$db->query($query);
-                    $fetch=fetchAll(PDO::FETCH_ASSOC);
-                    $students=$fetch["studentID"];
+                    if ($res!=false){
+                        $fetch=$res->fetchAll(PDO::FETCH_ASSOC);
+                        $students=$fetch["studentID"];
+                    }
+                    else{
+                        $students=[];
+                    }
                     $query_course="SELECT DISTINCT Course.courseID FROM (
                         SELECT t5.questionnaireID, courseID FROM (
                         SELECT Part.partID, t4.questionnaireID FROM (
