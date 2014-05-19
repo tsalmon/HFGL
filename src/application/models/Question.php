@@ -67,7 +67,7 @@ abstract class Question {
                     $question = new QRFQuestion($assignment, $tip, $points);
                 }
 
-                if($typeID == QuestionTypeManager::getInstance()->getLID()){
+                if($typeID == QuestionTypeManager::getInstance()->getLID() || $typeID == QuestionTypeManager::getInstance()->getLSID()){
                     $question = new LQuestion($assignment, $tip, $points);
                 }
 
