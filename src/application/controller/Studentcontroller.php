@@ -244,7 +244,7 @@ class Studentcontroller extends Controller{
                 $query="SELECT Question.typeID FROM Question WHERE Question.questionID =".$_GET["questionID"];
                 $res=$db->query($query);
                 $fetch=$res->fetch(PDO::FETCH_ASSOC);
-                $roleID=$fetch["roleID"];
+                $roleID=$fetch["typeID"];
                 if ($roleID==QuestionTypeManager::getInstance()->getLSID()){
                     
                     $query="SELECT studentID FROM (SELECT * FROM Student JOIN StudentEstimation AS se ON Student.studentID=se.estimatingStudentID) as test WHERE questionID=".$_GET["questionID"];
