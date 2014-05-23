@@ -22,7 +22,7 @@ class Studentcontroller extends Controller{
             $exam = true;
         }
         require 'application/views/_templates/header.php';
-        require 'application/views/etudiant.php';
+        require 'application/views/student.php';
         require 'application/views/_templates/footer.php';
         
     }
@@ -371,6 +371,13 @@ class Studentcontroller extends Controller{
         
         require 'application/views/_templates/header.php';
         require 'application/views/student_viewChapter.php';
+        require 'application/views/_templates/footer.php';  
+    }
+
+    public function projet_memoire(){
+        $page = "projet_memoire";        
+        require 'application/views/_templates/header.php';
+        require 'application/views/student_projet_memoire.php';
         require 'application/views/_templates/footer.php';  
     }
 
