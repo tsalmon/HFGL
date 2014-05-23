@@ -374,6 +374,11 @@ class Studentcontroller extends Controller{
         require 'application/views/_templates/footer.php';  
     }
 
+    public function projet_memoire(){
+        $page = "projet_memoire";        
+        echo $page;
+    }
+
     public function NotesDeCours()
     {
         $page = "student";
