@@ -305,6 +305,11 @@ fieldset{
 
 }
 
+.form_settings div { 
+  align: center;
+
+}
+
 .form_settings span { 
   float: left; 
   width: 250px; 
@@ -315,6 +320,12 @@ fieldset{
   float: left; 
   width: 250px; 
   text-align: left;
+}
+
+textarea #project_body {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  width: 500px;
 }
   
 .form_settings input, .form_settings textarea, .form_settings select { 
@@ -327,6 +338,18 @@ fieldset{
   border-radius: 7px 7px 7px 7px;
   -moz-border-radius: 7px 7px 7px 7px;
   -webkit-border: 7px 7px 7px 7px;  
+}
+
+.form_settings .bouton {
+  font: 100% 'Droid Sans', arial; 
+  border: 0; 
+  padding: 10px;
+  cursor: pointer; 
+  background: #1A1225; 
+  color: #FFF;
+  border-radius: 7px 7px 7px 7px;
+  -moz-border-radius: 7px 7px 7px 7px;
+  -webkit-border: 7px 7px 7px 7px; 
 }
 
 .bouton { 
@@ -632,5 +655,7 @@ footer {
   height: 70px;
   clear: both;
 }
+
+
 
 

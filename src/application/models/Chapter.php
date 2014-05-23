@@ -38,10 +38,13 @@ class Chapter {
                     if(isset($fetch['description'])){
                         $this->description = $fetch['description']; 
                     }
+                    if(isset($fetch['URL'])){
+                        $this->courseNotes=new CourseNote($fetch['URL']);
+                    }
+
                     $this->title=$fetch['title']; 
                     $this->chapterNumber=$fetch['chapterNumber']; 
-                    if(isset($fetch['URL'])){
-                        $this->courseNotes=new CourseNote($fetch['URL']);}
+
                 }
             }
             else {

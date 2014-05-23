@@ -81,41 +81,88 @@ class Professorcontroller extends Controller{
         require 'application/views/_templates/footer.php';
     }
 
-    public function CreateChapter_ok(){ 
-
-        if(pathinfo($_FILES["chp_file_lesson"]["name"], PATHINFO_EXTENSION) != "pdf"){
-            $error = "pdf";
-            Professorcontroller::CreateChapter();
-            return ;
-        }
-        if($_FILES["chp_file_lesson"]['size']>$_POST['MAX_FILE_SIZE']){
-            $error = "size";
-            Professorcontroller::CreateChapter();
-            return ;
-        }
-
-        $dir = getcwd();
-        if(!move_uploaded_file($_FILES["chp_file_lesson"]["tmp_name"], $dir."/files/".$_FILES["chp_file_lesson"]["name"])){
-            $error = "move";
-            Professorcontroller::CreateChapter();
-            return ;
-        }
-
-        /** Good part **/
-        $chp = new Chapter($_POST["chp_name"], false);
-        $notes = new CourseNote();
-        $notes->setURL($dir."/files/".$_FILES["chp_file_lesson"]["name"]);
-        $chp->setDescription($_POST["chp_descr"]);
-        $chp->setCourseNotes($notes);
-        $part= new Part($_GET["part"]);
-        $part->addChapter($chp);
-        
+    public function AddChapterExercice(){
         $_SESSION["ex_course"] = $_GET["cours"];
-        $_SESSION["ex_part"] = $_GET["cours"];
-        $_SESSION["ex_chpt"] = $chp->chapterID();
+        $_SESSION["ex_part"] = $_GET["part"];
+        $_SESSION["ex_chpt"] = $_GET["chapter"];
         $_SESSION["quest_for"] = "chapter";
-
         header('location: '.URL.'Professor/CreateExercice');
+    }
+
+    public function CreateChapter_ok(){ 
+        if($_FILES["chp_file_lesson"]['size']!= 0){
+            if(pathinfo($_FILES["chp_file_lesson"]["name"], PATHINFO_EXTENSION) != "pdf"){
+                $error = "pdf";
+                Professorcontroller::CreateChapter();
+                return ;
+            }
+            if($_FILES["chp_file_lesson"]['size']>$_POST['MAX_FILE_SIZE']){
+                $error = "size";
+                Professorcontroller::CreateChapter();
+                return ;
+            }
+
+            $dir = getcwd();
+            if(!move_uploaded_file($_FILES["chp_file_lesson"]["tmp_name"], $dir."/files/".$_FILES["chp_file_lesson"]["name"])){
+                $error = "move";
+                Professorcontroller::CreateChapter();
+                return ;
+            }
+            $notes = new CourseNote($dir."/files/".$_FILES["chp_file_lesson"]["name"]);
+
+        }
+
+        $chapter = new Chapter($_POST["chp_name"], false);
+
+        $chapter->setDescription($_POST["chp_descr"]);
+        if (isset($notes)) {
+            $chapter->setCourseNotes($notes);
+        }
+
+        $part = new Part($_GET["part"]);
+        $part->addChapter($chapter);
+        
+
+        header('location: '.URL.'Professor/?cours='.$_GET["cours"]);
+    }
+
+    public function ModifyChapter(){
+        $chapter = new Chapter($_GET["chapter"], true);
+
+        $chapter->setTitle($_POST["chp_name"]);
+        $chapter->setDescription($_POST["chp_descr"]);
+
+        if($_FILES["chp_file_lesson"]['size']!= 0){
+            if(pathinfo($_FILES["chp_file_lesson"]["name"], PATHINFO_EXTENSION) != "pdf"){
+                $error = "pdf";
+                Professorcontroller::ModifyChapter();
+                return ;
+            }
+            if($_FILES["chp_file_lesson"]['size']>$_POST['MAX_FILE_SIZE']){
+                $error = "size";
+                Professorcontroller::ModifyChapter();
+                return ;
+            }
+
+            $dir = getcwd();
+            if(!move_uploaded_file($_FILES["chp_file_lesson"]["tmp_name"], $dir."/files/".$_FILES["chp_file_lesson"]["name"])){
+                $error = "move";
+                Professorcontroller::ModifyChapter();
+                return ;
+            }
+
+            $notes = new CourseNote($dir."/files/".$_FILES["chp_file_lesson"]["name"]);
+            $chapter->setCourseNotes($notes);
+        }
+
+
+        header('location: '.URL.'Professor/?cours='.$_GET["cours"]);
+    }
+
+    public function DeleteChapter(){
+        $chapter = new Chapter($_GET["chapter"], true);
+        $chapter->delete();
+        header('location: '.URL.'Professor/?cours='.$_GET["cours"]);
     }
 
 

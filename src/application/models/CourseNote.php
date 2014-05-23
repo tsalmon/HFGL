@@ -6,6 +6,13 @@ class CourseNote extends Document{
     private $title;
     private $description;
 
+    //      Constructeur
+    //**************************
+    
+    public function __construct($url){  
+        $this->URL = $url;
+    } 
+
     public function setURL($url){
     	$this->URL = $url;
     }
