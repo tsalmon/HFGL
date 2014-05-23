@@ -30,6 +30,7 @@ ALTER TABLE `Person` DROP FOREIGN KEY `fk_Person_Role_1`;
 ALTER TABLE `StudentEstimation` DROP FOREIGN KEY `fk_StudentGrading`;
 ALTER TABLE `StudentEstimation` DROP FOREIGN KEY `fk_StudentGrading_1`;
 ALTER TABLE `StudentEstimation` DROP FOREIGN KEY `fk_StudentGrading_2`;
+ALTER TABLE `Course` DROP FOREIGN KEY `fk_Course`;
 
 ALTER TABLE `Person`DROP PRIMARY KEY;
 ALTER TABLE `Course`DROP PRIMARY KEY;
@@ -86,6 +87,7 @@ CREATE TABLE `Course` (
 `title` varchar(255) NOT NULL,
 `description` varchar(2000) NULL,
 `questionnaireID` int NULL,
+`projectID` int NULL,
 PRIMARY KEY (`courseID`) 
 );
 
@@ -269,4 +271,5 @@ ALTER TABLE `Person` ADD CONSTRAINT `fk_Person_Role_1` FOREIGN KEY (`roleID`) RE
 ALTER TABLE `StudentEstimation` ADD CONSTRAINT `fk_StudentGrading` FOREIGN KEY (`estimatingStudentID`) REFERENCES `Student` (`studentID`);
 ALTER TABLE `StudentEstimation` ADD CONSTRAINT `fk_StudentGrading_1` FOREIGN KEY (`estimatedStudentID`) REFERENCES `Student` (`studentID`);
 ALTER TABLE `StudentEstimation` ADD CONSTRAINT `fk_StudentGrading_2` FOREIGN KEY (`questionID`) REFERENCES `Question` (`questionID`);
+ALTER TABLE `Course` ADD CONSTRAINT `fk_Course` FOREIGN KEY (`projectID`) REFERENCES `Questionnaire` (`questionnaireID`);
 
