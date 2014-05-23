@@ -34,24 +34,26 @@ class Application
                     header('location: '.URL);
                 } 
             } else { // professor can only access to professor page, like student, like admin
-                switch ($_SESSION["role"]) {
-                    case 'admin':
-                        if($this->url_controller != "Admin"){
-                            $this->url_controller = "Admin";
-                        }
-                        break; 
-                    case 'teacher':
-                        if($this->url_controller != "Professor"){
-                            $this->url_controller = "Professor";
-                        }
-                        break;
-                    case 'student':
-                        if($this->url_controller != "Student"){
-                            $this->url_controller = "Student";
-                        }
-                        break;                        
-                    default:
-                        break;
+                if($this->url_controller != "Welcome"){
+                    switch ($_SESSION["role"]) {
+                        case 'admin':
+                            if($this->url_controller != "Admin"){
+                                $this->url_controller = "Admin";
+                            }
+                            break; 
+                        case 'teacher':
+                            if($this->url_controller != "Professor"){
+                                $this->url_controller = "Professor";
+                            }
+                            break;
+                        case 'student':
+                            if($this->url_controller != "Student"){
+                                $this->url_controller = "Student";
+                            }
+                            break;                        
+                        default:
+                            break;
+                    }
                 }
             }
             $this->url_controller = $this->url_controller."controller";
