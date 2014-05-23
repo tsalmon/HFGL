@@ -196,7 +196,7 @@ class Professorcontroller extends Controller{
             $this->CreateExerciceWithXML();
         } else {
             $exercice = new ExerciceSheet();
-            $_SESSION["ex_id"] = $exercice->writeToDatabase();
+            $_SESSION["ex_id"] = $exercice->getID();
             header('location: '.URL.'Professor/AddQuestion');
         }
     }
@@ -218,6 +218,8 @@ class Professorcontroller extends Controller{
             $table_pk = "courseID";
             $session_val = "ex_course";
         }
+
+        $exercice = new ExerciceSheet();
         //echo "UPDATE `".$questionnaire_table."` SET `questionnaireID`=".$_SESSION["ex_id"]." WHERE `".$table_pk."`=".$_SESSION[$session_val];
         PDOHelper::getInstance()->query("UPDATE `".$questionnaire_table."` SET `questionnaireID`=".$_SESSION["ex_id"]." WHERE `".$table_pk."`=".$_SESSION[$session_val]);
         header('location: '.URL.'Professor/index');
@@ -251,8 +253,7 @@ class Professorcontroller extends Controller{
            $qt_nb++;
         }
 
-        $questionnaire = new ExerciceSheet();
-        $questionnaire->loadByID($_SESSION["ex_id"]);
+        $questionnaire = new ExerciceSheet($_SESSION["ex_id"]);
 
         $qt=null;
 

@@ -32,7 +32,7 @@ class Chapter {
                 else{     
                     $this->chapterID=$id; 
                     if(isset($fetch['questionnaireID'])){
-                        $this->exercices=new ExerciceSheet();
+                        $this->exercices=new ExerciceSheet($fetch['questionnaireID']);
                         $this->questionnaireID = $fetch['questionnaireID'];
                     }
                     if(isset($fetch['description'])){
