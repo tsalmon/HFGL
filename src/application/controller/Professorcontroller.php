@@ -101,16 +101,23 @@ class Professorcontroller extends Controller{
                 Professorcontroller::CreateChapter();
                 return ;
             }
+            
+            $id_chapter = $this->NewChapter();
 
             $dir = getcwd();
-            if(!move_uploaded_file($_FILES["chp_file_lesson"]["tmp_name"], $dir."/files/".$_FILES["chp_file_lesson"]["name"])){
+            if(!move_uploaded_file($_FILES["chp_file_lesson"]["tmp_name"], $dir."/files/".$_GET["cours"]."_".$_GET["part"]."_".$id_chapter.".pdf")){
                 $error = "move";
-                Professorcontroller::CreateChapter();
                 return ;
             }
-            $notes = new CourseNote($dir."/files/".$_FILES["chp_file_lesson"]["name"]);
-
+            $notes = new CourseNote($dir."/files/".$_GET["cours"]."_".$_GET["part"]."_".$id_chapter.".pdf");
+        } else {
+            $this->NewChapter();
         }
+        header('location: '.URL.'Professor/?cours='.$_GET["cours"]);
+    }
+
+    /*return the id of the new chapter*/
+    private function NewChapter(){
 
         $chapter = new Chapter($_POST["chp_name"], false);
 
@@ -121,9 +128,7 @@ class Professorcontroller extends Controller{
 
         $part = new Part($_GET["part"]);
         $part->addChapter($chapter);
-        
-
-        header('location: '.URL.'Professor/?cours='.$_GET["cours"]);
+        return $chapter->chapterID();
     }
 
     public function ModifyChapter(){
@@ -405,6 +410,7 @@ class Professorcontroller extends Controller{
         echo "<ul>";
         
     }
+
     
     public function printQuestionsToValidate($prof){
         $questions=$prof->getQuestionsToValidate();
