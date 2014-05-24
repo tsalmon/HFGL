@@ -102,14 +102,15 @@ class Professorcontroller extends Controller{
                 return ;
             }
             
-            $id_chapter = $this->NewChapter();
+            $chapter = $this->NewChapter();
 
             $dir = getcwd();
-            if(!move_uploaded_file($_FILES["chp_file_lesson"]["tmp_name"], $dir."/files/".$_GET["cours"]."_".$_GET["part"]."_".$id_chapter.".pdf")){
+            if(!move_uploaded_file($_FILES["chp_file_lesson"]["tmp_name"], $dir."/files/".$_GET["cours"]."_".$_GET["part"]."_".($chapter->chapterID()).".pdf")){
                 $error = "move";
                 return ;
             }
-            $notes = new CourseNote($dir."/files/".$_GET["cours"]."_".$_GET["part"]."_".$id_chapter.".pdf");
+            $notes = new CourseNote($_GET["cours"]."_".$_GET["part"]."_".($chapter->chapterID()).".pdf");
+            $chapter->setCourseNotes($notes);
         } else {
             $this->NewChapter();
         }
@@ -118,17 +119,11 @@ class Professorcontroller extends Controller{
 
     /*return the id of the new chapter*/
     private function NewChapter(){
-
         $chapter = new Chapter($_POST["chp_name"], false);
-
         $chapter->setDescription($_POST["chp_descr"]);
-        if (isset($notes)) {
-            $chapter->setCourseNotes($notes);
-        }
-
         $part = new Part($_GET["part"]);
         $part->addChapter($chapter);
-        return $chapter->chapterID();
+        return $chapter;
     }
 
     public function ModifyChapter(){
