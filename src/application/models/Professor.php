@@ -138,7 +138,7 @@ class Professor extends Person implements Corrector{
                 $res=$this->db->query($query);
                     $fetch=$res->fetchAll(PDO::FETCH_ASSOC);
                 if($fetch!=false){
-                    $ids=merge_array($ids,$fetch["questionID"]);
+                    $ids=array_merge($ids,$fetch[0]);
                 }
                
             }
