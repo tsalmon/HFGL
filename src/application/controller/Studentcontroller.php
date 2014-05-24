@@ -376,9 +376,20 @@ class Studentcontroller extends Controller{
 
     public function projet_memoire(){
         $page = "projet_memoire";        
+    
+        $course = CourseFactory::getCourse($_GET["cours"],true);
+        $questionnaire = $course->finalExam();
+    
+        echo "<pre>";
+        print_r($course);
+        echo "</pre><h3><pre>";
+        print_r($questionnaire);
+        echo "</pre></h3>";
+        /*
         require 'application/views/_templates/header.php';
         require 'application/views/student_projet_memoire.php';
         require 'application/views/_templates/footer.php';  
+        */
     }
 
     public function NotesDeCours()
