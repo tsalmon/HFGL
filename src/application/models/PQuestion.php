@@ -31,15 +31,15 @@ class PQuestion extends Question{
 
     public function writeToDB(){
         if (is_null($this->questionID)) {
-            echo "INSERT INTO `Question`(`assignment`, `points`, `typeID`) VALUES ('".$this->assignment."',".$this->points.",".QuestionTypeManager::getInstance()->getPID().")<br>";
+            //echo "INSERT INTO `Question`(`assignment`, `points`, `typeID`) VALUES ('".$this->assignment."',".$this->points.",".QuestionTypeManager::getInstance()->getPID().")<br>";
             PDOHelper::getInstance()->exec("INSERT INTO `Question`(`assignment`, `points`, `typeID`) VALUES ('".$this->assignment."',".$this->points.",".QuestionTypeManager::getInstance()->getPID().")");
             $this->questionID = PDOHelper::getInstance()->lastInsertID();
-            echo "Inserted questionID:".$this->questionID."<br>";
+            //echo "Inserted questionID:".$this->questionID."<br>";
         }
 
 
         if (!is_null($this->resources)) {
-            echo "Insert resources";
+            //echo "Insert resources";
             foreach ($this->resources as $resource)
             {
                 $resource->writeToDBForQuestionID($this->questionID);
@@ -47,7 +47,7 @@ class PQuestion extends Question{
         }
 
         if (!is_null($this->tests)) {
-            echo "Insert tests";
+            //echo "Insert tests";
             foreach ($this->tests as $test)
             {
                 $test->writeToDBForQuestionID($this->questionID);

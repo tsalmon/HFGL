@@ -7,6 +7,8 @@
       <div class="content">
 
         <?php 
+        $examMessage = isset($exam)?"Modifier":"[+]";
+
         if ($currentCourse){
           echo '<h1 id="'.$currentCourse->title().'">'.$currentCourse->title().'</h1>';
           echo '<p>'.$currentCourse->description().'</p>
@@ -32,12 +34,8 @@
 
                 <tr>
                   <td>Examen</td> 
-                  <td><a href='.URL.'Professor/CreateExamen/?cours='.strval($currentCourse->courseID()).'>[+]</a></td>
+                  <td><a href='.URL.'Professor/CreateExamen/?cours='.strval($currentCourse->courseID()).'>'.$examMessage.'</a></td>
                 </tr>
-                <!-- <tr> si l`examen existe
-                    <td>Examen</td> 
-                    <td><a href='.URL.'Professor/Examen>Feuille de l`examen</a></td>
-                    </tr> -->
           </table>
             <p class = "pbouton">
               <span>&nbsp;</span>

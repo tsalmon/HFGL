@@ -37,7 +37,7 @@
                 if(!$create){ 
                   echo "<span>Fichier chargé:</span>";
                   if (null !== $chp->courseNotes() && null !== $chp->courseNotes()->getURL()) {
-                    echo basename($chp->courseNotes()->getURL());
+                    echo $chp->courseNotes()->getURL();
                   }else{
                     echo "Aucun";
                   }
