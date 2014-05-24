@@ -1,0 +1,34 @@
+Name: Algorithms
+Description: In this course you will learn several fundamental principles of algorithm design: divide-and-conquer methods, graph algorithms, practical data structures (heaps, hash tables, search trees), randomized algorithms, and more.
+
+Part 1. 
+Name: Introduction
+	Chapter 1.1
+	Name: Prologue
+	Description: Look around you. Computers and networks are everywhere, enabling an intricate web of com- plex human activities: education, commerce, entertainment, research, manufacturing, health management, human communication, even war. Of the two main technological underpinnings of this amazing proliferation, one is obvious: the breathtaking pace with which advances in microelectronics and chip design have been bringing us faster and faster hardware.This course tells the story of the other intellectual enterprise that is crucially fueling the computer revolution: efficient algorithms. It is a fascinating story.
+
+
+	Chapter 1.2
+	Name: Algorithms with numbers
+	Description: One of the main themes of this chapter is the dramatic contrast between two ancient problems that at first seem very similar:
+Factoring: Given a number N , express it as a product of its prime factors. Primality: Given a number N , determine whether it is a prime.
+Factoring is hard. Despite centuries of effort by some of the world’s smartest mathemati- cians and computer scientists, the fastest methods for factoring a number N take time expo- nential in the number of bits of N .
+On the other hand, we shall soon see that we can efficiently test whether N is prime! And (it gets even more interesting) this strange disparity between the two intimately related problems, one very hard and the other very easy, lies at the heart of the technology that enables secure communication in today’s global information environment.
+En route to these insights, we need to develop algorithms for a variety of computational tasks involving numbers. We begin with basic arithmetic, an especially appropriate starting point because, as we know, the word algorithms originally applied only to methods for these problems.
+
+Part 2.
+Name: Classical algorithms
+	Chapter 2.1 
+	Name: Divide-and-conquer algorithms
+	Description: The divide-and-conquer strategy solves a problem by:
+1. Breaking it into subproblems that are themselves smaller instances of the same type of
+problem
+2. Recursively solving these subproblems 3. Appropriately combining their answers
+The real work is done piecemeal, in three different places: in the partitioning of problems into subproblems; at the very tail end of the recursion, when the subproblems are so small that they are solved outright; and in the gluing together of partial answers. These are held together and coordinated by the algorithm’s core recursive structure.
+As an introductory example, we’ll see how this technique yields a new algorithm for multi- plying numbers, one that is much more efficient than the method we all learned in elementary school!
+
+	Chapter 2.2
+	Name: Decompositions of graphs
+	Description: A wide range of problems can be expressed with clarity and precision in the concise pictorial language of graphs. For instance, consider the task of coloring a political map. What is the minimum number of colors needed, with the obvious restriction that neighboring countries should have different colors? One of the difficulties in attacking this problem is that the map itself, even a stripped-down version like Figure 3.1(a), is usually cluttered with irrelevant information: intricate boundaries, border posts where three or more countries meet, open seas, and meandering rivers. Such distractions are absent from the mathematical object of Figure 3.1(b), a graph with one vertex for each country (1 is Brazil, 11 is Argentina) and edges between neighbors. It contains exactly the information needed for coloring, and nothing more. The precise goal is now to assign a color to each vertex so that no edge has endpoints of the same color.
+
+
