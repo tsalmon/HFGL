@@ -32,16 +32,19 @@ class Chapter {
                 else{     
                     $this->chapterID=$id; 
                     if(isset($fetch['questionnaireID'])){
-                        $this->exercices=new ExerciceSheet();
+                        $this->exercices=new ExerciceSheet($fetch['questionnaireID']);
                         $this->questionnaireID = $fetch['questionnaireID'];
                     }
                     if(isset($fetch['description'])){
                         $this->description = $fetch['description']; 
                     }
+                    if(isset($fetch['URL'])){
+                        $this->courseNotes=new CourseNote($fetch['URL']);
+                    }
+
                     $this->title=$fetch['title']; 
                     $this->chapterNumber=$fetch['chapterNumber']; 
-                    if(isset($fetch['URL'])){
-                        $this->courseNotes=new CourseNote($fetch['URL']);}
+
                 }
             }
             else {

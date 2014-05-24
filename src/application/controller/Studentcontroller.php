@@ -14,11 +14,15 @@ class Studentcontroller extends Controller{
         $student = PersonFactory::getPerson($_SESSION["email"]);
         $liste_cours = $MODELcours->getCourses($student);
         $currentCourse = null;
+        $exam = false;
         if (isset($_GET["cours"])){
             $currentCourse=CourseFactory::getCourse($_GET["cours"],true);
         }
+        if($currentCourse != null && $this->CoursehaveExamen($currentCourse->CourseID())){
+            $exam = true;
+        }
         require 'application/views/_templates/header.php';
-        require 'application/views/etudiant.php';
+        require 'application/views/student.php';
         require 'application/views/_templates/footer.php';
         
     }
@@ -42,6 +46,10 @@ class Studentcontroller extends Controller{
     public function ParametresPWD_result()
     {
         print_r($_POST);
+    }
+
+    private function CoursehaveExamen($cours_id){
+        return (!is_null(CourseFactory::getCourse($cours_id,true)->finalExam()));
     }
 
     public function DoExercice(){
@@ -77,11 +85,11 @@ class Studentcontroller extends Controller{
     }
 
     public function Exercice(){
+        $questionnaire = NULL;
         if ($_SESSION["type"] == "chapter") {
             $chpt = new Chapter($_SESSION["chapterID"]);
             $questionnaire = $chpt->exercices();
-        } else 
-        if ($_SESSION["type"] == "examen") {
+        } elseif ($_SESSION["type"] == "examen") {
             $course = CourseFactory::getCourse($_SESSION["courseID"],true);
             $questionnaire = $course->finalExam();
         }
@@ -363,6 +371,13 @@ class Studentcontroller extends Controller{
         
         require 'application/views/_templates/header.php';
         require 'application/views/student_viewChapter.php';
+        require 'application/views/_templates/footer.php';  
+    }
+
+    public function projet_memoire(){
+        $page = "projet_memoire";        
+        require 'application/views/_templates/header.php';
+        require 'application/views/student_projet_memoire.php';
         require 'application/views/_templates/footer.php';  
     }
 

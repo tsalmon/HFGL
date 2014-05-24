@@ -12,13 +12,14 @@
         <form action="#" method="post">
           <div class="form_settings">
             <p><span>Date limite: </span><input type="text" name="name" value="" /></p>
-            <p><span>Nombre de question </span><input type="text" name="name" value="" /></p>
 
             <span>Titre du projet </span>
-            <input type="text" name="name" value="" />
+            <input type="text" name="name" value="" /></br>
 
-            <span>Contenu de projet </span> </br>
-            <textarea rows="20" cols="50"></textarea>
+            <div>
+              <h3>Contenu de projet</h3>
+              <textarea id="project_body" rows="50" placeholder="Le sujet du projet..."></textarea>
+            </div>
 
           </div>
         </form>

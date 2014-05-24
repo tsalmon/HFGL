@@ -46,14 +46,16 @@
                   foreach($part->chapters() as $chapter){
                     echo '<a target="blank" href="'.URL.'Student/AfficherCours/?cours='.strval($currentCourse->courseID()).'&part='.strval($part->partID()).'&chp='.strval($chapter->chapterID()).'">'.$chapter->title().'</a>';
                   }
-                 
+                  
                   echo '</td>';
                 }
               echo '
                 </tr>
-                <tr><td>Projet</td> <td><a href="projet_memoire.html">Sujet de projet</a></td></tr>
-                <tr><td>Examen</td> <td><a href="'.URL.'Student/DoExercice/?type=examen&courseTitle='.$currentCourse->title().'&courseID='.$currentCourse->courseID().'">Feuille d examen</a></td></tr>
-              </table>
+                <tr><td>Projet</td> <td><a href="'.URL.'Student/projet_memoire/?cours='.strval($currentCourse->courseID()).'">Sujet de projet</a></td></tr>';
+                if($exam){
+                  echo '<tr><td>Examen</td> <td><a href="'.URL.'Student/DoExercice/?type=examen&courseTitle='.$currentCourse->title().'&courseID='.$currentCourse->courseID().'">Feuille d examen</a></td></tr>';
+                }
+              echo '</table>
 
               <p class = "pbouton"><span>&nbsp;</span>
               <a class="bouton" href="'.URL.'Student/desinscription/?cours='.strval($currentCourse->courseID()).'">Se desinscrire de ce cours</a>
