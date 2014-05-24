@@ -1,5 +1,7 @@
 <?php
 require_once 'application/models/Chapter.php';
+require_once 'application/models/Result.php';
+
 //require_once 'application/models/PersonFactory.php';
 
 class Studentcontroller extends Controller{
@@ -311,6 +313,12 @@ class Studentcontroller extends Controller{
         $MODELcours = $this->loadModel('CourseSubstcription');
         $student = PersonFactory::getPerson($_SESSION["email"]);
         $liste_cours = $MODELcours->getCourses($student);
+        
+        $results=[];
+
+        foreach ($liste_cours as $course) {
+            $results[]= new Result($student->studentID(),$course);
+        }
 
         require 'application/views/_templates/header.php';
         require 'application/views/student_view_notes.php';
