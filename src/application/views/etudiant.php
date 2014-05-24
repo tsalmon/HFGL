@@ -56,7 +56,7 @@
               </table>
 
               <p class = "pbouton"><span>&nbsp;</span>
-              <a class="bouton" href="'.URL.'Student/desinscription/?cours='.strval($currentCourse->courseID()).'"">Se desinscrire de ce cours</a>
+              <a class="bouton" href="'.URL.'Student/desinscription/?cours='.strval($currentCourse->courseID()).'">Se desinscrire de ce cours</a>
               </fieldset>'; 
             } else {
             }
