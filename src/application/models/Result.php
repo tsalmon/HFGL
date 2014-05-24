@@ -1,6 +1,6 @@
 <?php
 
-require_once 'CourseSubstcription.php';
+require_once 'QuestionnaireTypeManager.php';
 
 class Result {
 
@@ -9,10 +9,10 @@ class Result {
     
         protected $studentID;
         protected $course;
-        protected $questionnaireID;
-        protected $lastPoints;
-        protected $attemptsRemain;
-        protected $lastAttemptDate;
+        protected $notes_projet;
+        protected $notes_tps;
+        protected $notes_examen;
+        protected $notes_memoire;
         protected $db;
         
         
@@ -21,25 +21,73 @@ class Result {
         
         
      
-        // PAS TOUCHE !!! Voir classe PersonFactory.
+        // PAS TOUCHE !!! 
         //Impossibilité de mettre des classes friends en php, donc appeler le constructeur
         //directement revient à appuyer sur le nuke button.
-        public function __construct($student, $questionnaire, $courseID){    
+        public function __construct($student, $course){    
             $this->db=PDOHelper::getInstance(); 
-            $res = $this->db->query("SELECT * FROM Result WHERE `questionnaireID`='".$questionnaire."'&& studentID='".$student."';");
+            $this->notes_tps = [];
+            $this->course = $course;
+            $this->studentID = $student;
+            //access notes de l'examen
+            $examen = $this->db->query("SELECT lastPoints 
+                                                    FROM Result JOIN  Course 
+                                                    ON Result.questionnaireID=Course.questionnaireID
+                                                    WHERE courseID='".$course->courseID()."'&& studentID='".$student."';");
+            
+            $fetch1 = $examen->fetchAll(PDO::FETCH_ASSOC);
+             if($fetch1==null){
+                    // throw new UnexpectedValueException("Result de l'examen non existante");
+                }
+                else{
+                    $this->notes_examen = $fetch1['lastPoints'];
+                }
 
-            $fetch = $res->fetchAll(PDO::FETCH_ASSOC);
+            //access notes du mémoire et notes du projet
+            $parts = $this->db->query("SELECT * FROM Parts 
+                                        INNER JOIN  Part ON Parts.partID=Part.partID 
+                                        INNER JOIN Result ON Part.questionnaireID = Result.questionnaireID 
+                                        WHERE studentID='".$student."' && courseID='".$course->courseID()."';");
 
-            if($fetch==null){
-                    throw new UnexpectedValueException("Result non existante");
+            
+            $fetch2 = $parts->fetchAll(PDO::FETCH_ASSOC);
+             if($fetch1==null){
+                    // throw new UnexpectedValueException("Result du projet non existante");
+                }
+                else{
+            
+                    foreach($fetch1 as $part){
+                        $type_questionnaire = $this->db->query("SELECT questionnaireType FROM  Questionnaire
+                                                WHERE questionnaireID='".$fetch['questionnaireID']."';");
+                        $typeMemoire = QuestionnaireTypeManager::getInstance()->getMemoireID();
+                        $typeProjet = QuestionnaireTypeManager::getInstance()->getProjetID();
+
+                        if ($type_questionnaire==$typeMemoire){
+                            $this->notes_memoire = $fetch2['lastPoints'];
+                        }
+                        
+                        elseif ($type_questionnaire == $typeProjet){
+                            $this->notes_projet = $fetch2['lastPoints'];
+                        }
+                        // else
+                            // throw new UnexpectedValueException("Questionnaire non existante");
+                }
+            }
+
+            //access notes des tps
+            $tps = $this->db->query("SELECT * FROM Parts 
+                                        INNER JOIN  Chapters ON Parts.partID=Chapters.partID 
+                                        INNER JOIN  Chapter ON Chapters.chapterID=Chapter.chapterID 
+                                        INNER JOIN Result ON Chapter.questionnaireID = Result.questionnaireID 
+                                        WHERE studentID='".$student."' && courseID='".$course->courseID()."';");
+            $fetch3 = $tps->fetchAll(PDO::FETCH_ASSOC);
+            if($fetch3==null){
+                    // throw new UnexpectedValueException("Result non existante");
                 }
                 else{     
-                    $this->studentID = $student;
-                    $this->courseID = $courseID;
-                    $this->questionnaireID = $questionnaireID; 
-                    $this->lastPoints=$fetch['lastPoints'];
-                    $this->attemptsRemain=$fetch['attemptsRemain'];
-                    $this->lastAttemptDate=$fetch['lastAttemptDate'];    
+                     foreach($fetch3 as $tp){
+                        $this->notes_tps[]= $tp['lastPoints'];
+                     }
                 }
         }
         
@@ -47,13 +95,7 @@ class Result {
         
     //       Classes privées
     //****************************
-        
-        protected function type(){
-            $res=$this->db->query("Select questionnaireType from Questionnaire WHERE questionnaireID=".$questionnaireID.";");
-            $type= $this->db->query("Select typeName from QuestionnaireType WHERE typeID=".$res.";");
-            return $type;
-        }
-                
+ 
         
     //      Accesseurs
     //***********************
@@ -65,18 +107,21 @@ class Result {
             return $this->studentID;
         }
         
-        public function questionnaireID(){     
-            return $this->title;       
+        public function notes_projet(){     
+            return $this->notes_projet;       
+        }
+
+        public function notes_examen(){     
+            return $this->notes_examen;       
+        }
+
+        public function notes_tps(){     
+            return $this->notes_tps;       
         }
         
-        public function lastPoints(){   
-            return $this->lastPoints;         
+        public function notes_memoire(){   
+            return $this->notes_memoire;         
         }
-        
-        public function lastAttemptDate(){  
-            return $this->lastAttemptDate;          
-        }
-        
 }
 
 ?>
