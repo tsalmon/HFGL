@@ -13,8 +13,9 @@
         <h1><?php echo $courseTitle." : ".$partTitle." – ".$chapterTitle;?></h1>
         <div id="div_scroll">
             <p>
-              <iframe src="<?php echo $url;?>" height="1000" seamless/>
-                Votre navigateur ne supporte pas des iframes. Pensez de le jeter et installer un autre!
+      
+              <iframe src="<?php echo $url; ?>" height="1000" seamless/>
+                Votre navigateur ne supporte pas des iframes. Pensez à le jeter et installer un autre!
               </iframe>
             </p>
         </div>
