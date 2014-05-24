@@ -1,0 +1,30 @@
+Course
+1. Name: Beginning in Perl 
+Description: What does this course cover?
+– Installing Perl on Windows and UNIX
+– Making use of online Perl resources like CPAN
+– First principles in programming and the Perl syntax
+– Working with files and databases
+– Writing web pages in Perl
+– Using Perl as an object-oriented language
+
+Part 1. 
+Name:
+	Chapter 1.1
+	Name: First steps in Perl
+	Description: Perl is a great first language for people with no programming experience. It is easy to install, and actually comes pre-installed on most non-Windows operating systems. It has a very open syntax which, although very complex, is also very forgiving. It has a huge and freely available library (CPAN, the Comprehensive Perl Archive Network) that covers almost every imaginable area of programming and makes it exceedingly simple to create useful programs, whatever your need. It also has a huge, very friendly support group across the internet - literally thousands of tutorials, ready-made scripts and discussion groups are out there. With such a massive amount of readily available information, one of the largest problems that a beginner faces is knowing where and how to get started.
+
+	Chapter 1.2
+	Name: Working with simple values
+	Description: The essence of programming is computation—we want the computer to do some work with the input (the data we give it). Very rarely do we write programs that tell us something we already know. Even more rarely do we write programs that do nothing interesting with our data at all. So, if we’re going to write programs that do more than say hello to us, we’re going to need to know how to perform computations, or operations on our data.
+	In this chapter, we will discuss several important basic ideas of programming in Perl
+
+Part 2.
+Name: 
+	Chapter 2.1
+	Name: Lists and Hashes
+	Description: The scalar is the building block of all perl data types. A list is just an ordered group of scalars indexed by number. A hash is also a group of scalars, but rather than being ordered by number, it is an unordered list that is indexed by yet another set of scalars called keys. This may seem a bit confusing at first - lets go back to our empty box metaphor. A hash is simply a scattered group of these boxes. Rather than being in a nice, neat line, they're kept in no particular order but the boxes are identified with a special label (a key) on the outside.
+
+	Chapter 2.2 
+	Name: Loops and Decisions
+	Description: here is a second major type of flow control, called looping. Looping allows us to repeat the execution of a piece of our script. Perl provides several ways of looping; the first we’ll learn is looping using while.A loop can solve a fundamental problem we’ll often encounter. Suppose our script asks the user to respond to a question by entering 1 or 2. In the previous lesson, we learned how to test for a response that is 1 or 2 or neither, using if, elsif, and else. But the shortcoming of that script is that it can finish successfully only if the user enters a correct response. When the user enters an incorrect response—neither 1 nor 2—the only thing the script can do is print an error message and quit. This forces the user to run the script again, which is not very friendly.

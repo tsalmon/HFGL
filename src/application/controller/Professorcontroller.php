@@ -15,6 +15,7 @@ class Professorcontroller extends Controller{
         $currentCourse = null;
         if (isset($_GET["cours"])){
             $currentCourse=CourseFactory::getCourse($_GET["cours"],true);
+            $exam = $currentCourse->finalExam();
         }
         require 'application/views/_templates/header.php';
         require 'application/views/enseignant.php';
@@ -90,6 +91,9 @@ class Professorcontroller extends Controller{
     }
 
     public function CreateChapter_ok(){ 
+
+        $chapter = new Chapter($_POST["chp_name"], false);
+
         if($_FILES["chp_file_lesson"]['size']!= 0){
             if(pathinfo($_FILES["chp_file_lesson"]["name"], PATHINFO_EXTENSION) != "pdf"){
                 $error = "pdf";
@@ -102,17 +106,19 @@ class Professorcontroller extends Controller{
                 return ;
             }
 
-            $dir = getcwd();
-            if(!move_uploaded_file($_FILES["chp_file_lesson"]["tmp_name"], $dir."/files/".$_FILES["chp_file_lesson"]["name"])){
+            $dir = "files/Chapters/".$chapter->chapterID();
+            if (!file_exists($dir)) {
+                mkdir($dir, 0755, true);
+            }
+
+            if(!move_uploaded_file($_FILES["chp_file_lesson"]["tmp_name"], $dir."/".$_FILES["chp_file_lesson"]["name"])){
                 $error = "move";
                 Professorcontroller::CreateChapter();
                 return ;
             }
-            $notes = new CourseNote($dir."/files/".$_FILES["chp_file_lesson"]["name"]);
+            $notes = new CourseNote("http://localhost/src/".$dir."/".$_FILES["chp_file_lesson"]["name"]);
 
         }
-
-        $chapter = new Chapter($_POST["chp_name"], false);
 
         $chapter->setDescription($_POST["chp_descr"]);
         if (isset($notes)) {
@@ -143,15 +149,17 @@ class Professorcontroller extends Controller{
                 Professorcontroller::ModifyChapter();
                 return ;
             }
-
-            $dir = getcwd();
-            if(!move_uploaded_file($_FILES["chp_file_lesson"]["tmp_name"], $dir."/files/".$_FILES["chp_file_lesson"]["name"])){
+            $dir = "files/Chapters/".$chapter->chapterID();
+            if (!file_exists($dir)) {
+                mkdir($dir, 0755, true);
+            }
+            if(!move_uploaded_file($_FILES["chp_file_lesson"]["tmp_name"], $dir."/".$_FILES["chp_file_lesson"]["name"])){
                 $error = "move";
                 Professorcontroller::ModifyChapter();
                 return ;
             }
 
-            $notes = new CourseNote($dir."/files/".$_FILES["chp_file_lesson"]["name"]);
+            $notes = new CourseNote("http://localhost/src/".$dir."/".$_FILES["chp_file_lesson"]["name"]);
             $chapter->setCourseNotes($notes);
         }
 
@@ -338,7 +346,6 @@ class Professorcontroller extends Controller{
 
             if (($vf || $vc) && isset($qt)) {
                 $questionnaire->addQuestion($qt);
-                $_SESSION["ex_id"] = $questionnaire->writeToDatabase();
             }
 
             if ($vf || $f) {

@@ -22,7 +22,7 @@
         <div>
           <?php 
             if (null !== ($chp->courseNotes())) {
-              echo '<a class="bouton" href="'.URL.'Student/NotesDeCours'.$chp->courseNotes()->getURL().'">Cours</a>';
+              echo '<a class="bouton" href="'.URL.'Student/NotesDeCours?courseID='.$_GET["cours"]."&partID=".$_GET["part"]."&chapterID=".$_GET["chp"].'">Cours</a>';
             }
 
             if (null !== ($chp->exercices())) {

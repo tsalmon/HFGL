@@ -10,26 +10,25 @@
 
       <div class="content_big">
         
-        <h1>Notes de Cours 1</h1>
-        <h5>Enseignant: </h5>
+        <h1><?php echo $courseTitle." : ".$partTitle." – ".$chapterTitle;?></h1>
         <div id="div_scroll">
             <p>
-              <iframe src="http://www.liafa.univ-paris-diderot.fr/~yunes/cours/interfaces/fiches/Examens/2011/Sujet.pdf" height="1000" seamless/>
+              <iframe src="<?php echo $url;?>" height="1000" seamless/>
                 Votre navigateur ne supporte pas des iframes. Pensez de le jeter et installer un autre!
               </iframe>
             </p>
         </div>
 
         <a href="<?php echo URL; ?>Student/">
-          <p class = "pbouton">
+          <p>
             <span>&nbsp;</span>
             <input class="bouton" value="Traveaux de cours" />
           </p>
         </a>
 
-        <p class = "pbouton">
+        <p>
           <span>&nbsp;</span>
-          <input class="bouton" type="submit" value="Enregistrer" />
+          <a href="<?php echo $url;?>"><button class="bouton">Enregistrer</button></a>
         </p>
           
       </div>

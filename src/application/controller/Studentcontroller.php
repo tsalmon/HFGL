@@ -251,6 +251,7 @@ class Studentcontroller extends Controller{
             if (!$this->SecondaryParameter($key, $value))
             {   
                 $db=PDOHelper::getInstance();
+                /*
                 $query="SELECT Question.typeID FROM Question WHERE Question.questionID =".$_GET["questionID"];
                 $res=$db->query($query);
                 $fetch=$res->fetch(PDO::FETCH_ASSOC);
@@ -298,8 +299,8 @@ class Studentcontroller extends Controller{
                 }    
                 else{
                    $validated=2;
-                }
-                $db->exec("INSERT INTO `Points`(`studentID`, `questionID`, `response`, validated) VALUES (".$_SESSION["studentID"].",".$_GET["questionID"].", '".$value."', ".$validated.")");
+                }*/
+                $db->exec("INSERT INTO `Points`(`studentID`, `questionID`, `response`/*, validated*/) VALUES (".$_SESSION["studentID"].",".$_GET["questionID"].", '".$value/*."', ".$validated*/.")");
             }
         }
 
@@ -376,7 +377,7 @@ class Studentcontroller extends Controller{
         $cours = CourseFactory::getCourse($_GET["cours"], true);
         $part = $cours->part($_GET["part"]);
         $chp = $part->chapter($_GET["chp"]);
-        
+
         require 'application/views/_templates/header.php';
         require 'application/views/student_viewChapter.php';
         require 'application/views/_templates/footer.php';  
@@ -405,6 +406,17 @@ class Studentcontroller extends Controller{
         $page = "student";
         $MODELcours = $this->loadModel('CourseSubstcription');
         $student = PersonFactory::getPerson($_SESSION["email"]);
+        $course = CourseFactory::getCourse($_GET["courseID"], true);
+        $part = new Part($_GET["partID"]);
+        $chapter = new Chapter($_GET["chapterID"]);
+        $coursenotes = $chapter->courseNotes();
+        $chapterTitle = $chapter->title();
+        $courseTitle = $course->title();
+        $partTitle = $part->title();
+        $url=null;
+        if (isset($coursenotes)) {
+            $url = $coursenotes->getURL();
+        }
 
         require 'application/views/_templates/header.php';
         require 'application/views/student_view_notesDeCours.php';
