@@ -164,7 +164,9 @@ class Studentcontroller extends Controller{
                 if ($value == 1) {
                     $note = $question->getPoints();
                 }
-                PDOHelper::getInstance()->exec("INSERT INTO `Points`(`studentID`, `questionID`, `note`) VALUES (".$_SESSION["studentID"].",".$_GET["questionID"].", ".$note.")");
+                $corrector = new AutomaticCorrector();
+                $corrector->correctQuestion($_GET["questionID"], $_SESSION["studentID"], $note);
+                //PDOHelper::getInstance()->exec("INSERT INTO `Points`(`studentID`, `questionID`, `note`) VALUES (".$_SESSION["studentID"].",".$_GET["questionID"].", ".$note.")");
             }
         }
         $this->NextQuestion();
@@ -184,8 +186,8 @@ class Studentcontroller extends Controller{
                         $note = $question->getPoints();
                     }
                 } 
-
-                PDOHelper::getInstance()->exec("INSERT INTO `Points`(`studentID`, `questionID`, `response`, `note`) VALUES (".$_SESSION["studentID"].",".$_GET["questionID"].", '".$value."', ".$note.")");
+                $corrector = new AutomaticCorrector();
+                $corrector->correctQuestion($_GET["questionID"], $_SESSION["studentID"],$note, $value);
             }
         }
         $this->NextQuestion();
@@ -244,8 +246,8 @@ class Studentcontroller extends Controller{
                     }
                 } 
                 // echo "<br/>";
-
-                PDOHelper::getInstance()->exec("INSERT INTO `Points`(`studentID`, `questionID`, `note`) VALUES (".$_SESSION["studentID"].",".$_GET["questionID"].", '".$note."')");
+                $corrector = new AutomaticCorrector();
+                $corrector->correctQuestion($_GET["questionID"], $_SESSION["studentID"], $note);
             }
         }
 
@@ -257,8 +259,9 @@ class Studentcontroller extends Controller{
         foreach ($_POST as $key => $value) {
             if (!$this->SecondaryParameter($key, $value))
             {   
-                $db=PDOHelper::getInstance();
+                $validated = 0;
                 /*
+                $db=PDOHelper::getInstance();
                 $query="SELECT Question.typeID FROM Question WHERE Question.questionID =".$_GET["questionID"];
                 $res=$db->query($query);
                 $fetch=$res->fetch(PDO::FETCH_ASSOC);
@@ -307,7 +310,9 @@ class Studentcontroller extends Controller{
                 else{
                    $validated=2;
                 }*/
-                $db->exec("INSERT INTO `Points`(`studentID`, `questionID`, `response`/*, validated*/) VALUES (".$_SESSION["studentID"].",".$_GET["questionID"].", '".$value/*."', ".$validated*/.")");
+                $corrector = new AutomaticCorrector();
+                $corrector->saveResponseToCorrect($_GET["questionID"], $_SESSION["studentID"], 0, $value, $validated);
+                //$db->exec("INSERT INTO `Points`(`studentID`, `questionID`, `response`/*, validated*/) VALUES (".$_SESSION["studentID"].",".$_GET["questionID"].", '".$value/*."', ".$validated*/.")");
             }
         }
 
@@ -413,10 +418,11 @@ class Studentcontroller extends Controller{
         $projectQuestionID = $project->getQuestions()[0]->getID();
         $corrector = new AutomaticCorrector();
         $corrector->correctQuestion($projectQuestionID, $student->studentID(), 0);
+        header('location: '.URL.'Student/Projet?cours='.$_POST["courseID"]);
 
-        require 'application/views/_templates/header.php';
-        require 'application/views/student_view_projet.php';
-        require 'application/views/_templates/footer.php';
+        //require 'application/views/_templates/header.php';
+        //require 'application/views/student_view_projet.php';
+        //require 'application/views/_templates/footer.php';
     }
 
     public function NotesDeCours()
