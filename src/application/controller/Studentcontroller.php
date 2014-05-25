@@ -13,6 +13,7 @@ class Studentcontroller extends Controller{
 
     public function index() //consulter cours
     { 
+        $page = "student";
         $MODELcours = $this->loadModel('CourseSubstcription');
         $student = PersonFactory::getPerson($_SESSION["email"]);
         $liste_cours = $MODELcours->getCourses($student);

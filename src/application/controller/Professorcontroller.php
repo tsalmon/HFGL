@@ -59,9 +59,9 @@ class Professorcontroller extends Controller{
 
     public function CreateExamen(){
         $page = "prof";
-        $prof = $this->loadModel('PersonFactory')->getPerson($_SESSION["email"]);
+        /*$prof = $this->loadModel('PersonFactory')->getPerson($_SESSION["email"]);*/
         $_SESSION["quest_for"] = "examen";
-        $_SESSION["ex_course"] = $_GET["cours"];
+        $_SESSION["ex_course"] = $_GET["courseID"];
         header('location: '.URL.'Professor/CreateExercice');
     }
 

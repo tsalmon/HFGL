@@ -15,15 +15,14 @@
 
     <div id="site_content">
       
-      <?php include("_templates/bienvenue_title.php"); ?>
-
       <?php include("_templates/sidebar_left.php"); ?>
       
       <div class="content">
 
       <?php
           if ($currentCourse){
-
+            include("_templates/current_course.php");
+/*
             echo '<fieldset>
         <legend><h1 id="'.$currentCourse->title().'">'. $currentCourse->title() .'</h1></legend>';
             echo "<p>". $currentCourse->description() ."</p>";
@@ -62,6 +61,7 @@
               <p class = "pbouton"><span>&nbsp;</span>
               <a class="bouton" href="'.URL.'Student/desinscription/?cours='.strval($currentCourse->courseID()).'">Se desinscrire de ce cours</a>
               </fieldset>'; 
+              */
             } else {
             }
       ?>
