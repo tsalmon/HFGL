@@ -77,6 +77,7 @@ class Studentcontroller extends Controller{
         $_SESSION["started"] = False;
         $_SESSION["finished"] = False;
 
+
         header('location: '.URL.'Student/Exercice');
     }
 
@@ -88,6 +89,7 @@ class Studentcontroller extends Controller{
     private function NextQuestion(){
         if ($_SESSION["questionsCount"] == $_SESSION["currentQuestionNumber"]) {
             $_SESSION["finished"] = True;
+            AutomaticCorrector::saveAttempt($_SESSION["studentID"], $_SESSION["questionnaireID"]);
         } 
 
         header('location: '.URL.'Student/Exercice');
@@ -103,6 +105,9 @@ class Studentcontroller extends Controller{
             $questionnaire = $course->finalExam();
         }
 
+
+
+
         if (is_null($questionnaire)) {
             header('location: '.URL.'Student');
         }
@@ -113,7 +118,9 @@ class Studentcontroller extends Controller{
 
         $_SESSION["studentID"] = $student->studentID();
         $_SESSION["questionsCount"] = count($questions);
+        $_SESSION["questionnaireID"] = $questionnaire->getID();
 
+        $attemptsCount = AutomaticCorrector::attemptsRemain($_SESSION["studentID"], $questionnaire->getID());
 
         if (!$_SESSION["finished"]) {
             $currentQuestion = $questions[$_SESSION["currentQuestionNumber"]];
@@ -311,7 +318,7 @@ class Studentcontroller extends Controller{
                    $validated=2;
                 }*/
                 $corrector = new AutomaticCorrector();
-                $corrector->saveResponseToCorrect($_GET["questionID"], $_SESSION["studentID"], 0, $value, $validated);
+                $corrector->saveResponseToCorrect($_GET["questionID"], $_SESSION["studentID"], $value, $validated);
                 //$db->exec("INSERT INTO `Points`(`studentID`, `questionID`, `response`/*, validated*/) VALUES (".$_SESSION["studentID"].",".$_GET["questionID"].", '".$value/*."', ".$validated*/.")");
             }
         }
@@ -418,11 +425,7 @@ class Studentcontroller extends Controller{
         $projectQuestionID = $project->getQuestions()[0]->getID();
         $corrector = new AutomaticCorrector();
         $corrector->correctQuestion($projectQuestionID, $student->studentID(), 0);
-        header('location: '.URL.'Student/Projet?cours='.$_POST["courseID"]);
-
-        //require 'application/views/_templates/header.php';
-        //require 'application/views/student_view_projet.php';
-        //require 'application/views/_templates/footer.php';
+        header('location: '.URL.'Student/Project?cours='.$_POST["courseID"]);
     }
 
     public function NotesDeCours()

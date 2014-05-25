@@ -24,9 +24,18 @@
             <p>
                <?php
                if (!$_SESSION["started"]) {
-                 echo "Vous allez faire l'exercice de ".$_SESSION["questionsCount"]." questions. Est-ce que vous êtes prêt?<br/>";
-                 echo '<form action="StartExercice" method="POST">';
-                 echo '<input id="startexercice" value="Je commence!" type="submit"/>';
+                if ($attemptsCount == 0) {
+                  echo "Vous avez épuisé votre limite des tentatives.<br/>";
+                  echo '<form action="'.URL.'Student">
+                          <input type="submit" value="Retourner">
+                        </form>';
+                } else {
+                  $count = $attemptsCount == -1?3:$attemptsCount;
+                  echo "Vous allez faire l'exercice de ".$_SESSION["questionsCount"]." questions. Vous avez encore ".$count." tentatives. Est-ce que vous êtes prêt?<br/>";
+                  echo '<form action="StartExercice" method="POST">';
+                  echo '<input id="startexercice" value="Je commence!" type="submit"/>';
+                }
+
                } else 
                if ($_SESSION["finished"]){
                  echo "Vous avez fini cette exercice! Merci.";
