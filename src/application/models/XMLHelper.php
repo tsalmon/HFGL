@@ -5,6 +5,8 @@ require_once("application/models/LQuestion.php");
 require_once("application/models/PQuestion.php");
 require_once("application/models/PDOHelper.php");
 require_once("application/models/ExerciceSheet.php");
+require_once("application/models/QuestionnaireTypeManager.php");
+
 
 
 class XMLHelper {
@@ -50,12 +52,10 @@ class XMLHelper {
             $oquestions[] = $oq;
         }
 
-        $nExercise = new ExerciceSheet();
-        $nExercise->setQuestions($oquestions);
-        $nExercise->setAvailableDate(time());
-        $nExercise->setDeadline(time());
-        $nExercise->setQuestionnaireType(Examen);
+        $exercise = new ExerciceSheet();
+        $exercise->setQuestions($oquestions);
+        $exercise->setType(QuestionnaireTypeManager::getInstance()->getExamenID());
 
-        return $nExercise;
+        return $exercise;
     }
 } 

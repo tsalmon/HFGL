@@ -50,9 +50,11 @@
                   echo '</td>';
                 }
               echo '
-                </tr>
-                <tr><td>Projet</td> <td><a href="'.URL.'Student/projet_memoire/?cours='.strval($currentCourse->courseID()).'">Sujet de projet</a></td></tr>';
-                if($exam){
+                </tr>';
+                if (isset($project)) {
+                  echo '<tr><td>Projet</td> <td><a href="'.URL.'Student/Project/?cours='.strval($currentCourse->courseID()).'">Sujet de projet</a></td></tr>';
+                }
+                if(isset($exam)){
                   echo '<tr><td>Examen</td> <td><a href="'.URL.'Student/DoExercice/?type=examen&courseTitle='.$currentCourse->title().'&courseID='.$currentCourse->courseID().'">Feuille d examen</a></td></tr>';
                 }
               echo '</table>

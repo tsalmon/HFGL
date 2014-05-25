@@ -75,6 +75,10 @@ abstract class Question {
                     $question = new PQuestion($assignment, $tip, $points);
                 }
 
+                if($typeID == QuestionTypeManager::getInstance()->getPRID()){
+                    $question = new PRQuestion($assignment, $tip, $points);
+                }
+
                 $question->loadByID($questionID);
 
                 return $question;

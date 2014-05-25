@@ -6,6 +6,7 @@ define('QCM', "QCM");
 define('L', "L");
 define('LS', "LS");
 define('P', "P");
+define('PR', "PR");
 
 
 class QuestionTypeManager extends TypeManager{
@@ -16,6 +17,7 @@ class QuestionTypeManager extends TypeManager{
     private $l;
     private $p;
     private $ls;
+    private $pr;
 
     //      Constructeur private : singleton
     //*********************************************
@@ -41,6 +43,7 @@ class QuestionTypeManager extends TypeManager{
         $this->l = $this->getIdForTypeName(L);
         $this->p = $this->getIdForTypeName(P);
         $this->ls = $this->getIdForTypeName(LS);
+        $this->pr = $this->getIdForTypeName(PR);
 
     }
 
@@ -87,5 +90,14 @@ class QuestionTypeManager extends TypeManager{
             $this->p = $this->getIdForTypeName(P);
         }
         return $this->p;
+    }
+
+    public function getPRID()
+    {
+        if(!$this->pr)
+        {
+            $this->pr = $this->getIdForTypeName(PR);
+        }
+        return $this->pr;
     }
 } 

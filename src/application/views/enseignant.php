@@ -8,6 +8,7 @@
 
         <?php 
         $examMessage = isset($exam)?"Modifier":"[+]";
+        $projectMessage = isset($project)?"Modifier":"[+]";
 
         if ($currentCourse){
           echo '<h1 id="'.$currentCourse->title().'">'.$currentCourse->title().'</h1>';
@@ -29,7 +30,7 @@
           echo '
                 <tr>
                   <td>Projet</td>
-                  <td><a href='.URL.'Professor/CreateProjet>[+]</a></td>
+                  <td><a href='.URL.'Professor/CreateProjet&courseID='.strval($currentCourse->courseID()).'>'.$projectMessage.'</a></td>
                 </tr>
 
                 <tr>

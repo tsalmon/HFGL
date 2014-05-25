@@ -5,11 +5,13 @@ require_once("application/models/QuestionnaireTypeManager.php");
 require_once("application/models/QRFQuestion.php");
 require_once("application/models/LQuestion.php");
 require_once("application/models/PQuestion.php");
+require_once("application/models/PRQuestion.php");
 require_once("application/models/PDOHelper.php");
 
 
 class ExerciceSheet{
 
+    private $description;
     private $deadline;
     private $available;
     private $questionnaireID;
@@ -26,6 +28,7 @@ class ExerciceSheet{
                 $this->questionnaireType = $questionnaireRow['questionnaireType'];
                 $this->available = $questionnaireRow['available'];
                 $this->deadline = $questionnaireRow['deadline'];
+                $this->description = $questionnaireRow['description'];
             }
             else
             {
@@ -64,7 +67,19 @@ class ExerciceSheet{
     public function setType($type)
     {
         $this->questionnaireType = $type;
-        PDOHelper::getInstance()->query("UPDATE `Questions` SET `questionnaireType`=".$type.", WHERE `questionnaireID`=".$this->questionnaireID);
+        if ($type == QuestionnaireTypeManager::getInstance()->getProjetID()) {
+            $this->addQuestion(new PRQuestion("","",0));
+        }
+        PDOHelper::getInstance()->query("UPDATE `Questionnaire` SET `questionnaireType`=".$type." WHERE `questionnaireID`=".$this->questionnaireID);
+    }
+
+    public function getDescription(){
+        return $this->description;
+    }
+
+    public function setDescription($descr){
+        $this->description = $descr;
+        PDOHelper::getInstance()->query("UPDATE `Questionnaire` SET `description`='".$this->description."' WHERE `questionnaireID`=".$this->questionnaireID);
     }
 
     public function getQuestions()
@@ -101,7 +116,7 @@ class ExerciceSheet{
     public function setDeadline($deadline)
     {
         $this->deadline = $deadline;
-        PDOHelper::getInstance()->query("UPDATE `Questions` SET `deadline`=STR_TO_DATE('".$deadline."', '%m/%d/%Y'), WHERE `questionnaireID`=".$this->questionnaireID);
+        PDOHelper::getInstance()->query("UPDATE `Questionnaire` SET `deadline`=STR_TO_DATE('".$deadline."', '%d/%m/%Y') WHERE `questionnaireID`=".$this->questionnaireID);
     }
 
     public function getAvailableDate()
@@ -112,10 +127,10 @@ class ExerciceSheet{
     public function setAvailableDate($available)
     {
         $this->available = $available;
-        PDOHelper::getInstance()->query("UPDATE `Questions` SET `available`=STR_TO_DATE('".$available."', '%m/%d/%Y'), WHERE `questionnaireID`=".$this->questionnaireID);
+        PDOHelper::getInstance()->query("UPDATE `Questionnaire` SET `available`=STR_TO_DATE('".$available."', '%d/%m/%Y') WHERE `questionnaireID`=".$this->questionnaireID);
     }
 
     public function delete(){
-        PDOHelper::getInstance()->query("DELETE FROM `Questions` WHERE `questionnaireID`=".$this->questionnaireID);
+        PDOHelper::getInstance()->query("DELETE FROM `Questionnaire` WHERE `questionnaireID`=".$this->questionnaireID);
     }
 }

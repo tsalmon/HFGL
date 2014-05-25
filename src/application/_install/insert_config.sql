@@ -12,4 +12,5 @@ INSERT INTO `QuestionType`(`typeName`) VALUES
 ('QRF'),
 ('P'),
 ('L'),
-('LS');
+('LS'),
+('PR');

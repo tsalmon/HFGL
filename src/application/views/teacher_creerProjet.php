@@ -5,31 +5,25 @@
     <div id="site_content">  
       <?php include("_templates/bienvenue_title.php"); ?> 
 
-      <div class="content_big">
-        <h1>Cours 1</h1>
-        <h2>Créer le projet de cours</h2>
+      <div class="content_big" style="margin-left:150px">
+        <h1>Création le projet de cours <?php echo $courseTitle;?></h1>
 
-        <form action="#" method="post">
+        <form action="SaveProject" method="post">
           <div class="form_settings">
-            <p><span>Date limite: </span><input type="text" name="name" value="" /></p>
-
-            <span>Titre du projet </span>
-            <input type="text" name="name" value="" /></br>
-
-            <div>
-              <h3>Contenu de projet</h3>
-              <textarea id="project_body" rows="50" placeholder="Le sujet du projet..."></textarea>
+            <p class="project"><span>Date d'accés:</span><input type="text" name="dateAvailable"  placeholder="jj/mm/aaaa"/></p>
+            <p class="project"><span>Date limite: </span><input type="text" name="dateDeadline" placeholder="jj/mm/aaaa" /></p>
+            <input type="hidden" name="courseID" value="<?php echo $_GET["courseID"];?>" />
+            <div class="project">
+              <h3>Sujet du projet</h3>
+              <textarea name="assignment" rows="100" placeholder="Saisissez le sujet ici..."></textarea>
             </div>
 
           </div>
-        </form>
-          
-          <p class = "pbouton">
-            <span>&nbsp;</span>
-            <input class="bouton" type="submit" name="name" value="Importer les notes de projet" />
+          <p>
             <span>&nbsp;</span>
             <input class="bouton" type="submit" name="name" value="Publier ce projet" />
           </p>
+        </form>
       </div>
     <div class="clearfooter"></div>
     </div>

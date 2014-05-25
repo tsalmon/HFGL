@@ -322,11 +322,7 @@ fieldset{
   text-align: left;
 }
 
-textarea #project_body {
-  margin-left: auto !important;
-  margin-right: auto !important;
-  width: 500px;
-}
+
   
 .form_settings input, .form_settings textarea, .form_settings select { 
   padding: 5px; 
@@ -368,6 +364,14 @@ textarea #project_body {
   font: 100% 'Droid Sans', arial; 
   width: 299px;
 }
+
+.project textarea {
+  display: block;
+  width: 550px !important;
+  height: 500px !important;
+}
+
+
 
 .form_settings select { 
   width: 310px;

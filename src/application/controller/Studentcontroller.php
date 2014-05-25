@@ -1,6 +1,7 @@
 <?php
 require_once 'application/models/Chapter.php';
 require_once 'application/models/Result.php';
+require_once 'application/models/AutomaticCorrector.php';
 
 //require_once 'application/models/PersonFactory.php';
 
@@ -16,13 +17,19 @@ class Studentcontroller extends Controller{
         $student = PersonFactory::getPerson($_SESSION["email"]);
         $liste_cours = $MODELcours->getCourses($student);
         $currentCourse = null;
-        $exam = false;
+        // $exam = false;
+
         if (isset($_GET["cours"])){
-            $currentCourse=CourseFactory::getCourse($_GET["cours"],true);
+            $currentCourse = CourseFactory::getCourse($_GET["cours"],true);
+            $exam = $currentCourse->finalExam();
+            $project = $currentCourse->project();
         }
-        if($currentCourse != null && $this->CoursehaveExamen($currentCourse->CourseID())){
-            $exam = true;
-        }
+        // if($currentCourse != null && $this->CoursehaveExamen($currentCourse->CourseID())){
+        //     $exam = true;
+        // }
+        // if (isset($currentCourse->project)) {
+        //     $projet = $currentCourse->project;
+        // }
         require 'application/views/_templates/header.php';
         require 'application/views/student.php';
         require 'application/views/_templates/footer.php';
@@ -383,22 +390,33 @@ class Studentcontroller extends Controller{
         require 'application/views/_templates/footer.php';  
     }
 
-    public function projet_memoire(){
-        $page = "projet_memoire";        
-    
+    public function Project(){
+        $page = "projet";        
+        $student = $this->loadModel('PersonFactory')->getPerson($_SESSION["email"]);
+
         $course = CourseFactory::getCourse($_GET["cours"],true);
-        $questionnaire = $course->finalExam();
-    
-        echo "<pre>";
-        print_r($course);
-        echo "</pre><h3><pre>";
-        print_r($questionnaire);
-        echo "</pre></h3>";
-        /*
+        $project = $course->project();
+        $corrector = new AutomaticCorrector();
+        $soumis = $corrector->hasAnswerForQuestion($project->getQuestions()[0]->getID(), $student->studentID());
+        
         require 'application/views/_templates/header.php';
-        require 'application/views/student_projet_memoire.php';
+        require 'application/views/student_view_projet.php';
         require 'application/views/_templates/footer.php';  
-        */
+    }
+
+    public function LoadProject(){
+        $page = "projet";
+        $student = $this->loadModel('PersonFactory')->getPerson($_SESSION["email"]);
+
+        $course = CourseFactory::getCourse($_POST["courseID"],true);
+        $project = $course->project();
+        $projectQuestionID = $project->getQuestions()[0]->getID();
+        $corrector = new AutomaticCorrector();
+        $corrector->correctQuestion($projectQuestionID, $student->studentID(), 0);
+
+        require 'application/views/_templates/header.php';
+        require 'application/views/student_view_projet.php';
+        require 'application/views/_templates/footer.php';
     }
 
     public function NotesDeCours()

@@ -13,6 +13,7 @@ class Course {
         protected $finalExam;
         protected $parts;
         protected $db;
+        protected $project;
         
         
     //      Constructeur
@@ -41,6 +42,9 @@ class Course {
                     $this->courseID=$fetch['courseID'];
                     if(isset($fetch['questionnaireID'])){
                         $this->finalExam = new ExerciceSheet($fetch['questionnaireID']);
+                    }
+                    if(isset($fetch['projectID'])){
+                        $this->project = new ExerciceSheet($fetch['projectID']);
                     }
                     $this->description=$fetch['description'];                  
                     $this->parts=$this->getDBParts();
@@ -128,6 +132,15 @@ class Course {
         public function setFinalExam($fe){
             $this->db->exec("UPDATE Course SET questionnaireID = '".$fe->getId()."' WHERE courseID =".$this->courseID);
             $this->finalExam=$fe;
+        }
+
+        public function project(){   
+            return $this->project;         
+        }
+         
+        public function setProject($pr){
+            $this->db->exec("UPDATE Course SET projectID = '".$pr->getId()."' WHERE courseID =".$this->courseID);
+            $this->project=$pr;
         }
         
         public function setTitle($t){     
