@@ -213,6 +213,7 @@ nav {
   float: left;
   width: 234px;
   margin-top: 20px;
+  margin-left: 10px;
   background: #1D1D1D; /* Show a solid color for older browsers */
   -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 2px;
   -moz-box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 2px;
@@ -504,6 +505,8 @@ ul#toolbar li a:hover,ul#toolbar li a:focus {
 
 #welcome {
   margin-left: 700px; 
+  margin-right: 10px; 
+  margin-top: 10px; 
   padding-left: 20px;
   background: #1D1D1D; /* Show a solid color for older browsers */
   -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 2px;
