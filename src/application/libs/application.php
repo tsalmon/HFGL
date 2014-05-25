@@ -28,13 +28,14 @@ class Application
         $this->splitUrl();
         // check for controller: does such a controller exist ?
         if (file_exists('./application/controller/' . $this->url_controller.'controller.php')) {
-
             if(count($_SESSION) == 0){ // not connected
                 if($this->url_controller != "Welcome"){
                     header('location: '.URL);
                 } 
             } else { // professor can only access to professor page, like student, like admin
-                if($this->url_controller != "Welcome"){
+                if($this->url_controller == "files"){
+                    
+                } elseif($this->url_controller != "Welcome"){
                     switch ($_SESSION["role"]) {
                         case 'admin':
                             if($this->url_controller != "Admin"){

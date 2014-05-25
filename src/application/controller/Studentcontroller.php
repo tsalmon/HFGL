@@ -433,7 +433,7 @@ class Studentcontroller extends Controller{
         $partTitle = $part->title();
         $url=null;
         if (isset($coursenotes)) {
-            $url = $coursenotes->getURL();
+            $url = URL."files/".$coursenotes->getURL();
         }
 
         require 'application/views/_templates/header.php';
