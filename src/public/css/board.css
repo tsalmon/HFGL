@@ -32,8 +32,20 @@ body {
 }
 
 .part{
-  padding-top: 15px;
+  padding-top: 25px;
   padding-left: 15px;
+}
+
+.part_nom{
+  display: inline;
+}
+
+.description{
+  margin-top: 30px;
+}
+
+.liste_chapitres{
+  margin: 30px;
 }
 
 p { 
@@ -266,10 +278,6 @@ nav {
   float: right;
   font-size: 120%;
   padding: 14px 0 0 0;
-}
-  
-.content ul, .content_big ul { 
-  margin: 2px 0 22px 0px;
 }
 
 .content ul li, .content_big ul li, .sidebar ul li { 
