@@ -31,22 +31,23 @@
                         </form>';
                 } else {
                   $count = $attemptsCount == -1?3:$attemptsCount;
-                  echo "Vous allez faire l'exercice de ".$_SESSION["questionsCount"]." questions. Vous avez encore ".$count." tentatives. Est-ce que vous êtes prêt?<br/>";
+                  echo '<p class="assignment">Vous allez faire l\'exercice de '.$_SESSION["questionsCount"].' questions. Vous avez encore '.$count.' tentatives. Est-ce que vous êtes prêt?</p><br/>';
                   echo '<form action="StartExercice" method="POST">';
-                  echo '<input id="startexercice" value="Je commence!" type="submit"/>';
+                  echo '<p style="margin-left:400px"><input id="startexercice" class="bouton" value="Je commence!" type="submit"/></p>';
+                  echo '</form>';
                 }
 
                } else 
                if ($_SESSION["finished"]){
                  echo "Vous avez fini cette exercice! Merci.";
                } else {
-                 echo "Question ".($_SESSION["currentQuestionNumber"]+1)." sur ".$_SESSION["questionsCount"]."<br/>";
-                 echo $currentQuestion->getAssignment().'<br/>';
+                 echo '<p class="assignment">Question '.($_SESSION["currentQuestionNumber"]+1).' sur '.$_SESSION["questionsCount"].'</p><br/>';
+                 echo '<p class="assignment">'.$currentQuestion->getAssignment().'</p><br/>';
                  if ($currentQuestion instanceof QCMQuestion) {
                      $answers = $currentQuestion->getAnswers();
                      echo '<form action="QCMExerciceResponse?questionID='.$currentQuestion->getID().'" method="POST">';
                      foreach($answers as $answer) {
-                        echo '<input type="checkbox" name='.$currentQuestion->getID().' value='.$answer->isCorrect().'>'.$answer->getContent().'<br>';
+                        echo '<p><input class="answer" type="checkbox" name='.$currentQuestion->getID().' value='.$answer->isCorrect().'>'.$answer->getContent().'</p><br>';
                      }   
                  }
 
@@ -68,7 +69,7 @@
                  }
                  echo '<input type="hidden" id="currentQuestionNumber" name="currentQuestionNumber" value="'.$_SESSION["currentQuestionNumber"].'" />';
                  echo '<input type="hidden" id="questionsCount" name="questionsCount" value="'.$_SESSION["questionsCount"].'" />';
-                 echo '<input id="exerciceanswer" type="submit"/>';
+                 echo '<input style="margin-left:250px" id="exerciceanswer" class="bouton" type="submit"/>';
                  echo '</form>';
                }
               ?>
