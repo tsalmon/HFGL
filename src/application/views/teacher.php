@@ -8,7 +8,7 @@
 
         <?php 
         $examMessage = isset($exam)?"Examen (Modifier)":"Nouvel Examen";
-        $projectMessage = isset($project)?"Examen":"Nouveau Projet";
+        $projectMessage = isset($project)?"Projet (Modifier)":"Nouveau Projet";
 
         if ($currentCourse){
           echo '<h1 id="'.$currentCourse->title().'">'.$currentCourse->title().'</h1>';
