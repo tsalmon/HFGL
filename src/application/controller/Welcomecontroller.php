@@ -71,7 +71,6 @@ class Welcomecontroller extends Controller
             return ;
         }
         // user already exist (we check if the email address is already saved in the database
-
         if($_POST["role"] == "student"){
             try{
                 $inscription_model->createStudent($_POST["inscr_mail"], $_POST["inscr_firstname"],$_POST["inscr_surname"],$_POST["inscr_pwd"],0);

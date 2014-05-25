@@ -23,7 +23,7 @@
         <a href="<?php echo URL; ?>Student/">
           <p>
             <span>&nbsp;</span>
-            <input class="bouton" value="Traveaux de cours" />
+            <input class="bouton" value="Travaux de cours" />
           </p>
         </a>
 

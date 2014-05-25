@@ -23,7 +23,7 @@ class Student extends Person implements Corrector {
             $this->db=  PDOHelper::getInstance();   
             if($mail == null){
                 return ;
-            }
+            }          
             if($exists==true){
                 $fetch = $this->getDBEntry($mail, "Student", $isID); 
                 if($fetch==null){
@@ -32,7 +32,7 @@ class Student extends Person implements Corrector {
                 else{ 
                     $this->initiateMembers($fetch);
                     $this->studentID=$fetch['studentID'];
-                    $this->nse=$fetch['NSE'];
+                    $this->nse=$fetch['NSE'];    
                 }
             }
             else {

@@ -59,7 +59,7 @@ abstract class Person{
         //Créé une nouvelle personne en BDD à partir de son mail
         
         protected function createEntry($mail,$role){     
-                $this->db->exec("INSERT INTO Person ( `email`,roleID) VALUES ('".$mail."',$role);");
+                ($this->db->exec("INSERT INTO Person ( `email`,roleID) VALUES ('".$mail."',$role);"));
                 $this->email=$mail;
                 $this->personID=$this->db->lastInsertId();
                 return intval($this->personID);

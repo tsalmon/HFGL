@@ -6,7 +6,6 @@
 
     <div id="site_content">
 
-      <?php include("_templates/bienvenue_title.php"); ?>
       <div class="content_big">
         
         <h1>Projet / Mémoire</h1>
