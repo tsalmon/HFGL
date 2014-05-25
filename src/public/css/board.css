@@ -27,6 +27,15 @@ body {
   width: 100%;
 }
 
+.chp{
+  padding: 25px;
+}
+
+.part{
+  padding-top: 15px;
+  padding-left: 15px;
+}
+
 p { 
   padding: 0 0 16px 0;
   line-height: 1.7em;
@@ -352,6 +361,7 @@ fieldset{
   font: 100% 'Droid Sans', arial; 
   border: 0; 
   padding: 10px;
+  margin: 5px;
   cursor: pointer; 
   background: #1A1225; 
   color: #FFF;
@@ -459,81 +469,7 @@ html body ul.sf-menu ul ul {
   margin: 0 0 0 220px;
 }
 
-/* Framework for proper showing/hiding/positioning */
-ul.sf-menu,ul.sf-menu * { 
-  margin: 0;
-  padding: 0;
-}
 
-ul.sf-menu { 
-  display: block;
-  position: relative;
-}
-  
-ul.sf-menu li { 
-  display: block;
-  list-style: none;
-  float: left;
-  position: relative;
-}
-  
-ul.sf-menu li:hover { 
-  visibility: inherit; /* fixes IE7 'sticky bug' */ 
-}
-
-ul.sf-menu a { 
-  display: block;
-  position: relative;
-}
-  
-ul.sf-menu ul { 
-  position: absolute;
-  left: 0;
-  width: 150px; 
-  top: auto;
-  left: -999999px;
-}
-  
-ul.sf-menu ul a { 
-  zoom: 1; /* IE6/7 fix */ 
-}
-
-ul.sf-menu ul li { 
-  float: left; /* Must always be floated otherwise there will be a rogue 1px margin-bottom in IE6/7 */
-  width: 150px;
-}
-  
-ul.sf-menu ul ul { 
-  top: 0;
-  margin: 0 0 0 150px;
-}
-
-ul.sf-menu li:hover ul,ul.sf-menu li:focus ul,ul.sf-menu li.sf-hover ul, 
-ul.sf-menu ul li:hover ul,ul.sf-menu ul li:focus ul,ul.sf-menu ul li.sf-hover ul,
-ul.sf-menu ul ul li:hover ul,ul.sf-menu ul ul li:focus ul,ul.sf-menu ul ul li.sf-hover ul,
-ul.sf-menu ul ul ul li:hover ul,ul.sf-menu ul ul ul li:focus ul,ul.sf-menu ul ul ul li.sf-hover ul { 
-  left: auto;
-}
-  
-ul.sf-menu li:hover ul ul,ul.sf-menu li:focus ul ul,ul.sf-menu li.sf-hover ul ul,
-ul.sf-menu ul li:hover ul ul,ul.sf-menu ul li:focus ul ul,ul.sf-menu ul li.sf-hover ul ul,
-ul.sf-menu ul ul li:hover ul ul,ul.sf-menu ul ul li:focus ul ul,ul.sf-menu ul ul li.sf-hover ul ul,
-ul.sf-menu ul ul ul li:hover ul ul,ul.sf-menu ul ul ul li:focus ul ul,ul.sf-menu ul ul ul li.sf-hover ul ul { 
-  left: -999999px;
-}
-
-/* autoArrows CSS */
-span.sf-arrow { 
-  width: 7px;
-  height: 7px;
-  position: absolute;
-  top: 20px;
-  right: 5px;
-  display: block;
-  background: url(../images/arrows-white.png) no-repeat 0 0;
-  overflow: hidden; /* making sure IE6 doesn't overflow and expand the box */
-  font-size: 1px;
-}
 
 ul ul span.sf-arrow { 
   right: 10;
