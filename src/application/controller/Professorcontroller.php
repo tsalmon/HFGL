@@ -19,7 +19,7 @@ class Professorcontroller extends Controller{
             $project = $currentCourse->project();
         }
         require 'application/views/_templates/header.php';
-        require 'application/views/enseignant.php';
+        require 'application/views/teacher.php';
         require 'application/views/_templates/footer.php';     
     }
     
