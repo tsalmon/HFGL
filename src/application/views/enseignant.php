@@ -7,43 +7,29 @@
       <div class="content">
 
         <?php 
-        $examMessage = isset($exam)?"Modifier":"[+]";
-        $projectMessage = isset($project)?"Modifier":"[+]";
+        $examMessage = isset($exam)?"Examen (Modifier)":"Nouvel Examen";
+        $projectMessage = isset($project)?"Examen":"Nouveau Projet";
 
         if ($currentCourse){
           echo '<h1 id="'.$currentCourse->title().'">'.$currentCourse->title().'</h1>';
-          echo '<p>'.$currentCourse->description().'</p>
-                <h2>Les travaux</h2>';
-          echo '
-          <table>
-            <tr><th>Partie<a href="#'.($currentCourse->title()).'" onclick=createPart('.$currentCourse->courseID().');>[+]</a></td></th> <th>Documents</th></tr>';
-            foreach ($currentCourse->parts() as $part) {
-                  echo '
-                <tr>
-                  <td><a href="#" onclick="deletePart('.$currentCourse->courseID().','.$part->partID().',\''.$part->title().'\',\''.$currentCourse->title().'\')";>[-]</a>'.$part->title().'</td>
-                  <td>';
-                  foreach($part->chapters() as $chapter){
-                    echo '<a target="blank" href="'.URL.'Professor/AfficherCours/?cours='.strval($currentCourse->courseID()).'&part='.strval($part->partID()).'&chp='.strval($chapter->chapterID()).'">'.$chapter->title().'</a>';
-                  }                 
-                  echo '<a href="'.URL.'Professor/CreateChapter/?cours='.strval($currentCourse->courseID()).'&part='.strval($part->partID()).'">[+]</a></td>';
-                }
-          echo '
-                <tr>
-                  <td>Projet</td>
-                  <td><a href='.URL.'Professor/CreateProjet&courseID='.strval($currentCourse->courseID()).'>'.$projectMessage.'</a></td>
-                </tr>
-
-                <tr>
-                  <td>Examen</td> 
-                  <td><a href='.URL.'Professor/CreateExamen/?cours='.strval($currentCourse->courseID()).'>'.$examMessage.'</a></td>
-                </tr>
-          </table>
-            <p class = "pbouton">
-              <span>&nbsp;</span>
-              <a href="'.URL.'Professor/SupprimerCours/?cours='.$currentCourse->courseID().'" class="bouton">Supprimer ce cours</a>
-              <span>&nbsp;</span>
-              <a href='.URL.'Professor/ViewNotes class="bouton">Consulter les notes</a>
-            </p>
+          echo '<a class="bouton" href='.URL.'Professor/CreateProjet&courseID='.strval($currentCourse->courseID()).'>'.$examMessage.'</a>';
+          echo '<a class="bouton" href='.URL.'Professor/CreateProjet&courseID='.strval($currentCourse->courseID()).'>'.$projectMessage.'</a>';
+          echo '<a class="bouton" href="#'.($currentCourse->title()).'" onclick=createPart('.$currentCourse->courseID().');>Nouvelle Partie</a>';
+          echo '<p class="description">'.$currentCourse->description().'</p>';
+          foreach ($currentCourse->parts() as $part) {
+            echo '<div class="part"><h2 class="part_nom">'.($part->title()).'</h2>
+                  <a class="bouton" href="'.URL.'Professor/CreateChapter/?cours='.strval($currentCourse->courseID()).'&part='.strval($part->partID()).'"> Ajouter un chapitre</a>
+                  <a class="bouton" href="#" onclick="deletePart('.$currentCourse->courseID().','.$part->partID().',\''.$part->title().'\',\''.$currentCourse->title().'\')";>Supprimer la Partie</a>
+                  <ul class="liste_chapitres">';
+            foreach($part->chapters() as $chapter){
+              echo '<li><a class="chp" target="blank" href="'.URL.'Professor/AfficherCours/?cours='.strval($currentCourse->courseID()).'&part='.strval($part->partID()).'&chp='.strval($chapter->chapterID()).'">'.$chapter->title().'</a></li>';
+            }
+            echo "</ul></div>";
+          }
+          echo '<p class = "pbouton">
+                  <a href="'.URL.'Professor/SupprimerCours/?cours='.$currentCourse->courseID().'" class="bouton">Supprimer ce cours</a>
+                  <a href='.URL.'Professor/ViewNotes class="bouton">Consulter les notes</a>
+                </p>
             ';
         } else {
             $this->printQuestionsToCorrect($prof);
