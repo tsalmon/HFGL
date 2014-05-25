@@ -39,7 +39,7 @@
 
             function createPart(id_cours){
                 var nom_partie=prompt("Entrez le nom de la partie");
-                if(nom_partie == null){
+                if(nom_partie == null | nom_partie == false){
                     return;
                 }
                 xmlhttp.onreadystatechange = function(){
@@ -58,7 +58,7 @@
 
             function deletePart(id_cours, id_part, nom_partie, nom_cours){
                 var sure=confirm("Êtes vous sûr de vouloir supprimer la partie \'" + nom_partie + "\' du cours \'" + nom_cours + "\' ?");
-                if(sure == null){
+                if(sure == null || sure == false){
                     return;
                 }
                 xmlhttp.onreadystatechange = function(){
