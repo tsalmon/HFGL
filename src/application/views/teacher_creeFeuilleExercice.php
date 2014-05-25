@@ -8,7 +8,7 @@
       <div id="createExercice" class="content_big">
         <form action="CreateExerciceFork" method="post" enctype="multipart/form-data">
           <fieldset>
-            <legend><h2>Créer la nouvelle questionnaire</h2></legend>
+            <legend><h2>Créer le nouveau questionnaire</h2></legend>
 
             <div class="form_settings">
               <p><span>Description:</span>           

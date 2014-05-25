@@ -102,5 +102,3 @@
     </div>
     <?php include("_templates/nav_footer_enseignant.php"); ?>
 </div>
-
-<script src="<?php echo URL.'public/js/ChapterForm.js' ?>"></script>

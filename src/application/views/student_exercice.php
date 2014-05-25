@@ -21,7 +21,6 @@
         <h3>Date limite: </h4>
           
           <div id="div_scroll">
-            <p>
                <?php
                if (!$_SESSION["started"]) {
                 if ($attemptsCount == 0) {
@@ -73,8 +72,6 @@
                  echo '</form>';
                }
               ?>
-            </p>
-        </div>
 
         <a href="<?php echo URL; ?>Student/">
           <p class = "pbouton">
