@@ -66,7 +66,6 @@ class Professorcontroller extends Controller{
     }
 
     public function CreateProjet(){
-        $page = "prof";
         $prof = $this->loadModel('PersonFactory')->getPerson($_SESSION["email"]);
         $course = CourseFactory::getCourse($_GET["courseID"], true);
         $courseTitle = $course->title();
@@ -205,7 +204,6 @@ class Professorcontroller extends Controller{
         $p = new Part($_GET["part"], false);
         $cours->addPart($p);
         $_SESSION["quest_for"] = "part";
-        //print("createpart ok");
     }
 
     public function DeletePart(){
@@ -223,9 +221,11 @@ class Professorcontroller extends Controller{
             $this->CreateExerciceWithXML();
         } else {
             $exercice = new ExerciceSheet();
-            $_SESSION["ex_id"] = $exercice->getID();
-            header('location: '.URL.'Professor/AddQuestion');
+            $exercice->setDescription(nl2br($_POST["description"]));
+            $exercice->setDeadline($_POST["deadline_day"]."/".$_POST["deadline_month"]."/".$_POST["deadline_year"]);
+            $exercice->setAvailableDate($_POST["avalable_day"]."/".$_POST["avalable_month"]."/".$_POST["avalable_year"]);
         }
+        header('location: '.URL.'Professor/AddQuestion');
     }
 
     public function FinalizeExerciceCreation(){
