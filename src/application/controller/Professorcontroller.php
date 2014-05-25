@@ -436,7 +436,7 @@ class Professorcontroller extends Controller{
         $questions=$prof->getQuestionsToValidate();
         echo "<h3> Questions à valider</h3>";
         echo "<ul>";
-        foreach($questions as $question){
+        foreach($questions as $key => $questionID){
             $db=  PDOHelper::getInstance();
             $res=$db->query("SELECT assignment FROM Question WHERE questionID=".$questionID);
             $fetch=$res->fetch(PDO::FETCH_ASSOC);
