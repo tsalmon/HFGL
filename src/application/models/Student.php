@@ -103,8 +103,53 @@ class Student extends Person implements Corrector {
             }
             
        }   
+        public function getExerciceSheetsToDo() {
+            
+            $questionsheets=array();
+            $courses=$this->getCourses();
+            foreach ($courses as $course) {                                
+                if($course->finalExam()!=null){
+                    $questionsheets[]=$course->finalExam();}
+                foreach($course->parts() as $part){                           
+                    if($part->exam()!=null){
+                        $questionsheets[]=$part->exam();}
+                    foreach($part->chapters() as $chapter){  
+                        if($chapter->exercices()!=null){
+                            $questionsheets[]=$chapter->exercices();}
+                    }
+                }
+            }
+            
+            $questions=array();
+            foreach ($questionsheets as $questionsheet) {     
+                if($questionsheet->getQuestions()!=null){
+                
+                    $questions=array_merge($questions,$questionsheet->getQuestions());
+                }
+            }
+            $ids=array();
+            foreach ($questions as $question){
+                $query="SELECT DISTINCT questionID FROM Points WHERE questionID=".$question->getID()." and studentID=".$this->studentID();
+                $res=$this->db->query($query);
+                $fetch=$res->fetch(PDO::FETCH_ASSOC);
+                if($fetch==false){
+                    $ids[]=$question->getID();
+                }
+               
+            }
+            array_unique($ids);
+            $questionnaires_ids=array();
+            foreach ($ids as $id){
+                $query="SELECT DISTINCT questionnaireID FROM Questions WHERE questionID=".$id;
+                $res=$this->db->query($query);
+                $fetch=$res->fetch(PDO::FETCH_ASSOC);
+                if($fetch!=false){
+                    $questionnaires_ids[]=$fetch["questionnaireID"];
+                }
+            }
+            return array_unique($questionnaires_ids);
+        }
         
-                    
 }
 
 ?>
