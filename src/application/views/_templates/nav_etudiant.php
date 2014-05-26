@@ -3,7 +3,7 @@
         <div id="logo_text">
           <!-- class="logo_colour", allows you to change the colour of the text -->
           <h1>
-            <a href="<?php echo URL; ?>Student/" id = "hlgf">Have fun - Good learning</a>
+            <a href="<?php echo URL; ?>Admin">Have fun&nbsp;<span class="logo_colour">- Good learning</span></a>
           </h1>
         </div>
       </div>
