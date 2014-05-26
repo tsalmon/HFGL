@@ -217,16 +217,18 @@ class Professorcontroller extends Controller{
     }
 
     public function CreateExerciceFork(){
+        $dateDebut = $_POST["avalable_day"]."/".$_POST["avalable_month"]."/".$_POST["avalable_year"];
+        $dateFin = $_POST["deadline_day"]."/".$_POST["deadline_month"]."/".$_POST["deadline_year"];
         if (array_key_exists ("xmlOrNot" , $_POST)){
-            $this->CreateExerciceWithXML();
+            $this->CreateExerciceWithXML($dateDebut, $dateFin);
         } else {
             $exercice = new ExerciceSheet();
             $exercice->setDescription(nl2br($_POST["description"]));
-            $exercice->setDeadline($_POST["deadline_day"]."/".$_POST["deadline_month"]."/".$_POST["deadline_year"]);
-            $exercice->setAvailableDate($_POST["avalable_day"]."/".$_POST["avalable_month"]."/".$_POST["avalable_year"]);
+            $exercice->setDeadline($dateFin);
+            $exercice->setAvailableDate($dateDebut);
             $_SESSION["ex_id"] = $exercice->getID();
+            header('location: '.URL.'Professor/AddQuestion');
         }
-        header('location: '.URL.'Professor/AddQuestion');
     }
 
     public function FinalizeExerciceCreation(){
@@ -249,10 +251,11 @@ class Professorcontroller extends Controller{
 
         $exercice = new ExerciceSheet();
         PDOHelper::getInstance()->query("UPDATE `".$questionnaire_table."` SET `questionnaireID`=".$_SESSION["ex_id"]." WHERE `".$table_pk."`=".$_SESSION[$session_val]);
+        //var_dump($exercice);
         header('location: '.URL.'Professor/index');
     }
 
-    public function CreateExerciceWithXML(){
+    public function CreateExerciceWithXML($dateDebut, $dateFin){
         if ($_FILES["exerciceXML"]["error"] > 0) {
             echo "Error: " . $_FILES["exerciceXML"]["error"] . "<br>";
         } else {
@@ -260,14 +263,14 @@ class Professorcontroller extends Controller{
             $name_file = $_FILES["exerciceXML"]['name'];
             move_uploaded_file($temp, "files/loadedxml/".$name_file);
             $exerciceSheet = XMLHelper::parseXML("files/loadedxml/".$name_file);
-            $exerciceSheet->setDeadline($_POST["datelimite"]);
-            $exerciceSheet->setAvailableDate($_POST["dateaccess"]);
+            $exerciceSheet->setDeadline($dateFin);
+            $exerciceSheet->setAvailableDate($dateDebut);
 
             $questionnaire_table = null;
             $table_pk = null;
             $session_val = null;
 
-            $_SESSION["ex_id"] = $exerciceSheet->writeToDatabase();
+            $_SESSION["ex_id"] = $exerciceSheet->getID();
             $this->FinalizeExerciceCreation();
         }
     }
