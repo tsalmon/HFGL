@@ -427,7 +427,7 @@ class Professorcontroller extends Controller{
             $description=$fetch["assignment"];
             echo "<li><a href=".URL.'Professor/correct/'.$questionID.">".$description."</a></li>";
         }
-        echo "<ul>";
+        echo "</ul>";
         
     }
 
@@ -443,7 +443,7 @@ class Professorcontroller extends Controller{
             $description=$fetch["assignment"];
             echo "<li><a href=".URL.'Professor/validate/'.$questionID."/>".$description."</a></li>";
         }
-        echo "<ul>";
+        echo "</ul>";
     }
     public function printQuestionCorrect($id){
         $db=  PDOHelper::getInstance();
