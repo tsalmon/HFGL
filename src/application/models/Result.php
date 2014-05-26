@@ -36,12 +36,9 @@ class Result {
                                                     WHERE courseID='".$course->courseID()."'&& studentID='".$student."';");
             
             $fetch1 = $examen->fetchAll(PDO::FETCH_ASSOC);
-             if($fetch1==null){
-                    // throw new UnexpectedValueException("Result de l'examen non existante");
-                }
-                else{
-                    $this->notes_examen = $fetch1['lastPoints'];
-                }
+            if(!($fetch1==null || !isset($fetch1["lastPoints"]))){
+                $this->notes_examen = $fetch1['lastPoints'];
+            }
 
             //access notes du mémoire et notes du projet
             $parts = $this->db->query("SELECT * FROM Parts 
@@ -51,14 +48,19 @@ class Result {
 
             
             $fetch2 = $parts->fetchAll(PDO::FETCH_ASSOC);
+
+
              if($fetch1==null){
                     // throw new UnexpectedValueException("Result du projet non existante");
                 }
                 else{
             
                     foreach($fetch1 as $part){
+                        if(!isset($fetch1['questionnaireID'])){
+                            continue;
+                        }
                         $type_questionnaire = $this->db->query("SELECT questionnaireType FROM  Questionnaire
-                                                WHERE questionnaireID='".$fetch['questionnaireID']."';");
+                                                WHERE questionnaireID='".$fetch1['questionnaireID']."';");
                         $typeMemoire = QuestionnaireTypeManager::getInstance()->getMemoireID();
                         $typeProjet = QuestionnaireTypeManager::getInstance()->getProjetID();
 

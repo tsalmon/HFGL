@@ -294,7 +294,9 @@ class Studentcontroller extends Controller{
         $results=[];
 
         foreach ($liste_cours as $course) {
+            //try{
             $results[]= new Result($student->studentID(),$course);
+            //} catch(Exception $e){}    
         }
 
         require 'application/views/_templates/header.php';
@@ -435,7 +437,7 @@ class Studentcontroller extends Controller{
         
     }
 
-    public function printQuestionCorrect($id){
+    private function printQuestionCorrect($id){
         $db=  PDOHelper::getInstance();
         $res=$db->query("SELECT assignment FROM Question WHERE questionID=".$id);
         $fetch=$res->fetch(PDO::FETCH_ASSOC);
