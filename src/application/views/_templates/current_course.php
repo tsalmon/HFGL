@@ -6,6 +6,7 @@ $addCHP = "";
 $delPart = "";
 $delCourse = "";
 $getNotes = "";
+$addPart = "";
 
 if($page == "prof"){
   $examMessage = isset($exam)?"Examen (Modifier)":"Nouvel Examen";  
@@ -14,6 +15,7 @@ if($page == "prof"){
   $examen = '<a class="bouton" href='.URL.'Professor/CreateProjet&courseID='.strval($currentCourse->courseID()).'>'.$projectMessage.'</a>';
   $delCourse = '<a href="'.URL.'Professor/SupprimerCours/?cours='.$currentCourse->courseID().'" class="bouton">Supprimer ce cours</a>';
   $getNotes = '<a href='.URL.'Professor/ViewNotes class="bouton">Consulter les notes</a>';
+  $addPart = '<a class="bouton" href="#'.($currentCourse->title()).'" onclick=createPart('.$currentCourse->courseID().');>Nouvelle Partie</a>';
 } elseif($page == "student") {
   if (isset($project)) {
     $projet = '<tr><td>Projet</td> <td><a href="'.URL.'Student/Project/?cours='.strval($currentCourse->courseID()).'">Sujet de projet</a></td></tr>';
@@ -23,8 +25,7 @@ if($page == "prof"){
   }
 }
 echo '<h1 id="'.$currentCourse->title().'">'.$currentCourse->title().'</h1>
-          '.$projet.' '.$examen.'
-          <a class="bouton" href="#'.($currentCourse->title()).'" onclick=createPart('.$currentCourse->courseID().');>Nouvelle Partie</a>
+          '.$projet.' '.$examen.' '.$addPart.'
           <p class="description">'.$currentCourse->description().'</p>';
           foreach ($currentCourse->parts() as $part) {
             if($page == "prof"){
