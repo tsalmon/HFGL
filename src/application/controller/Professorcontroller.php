@@ -274,7 +274,6 @@ class Professorcontroller extends Controller{
     public function AddQuestion(){
         $prof = $this->loadModel('PersonFactory')->getPerson($_SESSION["email"]);
         $page="AddQuestion";
-
         if (isset($qt_nb)) {
            $qt_nb++;
         }
@@ -287,9 +286,9 @@ class Professorcontroller extends Controller{
             if($_POST["lareponse"] == "libre"){ 
                 //Question libre
                 if(array_key_exists ("student_corrector" , $_POST)){
-                    $qt = new LQuestion($_POST["question"], $_POST["tip"], $_POST["points"]);
-                }else{
                     $qt = new LQuestion($_POST["question"], $_POST["tip"], $_POST["points"], true);
+                }else{
+                    $qt = new LQuestion($_POST["question"], $_POST["tip"], $_POST["points"]);
                 }
             } elseif($_POST["lareponse"] == "checkbox"){ 
                 //QCM
