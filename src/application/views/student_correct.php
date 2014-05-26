@@ -63,7 +63,7 @@
               </fieldset>'; 
               */
             } else {
-            $this->printQuestionsToCorrect($student);
+            $this->printQuestionCorrect($id);
             }
       ?>
       </div>

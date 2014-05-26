@@ -45,7 +45,7 @@ class Professorcontroller extends Controller{
             $currentCourse=CourseFactory::getCourse($_GET["cours"],true);
         }
         require 'application/views/_templates/header.php';
-        require 'application/views/enseignant_correct.php';
+        require 'application/views/enseignant_validate.php';
         require 'application/views/_templates/footer.php';     
     }
 
@@ -427,7 +427,7 @@ class Professorcontroller extends Controller{
             $description=$fetch["assignment"];
             echo "<li><a href=".URL.'Professor/correct/'.$questionID.">".$description."</a></li>";
         }
-        echo "<ul>";
+        echo "</ul>";
         
     }
 
@@ -443,7 +443,7 @@ class Professorcontroller extends Controller{
             $description=$fetch["assignment"];
             echo "<li><a href=".URL.'Professor/validate/'.$questionID."/>".$description."</a></li>";
         }
-        echo "<ul>";
+        echo "</ul>";
     }
     public function printQuestionCorrect($id){
         $db=  PDOHelper::getInstance();
@@ -451,7 +451,7 @@ class Professorcontroller extends Controller{
         $fetch=$res->fetch(PDO::FETCH_ASSOC);
         $description=$fetch["assignment"];
         echo "<h3> Question : ".$description."</h3>";
-        echo' <form action="ValidateNote" method="post" enctype="multipart/form-data">';
+        echo' <form action="../CorrectNote" method="post" enctype="multipart/form-data">';
         echo "<table style='width:95%;'><tr><th>Reponse</th><th>Points</th></tr>";
         $query="SELECT points FROM Question WHERE questionID=".$id;
         $res1=$db->query($query);
@@ -469,6 +469,21 @@ class Professorcontroller extends Controller{
         echo "</form>";
         
     }
+    public function CorrectNote(){
+        $prof = $this->loadModel('PersonFactory')->getPerson($_SESSION["email"]);
+        foreach($_POST as $key => $value){
+            if($value=="Enregistrer"){
+                $questionID=$key;
+            }
+        }
+        foreach($_POST as $key => $value){
+            if($value!="Enregistrer"){
+                $prof->correctQuestion($questionID,$key,$value);
+            }
+        }
+        header('location: '.URL.'Professor');
+        
+    }
     
     public function printQuestionValidate($id){
         $db=  PDOHelper::getInstance();
@@ -476,23 +491,25 @@ class Professorcontroller extends Controller{
         $fetch=$res->fetch(PDO::FETCH_ASSOC);
         $description=$fetch["assignment"];
         echo "<h3> Question : ".$description."</h3>";
-        echo' <form action="ValidateNote" method="post" enctype="multipart/form-data">';
+        echo' <form action="../../CorrectNote" method="post" enctype="multipart/form-data">';
         echo "<table style='width:95%;'><tr><th>Reponse</th><th>Points</th></tr>";
-        $query="SELECT response, studentID FROM Points WHERE validated=1 AND questionID=".$id;
+        $query="SELECT points FROM Question WHERE questionID=".$id;
+        $res1=$db->query($query);
+        $fetch=$res1->fetch(PDO::FETCH_ASSOC);
+        $points=$fetch["points"];
+        $query="SELECT note,response, studentID FROM Points WHERE validated=0 AND questionID=".$id;
+        echo $query;
         $res=$db->query($query);
         $fetch=$res->fetchAll(PDO::FETCH_ASSOC);
         foreach($fetch as $reponse){            
-            $query="SELECT note FROM Points WHERE questionID=".$id." AND studentID=".$reponse["studentID"];
-            $res1=$db->query($query);
-            $fetch=$res1->fetch(PDO::FETCH_ASSOC);
-            $points=$fetch["note"];
             echo "<tr><td>".$reponse["response"]."</td>
-                <td><input type='text' name='note' value='' />/".$points."</td></tr>";
+                <td><input type='text' name='".$reponse["studentID"]."' value=".$reponse["note"]." />/".$points."</td></tr>";
         }
         echo "</table>";
-        echo '<input class="bouton" type="submit" name="enregistrer" value="Enregistrer" />';
+        echo '<input class="bouton" type="submit" name="'.$id.'" value="Enregistrer" />';
         echo "</form>";
-    }
+        
+    }   
 
     public function newCourse(){
         try{

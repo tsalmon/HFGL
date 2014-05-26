@@ -28,7 +28,7 @@ body {
 }
 
 .chp{
-  padding: 25px;
+  padding-left: 25px;
 }
 
 .part{
@@ -315,7 +315,7 @@ footer a:hover {
 fieldset{ 
   border-radius: 16px;
   padding: 1em 2em;
-  margin: 1em 0em;
+  margin: 1em;
 }
 
 .form_settings p { 

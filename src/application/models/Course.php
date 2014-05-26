@@ -1,6 +1,7 @@
 <?php
 
 require_once 'Part.php';
+require_once 'CourseSubstcription.php';
 
 class Course {
 

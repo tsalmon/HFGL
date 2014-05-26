@@ -1,6 +1,7 @@
 <?php
 require_once 'application/models/Chapter.php';
 require_once 'application/models/AutomaticCorrector.php';
+require_once 'application/models/Result.php';
 
 //require_once 'application/models/PersonFactory.php';
 
@@ -274,60 +275,8 @@ class Studentcontroller extends Controller{
         foreach ($_POST as $key => $value) {
             if (!$this->SecondaryParameter($key, $value))
             {   
-                $validated = 0;
-                /*
-                $db=PDOHelper::getInstance();
-                $query="SELECT Question.typeID FROM Question WHERE Question.questionID =".$_GET["questionID"];
-                $res=$db->query($query);
-                $fetch=$res->fetch(PDO::FETCH_ASSOC);
-                $roleID=$fetch["typeID"];
-                if ($roleID==QuestionTypeManager::getInstance()->getLSID()){
-                    
-                    $query="SELECT studentID FROM (SELECT * FROM Student JOIN StudentEstimation AS se ON Student.studentID=se.estimatingStudentID) as test WHERE questionID=".$_GET["questionID"];
-                    $res=$db->query($query);
-                    if ($res!=false){
-                        $fetch=$res->fetchAll(PDO::FETCH_ASSOC);
-                        $students=$fetch["studentID"];
-                    }
-                    else{
-                        $students=[];
-                    }
-                    $query_course="SELECT DISTINCT Course.courseID FROM (
-                        SELECT t5.questionnaireID, courseID FROM (
-                        SELECT Part.partID, t4.questionnaireID FROM (
-                        SELECT Chapters.partID, t3.questionnaireID FROM (
-                        SELECT chapterID, t2.questionnaireID From (
-                        SELECT table1.questionnaireID FROM (
-                        SELECT questionnaireID FROM Questions WHERE questionID =1) as table1 
-                        JOIN Questionnaire ON table1.questionnaireID=Questionnaire.questionnaireID) as t2 
-                        JOIN Chapter ON Chapter.questionnaireID=t2.questionnaireID) as t3 
-                        JOIN Chapters on Chapters.chapterID=t3.chapterID) as t4 
-                        JOIN Part ON Part.partID=t4.partID or Part.questionnaireID=t4.questionnaireID) as t5 
-                        JOIN Parts on Parts.partID= t5.partID)as t6 JOIN 
-                        Course on Course.questionnaireID=t6.questionnaireID or Course.courseID=t6.courseID";
-                    $resCourse=$db->query($query_course);
-                    $fetch=$resCourse->fetch(PDO::FETCH_ASSOC);
-                    $course=  CourseFactory::getCourse($fetch["courseID"], true);
-                    $courseStudentsID=[];
-                    foreach($course->getStudents() as $student){
-                        $courseStudentsID=$student->studentID();
-                    }
-                    $freeStudents=array_diff($courseStudentsID,$students);
-                    if($freeStudents==[]){
-                        $studentID=$students[0];
-                    }
-                    else{
-                        $studentID=$freeStudents[0];
-                    }
-                    $db->exec("INSERT INTO StudentEstimation (estimatingStudentID, estimatedStudentID, questionID) VALUES(".$studentID.",".$_SESSION["studentID"].",".$_GET["questionID"]);
-                    $validated=3;
-                }    
-                else{
-                   $validated=2;
-                }*/
                 $corrector = new AutomaticCorrector();
-                $corrector->saveResponseToCorrect($_GET["questionID"], $_SESSION["studentID"], $value, $validated);
-                //$db->exec("INSERT INTO `Points`(`studentID`, `questionID`, `response`/*, validated*/) VALUES (".$_SESSION["studentID"].",".$_GET["questionID"].", '".$value/*."', ".$validated*/.")");
+                $corrector->saveResponseToCorrect($_GET["questionID"], $_SESSION["studentID"], $value);
             }
         }
 
@@ -458,6 +407,74 @@ class Studentcontroller extends Controller{
         require 'application/views/_templates/footer.php';
     }
 
+    public function correct($id){ 
+        $page = "student";
+        $student = $this->loadModel('PersonFactory')->getPerson($_SESSION["email"]);
+        $cours_teaching = $this->loadModel('CourseSubstcription')->getCourses($student);
+        $currentCourse = null;
+        if (isset($_GET["cours"])){
+            $currentCourse=CourseFactory::getCourse($_GET["cours"],true);
+        }
+        require 'application/views/_templates/header.php';
+        require 'application/views/student_correct.php';
+        require 'application/views/_templates/footer.php';     
+    }
+    
+    public function printQuestionsToCorrect($student){
+        $questions=$student->getQuestionsToCorrect();
+        echo "<h3> Questions à corriger</h3>";
+        echo "<ul>";
+        foreach($questions as $questionID){
+            $db=  PDOHelper::getInstance();
+            $res=$db->query("SELECT assignment FROM Question WHERE questionID=".$questionID);
+            $fetch=$res->fetch(PDO::FETCH_ASSOC);
+            $description=$fetch["assignment"];
+            echo "<li><a href=".URL.'Student/correct/'.$questionID.">".$description."</a></li>";
+        }
+        echo "</ul>";
+        
+    }
+
+    public function printQuestionCorrect($id){
+        $db=  PDOHelper::getInstance();
+        $res=$db->query("SELECT assignment FROM Question WHERE questionID=".$id);
+        $fetch=$res->fetch(PDO::FETCH_ASSOC);
+        $description=$fetch["assignment"];
+        echo "<h3> Question : ".$description."</h3>";
+        echo' <form action="../CorrectNote" method="post" enctype="multipart/form-data">';
+        echo "<table style='width:95%;'><tr><th>Reponse</th><th>Points</th></tr>";
+        $query="SELECT points FROM Question WHERE questionID=".$id;
+        $res1=$db->query($query);
+        $fetch=$res1->fetch(PDO::FETCH_ASSOC);
+        $points=$fetch["points"];
+        $query="SELECT response, studentID FROM Points WHERE validated=3 AND questionID=".$id;
+        $res=$db->query($query);
+        $fetch=$res->fetchAll(PDO::FETCH_ASSOC);
+        foreach($fetch as $reponse){            
+            echo "<tr><td>".$reponse["response"]."</td>
+                <td><input type='text' name='".$reponse["studentID"]."' value='' />/".$points."</td></tr>";
+        }
+        echo "</table>";
+        echo '<input class="bouton" type="submit" name="'.$id.'" value="Enregistrer" />';
+        echo "</form>";
+        
+    }
+    public function CorrectNote(){
+        $student = $this->loadModel('PersonFactory')->getPerson($_SESSION["email"]);
+        foreach($_POST as $key => $value){
+            if($value=="Enregistrer"){
+                $questionID=$key;
+            }
+        }
+        foreach($_POST as $key => $value){
+            if($value!="Enregistrer"){
+                $student->correctQuestion($questionID,$key,$value);
+            }
+        }
+        header('location: '.URL.'Student');
+        
+    }
+    
     public function Deconnexion(){
         if(session_destroy()){
             header('location: '.URL.'Welcome');
