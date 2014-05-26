@@ -1,6 +1,5 @@
 <?php
 require_once 'application/models/Chapter.php';
-require_once 'application/models/Result.php';
 require_once 'application/models/AutomaticCorrector.php';
 
 //require_once 'application/models/PersonFactory.php';
@@ -106,9 +105,6 @@ class Studentcontroller extends Controller{
             $questionnaire = $course->finalExam();
         }
 
-
-
-
         if (is_null($questionnaire)) {
             header('location: '.URL.'Student');
         }
@@ -138,11 +134,22 @@ class Studentcontroller extends Controller{
                     }
                 } 
             }
+            require 'application/views/_templates/header.php';
+            require 'application/views/student_exercice.php';
+            require 'application/views/_templates/footer.php';
+        } else {
+            header('location: '.URL.'/Student');
         }
 
-        require 'application/views/_templates/header.php';
-        require 'application/views/student_exercice.php';
-        require 'application/views/_templates/footer.php';
+    }
+
+    public function ExerciceOk(){
+        $_SESSION["questionsCount"] = $_SESSION["currentQuestionNumber"];
+        $this->NextQuestion();
+    }
+
+    public  function ExerciceSave(){
+                        
     }
 
     private function SecondaryParameter($key, $value){
