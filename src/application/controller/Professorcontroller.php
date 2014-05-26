@@ -224,6 +224,7 @@ class Professorcontroller extends Controller{
             $exercice->setDescription(nl2br($_POST["description"]));
             $exercice->setDeadline($_POST["deadline_day"]."/".$_POST["deadline_month"]."/".$_POST["deadline_year"]);
             $exercice->setAvailableDate($_POST["avalable_day"]."/".$_POST["avalable_month"]."/".$_POST["avalable_year"]);
+            $_SESSION["ex_id"] = $exercice->getID();
         }
         header('location: '.URL.'Professor/AddQuestion');
     }
