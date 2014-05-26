@@ -6,6 +6,8 @@
       <div class="content">
 
         <?php 
+        $examMessage = isset($exam)?"Examen (Modifier)":"Nouvel Examen";
+        $projectMessage = isset($project)?"Projet (Modifier)":"Nouveau Projet";
 
         if ($currentCourse){
           include("_templates/current_course.php");
