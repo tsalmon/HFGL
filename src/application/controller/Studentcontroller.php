@@ -1,6 +1,7 @@
 <?php
 require_once 'application/models/Chapter.php';
 require_once 'application/models/AutomaticCorrector.php';
+require_once 'application/models/Result.php';
 
 //require_once 'application/models/PersonFactory.php';
 
@@ -406,6 +407,74 @@ class Studentcontroller extends Controller{
         require 'application/views/_templates/footer.php';
     }
 
+    public function correct($id){ 
+        $page = "student";
+        $student = $this->loadModel('PersonFactory')->getPerson($_SESSION["email"]);
+        $cours_teaching = $this->loadModel('CourseSubstcription')->getCourses($student);
+        $currentCourse = null;
+        if (isset($_GET["cours"])){
+            $currentCourse=CourseFactory::getCourse($_GET["cours"],true);
+        }
+        require 'application/views/_templates/header.php';
+        require 'application/views/student_correct.php';
+        require 'application/views/_templates/footer.php';     
+    }
+    
+    public function printQuestionsToCorrect($student){
+        $questions=$student->getQuestionsToCorrect();
+        echo "<h3> Questions à corriger</h3>";
+        echo "<ul>";
+        foreach($questions as $questionID){
+            $db=  PDOHelper::getInstance();
+            $res=$db->query("SELECT assignment FROM Question WHERE questionID=".$questionID);
+            $fetch=$res->fetch(PDO::FETCH_ASSOC);
+            $description=$fetch["assignment"];
+            echo "<li><a href=".URL.'Student/correct/'.$questionID.">".$description."</a></li>";
+        }
+        echo "</ul>";
+        
+    }
+
+    public function printQuestionCorrect($id){
+        $db=  PDOHelper::getInstance();
+        $res=$db->query("SELECT assignment FROM Question WHERE questionID=".$id);
+        $fetch=$res->fetch(PDO::FETCH_ASSOC);
+        $description=$fetch["assignment"];
+        echo "<h3> Question : ".$description."</h3>";
+        echo' <form action="../CorrectNote" method="post" enctype="multipart/form-data">';
+        echo "<table style='width:95%;'><tr><th>Reponse</th><th>Points</th></tr>";
+        $query="SELECT points FROM Question WHERE questionID=".$id;
+        $res1=$db->query($query);
+        $fetch=$res1->fetch(PDO::FETCH_ASSOC);
+        $points=$fetch["points"];
+        $query="SELECT response, studentID FROM Points WHERE validated=3 AND questionID=".$id;
+        $res=$db->query($query);
+        $fetch=$res->fetchAll(PDO::FETCH_ASSOC);
+        foreach($fetch as $reponse){            
+            echo "<tr><td>".$reponse["response"]."</td>
+                <td><input type='text' name='".$reponse["studentID"]."' value='' />/".$points."</td></tr>";
+        }
+        echo "</table>";
+        echo '<input class="bouton" type="submit" name="'.$id.'" value="Enregistrer" />';
+        echo "</form>";
+        
+    }
+    public function CorrectNote(){
+        $student = $this->loadModel('PersonFactory')->getPerson($_SESSION["email"]);
+        foreach($_POST as $key => $value){
+            if($value=="Enregistrer"){
+                $questionID=$key;
+            }
+        }
+        foreach($_POST as $key => $value){
+            if($value!="Enregistrer"){
+                $student->correctQuestion($questionID,$key,$value);
+            }
+        }
+        header('location: '.URL.'Student');
+        
+    }
+    
     public function Deconnexion(){
         if(session_destroy()){
             header('location: '.URL.'Welcome');

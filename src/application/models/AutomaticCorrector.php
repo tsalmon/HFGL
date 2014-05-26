@@ -9,7 +9,7 @@ class AutomaticCorrector implements Corrector{
       $check = PDOHelper::getInstance()->query($answered);
 
       if ($check->rowCount() == 0) {
-          $request = "INSERT INTO `Points`(`studentID`, `questionID`, `note`, `response`) VALUES (".$studentID.",".$questionID.", '".$note."', '".$response."')";
+          $request = "INSERT INTO `Points`(`studentID`, `questionID`, `note`, `response`, validated) VALUES (".$studentID.",".$questionID.", '".$note."', '".$response."', 1)";
           $res = PDOHelper::getInstance()->exec($request);
           if ($res == 0) {
             echo $request;
@@ -40,8 +40,8 @@ class AutomaticCorrector implements Corrector{
                 $query="SELECT studentID FROM (SELECT * FROM Student JOIN StudentEstimation AS se ON Student.studentID=se.estimatingStudentID) as test WHERE questionID=".$questionID;
                 $res=$db->query($query);
                 if ($res->rowCount()!=0){
-                    $fetch=$res->fetchAll(PDO::FETCH_ASSOC);
-                    $students=$fetch["studentID"];
+                    $fetch=$res->fetchAll(PDO::FETCH_COLUMN, "studentID");
+                    $students=$fetch;
                 }
                 else{
                     $students=[];
@@ -111,7 +111,7 @@ class AutomaticCorrector implements Corrector{
         }
     }
 
-  	public function hasAnswerForQuestion($questionID, $studentID){
+    public function hasAnswerForQuestion($questionID, $studentID){
   		$row = PDOHelper::getInstance()->query("SELECT * FROM `Points` WHERE `studentID`=".$studentID." AND `questionID`=".$questionID);
   		if($row->fetchColumn() > 0){
   			return True;

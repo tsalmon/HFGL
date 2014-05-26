@@ -86,18 +86,20 @@ class Student extends Person implements Corrector {
 
         public function correctQuestion($questionID, $corrected_student_ID,$note) {
             $query="UPDATE Points SET note=".$note.", validated=0 WHERE questionID=".$questionID."
-                AND studentID=".corrected_student_ID;
+                AND studentID=".$corrected_student_ID;
             $this->db->exec($query);
+            $query2="DELETE FROM studentestimation WHERE questionID=".$questionID." AND estimatedStudentID=".$corrected_student_ID;
+            $this->db->exec($query2);
         }
 
         public function getQuestionsToCorrect() {
-            $query="SELECT questionID FROM StudentEstimation WHERE estimatingPersonID=".$this->personID();
+            $query="SELECT questionID FROM StudentEstimation WHERE estimatingStudentID=".$this->studentID();
             $res=$this->db->query($query);            
             if (!$res){
                 return array();
             }else {
-                 $fetch=$res->fetchAll(PDO::FETCH_ASSOC);
-                return $fetch["questionID"];
+                $fetch=$res->fetchAll(PDO::FETCH_COLUMN, "questionID");
+                return $fetch;
             }
             
        }   

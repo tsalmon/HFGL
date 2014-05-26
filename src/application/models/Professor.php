@@ -68,13 +68,10 @@ class Professor extends Person implements Corrector{
             parent::delete();            
         }
 
-        public function addQuestionToCorrect($question) {
-
-        }
     
         public function correctQuestion($questionID, $corrected_student_ID,$note) {
             $query="UPDATE Points SET note=".$note.", validated=1 WHERE questionID=".$questionID."
-                AND studentID=".corrected_student_ID;
+                AND studentID=".$corrected_student_ID;
             $this->db->exec($query);
         }
 
@@ -136,13 +133,13 @@ class Professor extends Person implements Corrector{
             foreach ($questions as $question){
                 $query="SELECT DISTINCT questionID FROM Points WHERE validated=0 AND questionID=".$question->getID();
                 $res=$this->db->query($query);
-                    $fetch=$res->fetchAll(PDO::FETCH_ASSOC);
+                $fetch=$res->fetch(PDO::FETCH_ASSOC);
                 if($fetch!=false){
-                    $ids=array_merge($ids,$fetch[0]);
+                    $ids[]=$fetch["questionID"];
                 }
                
             }
-            return array_unique($ids);
+            return  array_unique($ids);
             
        }   
 }
