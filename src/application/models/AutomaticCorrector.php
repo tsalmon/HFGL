@@ -130,7 +130,7 @@ class AutomaticCorrector implements Corrector{
 
         $questionsRequest = "SELECT * FROM Questions WHERE questionnaireID=".$questionnaireID;
 
-        if ($questionsRequestResult == PDOHelper::getInstance()->query($questionsRequest))
+        if ($questionsRequestResult = PDOHelper::getInstance()->query($questionsRequest))
         {
             while($currentQuestionsRow = $questionsRequestResult->fetch(PDO::FETCH_ASSOC))
             {
@@ -141,7 +141,7 @@ class AutomaticCorrector implements Corrector{
         $points = 0;
         $pointsRequest = "SELECT * FROM Points WHERE studentID=".$studentID;
 
-        if ($pointsRequestResult == PDOHelper::getInstance()->query($pointsRequest))
+        if ($pointsRequestResult = PDOHelper::getInstance()->query($pointsRequest))
         {
             while($currentPointsRow = $pointsRequestResult->fetch(PDO::FETCH_ASSOC))
             {
